@@ -1,6 +1,10 @@
+## 1.0.3
+
+- Added example
+
 ## 1.0.2
 
-- Add Web support
+- Adds Web support
 
 ## 1.0.0
 

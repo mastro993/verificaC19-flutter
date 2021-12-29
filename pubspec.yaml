@@ -1,8 +1,8 @@
 name: verificac19
 description: Unofficial EU Digital Green Certificate validation SDK for Flutter apps
-version: 1.0.2
-homepage: https://github.com/mastro993/verificac19_flutter
-documentation: https://github.com/mastro993/verificac19_flutter
+version: 1.0.3
+homepage: https://github.com/mastro993/verificac19-flutter
+documentation: https://github.com/mastro993/verificac19-flutter
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
