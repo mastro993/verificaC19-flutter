@@ -26,7 +26,7 @@ flutter pub get
 ## Installation
 
 ```sh
-flutter pub add verificac19_flutter
+flutter pub add verificac19
 ```
 
 ## Usage
