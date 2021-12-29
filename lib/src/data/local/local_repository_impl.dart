@@ -1,6 +1,5 @@
 import 'package:clock/clock.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
@@ -15,9 +14,7 @@ class LocalRepositoryImpl implements LocalRepository {
 
   @override
   Future<void> setup() async {
-    final docsDir = await getApplicationDocumentsDirectory();
-
-    Hive.init('${docsDir.path}/verificac19/cache/');
+    await Hive.initFlutter('/verificac19/cache');
     Hive.registerAdapter(ValidationRuleAdapter());
 
     await Hive.openBox<dynamic>(C.dbKeys.dbData);
