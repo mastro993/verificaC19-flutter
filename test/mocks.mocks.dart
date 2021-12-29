@@ -272,6 +272,10 @@ class MockLocalRepository extends _i1.Mock implements _i8.LocalRepository {
   }
 
   @override
+  _i4.Future<void> setup() => (super.noSuchMethod(Invocation.method(#setup, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
   bool rulesMustBeUpdated() =>
       (super.noSuchMethod(Invocation.method(#rulesMustBeUpdated, []),
           returnValue: false) as bool);
@@ -282,6 +286,10 @@ class MockLocalRepository extends _i1.Mock implements _i8.LocalRepository {
   @override
   bool signatureListMustBeUpdated() =>
       (super.noSuchMethod(Invocation.method(#signatureListMustBeUpdated, []),
+          returnValue: false) as bool);
+  @override
+  bool revokeListMustBeUpdated() =>
+      (super.noSuchMethod(Invocation.method(#revokeListMustBeUpdated, []),
           returnValue: false) as bool);
   @override
   _i4.Future<void> storeRules(List<_i9.ValidationRule>? rules) =>

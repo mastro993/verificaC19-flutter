@@ -1,6 +1,7 @@
 import 'package:verificac19/src/data/model/validation_rule.dart';
 
 abstract class LocalRepository {
+  Future<void> setup();
   bool rulesMustBeUpdated();
   bool signaturesMustBeUpdated();
   bool signatureListMustBeUpdated();

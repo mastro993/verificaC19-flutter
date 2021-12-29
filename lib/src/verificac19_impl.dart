@@ -1,8 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/local/local_repository_impl.dart';
-import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/data/remote/remote_repository.dart';
 import 'package:verificac19/src/data/remote/remote_repository_impl.dart';
 import 'package:verificac19/src/data/updater.dart';
@@ -21,15 +18,12 @@ class VerificaC19Impl implements VerificaC19Interface {
 
   @override
   Future<void> initialize() async {
-    await Hive.initFlutter();
-    Hive.registerAdapter(ValidationRuleAdapter());
-    await Hive.openBox<dynamic>(C.dbKeys.dbData);
-    await Hive.openBox<String>(C.dbKeys.dbRevokeList);
-
     _remote = RemoteRepositoryImpl();
     _local = LocalRepositoryImpl();
     _validator = CertificateValidatorImpl(_local);
     _updater = UpdaterImpl(_remote, _local);
+
+    await _local.setup();
   }
 
   @override

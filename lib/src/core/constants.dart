@@ -1,5 +1,7 @@
 class C {
   static final dbKeys = _DbKeys();
+  static final testResult = _TestResult();
+  static final testType = _TestType();
 }
 
 class _DbKeys {
@@ -14,4 +16,13 @@ class _DbKeys {
   final String keySignaturesListLastUpdate = 'signatures_list_last_update';
   final String keyRevokeListLastUpdate = 'revoke_list_last_update';
   final String keyRevokeListVersion = 'revoke_list_version';
+}
+
+class _TestResult {
+  final String detected = "260373001";
+}
+
+class _TestType {
+  final String rapid = 'LP217198-3';
+  final String molecular = 'LP6464-4';
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:archive/archive_io.dart';
+import 'package:archive/archive.dart';
 import 'package:asn1lib/asn1lib.dart';
 import 'package:cbor/cbor.dart';
 import 'package:crypto/crypto.dart';

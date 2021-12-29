@@ -1,9 +1,8 @@
 import 'package:clock/clock.dart';
+import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
-import 'package:verificac19/src/model/test_result.dart';
-import 'package:verificac19/src/model/test_type.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
@@ -164,7 +163,7 @@ class CertificateValidatorImpl implements CertificateValidator {
     try {
       final lastTest = cert.tests.last;
 
-      if (lastTest.testResult == TestResult.detected) {
+      if (lastTest.testResult == C.testResult.detected) {
         return const ValidationResult(
           status: CertificateStatus.notValid,
           result: false,
@@ -175,10 +174,10 @@ class CertificateValidatorImpl implements CertificateValidator {
       ValidationRule testStartHours;
       ValidationRule testEndHours;
 
-      if (lastTest.typeOfTest == TestType.molecular) {
+      if (lastTest.typeOfTest == C.testType.molecular) {
         testStartHours = rules.find('molecular_test_start_hours')!;
         testEndHours = rules.find('molecular_test_end_hours')!;
-      } else if (lastTest.typeOfTest == TestType.rapid) {
+      } else if (lastTest.typeOfTest == C.testType.rapid) {
         testStartHours = rules.find('rapid_test_start_hours')!;
         testEndHours = rules.find('rapid_test_end_hours')!;
       } else {

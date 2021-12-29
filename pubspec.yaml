@@ -1,6 +1,6 @@
 name: verificac19
-description: Unofficial EU DGC validation package for Flutter
-version: 1.0.0
+description: Unofficial EU Digital Green Certificate validation SDK for Flutter apps
+version: 1.0.1
 homepage: https://github.com/mastro993/verificac19_flutter
 documentation: https://github.com/mastro993/verificac19_flutter
 
@@ -20,10 +20,10 @@ dependencies:
   flutter:
     sdk: flutter
   hive: ^2.0.5
-  hive_flutter: ^1.1.0
   json_annotation: ^4.4.0
   json_serializable: ^6.1.3
   ninja: ^3.0.7
+  path_provider: ^2.0.8
   retrofit: ^3.0.1
   x509b: ^0.2.5
 

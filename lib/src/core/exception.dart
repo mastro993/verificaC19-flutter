@@ -7,22 +7,27 @@ class _Exception implements Exception {
   }
 }
 
+/// Thrown when Certificate contains unsupported data
 class CertificateException extends _Exception {
   CertificateException([String reason = '']) : super(reason);
 }
 
+/// Thrown when is not possibile to get a Certificate from the provided raw data
 class ParseException extends _Exception {
   ParseException([String reason = '']) : super(reason);
 }
 
+/// Thrown when a problem is encountered during a Certificate validation
 class ValidationException extends _Exception {
   ValidationException([String reason = '']) : super(reason);
 }
 
+/// Thrown when are encountered problems with remote service
 class ServiceException extends _Exception {
   ServiceException([String reason = '']) : super(reason);
 }
 
+/// Thrown when are encountered problems interacting with local storage
 class CacheException extends _Exception {
   CacheException([String reason = '']) : super(reason);
 }
