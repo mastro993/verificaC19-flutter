@@ -1,9 +1,8 @@
 name: verificac19
-description: Unofficial DGC VerificaC19 SDK implementation for Flutter
+description: Unofficial EU DGC validation package for Flutter
 version: 1.0.0
-homepage: http://fedemas.me
-documentation: htpp://fedemas.me
-publish_to: none
+homepage: https://github.com/mastro993/verificac19_flutter
+documentation: https://github.com/mastro993/verificac19_flutter
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
