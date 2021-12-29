@@ -1,0 +1,1 @@
+enum ValidationMode { normalDGP, superDGP }
