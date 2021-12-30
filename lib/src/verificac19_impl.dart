@@ -33,7 +33,7 @@ class VerificaC19Impl implements VerificaC19Interface {
 
   @override
   Future<void> update({bool forced = false}) async {
-    await _updater.updateAll(forced);
+    await _updater.updateAll(forced: forced);
   }
 
   @override

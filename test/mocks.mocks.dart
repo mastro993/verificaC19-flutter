@@ -276,20 +276,23 @@ class MockLocalRepository extends _i1.Mock implements _i8.LocalRepository {
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  bool rulesMustBeUpdated() =>
-      (super.noSuchMethod(Invocation.method(#rulesMustBeUpdated, []),
+  bool rulesMustBeUpdated([int? updateWindowHours = 24]) => (super.noSuchMethod(
+      Invocation.method(#rulesMustBeUpdated, [updateWindowHours]),
+      returnValue: false) as bool);
+  @override
+  bool signaturesMustBeUpdated([int? updateWindowHours = 24]) =>
+      (super.noSuchMethod(
+          Invocation.method(#signaturesMustBeUpdated, [updateWindowHours]),
           returnValue: false) as bool);
   @override
-  bool signaturesMustBeUpdated() =>
-      (super.noSuchMethod(Invocation.method(#signaturesMustBeUpdated, []),
+  bool signatureListMustBeUpdated([int? updateWindowHours = 24]) =>
+      (super.noSuchMethod(
+          Invocation.method(#signatureListMustBeUpdated, [updateWindowHours]),
           returnValue: false) as bool);
   @override
-  bool signatureListMustBeUpdated() =>
-      (super.noSuchMethod(Invocation.method(#signatureListMustBeUpdated, []),
-          returnValue: false) as bool);
-  @override
-  bool revokeListMustBeUpdated() =>
-      (super.noSuchMethod(Invocation.method(#revokeListMustBeUpdated, []),
+  bool revokeListMustBeUpdated([int? updateWindowHours = 24]) =>
+      (super.noSuchMethod(
+          Invocation.method(#revokeListMustBeUpdated, [updateWindowHours]),
           returnValue: false) as bool);
   @override
   _i4.Future<void> storeRules(List<_i9.ValidationRule>? rules) =>

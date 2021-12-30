@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Rules, CRL and DSCs can be force updated before the 24 hours expiry window
+
 ## 1.0.4
 
 - Added method to check if the data needs to be updated

@@ -19,15 +19,15 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateAll([bool forced = false]) async {
-    await updateRules();
-    await updateSignatures();
-    await updateSignaturesList();
-    await updateRevokeList();
+  Future<void> updateAll({bool forced = false}) async {
+    await updateRules(forced: forced);
+    await updateSignatures(forced: forced);
+    await updateSignaturesList(forced: forced);
+    await updateRevokeList(forced: forced);
   }
 
   @override
-  Future<void> updateRules([bool forced = false]) async {
+  Future<void> updateRules({bool forced = false}) async {
     try {
       bool needsUpdate = _local.rulesMustBeUpdated(
         forced ? UpdateWindowHours.min : UpdateWindowHours.max,
@@ -43,7 +43,7 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateSignaturesList([bool forced = false]) async {
+  Future<void> updateSignaturesList({bool forced = false}) async {
     try {
       bool needsUpdate = _local.signatureListMustBeUpdated(
         forced ? UpdateWindowHours.min : UpdateWindowHours.max,
@@ -59,7 +59,7 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateSignatures([bool forced = false]) async {
+  Future<void> updateSignatures({bool forced = false}) async {
     try {
       bool needsUpdate = _local.signaturesMustBeUpdated(
         forced ? UpdateWindowHours.min : UpdateWindowHours.max,
@@ -75,9 +75,9 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateRevokeList([bool forced = false]) async {
+  Future<void> updateRevokeList({bool forced = false}) async {
     try {
-      bool needsUpdate = _local.signaturesMustBeUpdated(
+      bool needsUpdate = _local.revokeListMustBeUpdated(
         forced ? UpdateWindowHours.min : UpdateWindowHours.max,
       );
 

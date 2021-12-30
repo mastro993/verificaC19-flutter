@@ -9,7 +9,6 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'mocks.mocks.dart';
 
 void main() {
-  int cacheHours = 24;
   late MockBox dataBox;
   late MockBox<String> revokeListBox;
   late MockHiveInterface hive;
@@ -67,8 +66,8 @@ void main() {
       await cache.storeRules([]);
       // assert
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 - 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 - 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
@@ -83,8 +82,8 @@ void main() {
       // act
       // assert
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 + 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 + 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
@@ -135,8 +134,8 @@ void main() {
       // act
       // assert
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 - 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 - 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
@@ -153,8 +152,8 @@ void main() {
       // assert
 
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 + 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 + 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
@@ -207,8 +206,8 @@ void main() {
       // act
       // assert
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 - 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 - 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
@@ -225,8 +224,8 @@ void main() {
       // assert
 
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 + 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 + 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
@@ -277,8 +276,8 @@ void main() {
       // act
       // assert
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 - 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 - 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
@@ -295,8 +294,8 @@ void main() {
       // assert
 
       final now = clock.now();
-      final testDate = now.add(Duration(
-        seconds: cacheHours * 3600 + 1,
+      final testDate = now.add(const Duration(
+        seconds: UpdateWindowHours.max * 3600 + 1,
       ));
 
       withClock(Clock.fixed(testDate), () {
