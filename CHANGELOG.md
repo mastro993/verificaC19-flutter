@@ -1,3 +1,7 @@
+## 1.0.8
+
+- Fixes
+
 ## 1.0.7
 
 - Added method to retrieve the date and time of the last successfull update
