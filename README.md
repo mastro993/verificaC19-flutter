@@ -1,3 +1,5 @@
+# VerificaC19 SDK for Flutter
+
 [![Flutter](https://github.com/mastro993/verificac19_flutter/actions/workflows/flutter-ci.yml/badge.svg?branch=master)](https://github.com/mastro993/verificac19_flutter/actions/workflows/flutter-ci.yml)
 [![pub package](https://img.shields.io/pub/v/verificac19.svg)](https://pub.dev/packages/verificac19)
 [![pub points](https://badges.bar/verificac19/pub%20points)](https://pub.dev/packages/verificac19/score)
@@ -7,7 +9,10 @@
 ## About
 
 This package allows to decode and validate any EU Digital Green Certificate in your Flutter application. It is based on the specications contained in the [official it-dgc-verificac19-sdk-android repository](https://github.com/ministero-salute/it-dgc-verificac19-sdk-android).
-For now it only supports the download of validation rules from the Italian Backend.
+
+This library requires an internet connection to downlod and cache rules, CRL and DSCs at least once per day. Once updated the entire process of validation can be done completely offline and in real-time.
+
+Note: this library currently only supports the download of rules, CRL and DSCs from the Italian Backend (https://get.dgc.gov.it/v1/dgc)
 
 ## Development & testing
 
