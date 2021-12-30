@@ -19,6 +19,14 @@ class LocalRepositoryImpl implements LocalRepository {
     await Hive.openBox<String>(DbKeys.dbRevokeList);
   }
 
+  @override
+  Future<bool> needsUpdate() async {
+    return rulesMustBeUpdated(UpdateWindowHours.max) ||
+        signatureListMustBeUpdated(UpdateWindowHours.max) ||
+        signaturesMustBeUpdated(UpdateWindowHours.max) ||
+        revokeListMustBeUpdated(UpdateWindowHours.max);
+  }
+
   bool _needsUpdate(String key, int updateWindowHours) {
     try {
       final box = _hive.box(DbKeys.dbData);

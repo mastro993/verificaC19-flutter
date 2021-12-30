@@ -11,11 +11,8 @@ class UpdaterImpl implements Updater {
   UpdaterImpl(this._remote, this._local);
 
   @override
-  Future<bool> needsUpdate() async {
-    return _local.rulesMustBeUpdated(UpdateWindowHours.max) ||
-        _local.signatureListMustBeUpdated(UpdateWindowHours.max) ||
-        _local.signaturesMustBeUpdated(UpdateWindowHours.max) ||
-        _local.revokeListMustBeUpdated(UpdateWindowHours.max);
+  Future<bool> needsUpdate() {
+    return _local.needsUpdate();
   }
 
   @override

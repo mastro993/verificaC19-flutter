@@ -22,24 +22,22 @@ void main() {
   group('updates', () {
     test('Should require updates', () async {
       // arrange
-      when(cache.rulesMustBeUpdated()).thenReturn(true);
-      when(cache.signaturesMustBeUpdated()).thenReturn(false);
-      when(cache.signatureListMustBeUpdated()).thenReturn(true);
-      when(cache.revokeListMustBeUpdated()).thenReturn(false);
+      when(cache.needsUpdate()).thenAnswer((_) async => true);
       // act
       final result = await updater.needsUpdate();
+      verify(cache.needsUpdate()).called(1);
+      verifyNoMoreInteractions(cache);
       // assert
       assert(result == true);
     });
 
     test('Should not require updates', () async {
       // arrange
-      when(cache.rulesMustBeUpdated()).thenReturn(false);
-      when(cache.signaturesMustBeUpdated()).thenReturn(false);
-      when(cache.signatureListMustBeUpdated()).thenReturn(false);
-      when(cache.revokeListMustBeUpdated()).thenReturn(false);
+      when(cache.needsUpdate()).thenAnswer((_) async => false);
       // act
       final result = await updater.needsUpdate();
+      verify(cache.needsUpdate()).called(1);
+      verifyNoMoreInteractions(cache);
       // assert
       assert(result == false);
     });

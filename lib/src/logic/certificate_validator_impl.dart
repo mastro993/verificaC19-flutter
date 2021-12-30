@@ -3,6 +3,7 @@ import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
+import 'package:verificac19/src/model/validation_error.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
@@ -152,6 +153,7 @@ class CertificateValidatorImpl implements CertificateValidator {
         result: false,
         message:
             'Vaccination is not present or is not a green pass: ${e.toString()}',
+        error: ValidationError.emptyOrBlacklisted,
       );
     }
   }
@@ -225,6 +227,7 @@ class CertificateValidatorImpl implements CertificateValidator {
         result: false,
         message:
             'Test Result is not present or is not a green pass: ${e.toString()}',
+        error: ValidationError.emptyOrBlacklisted,
       );
     }
   }
@@ -283,6 +286,7 @@ class CertificateValidatorImpl implements CertificateValidator {
         result: false,
         message:
             'Recovery statement is not present or is not a green pass: ${e.toString()}',
+        error: ValidationError.emptyOrBlacklisted,
       );
     }
   }
@@ -344,6 +348,7 @@ class CertificateValidatorImpl implements CertificateValidator {
       status: CertificateStatus.notEuDCC,
       message:
           'No vaccination, test or recovery statement found in payload or UVCI is in blacklist',
+      error: ValidationError.emptyOrBlacklisted,
     );
   }
 
@@ -370,6 +375,16 @@ class CertificateValidatorImpl implements CertificateValidator {
     Certificate certificate, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
+    final bool needsUpdate = await _repo.needsUpdate();
+
+    if (needsUpdate) {
+      return const ValidationResult(
+        status: CertificateStatus.notValid,
+        result: false,
+        error: ValidationError.outdatedValidationRules,
+      );
+    }
+
     final bool signatureIsOk = await _checkSignature(certificate);
 
     if (!signatureIsOk) {

@@ -5,6 +5,9 @@ abstract class LocalRepository {
   /// Initializes internal depencencies
   Future<void> setup();
 
+  // Checks if rules, CRL or DSCs needs to be updated
+  Future<bool> needsUpdate();
+
   /// Checks if rules are older than the given [updateWindowHours] argument
   bool rulesMustBeUpdated([
     int updateWindowHours = UpdateWindowHours.max,

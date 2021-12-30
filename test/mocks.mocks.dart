@@ -276,6 +276,10 @@ class MockLocalRepository extends _i1.Mock implements _i8.LocalRepository {
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
+  _i4.Future<bool> needsUpdate() =>
+      (super.noSuchMethod(Invocation.method(#needsUpdate, []),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
   bool rulesMustBeUpdated([int? updateWindowHours = 24]) => (super.noSuchMethod(
       Invocation.method(#rulesMustBeUpdated, [updateWindowHours]),
       returnValue: false) as bool);

@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Validator returns an error if validation rules are expired (older than 24 hours)
+
 ## 1.0.5
 
 - Rules, CRL and DSCs can be force updated before the 24 hours expiry window
