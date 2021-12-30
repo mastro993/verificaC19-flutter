@@ -1,4 +1,8 @@
 [![Flutter](https://github.com/mastro993/verificac19_flutter/actions/workflows/flutter-ci.yml/badge.svg?branch=master)](https://github.com/mastro993/verificac19_flutter/actions/workflows/flutter-ci.yml)
+[![pub package](https://img.shields.io/pub/v/verificac19.svg)](https://pub.dev/packages/verificac19)
+[![pub points](https://badges.bar/verificac19/pub%20points)](https://pub.dev/packages/verificac19/score)
+[![popularity](https://badges.bar/verificac19/popularity)](https://pub.dev/packages/verificac19/score)
+[![likes](https://badges.bar/verificac19/likes)](https://pub.dev/packages/verificac19/score)
 
 ## About
 
