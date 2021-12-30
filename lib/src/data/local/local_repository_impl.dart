@@ -29,8 +29,11 @@ class LocalRepositoryImpl implements LocalRepository {
   }
 
   @override
-  Future<DateTime> getLastUpdateTime() async {
+  Future<DateTime?> getLastUpdateTime() async {
     final Box<DateTime> box = _hive.box(DbKeys.dbUpdates);
+    if (box.isEmpty) {
+      return null;
+    }
     return box.values.reduce(
       (value, element) => value.compareTo(element) > 0 ? value : element,
     );

@@ -32,7 +32,7 @@ class VerificaC19Impl implements VerificaC19Interface {
   }
 
   @override
-  Future<DateTime> getLastUpdateTime() {
+  Future<DateTime?> getLastUpdateTime() {
     return _cache.getLastUpdateTime();
   }
 
