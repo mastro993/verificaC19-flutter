@@ -56,6 +56,17 @@ You can download and cache rules, CRL data and DSCs using the `update` function.
 await VerificaC19.update();
 ```
 
+You can optionally pass the ```force``` parameter to force the update before the **24 hours** expiry window, but only after **1 hour** from the last update. 
+
+```dart
+await VerificaC19.update(force: true);
+```
+
+You can also check if the data is expired (older than the 24 hours update window) without requiring an update with the ```needUpdate``` function.
+
+```dart
+bool requiresUpdate = await VerificaC19.needsUpdate();
+```
 
 ### Verify a DGC
 
