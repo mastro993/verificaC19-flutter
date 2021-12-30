@@ -163,7 +163,7 @@ class CertificateValidatorImpl implements CertificateValidator {
     try {
       final lastTest = cert.tests.last;
 
-      if (lastTest.testResult == C.testResult.detected) {
+      if (lastTest.testResult == TestResult.detected) {
         return const ValidationResult(
           status: CertificateStatus.notValid,
           result: false,
@@ -174,10 +174,10 @@ class CertificateValidatorImpl implements CertificateValidator {
       ValidationRule testStartHours;
       ValidationRule testEndHours;
 
-      if (lastTest.typeOfTest == C.testType.molecular) {
+      if (lastTest.typeOfTest == TestType.molecular) {
         testStartHours = rules.find('molecular_test_start_hours')!;
         testEndHours = rules.find('molecular_test_end_hours')!;
-      } else if (lastTest.typeOfTest == C.testType.rapid) {
+      } else if (lastTest.typeOfTest == TestType.rapid) {
         testStartHours = rules.find('rapid_test_start_hours')!;
         testEndHours = rules.find('rapid_test_end_hours')!;
       } else {

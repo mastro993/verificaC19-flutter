@@ -6,11 +6,13 @@ abstract class VerificaC19Interface {
   /// Initializes dependencies
   Future<void> initialize();
 
-  /// Check if rules, CRL and/or DSCs need to be updated
+  /// Check if rules, CRL and/or DSCs are expired (older than 24 hours)
   Future<bool> needsUpdate();
 
   /// Download and cache rules, CRL data and DSCs
-  Future<void> update();
+  ///
+  /// Optional parameter [forced] can be passed to force the update before the 24 hours expiry window
+  Future<void> update({bool forced});
 
   /// Retrives a [Certificate] from a Base45 encoded string provided by [rawData] parameter.
   ///

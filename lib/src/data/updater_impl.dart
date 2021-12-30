@@ -1,3 +1,4 @@
+import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/data/remote/remote_repository.dart';
@@ -11,16 +12,28 @@ class UpdaterImpl implements Updater {
 
   @override
   Future<bool> needsUpdate() async {
-    return _local.rulesMustBeUpdated() ||
-        _local.signatureListMustBeUpdated() ||
-        _local.signaturesMustBeUpdated() ||
-        _local.revokeListMustBeUpdated();
+    return _local.rulesMustBeUpdated(UpdateWindowHours.max) ||
+        _local.signatureListMustBeUpdated(UpdateWindowHours.max) ||
+        _local.signaturesMustBeUpdated(UpdateWindowHours.max) ||
+        _local.revokeListMustBeUpdated(UpdateWindowHours.max);
   }
 
   @override
-  Future<void> updateRules() async {
+  Future<void> updateAll([bool forced = false]) async {
+    await updateRules();
+    await updateSignatures();
+    await updateSignaturesList();
+    await updateRevokeList();
+  }
+
+  @override
+  Future<void> updateRules([bool forced = false]) async {
     try {
-      if (_local.rulesMustBeUpdated()) {
+      bool needsUpdate = _local.rulesMustBeUpdated(
+        forced ? UpdateWindowHours.min : UpdateWindowHours.max,
+      );
+
+      if (needsUpdate) {
         final List<ValidationRule> rules = await _remote.getValidationRules();
         await _local.storeRules(rules);
       }
@@ -30,9 +43,13 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateSignaturesList() async {
+  Future<void> updateSignaturesList([bool forced = false]) async {
     try {
-      if (_local.signatureListMustBeUpdated()) {
+      bool needsUpdate = _local.signatureListMustBeUpdated(
+        forced ? UpdateWindowHours.min : UpdateWindowHours.max,
+      );
+
+      if (needsUpdate) {
         final List<String> signaturesList = await _remote.getSignaturesList();
         await _local.storeSignaturesList(signaturesList);
       }
@@ -42,9 +59,13 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateSignatures() async {
+  Future<void> updateSignatures([bool forced = false]) async {
     try {
-      if (_local.signaturesMustBeUpdated()) {
+      bool needsUpdate = _local.signaturesMustBeUpdated(
+        forced ? UpdateWindowHours.min : UpdateWindowHours.max,
+      );
+
+      if (needsUpdate) {
         final Map<String, String> signatures = await _remote.getSignatures();
         await _local.storeSignatures(signatures);
       }
@@ -54,9 +75,13 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateRevokeList() async {
+  Future<void> updateRevokeList([bool forced = false]) async {
     try {
-      if (_local.revokeListMustBeUpdated()) {
+      bool needsUpdate = _local.signaturesMustBeUpdated(
+        forced ? UpdateWindowHours.min : UpdateWindowHours.max,
+      );
+
+      if (needsUpdate) {
         final List<String> revokeList = await _remote.getRevokeList();
         await _local.storeRevokeList(revokeList);
       }
