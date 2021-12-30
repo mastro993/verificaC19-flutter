@@ -50,11 +50,12 @@ await VerificaC19.initialize();
 
 ### Download and cache rules, CRL data and DSCs
 
-You can download and cache rules, CRL data and DSCs using the `update` function.
+You can download and cache rules, CRL data and DSCs using the `update` function. This will update data only if the 24 hours update window is expired.
 
 ```dart
 await VerificaC19.update();
 ```
+
 
 ### Verify a DGC
 
