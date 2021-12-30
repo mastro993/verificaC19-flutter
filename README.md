@@ -103,5 +103,5 @@ An example application is currently WIP.
 
 ## TODOs
 
-- [ ] Add the ability to retrieve/validate a Certificate from image
-- [ ] Add the ability to custom data providers other than the Italian one (https://get.dgc.gov.it/v1/dgc)
+- [ ] Add the ability to retrieve/validate a Certificate from an image file
+- [ ] Add the ability to implement rules providers from other countries
