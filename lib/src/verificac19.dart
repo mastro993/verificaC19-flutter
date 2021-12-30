@@ -10,6 +10,9 @@ abstract class VerificaC19Interface {
   /// The maximum update window is 24 hour.
   Future<bool> needsUpdate();
 
+  /// Returns a [DateTime] with the date and time of the last completed rules update
+  Future<DateTime> getLastUpdateTime();
+
   /// Download and cache rules, CRL data and DSCs
   ///
   /// Optional parameter [forced] can be passed to force the update before the 24 hours expiry window

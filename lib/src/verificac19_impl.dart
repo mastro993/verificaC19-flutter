@@ -11,24 +11,30 @@ import 'package:verificac19/src/model/validation_mode.dart';
 import 'package:verificac19/verificac19.dart';
 
 class VerificaC19Impl implements VerificaC19Interface {
-  late RemoteRepository _remote;
-  late LocalRepository _local;
+  late RemoteRepository _service;
+  late LocalRepository _cache;
   late CertificateValidator _validator;
   late Updater _updater;
 
   @override
   Future<void> initialize() async {
-    _remote = RemoteRepositoryImpl();
-    _local = LocalRepositoryImpl();
-    _validator = CertificateValidatorImpl(_local);
-    _updater = UpdaterImpl(_remote, _local);
+    _service = RemoteRepositoryImpl();
+    _cache = LocalRepositoryImpl();
+    _validator = CertificateValidatorImpl(_cache);
+    _updater = UpdaterImpl(_service, _cache);
 
-    await _local.setup();
+    await _cache.setup();
   }
 
   @override
   Future<bool> needsUpdate() {
-    return _updater.needsUpdate();
+    return _cache.needsUpdate();
+  }
+
+  @override
+  Future<DateTime> getLastUpdateTime() {
+    // TODO: implement getLastUpdateTime
+    throw UnimplementedError();
   }
 
   @override

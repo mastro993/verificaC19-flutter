@@ -12,11 +12,12 @@ class LocalRepositoryImpl implements LocalRepository {
 
   @override
   Future<void> setup() async {
-    await Hive.initFlutter('/verificac19/cache');
+    await Hive.initFlutter();
     Hive.registerAdapter(ValidationRuleAdapter());
 
     await Hive.openBox<dynamic>(DbKeys.dbData);
     await Hive.openBox<String>(DbKeys.dbRevokeList);
+    await Hive.openBox<DateTime>(DbKeys.dbUpdates);
   }
 
   @override
@@ -27,9 +28,17 @@ class LocalRepositoryImpl implements LocalRepository {
         revokeListMustBeUpdated(UpdateWindowHours.max);
   }
 
+  @override
+  Future<DateTime> getLastUpdateTime() async {
+    final Box<DateTime> box = _hive.box(DbKeys.dbUpdates);
+    return box.values.reduce(
+      (value, element) => value.compareTo(element) > 0 ? value : element,
+    );
+  }
+
   bool _needsUpdate(String key, int updateWindowHours) {
     try {
-      final box = _hive.box(DbKeys.dbData);
+      final Box<DateTime> box = _hive.box(DbKeys.dbUpdates);
       final DateTime? lastUpdate = box.get(key);
       if (lastUpdate == null) {
         return true;
@@ -113,8 +122,9 @@ class LocalRepositoryImpl implements LocalRepository {
   ) async {
     try {
       final Box box = _hive.box(DbKeys.dbData);
+      final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
       await box.put(DbKeys.keyRules, rules);
-      await box.put(DbKeys.keyRulesLastUpdate, clock.now());
+      await updatesBox.put(DbKeys.keyRulesLastUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store rules to cache');
     }
@@ -126,8 +136,9 @@ class LocalRepositoryImpl implements LocalRepository {
   ) async {
     try {
       final Box box = _hive.box(DbKeys.dbData);
+      final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
       await box.put(DbKeys.keySignaturesList, signaturesList);
-      await box.put(DbKeys.keySignaturesListLastUpdate, clock.now());
+      await updatesBox.put(DbKeys.keySignaturesListLastUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store signatures list to cache');
     }
@@ -139,8 +150,9 @@ class LocalRepositoryImpl implements LocalRepository {
   ) async {
     try {
       final Box box = _hive.box(DbKeys.dbData);
+      final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
       await box.put(DbKeys.keySignatures, signatures);
-      await box.put(DbKeys.keySignaturesLastUpdate, clock.now());
+      await updatesBox.put(DbKeys.keySignaturesLastUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store signatures to cache');
     }
@@ -152,10 +164,10 @@ class LocalRepositoryImpl implements LocalRepository {
   ) async {
     try {
       final Box<String> revokeListBox = _hive.box(DbKeys.dbRevokeList);
-      final Box dataBox = _hive.box(DbKeys.dbData);
+      final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
       await revokeListBox.clear();
       await revokeListBox.addAll(revokeList);
-      await dataBox.put(DbKeys.keyRevokeListLastUpdate, clock.now());
+      await updatesBox.put(DbKeys.keyRevokeListLastUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store revoke list to cache');
     }

@@ -10,17 +10,20 @@ import 'mocks.mocks.dart';
 
 void main() {
   late MockBox dataBox;
+  late MockBox updatesBox;
   late MockBox<String> revokeListBox;
   late MockHiveInterface hive;
   late LocalRepository cache;
 
   setUp(() {
     dataBox = MockBox();
+    updatesBox = MockBox<DateTime>();
     revokeListBox = MockBox<String>();
     hive = MockHiveInterface();
 
     when(hive.box(DbKeys.dbData)).thenAnswer((_) => dataBox);
     when(hive.box(DbKeys.dbRevokeList)).thenAnswer((_) => revokeListBox);
+    when(hive.box(DbKeys.dbUpdates)).thenAnswer((_) => updatesBox);
 
     cache = LocalRepositoryImpl(hive: hive);
   });
@@ -31,7 +34,7 @@ void main() {
       await cache.storeRules([]);
       // assert
       verify(dataBox.put(DbKeys.keyRules, any)).called(1);
-      verify(dataBox.put(DbKeys.keyRulesLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keyRulesLastUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 
@@ -50,7 +53,7 @@ void main() {
     test('Should return that rules must be updated if rules are not yet stored',
         () {
       // arrange
-      when(dataBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(null);
+      when(updatesBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(null);
       // act
       final result = cache.rulesMustBeUpdated();
       // assert
@@ -61,7 +64,7 @@ void main() {
         'Should return that rules must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(dataBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(clock.now());
       // act
       await cache.storeRules([]);
       // assert
@@ -78,7 +81,7 @@ void main() {
 
     test('Should return that rules must be updated if are expired', () async {
       // arrange
-      when(dataBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(clock.now());
       // act
       // assert
       final now = clock.now();
@@ -99,7 +102,7 @@ void main() {
       await cache.storeSignatures({});
       // assert
       verify(dataBox.put(DbKeys.keySignatures, any)).called(1);
-      verify(dataBox.put(DbKeys.keySignaturesLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keySignaturesLastUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 
@@ -119,7 +122,7 @@ void main() {
     test('Should return that rules must be updated if rules are not yet stored',
         () {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(null);
+      when(updatesBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(null);
       // act
       final result = cache.signaturesMustBeUpdated();
       // assert
@@ -130,7 +133,8 @@ void main() {
         'Should return that signatures must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
+          .thenReturn(clock.now());
       // act
       // assert
       final now = clock.now();
@@ -147,7 +151,8 @@ void main() {
     test('Should return that signatures must be updated if are expired',
         () async {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
+          .thenReturn(clock.now());
       // act
       // assert
 
@@ -169,7 +174,7 @@ void main() {
       await cache.storeSignaturesList([]);
       // assert
       verify(dataBox.put(DbKeys.keySignaturesList, any)).called(1);
-      verify(dataBox.put(DbKeys.keySignaturesListLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keySignaturesListLastUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 
@@ -190,7 +195,7 @@ void main() {
         'Should return that signatures list must be updated if rules are not yet stored',
         () {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesListLastUpdate)).thenReturn(null);
+      when(updatesBox.get(DbKeys.keySignaturesListLastUpdate)).thenReturn(null);
       // act
       final result = cache.signatureListMustBeUpdated();
       // assert
@@ -201,7 +206,7 @@ void main() {
         'Should return that signatures list must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesListLastUpdate))
+      when(updatesBox.get(DbKeys.keySignaturesListLastUpdate))
           .thenReturn(clock.now());
       // act
       // assert
@@ -218,7 +223,7 @@ void main() {
 
     test('Should return that rules must be updated if are expired', () async {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesListLastUpdate))
+      when(updatesBox.get(DbKeys.keySignaturesListLastUpdate))
           .thenReturn(clock.now());
       // act
       // assert
@@ -241,7 +246,7 @@ void main() {
       await cache.storeSignatures({});
       // assert
       verify(dataBox.put(DbKeys.keySignatures, any)).called(1);
-      verify(dataBox.put(DbKeys.keySignaturesLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keySignaturesLastUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 
@@ -261,7 +266,7 @@ void main() {
     test('Should return that rules must be updated if rules are not yet stored',
         () {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(null);
+      when(updatesBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(null);
       // act
       final result = cache.signaturesMustBeUpdated();
       // assert
@@ -272,7 +277,8 @@ void main() {
         'Should return that signatures must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
+          .thenReturn(clock.now());
       // act
       // assert
       final now = clock.now();
@@ -289,7 +295,8 @@ void main() {
     test('Should return that signatures must be updated if are expired',
         () async {
       // arrange
-      when(dataBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
+          .thenReturn(clock.now());
       // act
       // assert
 
@@ -316,7 +323,7 @@ void main() {
       verify(revokeListBox.clear()).called(1);
       verify(revokeListBox.addAll(any)).called(1);
       verifyNoMoreInteractions(revokeListBox);
-      verify(dataBox.put(DbKeys.keyRevokeListLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keyRevokeListLastUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 

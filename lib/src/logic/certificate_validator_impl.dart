@@ -362,7 +362,9 @@ class CertificateValidatorImpl implements CertificateValidator {
       try {
         String signature = signatures[certificate.kid]!;
         return DccUtils.checkSignatureWithCertificate(
-            signature, certificate.dcc);
+          signature,
+          certificate.dcc,
+        );
       } catch (e) {
         return false;
       }
@@ -392,6 +394,7 @@ class CertificateValidatorImpl implements CertificateValidator {
         status: CertificateStatus.notValid,
         result: false,
         message: 'Invalid signature',
+        error: ValidationError.invalidSignature,
       );
     }
 

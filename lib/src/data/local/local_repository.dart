@@ -8,6 +8,9 @@ abstract class LocalRepository {
   // Checks if rules, CRL or DSCs needs to be updated
   Future<bool> needsUpdate();
 
+  /// Returns a [DateTime] with the date and time of the last completed update
+  Future<DateTime> getLastUpdateTime();
+
   /// Checks if rules are older than the given [updateWindowHours] argument
   bool rulesMustBeUpdated([
     int updateWindowHours = UpdateWindowHours.max,

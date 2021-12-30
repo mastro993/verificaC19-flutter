@@ -1,3 +1,10 @@
+## 1.0.7
+
+- Added method to retrieve the date and time of the last successfull update
+- Removed unused methods
+- Fixed bugs with Certificate validation
+- Resolved Cache initialization error
+
 ## 1.0.6
 
 - Validator returns an error if validation rules are expired (older than 24 hours)

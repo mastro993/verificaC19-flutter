@@ -20,29 +20,7 @@ void main() {
   });
 
   group('updates', () {
-    test('Should require updates', () async {
-      // arrange
-      when(cache.needsUpdate()).thenAnswer((_) async => true);
-      // act
-      final result = await updater.needsUpdate();
-      verify(cache.needsUpdate()).called(1);
-      verifyNoMoreInteractions(cache);
-      // assert
-      assert(result == true);
-    });
-
-    test('Should not require updates', () async {
-      // arrange
-      when(cache.needsUpdate()).thenAnswer((_) async => false);
-      // act
-      final result = await updater.needsUpdate();
-      verify(cache.needsUpdate()).called(1);
-      verifyNoMoreInteractions(cache);
-      // assert
-      assert(result == false);
-    });
-
-    test('Should get updated with right arguments', () async {
+    test('Should get updates with right arguments', () async {
       // Arrange
       when(cache.rulesMustBeUpdated(UpdateWindowHours.max)).thenReturn(false);
       when(cache.signaturesMustBeUpdated(UpdateWindowHours.max))
@@ -63,7 +41,7 @@ void main() {
       verifyNoMoreInteractions(cache);
     });
 
-    test('Should get updated with right arguments (forced)', () async {
+    test('Should get updates with right arguments (forced)', () async {
       // Arrange
       when(cache.rulesMustBeUpdated(UpdateWindowHours.min)).thenReturn(false);
       when(cache.signaturesMustBeUpdated(UpdateWindowHours.min))

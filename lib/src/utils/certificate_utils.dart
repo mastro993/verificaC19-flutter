@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:asn1lib/asn1lib.dart';
 import 'package:crypto/crypto.dart';
@@ -10,20 +11,7 @@ class CertificateUtils {
   static const _beginCert = '-----BEGIN CERTIFICATE-----';
   static const _endCert = '-----END CERTIFICATE-----';
 
-  static X509Certificate getX509Certificate(String pem) {
-    var cert = pem.trim();
-
-    if (cert.startsWith(_beginCert)) {
-      // we expect there to be only 1 cert in the pem, so we take the first.
-      return parsePem(pem).first as X509Certificate;
-    } else {
-      return X509Certificate.fromAsn1(
-        ASN1Sequence.fromBytes(base64Decode(pem)),
-      );
-    }
-  }
-
-  static String extractKid(String pem) {
+  static Uint8List _decodePem(String pem) {
     var cert = pem.trim();
 
     if (cert.startsWith(_beginCert) && cert.endsWith(_endCert)) {
@@ -34,8 +22,18 @@ class CertificateUtils {
       cert = cert.replaceAll(" ", "");
     }
 
-    //The kid is defined as the first 8 bytes of the SHA256 hash of the certificate.
     final der = base64Decode(cert);
+    return der;
+  }
+
+  static X509Certificate getX509Certificate(String pem) {
+    final der = _decodePem(pem);
+    return X509Certificate.fromAsn1(ASN1Sequence.fromBytes(der));
+  }
+
+  static String extractKid(String pem) {
+    //The kid is defined as the first 8 bytes of the SHA256 hash of the certificate.
+    final der = _decodePem(pem);
     return base64Encode(sha256.convert(der).bytes.sublist(0, 8));
   }
 }
