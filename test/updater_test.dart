@@ -197,7 +197,7 @@ void main() {
       when(remote.getRevokeList()).thenAnswer((_) async => []);
       when(cache.storeRevokeList(any)).thenAnswer((_) async => Void);
       // act
-      await updater.updateSignaturesList();
+      await updater.updateRevokeList();
       // assert
       verify(cache.revokeListMustBeUpdated(UpdateWindowHours.max)).called(1);
       verify(remote.getRevokeList()).called(1);
@@ -213,7 +213,7 @@ void main() {
       when(remote.getRevokeList()).thenAnswer((_) async => []);
       when(cache.storeRevokeList(any)).thenAnswer((_) async => Void);
       // act
-      await updater.updateSignaturesList();
+      await updater.updateRevokeList();
       // assert
       verify(cache.revokeListMustBeUpdated(UpdateWindowHours.max)).called(1);
       verifyNever(remote.getRevokeList());
