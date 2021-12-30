@@ -6,6 +6,9 @@ abstract class VerificaC19Interface {
   /// Initializes dependencies
   Future<void> initialize();
 
+  /// Check if rules, CRL and/or DSCs need to be updated
+  Future<bool> needsUpdate();
+
   /// Download and cache rules, CRL data and DSCs
   Future<void> update();
 

@@ -10,6 +10,14 @@ class UpdaterImpl implements Updater {
   UpdaterImpl(this._remote, this._local);
 
   @override
+  Future<bool> needsUpdate() async {
+    return _local.rulesMustBeUpdated() ||
+        _local.signatureListMustBeUpdated() ||
+        _local.signaturesMustBeUpdated() ||
+        _local.revokeListMustBeUpdated();
+  }
+
+  @override
   Future<void> updateRules() async {
     try {
       if (_local.rulesMustBeUpdated()) {

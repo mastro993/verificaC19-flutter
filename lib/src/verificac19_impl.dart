@@ -27,6 +27,11 @@ class VerificaC19Impl implements VerificaC19Interface {
   }
 
   @override
+  Future<bool> needsUpdate() {
+    return _updater.needsUpdate();
+  }
+
+  @override
   Future<void> update() async {
     await _updater.updateRules();
     await _updater.updateSignaturesList();

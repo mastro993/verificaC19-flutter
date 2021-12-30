@@ -18,6 +18,32 @@ void main() {
     updater = UpdaterImpl(remote, cache);
   });
 
+  group('updates', () {
+    test('Should require updates', () async {
+      // arrange
+      when(cache.rulesMustBeUpdated()).thenReturn(true);
+      when(cache.signaturesMustBeUpdated()).thenReturn(false);
+      when(cache.signatureListMustBeUpdated()).thenReturn(true);
+      when(cache.revokeListMustBeUpdated()).thenReturn(false);
+      // act
+      final result = await updater.needsUpdate();
+      // assert
+      assert(result == true);
+    });
+
+    test('Should not require updates', () async {
+      // arrange
+      when(cache.rulesMustBeUpdated()).thenReturn(false);
+      when(cache.signaturesMustBeUpdated()).thenReturn(false);
+      when(cache.signatureListMustBeUpdated()).thenReturn(false);
+      when(cache.revokeListMustBeUpdated()).thenReturn(false);
+      // act
+      final result = await updater.needsUpdate();
+      // assert
+      assert(result == false);
+    });
+  });
+
   group('Rules', () {
     test('Should update rules when expired', () async {
       // arrange
