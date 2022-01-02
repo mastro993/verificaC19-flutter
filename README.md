@@ -68,20 +68,12 @@ You can also check if the data is expired (older than the 24 hours update window
 bool requiresUpdate = await VerificaC19.needsUpdate();
 ```
 
-### Verify a DGC
+### Verify and validate a DGC
 
-You can decode and get a `Certificate` object from raw data using the `getCertificateFromRaw` function
-
-```dart
-Certificate cert = await VerificaC19.getCertificateFromRaw('HC1:NCFOXN%TSMAHN-H3ZSUZK+.V0ET9%6-AH...');
-```
-
-You can verify a DGC from a `Certificate` object or directly base45 encoded raw data.
+You can verify and validate a DGC from a String containing a base45 encoded data.
 
 ```dart
-// Validate Certificate object
-ValidationResult result = await VerificaC19.validateCertificate(cert);
-// or base45 encoded raw data
+// Validate frombase45 encoded data
 ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSMAHN-H3ZSUZK+.V0ET9%6-AH...');
 ```
 
@@ -93,7 +85,7 @@ ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSMAHN-H
 | ❌  | notValid    | Certificate is not valid     |
 | ❌  | notValidYet | Certificate is not valid yet |
 | ❌  | notEuDCC    | Certificate is not an EU DCC |
-| ❌  | notEuDCC    | Certificate has been revoked |
+| ❌  | revoke      | Certificate has been revoked |
 
 You can also provide a `ValidationMode` parameter.
 
