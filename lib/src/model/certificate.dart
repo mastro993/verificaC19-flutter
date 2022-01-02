@@ -1,38 +1,33 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:verificac19/src/model/dcc.dart';
 import 'package:verificac19/src/model/person.dart';
 import 'package:verificac19/src/model/recovery_statement.dart';
 import 'package:verificac19/src/model/test.dart';
 import 'package:verificac19/src/model/vaccination.dart';
 
-class Certificate {
-  /// Personal information of the certificate subject
-  final Person person;
+part 'certificate.freezed.dart';
 
-  /// Date of birth of the person
-  final DateTime dateOfBirth;
+@freezed
+class Certificate with _$Certificate {
+  const Certificate._();
 
-  /// Certificate KID
-  final String kid;
+  const factory Certificate({
+    /// Personal information of the certificate subject
+    required Person person,
 
-  /// List of certificate Vaccinations
-  final List<Vaccination> vaccinations;
+    /// Date of birth of the person
+    required DateTime dateOfBirth,
 
-  /// List of certificate Test results
-  final List<Test> tests;
+    /// List of certificate Vaccinations
+    required List<Vaccination> vaccinations,
 
-  /// List of certificate Recovery statements
-  final List<RecoveryStatement> recoveryStatements;
+    /// List of certificate Test results
+    required List<Test> tests,
 
-  /// Certificate DCC
-  final DCC dcc;
+    /// List of certificate Recovery statements
+    required List<RecoveryStatement> recoveryStatements,
 
-  const Certificate({
-    required this.person,
-    required this.dateOfBirth,
-    required this.kid,
-    required this.vaccinations,
-    required this.tests,
-    required this.recoveryStatements,
-    required this.dcc,
-  });
+    /// Certificate DCC
+    required DCC dcc,
+  }) = _Certificate;
 }

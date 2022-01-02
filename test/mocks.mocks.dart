@@ -280,6 +280,10 @@ class MockLocalRepository extends _i1.Mock implements _i8.LocalRepository {
       (super.noSuchMethod(Invocation.method(#needsUpdate, []),
           returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
+  _i4.Future<DateTime?> getLastUpdateTime() =>
+      (super.noSuchMethod(Invocation.method(#getLastUpdateTime, []),
+          returnValue: Future<DateTime?>.value()) as _i4.Future<DateTime?>);
+  @override
   bool rulesMustBeUpdated([int? updateWindowHours = 24]) => (super.noSuchMethod(
       Invocation.method(#rulesMustBeUpdated, [updateWindowHours]),
       returnValue: false) as bool);

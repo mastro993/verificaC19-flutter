@@ -27,3 +27,12 @@ class TestType {
   static const String rapid = 'LP217198-3';
   static const String molecular = 'LP6464-4';
 }
+
+class VaccineType {
+  static const String johnson = 'EU/1/20/1525';
+  static const String sputnik = 'Sputnik-V';
+}
+
+class Country {
+  static const String sanMarino = 'SM';
+}

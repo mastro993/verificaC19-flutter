@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/local/local_repository_impl.dart';
 import 'package:verificac19/src/data/remote/remote_repository.dart';
@@ -42,24 +44,43 @@ class VerificaC19Impl implements VerificaC19Interface {
   }
 
   @override
-  Future<Certificate> getCertificateFromRaw(String rawData) {
-    return CertificateParser.getCertificateFromRawData(rawData);
-  }
-
-  @override
-  Future<ValidationResult> validateCertificate(
-    Certificate certificate, {
-    ValidationMode mode = ValidationMode.normalDGP,
-  }) {
-    return _validator.validate(certificate, mode: mode);
-  }
-
-  @override
   Future<ValidationResult> validateFromRaw(
     String rawData, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
-    final cert = await getCertificateFromRaw(rawData);
-    return validateCertificate(cert, mode: mode);
+    final bool needsUpdate = await _cache.needsUpdate();
+
+    final certificate = await CertificateParser.getCertificateFromRawData(
+      rawData,
+    );
+
+    if (needsUpdate) {
+      log("Velidation rules needs to be updated");
+      return ValidationResult(
+        certificate: certificate,
+        status: CertificateStatus.notValid,
+      );
+    }
+
+    final bool signatureIsOk =
+        await _validator.checkCertificateSignature(certificate);
+
+    if (!signatureIsOk) {
+      log("Certificate has an invalid signature");
+      return ValidationResult(
+        certificate: certificate,
+        status: CertificateStatus.notValid,
+      );
+    }
+
+    final CertificateStatus rulesResult = await _validator.checkValidationRules(
+      certificate,
+      mode: mode,
+    );
+
+    return ValidationResult(
+      certificate: certificate,
+      status: rulesResult,
+    );
   }
 }

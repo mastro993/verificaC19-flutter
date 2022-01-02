@@ -1,3 +1,12 @@
+## 1.0.10
+
+- Added booster validation mode
+- Improved validation logic
+- Covered more test cases
+- Removed string message from validation result
+- Removed error from validation result
+- Removed parse funcion (you can get the certificate only though validation)
+
 ## 1.0.9
 
 - Fixes

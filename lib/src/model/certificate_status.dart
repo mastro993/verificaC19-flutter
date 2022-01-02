@@ -10,4 +10,10 @@ enum CertificateStatus {
 
   /// Certifica is valid and active
   valid,
+
+  /// Certificate has been revoked by the issuer
+  revoked,
+
+  /// Additional test required
+  testNeeded,
 }

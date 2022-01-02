@@ -1,0 +1,364 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+
+part of 'vaccination.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+class _$VaccinationTearOff {
+  const _$VaccinationTearOff();
+
+  _Vaccination call(
+      {required String disease,
+      required String vaccine,
+      required String medicinalProduct,
+      required String manufacturer,
+      required int doseNumber,
+      required int totalSeriesOfDoses,
+      required DateTime dateOfVaccination,
+      required String countryOfVaccination,
+      required String certificateIssuer,
+      required String certificateIdentifier}) {
+    return _Vaccination(
+      disease: disease,
+      vaccine: vaccine,
+      medicinalProduct: medicinalProduct,
+      manufacturer: manufacturer,
+      doseNumber: doseNumber,
+      totalSeriesOfDoses: totalSeriesOfDoses,
+      dateOfVaccination: dateOfVaccination,
+      countryOfVaccination: countryOfVaccination,
+      certificateIssuer: certificateIssuer,
+      certificateIdentifier: certificateIdentifier,
+    );
+  }
+}
+
+/// @nodoc
+const $Vaccination = _$VaccinationTearOff();
+
+/// @nodoc
+mixin _$Vaccination {
+  String get disease => throw _privateConstructorUsedError;
+  String get vaccine => throw _privateConstructorUsedError;
+  String get medicinalProduct => throw _privateConstructorUsedError;
+  String get manufacturer => throw _privateConstructorUsedError;
+  int get doseNumber => throw _privateConstructorUsedError;
+  int get totalSeriesOfDoses => throw _privateConstructorUsedError;
+  DateTime get dateOfVaccination => throw _privateConstructorUsedError;
+  String get countryOfVaccination => throw _privateConstructorUsedError;
+  String get certificateIssuer => throw _privateConstructorUsedError;
+  String get certificateIdentifier => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $VaccinationCopyWith<Vaccination> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VaccinationCopyWith<$Res> {
+  factory $VaccinationCopyWith(
+          Vaccination value, $Res Function(Vaccination) then) =
+      _$VaccinationCopyWithImpl<$Res>;
+  $Res call(
+      {String disease,
+      String vaccine,
+      String medicinalProduct,
+      String manufacturer,
+      int doseNumber,
+      int totalSeriesOfDoses,
+      DateTime dateOfVaccination,
+      String countryOfVaccination,
+      String certificateIssuer,
+      String certificateIdentifier});
+}
+
+/// @nodoc
+class _$VaccinationCopyWithImpl<$Res> implements $VaccinationCopyWith<$Res> {
+  _$VaccinationCopyWithImpl(this._value, this._then);
+
+  final Vaccination _value;
+  // ignore: unused_field
+  final $Res Function(Vaccination) _then;
+
+  @override
+  $Res call({
+    Object? disease = freezed,
+    Object? vaccine = freezed,
+    Object? medicinalProduct = freezed,
+    Object? manufacturer = freezed,
+    Object? doseNumber = freezed,
+    Object? totalSeriesOfDoses = freezed,
+    Object? dateOfVaccination = freezed,
+    Object? countryOfVaccination = freezed,
+    Object? certificateIssuer = freezed,
+    Object? certificateIdentifier = freezed,
+  }) {
+    return _then(_value.copyWith(
+      disease: disease == freezed
+          ? _value.disease
+          : disease // ignore: cast_nullable_to_non_nullable
+              as String,
+      vaccine: vaccine == freezed
+          ? _value.vaccine
+          : vaccine // ignore: cast_nullable_to_non_nullable
+              as String,
+      medicinalProduct: medicinalProduct == freezed
+          ? _value.medicinalProduct
+          : medicinalProduct // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufacturer: manufacturer == freezed
+          ? _value.manufacturer
+          : manufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
+      doseNumber: doseNumber == freezed
+          ? _value.doseNumber
+          : doseNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalSeriesOfDoses: totalSeriesOfDoses == freezed
+          ? _value.totalSeriesOfDoses
+          : totalSeriesOfDoses // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateOfVaccination: dateOfVaccination == freezed
+          ? _value.dateOfVaccination
+          : dateOfVaccination // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      countryOfVaccination: countryOfVaccination == freezed
+          ? _value.countryOfVaccination
+          : countryOfVaccination // ignore: cast_nullable_to_non_nullable
+              as String,
+      certificateIssuer: certificateIssuer == freezed
+          ? _value.certificateIssuer
+          : certificateIssuer // ignore: cast_nullable_to_non_nullable
+              as String,
+      certificateIdentifier: certificateIdentifier == freezed
+          ? _value.certificateIdentifier
+          : certificateIdentifier // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$VaccinationCopyWith<$Res>
+    implements $VaccinationCopyWith<$Res> {
+  factory _$VaccinationCopyWith(
+          _Vaccination value, $Res Function(_Vaccination) then) =
+      __$VaccinationCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String disease,
+      String vaccine,
+      String medicinalProduct,
+      String manufacturer,
+      int doseNumber,
+      int totalSeriesOfDoses,
+      DateTime dateOfVaccination,
+      String countryOfVaccination,
+      String certificateIssuer,
+      String certificateIdentifier});
+}
+
+/// @nodoc
+class __$VaccinationCopyWithImpl<$Res> extends _$VaccinationCopyWithImpl<$Res>
+    implements _$VaccinationCopyWith<$Res> {
+  __$VaccinationCopyWithImpl(
+      _Vaccination _value, $Res Function(_Vaccination) _then)
+      : super(_value, (v) => _then(v as _Vaccination));
+
+  @override
+  _Vaccination get _value => super._value as _Vaccination;
+
+  @override
+  $Res call({
+    Object? disease = freezed,
+    Object? vaccine = freezed,
+    Object? medicinalProduct = freezed,
+    Object? manufacturer = freezed,
+    Object? doseNumber = freezed,
+    Object? totalSeriesOfDoses = freezed,
+    Object? dateOfVaccination = freezed,
+    Object? countryOfVaccination = freezed,
+    Object? certificateIssuer = freezed,
+    Object? certificateIdentifier = freezed,
+  }) {
+    return _then(_Vaccination(
+      disease: disease == freezed
+          ? _value.disease
+          : disease // ignore: cast_nullable_to_non_nullable
+              as String,
+      vaccine: vaccine == freezed
+          ? _value.vaccine
+          : vaccine // ignore: cast_nullable_to_non_nullable
+              as String,
+      medicinalProduct: medicinalProduct == freezed
+          ? _value.medicinalProduct
+          : medicinalProduct // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufacturer: manufacturer == freezed
+          ? _value.manufacturer
+          : manufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
+      doseNumber: doseNumber == freezed
+          ? _value.doseNumber
+          : doseNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalSeriesOfDoses: totalSeriesOfDoses == freezed
+          ? _value.totalSeriesOfDoses
+          : totalSeriesOfDoses // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateOfVaccination: dateOfVaccination == freezed
+          ? _value.dateOfVaccination
+          : dateOfVaccination // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      countryOfVaccination: countryOfVaccination == freezed
+          ? _value.countryOfVaccination
+          : countryOfVaccination // ignore: cast_nullable_to_non_nullable
+              as String,
+      certificateIssuer: certificateIssuer == freezed
+          ? _value.certificateIssuer
+          : certificateIssuer // ignore: cast_nullable_to_non_nullable
+              as String,
+      certificateIdentifier: certificateIdentifier == freezed
+          ? _value.certificateIdentifier
+          : certificateIdentifier // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Vaccination extends _Vaccination {
+  const _$_Vaccination(
+      {required this.disease,
+      required this.vaccine,
+      required this.medicinalProduct,
+      required this.manufacturer,
+      required this.doseNumber,
+      required this.totalSeriesOfDoses,
+      required this.dateOfVaccination,
+      required this.countryOfVaccination,
+      required this.certificateIssuer,
+      required this.certificateIdentifier})
+      : super._();
+
+  @override
+  final String disease;
+  @override
+  final String vaccine;
+  @override
+  final String medicinalProduct;
+  @override
+  final String manufacturer;
+  @override
+  final int doseNumber;
+  @override
+  final int totalSeriesOfDoses;
+  @override
+  final DateTime dateOfVaccination;
+  @override
+  final String countryOfVaccination;
+  @override
+  final String certificateIssuer;
+  @override
+  final String certificateIdentifier;
+
+  @override
+  String toString() {
+    return 'Vaccination(disease: $disease, vaccine: $vaccine, medicinalProduct: $medicinalProduct, manufacturer: $manufacturer, doseNumber: $doseNumber, totalSeriesOfDoses: $totalSeriesOfDoses, dateOfVaccination: $dateOfVaccination, countryOfVaccination: $countryOfVaccination, certificateIssuer: $certificateIssuer, certificateIdentifier: $certificateIdentifier)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Vaccination &&
+            const DeepCollectionEquality().equals(other.disease, disease) &&
+            const DeepCollectionEquality().equals(other.vaccine, vaccine) &&
+            const DeepCollectionEquality()
+                .equals(other.medicinalProduct, medicinalProduct) &&
+            const DeepCollectionEquality()
+                .equals(other.manufacturer, manufacturer) &&
+            const DeepCollectionEquality()
+                .equals(other.doseNumber, doseNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.totalSeriesOfDoses, totalSeriesOfDoses) &&
+            const DeepCollectionEquality()
+                .equals(other.dateOfVaccination, dateOfVaccination) &&
+            const DeepCollectionEquality()
+                .equals(other.countryOfVaccination, countryOfVaccination) &&
+            const DeepCollectionEquality()
+                .equals(other.certificateIssuer, certificateIssuer) &&
+            const DeepCollectionEquality()
+                .equals(other.certificateIdentifier, certificateIdentifier));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(disease),
+      const DeepCollectionEquality().hash(vaccine),
+      const DeepCollectionEquality().hash(medicinalProduct),
+      const DeepCollectionEquality().hash(manufacturer),
+      const DeepCollectionEquality().hash(doseNumber),
+      const DeepCollectionEquality().hash(totalSeriesOfDoses),
+      const DeepCollectionEquality().hash(dateOfVaccination),
+      const DeepCollectionEquality().hash(countryOfVaccination),
+      const DeepCollectionEquality().hash(certificateIssuer),
+      const DeepCollectionEquality().hash(certificateIdentifier));
+
+  @JsonKey(ignore: true)
+  @override
+  _$VaccinationCopyWith<_Vaccination> get copyWith =>
+      __$VaccinationCopyWithImpl<_Vaccination>(this, _$identity);
+}
+
+abstract class _Vaccination extends Vaccination {
+  const factory _Vaccination(
+      {required String disease,
+      required String vaccine,
+      required String medicinalProduct,
+      required String manufacturer,
+      required int doseNumber,
+      required int totalSeriesOfDoses,
+      required DateTime dateOfVaccination,
+      required String countryOfVaccination,
+      required String certificateIssuer,
+      required String certificateIdentifier}) = _$_Vaccination;
+  const _Vaccination._() : super._();
+
+  @override
+  String get disease;
+  @override
+  String get vaccine;
+  @override
+  String get medicinalProduct;
+  @override
+  String get manufacturer;
+  @override
+  int get doseNumber;
+  @override
+  int get totalSeriesOfDoses;
+  @override
+  DateTime get dateOfVaccination;
+  @override
+  String get countryOfVaccination;
+  @override
+  String get certificateIssuer;
+  @override
+  String get certificateIdentifier;
+  @override
+  @JsonKey(ignore: true)
+  _$VaccinationCopyWith<_Vaccination> get copyWith =>
+      throw _privateConstructorUsedError;
+}

@@ -1,4 +1,3 @@
-import 'package:verificac19/src/model/certificate.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
 import 'package:verificac19/src/model/validation_result.dart';
 
@@ -20,24 +19,10 @@ abstract class VerificaC19Interface {
   /// The minimun update window is 1 hour.
   Future<void> update({bool forced});
 
-  /// Retrives a [Certificate] from a Base45 encoded string provided by [rawData] parameter.
-  ///
-  /// Throws a [ParseException] if no Certificate is found.
-  Future<Certificate> getCertificateFromRaw(
-    String rawData,
-  );
-
   /// Parses and validates a DCG from [rawData].
   /// A [mode] con be optionally provided.
   Future<ValidationResult> validateFromRaw(
     String rawData, {
-    ValidationMode mode = ValidationMode.normalDGP,
-  });
-
-  /// Validates a DCG from [certificate].
-  /// A [mode] con be optionally provided.
-  Future<ValidationResult> validateCertificate(
-    Certificate certificate, {
     ValidationMode mode = ValidationMode.normalDGP,
   });
 }

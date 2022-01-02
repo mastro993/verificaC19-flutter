@@ -45,7 +45,9 @@ class CertificateParser {
           disease: t['tg'],
           typeOfTest: t['tt'],
           testName: t['nm'],
+          testNameAndManufacturer: null,
           dateTimeOfCollection: DateTime.parse(t['sc']),
+          dateTimeOfTestResult: null,
           testResult: t['tr'],
           testingCentre: t['tc'],
           countryOfVaccination: t['co'],
@@ -63,7 +65,7 @@ class CertificateParser {
       for (final r in rList) {
         final recoveryStatement = RecoveryStatement(
           disease: r['tg'],
-          dateOfFirstPositiveTest: r['fr'],
+          dateOfFirstPositiveTest: DateTime.parse(r['fr']),
           countryOfVaccination: r['co'],
           certificateIssuer: r['is'],
           certificateValidFrom: DateTime.parse(r['df']),
@@ -79,7 +81,6 @@ class CertificateParser {
         vaccinations: vaccinations,
         tests: tests,
         recoveryStatements: recoveryStatements,
-        kid: dcc.kid,
         dcc: dcc,
       );
     } catch (e) {

@@ -1,22 +1,18 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:verificac19/src/model/certificate_status.dart';
-import 'package:verificac19/src/model/validation_error.dart';
+import 'package:verificac19/verificac19.dart';
 
-class ValidationResult {
-  /// Indicates if DGC is valid or not
-  final bool result;
+part 'validation_result.freezed.dart';
 
-  /// Validity status
-  final CertificateStatus status;
+@freezed
+class ValidationResult with _$ValidationResult {
+  const ValidationResult._();
 
-  final ValidationError? error;
+  factory ValidationResult({
+    /// Validated certificate
+    required Certificate certificate,
 
-  /// Validity details
-  final String? message;
-
-  const ValidationResult({
-    required this.result,
-    required this.status,
-    this.message,
-    this.error,
-  });
+    /// Validation rules result
+    required CertificateStatus status,
+  }) = _ValidationResult;
 }

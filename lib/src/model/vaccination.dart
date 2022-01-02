@@ -1,25 +1,21 @@
-class Vaccination {
-  final String disease;
-  final String vaccine;
-  final String medicinalProduct;
-  final String manufacturer;
-  final int doseNumber;
-  final int totalSeriesOfDoses;
-  final DateTime dateOfVaccination;
-  final String countryOfVaccination;
-  final String certificateIssuer;
-  final String certificateIdentifier;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  const Vaccination({
-    required this.disease,
-    required this.vaccine,
-    required this.medicinalProduct,
-    required this.manufacturer,
-    required this.doseNumber,
-    required this.totalSeriesOfDoses,
-    required this.dateOfVaccination,
-    required this.countryOfVaccination,
-    required this.certificateIssuer,
-    required this.certificateIdentifier,
-  });
+part 'vaccination.freezed.dart';
+
+@freezed
+class Vaccination with _$Vaccination {
+  const Vaccination._();
+
+  const factory Vaccination({
+    required String disease,
+    required String vaccine,
+    required String medicinalProduct,
+    required String manufacturer,
+    required int doseNumber,
+    required int totalSeriesOfDoses,
+    required DateTime dateOfVaccination,
+    required String countryOfVaccination,
+    required String certificateIssuer,
+    required String certificateIdentifier,
+  }) = _Vaccination;
 }

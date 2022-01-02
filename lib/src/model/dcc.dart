@@ -1,42 +1,39 @@
 import 'dart:typed_data';
 
-class DCC {
-  /// Raw unprocessed data
-  final String raw;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  /// COSE data
-  final List<int> coseRaw;
+part 'dcc.freezed.dart';
 
-  /// Protected header
-  final Uint8List protectedHeader;
+@freezed
+class DCC with _$DCC {
+  const DCC._();
 
-  /// Unprotected header
-  final Map unprotectedHeader;
+  const factory DCC({
+    /// Raw unprocessed data
+    required String raw,
 
-  /// Certificate data payload
-  final Map payload;
+    /// COSE data
+    required List<int> coseRaw,
 
-  /// Encoded certificate data payload
-  final Uint8List payloadBytes;
+    /// Protected header
+    required Uint8List protectedHeader,
 
-  /// Certificate signers
-  final Uint8List signers;
+    /// Unprotected header
+    required Map unprotectedHeader,
 
-  /// Certificate kid
-  final String kid;
+    /// Certificate data payload
+    required Map payload,
 
-  /// Certificate algorithm
-  final int algorithm;
+    /// Encoded certificate data payload
+    required Uint8List payloadBytes,
 
-  const DCC({
-    required this.raw,
-    required this.coseRaw,
-    required this.protectedHeader,
-    required this.unprotectedHeader,
-    required this.signers,
-    required this.payload,
-    required this.payloadBytes,
-    required this.kid,
-    required this.algorithm,
-  });
+    /// Certificate signers
+    required Uint8List signers,
+
+    /// Certificate kid
+    required String kid,
+
+    /// Certificate algorithm
+    required int algorithm,
+  }) = _DCC;
 }

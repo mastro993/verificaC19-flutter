@@ -1,27 +1,22 @@
-class Test {
-  final String disease;
-  final String typeOfTest;
-  final String? testName;
-  final String? testNameAndManufacturer;
-  final DateTime dateTimeOfCollection;
-  final DateTime? dateTimeOfTestResult;
-  final String testResult;
-  final String testingCentre;
-  final String countryOfVaccination;
-  final String certificateIssuer;
-  final String certificateIdentifier;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  const Test({
-    required this.disease,
-    required this.typeOfTest,
-    required this.testName,
-    this.testNameAndManufacturer,
-    required this.dateTimeOfCollection,
-    this.dateTimeOfTestResult,
-    required this.testResult,
-    required this.testingCentre,
-    required this.countryOfVaccination,
-    required this.certificateIssuer,
-    required this.certificateIdentifier,
-  });
+part 'test.freezed.dart';
+
+@freezed
+class Test with _$Test {
+  const Test._();
+
+  const factory Test({
+    required String disease,
+    required String typeOfTest,
+    required String? testName,
+    required String? testNameAndManufacturer,
+    required DateTime dateTimeOfCollection,
+    required DateTime? dateTimeOfTestResult,
+    required String testResult,
+    required String testingCentre,
+    required String countryOfVaccination,
+    required String certificateIssuer,
+    required String certificateIdentifier,
+  }) = _Test;
 }

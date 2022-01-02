@@ -1,20 +1,22 @@
-class Person {
-  /// Surname of the person with standard characters
-  String? standardisedFamilyName;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  /// Surname of the person
-  String? familyName;
+part 'person.freezed.dart';
 
-  /// Name of the person with standard characters
-  String? standardisedGivenName;
+@freezed
+class Person with _$Person {
+  const Person._();
 
-  /// Name of the person
-  String? givenName;
+  const factory Person({
+    /// Surname of the person with standard characters
+    required String standardisedFamilyName,
 
-  Person({
-    this.standardisedFamilyName,
-    this.familyName,
-    this.standardisedGivenName,
-    this.givenName,
-  });
+    /// Surname of the person
+    required String familyName,
+
+    /// Name of the person with standard characters
+    required String standardisedGivenName,
+
+    /// Name of the person
+    required String givenName,
+  }) = _Person;
 }
