@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:verificac19/src/model/certificate_status.dart';
 import 'package:verificac19/verificac19.dart';
 
 part 'validation_result.freezed.dart';
