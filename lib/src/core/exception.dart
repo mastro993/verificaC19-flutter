@@ -13,8 +13,8 @@ class CertificateException extends _Exception {
 }
 
 /// Thrown when is not possibile to get a Certificate from the provided raw data
-class ParseException extends _Exception {
-  ParseException([String reason = '']) : super(reason);
+class DecodeException extends _Exception {
+  DecodeException([String reason = '']) : super(reason);
 }
 
 /// Thrown when a problem is encountered during a Certificate validation

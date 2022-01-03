@@ -28,7 +28,7 @@ void main() {
       final base45 = fixture('test_certificate_faulty_cwt.txt');
       expect(
         () async => await CertificateDecoder.getCertificateFromRawData(base45),
-        throwsA(isA<ParseException>()),
+        throwsA(isA<DecodeException>()),
       );
     });
 
@@ -36,7 +36,7 @@ void main() {
       final base45 = fixture('test_certificate_noop_comp.txt');
       expect(
         () async => await CertificateDecoder.getCertificateFromRawData(base45),
-        throwsA(isA<ParseException>()),
+        throwsA(isA<DecodeException>()),
       );
     });
   });

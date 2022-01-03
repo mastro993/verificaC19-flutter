@@ -10,7 +10,7 @@ abstract class VerificaC19Interface {
   Future<bool> needsUpdate();
 
   /// Returns a [DateTime] with the date and time of the last completed rules update
-  /// Returns null if not date is available
+  /// Returns null if no date is available
   Future<DateTime?> getLastUpdateTime();
 
   /// Download and cache rules, CRL data and DSCs

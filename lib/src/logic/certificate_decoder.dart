@@ -84,7 +84,7 @@ class CertificateDecoder {
         dcc: dcc,
       );
     } catch (e) {
-      throw ParseException();
+      throw DecodeException();
     }
   }
 }

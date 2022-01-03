@@ -31,7 +31,7 @@ class DccUtils {
     try {
       base45Data = Base45.decode(rawData.substring(_prefix.length));
     } catch (e) {
-      throw ParseException('Invalid base45 string');
+      throw DecodeException('Invalid base45 string');
     }
 
     final List<int> coseRaw = const ZLibDecoder().decodeBytes(base45Data);
@@ -41,20 +41,20 @@ class DccUtils {
     cbor.clearDecodeStack();
 
     if (messageObject == null || messageObject.isEmpty) {
-      throw ParseException('Cbor decoding error');
+      throw DecodeException('Cbor decoding error');
     }
 
     final element = messageObject.first;
 
     if (element is! List) {
-      throw ParseException('Unsupported format');
+      throw DecodeException('Unsupported format');
     }
 
     List items = element;
 
     // check if it has exactly 4 items
     if (items.length != _cborDataLength) {
-      throw ParseException('Invalid format');
+      throw DecodeException('Invalid format');
     }
 
     final protectedHeader = items[_cborDataProtectedHeaderIndex];
@@ -70,7 +70,7 @@ class DccUtils {
 
     if (headerList != null) {
       if (headerList.isEmpty) {
-        throw ParseException('Cbor decoding error');
+        throw DecodeException('Cbor decoding error');
       }
       header = headerList.first;
     }
@@ -83,7 +83,7 @@ class DccUtils {
     cbor.clearDecodeStack();
 
     if (payload == null || payload.isEmpty) {
-      throw ParseException('Cbor decoding error');
+      throw DecodeException('Cbor decoding error');
     }
 
     var payloadData = payload.first[-260][1];
