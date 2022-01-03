@@ -6,7 +6,6 @@ import 'package:verificac19/src/core/extensions.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
-import 'package:verificac19/src/model/validation_mode.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
 
