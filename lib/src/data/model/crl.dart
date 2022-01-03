@@ -15,14 +15,14 @@ class CRL {
   int? totalNumberUCVI;
 
   CRL({
-    required this.fromVersion,
-    required this.version,
-    required this.chunk,
-    required this.lastChunk,
-    required this.delta,
-    required this.revokedUcvi,
-    required this.sizeSingleChunkInByte,
-    required this.totalNumberUCVI,
+    this.fromVersion,
+    this.version,
+    this.chunk,
+    this.lastChunk,
+    this.delta,
+    this.revokedUcvi,
+    this.sizeSingleChunkInByte,
+    this.totalNumberUCVI,
   });
 
   factory CRL.fromJson(Map<String, dynamic> json) => _$CRLFromJson(json);

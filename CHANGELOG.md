@@ -1,3 +1,7 @@
+## 1.1.0
+
+- UVCI revoked list updates in chunks with version check
+
 ## 1.0.11
 
 - Fixed UVCI revocation check

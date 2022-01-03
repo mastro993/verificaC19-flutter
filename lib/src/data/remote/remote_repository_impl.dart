@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:verificac19/src/data/model/crl.dart';
+import 'package:verificac19/src/data/model/crl_status.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/data/remote/api_client.dart';
 import 'package:verificac19/src/data/remote/remote_repository.dart';
@@ -65,23 +66,34 @@ class RemoteRepositoryImpl implements RemoteRepository {
   }
 
   @override
-  Future<List<String>> getRevokeList() async {
+  Future<CRL> getRevokeListChunk({
+    int? version,
+    int? chunk,
+  }) async {
     try {
-      int chunk = 1;
-      int lastChunk = 0;
-      HttpResponse<CRL> crlResponse;
-      List<String> revokedCerts = [];
-
-      do {
-        crlResponse = await _client.getRevokeList(chunk: chunk);
-        revokedCerts.addAll(crlResponse.data.revokedUcvi!);
-        lastChunk = crlResponse.data.lastChunk!;
-        chunk = chunk + 1;
-      } while (chunk <= lastChunk);
-
-      return revokedCerts;
+      final HttpResponse<CRL> response = await _client.getRevokeList(
+        version: version,
+        chunk: chunk,
+      );
+      final CRL data = response.data;
+      return data;
     } catch (e) {
-      throw ServiceException('Unable to get revoke list from server');
+      throw ServiceException('Unable to get revoke list chunk from server');
+    }
+  }
+
+  @override
+  Future<CRLStatus> getRevokeListStatus({
+    int? version,
+  }) async {
+    try {
+      final HttpResponse<CRLStatus> response = await _client.getCRLStatus(
+        version: version,
+      );
+      final CRLStatus data = response.data;
+      return data;
+    } catch (e) {
+      throw ServiceException('Unable to get revoke list status from server');
     }
   }
 }

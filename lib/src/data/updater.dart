@@ -1,21 +1,16 @@
 abstract class Updater {
   /// Updates all the data
-  /// Optional paramter [forced] can be passed to force the update before the 24 hours expiry window
-  Future<void> updateAll({bool forced});
+  Future<void> updateAll();
 
   /// Updates the validation rules list
-  /// Optional paramter [forced] can be passed to force the update before the 24 hours expiry window
-  Future<void> updateRules({bool forced});
+  Future<void> updateRules();
 
   /// Updates the signatures kid list
-  /// Optional paramter [forced] can be passed to force the update before the 24 hours expiry window
-  Future<void> updateSignaturesList({bool forced});
+  Future<void> updateSignaturesList();
 
   /// Updates the signatures list
-  /// Optional paramter [forced] can be passed to force the update before the 24 hours expiry window
-  Future<void> updateSignatures({bool forced});
+  Future<void> updateSignatures();
 
   /// Updates the revoked UVCI list
-  /// Optional paramter [forced] can be passed to force the update before the 24 hours expiry window
-  Future<void> updateRevokeList({bool forced});
+  Future<void> updateRevokeList();
 }

@@ -24,14 +24,6 @@ class LocalRepositoryImpl implements LocalRepository {
   }
 
   @override
-  Future<bool> needsUpdate() async {
-    return rulesMustBeUpdated(UpdateWindowHours.max) ||
-        signatureListMustBeUpdated(UpdateWindowHours.max) ||
-        signaturesMustBeUpdated(UpdateWindowHours.max) ||
-        revokeListMustBeUpdated(UpdateWindowHours.max);
-  }
-
-  @override
   Future<DateTime?> getLastUpdateTime() async {
     final Box<DateTime> box = _hive.box(DbKeys.dbUpdates);
     if (box.isEmpty) {
@@ -42,7 +34,7 @@ class LocalRepositoryImpl implements LocalRepository {
     );
   }
 
-  bool _needsUpdate(String key, int updateWindowHours) {
+  bool _isExpired(String key) {
     try {
       final Box<DateTime> box = _hive.box(DbKeys.dbUpdates);
       final DateTime? lastUpdate = box.get(key);
@@ -50,7 +42,7 @@ class LocalRepositoryImpl implements LocalRepository {
         return true;
       }
       final DateTime expiryDate = lastUpdate.add(
-        Duration(hours: updateWindowHours),
+        const Duration(hours: UpdateWindowHours.max),
       );
       return clock.now().isAfter(expiryDate);
     } catch (e) {
@@ -99,28 +91,16 @@ class LocalRepositoryImpl implements LocalRepository {
   }
 
   @override
-  bool rulesMustBeUpdated([
-    int updateWindowHours = UpdateWindowHours.max,
-  ]) =>
-      _needsUpdate(DbKeys.keyRulesLastUpdate, updateWindowHours);
+  bool needRulesUpdate() => _isExpired(DbKeys.keyRulesUpdate);
 
   @override
-  bool signatureListMustBeUpdated([
-    int updateWindowHours = UpdateWindowHours.max,
-  ]) =>
-      _needsUpdate(DbKeys.keySignaturesListLastUpdate, updateWindowHours);
+  bool needSignaturesListUpdate() => _isExpired(DbKeys.keySignaturesListUpdate);
 
   @override
-  bool signaturesMustBeUpdated([
-    int updateWindowHours = UpdateWindowHours.max,
-  ]) =>
-      _needsUpdate(DbKeys.keySignaturesLastUpdate, updateWindowHours);
+  bool needSignaturesUpdate() => _isExpired(DbKeys.keySignaturesUpdate);
 
   @override
-  bool revokeListMustBeUpdated([
-    int updateWindowHours = UpdateWindowHours.max,
-  ]) =>
-      _needsUpdate(DbKeys.keyRevokeListLastUpdate, updateWindowHours);
+  bool needRevokeListUpdate() => _isExpired(DbKeys.keyRevokeListUpdate);
 
   @override
   Future<void> storeRules(
@@ -130,7 +110,7 @@ class LocalRepositoryImpl implements LocalRepository {
       final Box box = _hive.box(DbKeys.dbData);
       final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
       await box.put(DbKeys.keyRules, rules);
-      await updatesBox.put(DbKeys.keyRulesLastUpdate, clock.now());
+      await updatesBox.put(DbKeys.keyRulesUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store rules to cache');
     }
@@ -144,7 +124,7 @@ class LocalRepositoryImpl implements LocalRepository {
       final Box box = _hive.box(DbKeys.dbData);
       final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
       await box.put(DbKeys.keySignaturesList, signaturesList);
-      await updatesBox.put(DbKeys.keySignaturesListLastUpdate, clock.now());
+      await updatesBox.put(DbKeys.keySignaturesListUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store signatures list to cache');
     }
@@ -158,22 +138,27 @@ class LocalRepositoryImpl implements LocalRepository {
       final Box box = _hive.box(DbKeys.dbData);
       final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
       await box.put(DbKeys.keySignatures, signatures);
-      await updatesBox.put(DbKeys.keySignaturesLastUpdate, clock.now());
+      await updatesBox.put(DbKeys.keySignaturesUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store signatures to cache');
     }
   }
 
   @override
-  Future<void> storeRevokeList(
-    List<String> revokeList,
-  ) async {
+  Future<void> storeRevokeList({
+    List<String>? insertions,
+    List<String>? deletions,
+  }) async {
     try {
       final Box<String> revokeListBox = _hive.box(DbKeys.dbRevokeList);
-      final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
-      await revokeListBox.clear();
-      await revokeListBox.addAll(revokeList);
-      await updatesBox.put(DbKeys.keyRevokeListLastUpdate, clock.now());
+
+      if (insertions != null) {
+        await revokeListBox.addAll(insertions);
+      }
+
+      if (deletions != null) {
+        await revokeListBox.deleteAll(deletions);
+      }
     } catch (e) {
       throw CacheException('Unable to store revoke list to cache');
     }
@@ -191,6 +176,30 @@ class LocalRepositoryImpl implements LocalRepository {
       return box.values.contains(hashedUvci);
     } catch (e) {
       throw CacheException('Unable to check uvci from cached revoke list');
+    }
+  }
+
+  @override
+  int getRevokeListVersion() {
+    try {
+      final Box box = _hive.box(DbKeys.dbData);
+      return box.get(DbKeys.keyRevokeListVersion, defaultValue: 0);
+    } catch (e) {
+      throw CacheException('Unable to get revoke list version from cache');
+    }
+  }
+
+  @override
+  Future<void> storeRevokeListVersion(
+    int version,
+  ) async {
+    try {
+      final Box box = _hive.box(DbKeys.dbData);
+      final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
+      await box.put(DbKeys.keyRevokeListVersion, version);
+      await updatesBox.put(DbKeys.keyRevokeListUpdate, clock.now());
+    } catch (e) {
+      throw CacheException('Unable to store revoke list version to cache');
     }
   }
 }
