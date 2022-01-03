@@ -37,7 +37,7 @@ void main() {
       await cache.storeRules([]);
       // assert
       verify(dataBox.put(DbKeys.keyRules, any)).called(1);
-      verify(updatesBox.put(DbKeys.keyRulesLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keyRulesUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 
@@ -56,9 +56,9 @@ void main() {
     test('Should return that rules must be updated if rules are not yet stored',
         () {
       // arrange
-      when(updatesBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(null);
+      when(updatesBox.get(DbKeys.keyRulesUpdate)).thenReturn(null);
       // act
-      final result = cache.rulesMustBeUpdated();
+      final result = cache.needRulesUpdate();
       // assert
       expect(result, equals(true));
     });
@@ -67,7 +67,7 @@ void main() {
         'Should return that rules must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keyRulesUpdate)).thenReturn(clock.now());
       // act
       await cache.storeRules([]);
       // assert
@@ -77,14 +77,14 @@ void main() {
       ));
 
       withClock(Clock.fixed(testDate), () {
-        final result = cache.rulesMustBeUpdated();
+        final result = cache.needRulesUpdate();
         expect(result, equals(false));
       });
     });
 
     test('Should return that rules must be updated if are expired', () async {
       // arrange
-      when(updatesBox.get(DbKeys.keyRulesLastUpdate)).thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keyRulesUpdate)).thenReturn(clock.now());
       // act
       // assert
       final now = clock.now();
@@ -93,7 +93,7 @@ void main() {
       ));
 
       withClock(Clock.fixed(testDate), () {
-        final result = cache.rulesMustBeUpdated();
+        final result = cache.needRulesUpdate();
         expect(result, equals(true));
       });
     });
@@ -105,7 +105,7 @@ void main() {
       await cache.storeSignatures({});
       // assert
       verify(dataBox.put(DbKeys.keySignatures, any)).called(1);
-      verify(updatesBox.put(DbKeys.keySignaturesLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keySignaturesUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 
@@ -125,9 +125,9 @@ void main() {
     test('Should return that rules must be updated if rules are not yet stored',
         () {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(null);
+      when(updatesBox.get(DbKeys.keySignaturesUpdate)).thenReturn(null);
       // act
-      final result = cache.signaturesMustBeUpdated();
+      final result = cache.needSignaturesUpdate();
       // assert
       expect(result, equals(true));
     });
@@ -136,8 +136,7 @@ void main() {
         'Should return that signatures must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
-          .thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keySignaturesUpdate)).thenReturn(clock.now());
       // act
       // assert
       final now = clock.now();
@@ -146,7 +145,7 @@ void main() {
       ));
 
       withClock(Clock.fixed(testDate), () {
-        final result = cache.signaturesMustBeUpdated();
+        final result = cache.needSignaturesUpdate();
         expect(result, equals(false));
       });
     });
@@ -154,8 +153,7 @@ void main() {
     test('Should return that signatures must be updated if are expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
-          .thenReturn(clock.now());
+      when(updatesBox.get(DbKeys.keySignaturesUpdate)).thenReturn(clock.now());
       // act
       // assert
 
@@ -165,7 +163,7 @@ void main() {
       ));
 
       withClock(Clock.fixed(testDate), () {
-        final result = cache.signaturesMustBeUpdated();
+        final result = cache.needSignaturesUpdate();
         expect(result, equals(true));
       });
     });
@@ -177,7 +175,7 @@ void main() {
       await cache.storeSignaturesList([]);
       // assert
       verify(dataBox.put(DbKeys.keySignaturesList, any)).called(1);
-      verify(updatesBox.put(DbKeys.keySignaturesListLastUpdate, any)).called(1);
+      verify(updatesBox.put(DbKeys.keySignaturesListUpdate, any)).called(1);
       verifyNoMoreInteractions(dataBox);
     });
 
@@ -198,9 +196,9 @@ void main() {
         'Should return that signatures list must be updated if rules are not yet stored',
         () {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesListLastUpdate)).thenReturn(null);
+      when(updatesBox.get(DbKeys.keySignaturesListUpdate)).thenReturn(null);
       // act
-      final result = cache.signatureListMustBeUpdated();
+      final result = cache.needSignaturesListUpdate();
       // assert
       expect(result, equals(true));
     });
@@ -209,7 +207,7 @@ void main() {
         'Should return that signatures list must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesListLastUpdate))
+      when(updatesBox.get(DbKeys.keySignaturesListUpdate))
           .thenReturn(clock.now());
       // act
       // assert
@@ -219,14 +217,14 @@ void main() {
       ));
 
       withClock(Clock.fixed(testDate), () {
-        final result = cache.signatureListMustBeUpdated();
+        final result = cache.needSignaturesListUpdate();
         expect(result, equals(false));
       });
     });
 
     test('Should return that rules must be updated if are expired', () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesListLastUpdate))
+      when(updatesBox.get(DbKeys.keySignaturesListUpdate))
           .thenReturn(clock.now());
       // act
       // assert
@@ -237,97 +235,24 @@ void main() {
       ));
 
       withClock(Clock.fixed(testDate), () {
-        final result = cache.signatureListMustBeUpdated();
+        final result = cache.needSignaturesListUpdate();
         expect(result, equals(true));
       });
     });
   });
-
-  group('Signatures', () {
-    test('Should store signatures', () async {
-      // act
-      await cache.storeSignatures({});
-      // assert
-      verify(dataBox.put(DbKeys.keySignatures, any)).called(1);
-      verify(updatesBox.put(DbKeys.keySignaturesLastUpdate, any)).called(1);
-      verifyNoMoreInteractions(dataBox);
-    });
-
-    test('Should get signatures', () {
-      // arrange
-      final Map<String, String> tResult = {};
-      when(dataBox.get(DbKeys.keySignatures, defaultValue: {}))
-          .thenReturn(tResult);
-      // act
-      final result = cache.getSignatures();
-      // assert
-      verify(dataBox.get(DbKeys.keySignatures, defaultValue: {})).called(1);
-      verifyNoMoreInteractions(dataBox);
-      expect(result, equals(tResult));
-    });
-
-    test('Should return that rules must be updated if rules are not yet stored',
-        () {
-      // arrange
-      when(updatesBox.get(DbKeys.keySignaturesLastUpdate)).thenReturn(null);
-      // act
-      final result = cache.signaturesMustBeUpdated();
-      // assert
-      expect(result, equals(true));
-    });
-
-    test(
-        'Should return that signatures must not be updated if rules are not yet expired',
-        () async {
-      // arrange
-      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
-          .thenReturn(clock.now());
-      // act
-      // assert
-      final now = clock.now();
-      final testDate = now.add(const Duration(
-        seconds: UpdateWindowHours.max * 3600 - 1,
-      ));
-
-      withClock(Clock.fixed(testDate), () {
-        final result = cache.signaturesMustBeUpdated();
-        expect(result, equals(false));
-      });
-    });
-
-    test('Should return that signatures must be updated if are expired',
-        () async {
-      // arrange
-      when(updatesBox.get(DbKeys.keySignaturesLastUpdate))
-          .thenReturn(clock.now());
-      // act
-      // assert
-
-      final now = clock.now();
-      final testDate = now.add(const Duration(
-        seconds: UpdateWindowHours.max * 3600 + 1,
-      ));
-
-      withClock(Clock.fixed(testDate), () {
-        final result = cache.signaturesMustBeUpdated();
-        expect(result, equals(true));
-      });
-    });
-  });
-
   group('Revoke list', () {
     test('Should store revoke list', () async {
       // arrange
       when(revokeListBox.clear()).thenAnswer((_) async => 0);
       when(revokeListBox.addAll(any)).thenAnswer((_) async => []);
+      when(revokeListBox.deleteAll(any)).thenAnswer((_) async => []);
       // act
-      await cache.storeRevokeList([]);
+      await cache.storeRevokeList(insertions: [], deletions: []);
       // assert
-      verify(revokeListBox.clear()).called(1);
+      verifyNever(revokeListBox.clear());
       verify(revokeListBox.addAll(any)).called(1);
+      verify(revokeListBox.deleteAll(any)).called(1);
       verifyNoMoreInteractions(revokeListBox);
-      verify(updatesBox.put(DbKeys.keyRevokeListLastUpdate, any)).called(1);
-      verifyNoMoreInteractions(dataBox);
     });
 
     test('Should get revoke list', () {

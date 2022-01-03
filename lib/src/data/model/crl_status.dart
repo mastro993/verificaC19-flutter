@@ -13,13 +13,13 @@ class CRLStatus {
   int? totalNumberUCVI;
 
   CRLStatus({
-    required this.version,
-    required this.chunk,
-    required this.numDidAdd,
-    required this.totalSizeInByte,
-    required this.sizeSingleChunkByte,
-    required this.totalChunk,
-    required this.totalNumberUCVI,
+    this.version,
+    this.chunk,
+    this.numDidAdd,
+    this.totalSizeInByte,
+    this.sizeSingleChunkByte,
+    this.totalChunk,
+    this.totalNumberUCVI,
   });
 
   factory CRLStatus.fromJson(Map<String, dynamic> json) =>

@@ -8,8 +8,8 @@ class CRLDelta {
   List<String>? deletions;
 
   CRLDelta({
-    required this.insertions,
-    required this.deletions,
+    this.insertions,
+    this.deletions,
   });
 
   factory CRLDelta.fromJson(Map<String, dynamic> json) =>

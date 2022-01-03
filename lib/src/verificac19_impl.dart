@@ -29,8 +29,11 @@ class VerificaC19Impl implements VerificaC19Interface {
   }
 
   @override
-  Future<bool> needsUpdate() {
-    return _cache.needsUpdate();
+  bool needsUpdate() {
+    return _cache.needRulesUpdate() ||
+        _cache.needRevokeListUpdate() ||
+        _cache.needSignaturesListUpdate() ||
+        _cache.needSignaturesUpdate();
   }
 
   @override
@@ -39,8 +42,8 @@ class VerificaC19Impl implements VerificaC19Interface {
   }
 
   @override
-  Future<void> update({bool forced = false}) async {
-    await _updater.updateAll(forced: forced);
+  Future<void> update() async {
+    await _updater.updateAll();
   }
 
   @override
@@ -48,22 +51,19 @@ class VerificaC19Impl implements VerificaC19Interface {
     String rawData, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
-    final bool needsUpdate = await _cache.needsUpdate();
+    if (needsUpdate()) {
+      throw ValidationException(
+        'Expired validation rules. Please update the rules before validating a DGC',
+      );
+    }
 
     final certificate = await CertificateDecoder.getCertificateFromRawData(
       rawData,
     );
 
-    if (needsUpdate) {
-      log("Velidation rules needs to be updated");
-      return ValidationResult(
-        certificate: certificate,
-        status: CertificateStatus.notValid,
-      );
-    }
-
-    final bool signatureIsOk =
-        await _validator.checkCertificateSignature(certificate);
+    final bool signatureIsOk = await _validator.checkCertificateSignature(
+      certificate,
+    );
 
     if (!signatureIsOk) {
       log("Certificate has an invalid signature");

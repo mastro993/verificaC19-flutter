@@ -38,6 +38,10 @@ flutter pub get
 flutter pub add verificac19
 ```
 
+## Example app
+
+An example application is currently WIP.
+
 ## Usage
 
 ### Setup
@@ -56,13 +60,7 @@ You can download and cache rules, CRL data and DSCs using the `update` function.
 await VerificaC19.update();
 ```
 
-You can optionally pass the `force` parameter to force the update before the **24 hours** expiry window, but only after **1 hour** from the last update.
-
-```dart
-await VerificaC19.update(force: true);
-```
-
-You can also check if the data is expired (older than the 24 hours update window) without requiring an update with the `needUpdate` function.
+You can also check if the data is expired (older than the 24 hours update window) without requiring an update with the `needsUpdate` function.
 
 ```dart
 bool requiresUpdate = await VerificaC19.needsUpdate();
@@ -74,10 +72,10 @@ You can verify and validate a DGC from a String containing a base45 encoded data
 
 ```dart
 // Validate frombase45 encoded data
-ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSMAHN-H3ZSUZK+.V0ET9%6-AH...');
+ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSM...');
 ```
 
-`ValidationResult` object contains a `CertificateStatus` which can have the following values:
+The result is a `ValidationResult` object containing the decoded `Certificate` object and its `CertificateStatus` which can have the following values:
 
 |     | Code        | Description                  |
 | --- | ----------- | ---------------------------- |
@@ -98,16 +96,11 @@ You can also provide a `ValidationMode` parameter.
 Example:
 
 ```dart
-ValidationResult result = await VerificaC19.validateCertificate(cert, mode: ValidationMode.normalDGP);
+ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSM...', mode: ValidationMode.normalDGP);
 // or
-ValidationResult result = await VerificaC19.validateCertificate(cert, mode: ValidationMode.superDGP);
+ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSM...', mode: ValidationMode.superDGP);
 ```
-
-## Examples
-
-An example application is currently WIP.
 
 ## TODOs
 
 - [ ] Add the ability to retrieve/validate a Certificate from an image file
-- [ ] Add the ability to implement rules providers from other countries
