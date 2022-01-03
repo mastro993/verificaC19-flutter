@@ -1,3 +1,7 @@
+## 1.0.11
+
+- Fixed UVCI revocation check
+
 ## 1.0.10
 
 - Added booster validation mode

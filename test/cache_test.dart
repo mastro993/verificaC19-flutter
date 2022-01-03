@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:clock/clock.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:verificac19/src/core/constants.dart';
@@ -341,7 +344,10 @@ void main() {
 
     test('Should return that UVCI is revoked', () {
       // arrange
-      final List<String> tRevokeList = ['A', 'B', 'C'];
+      final List<String> tRevokeListRaw = ['A', 'B', 'C'];
+      final List<String> tRevokeList = tRevokeListRaw
+          .map((a) => base64Encode(sha256.convert(utf8.encode(a)).bytes))
+          .toList();
       when(revokeListBox.values).thenReturn(tRevokeList);
       // act
       final result = cache.isUvciRevoked('A');

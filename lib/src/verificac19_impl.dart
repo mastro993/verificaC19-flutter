@@ -6,7 +6,7 @@ import 'package:verificac19/src/data/remote/remote_repository.dart';
 import 'package:verificac19/src/data/remote/remote_repository_impl.dart';
 import 'package:verificac19/src/data/updater.dart';
 import 'package:verificac19/src/data/updater_impl.dart';
-import 'package:verificac19/src/logic/certificate_parser.dart';
+import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/logic/certificate_validator_impl.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
@@ -50,7 +50,7 @@ class VerificaC19Impl implements VerificaC19Interface {
   }) async {
     final bool needsUpdate = await _cache.needsUpdate();
 
-    final certificate = await CertificateParser.getCertificateFromRawData(
+    final certificate = await CertificateDecoder.getCertificateFromRawData(
       rawData,
     );
 

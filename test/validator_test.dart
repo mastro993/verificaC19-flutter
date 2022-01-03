@@ -4,7 +4,7 @@ import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
-import 'package:verificac19/src/logic/certificate_parser.dart';
+import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/logic/certificate_validator_impl.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
@@ -56,7 +56,7 @@ void main() {
   }) async {
     withClock(Clock.fixed(withDate ?? clock.now()), () async {
       final base45 = fixture(certFixture);
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       final result = await validator.checkValidationRules(
         cert,
         mode: mode ?? ValidationMode.normalDGP,
@@ -70,7 +70,7 @@ void main() {
     bool expectedResult,
   ) async {
     final base45 = fixture(certFixture);
-    final cert = await CertificateParser.getCertificateFromRawData(base45);
+    final cert = await CertificateDecoder.getCertificateFromRawData(base45);
     final sigOk = await validator.checkCertificateSignature(cert);
 
     expect(sigOk, equals(expectedResult));
@@ -257,7 +257,7 @@ void main() {
     test('Should not validate certificate without recovery statements',
         () async {
       final base45 = fixture('eu_test_certificates/sk_6.txt');
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.recoveryStatements.clear();
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(CertificateStatus.notEuDCC));
@@ -265,7 +265,7 @@ void main() {
 
     test('Should not validate certificate without tests', () async {
       final base45 = fixture('eu_test_certificates/sk_7.txt');
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.tests.clear();
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(CertificateStatus.notEuDCC));
@@ -273,7 +273,7 @@ void main() {
 
     test('Should not validate certificate without vaccinations', () async {
       final base45 = fixture('eu_test_certificates/sk_3.txt');
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.vaccinations.clear();
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(CertificateStatus.notEuDCC));
@@ -281,7 +281,7 @@ void main() {
 
     test('Should not validate certificate with negative vaccination', () async {
       final base45 = fixture('eu_test_certificates/sk_3.txt');
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.vaccinations.add(cert.vaccinations.last.copyWith(doseNumber: -1));
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(CertificateStatus.notValid));
@@ -301,7 +301,7 @@ void main() {
         'Should not validate certificate with Sputnik-V Vaccination from other countries',
         () async {
       final base45 = fixture('eu_test_certificates/sm_1.txt');
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.vaccinations
           .add(cert.vaccinations.last.copyWith(countryOfVaccination: 'IT'));
       final result = await validator.checkValidationRules(cert);
@@ -310,7 +310,7 @@ void main() {
 
     test('Should not validate certificate with fake tests', () async {
       final base45 = fixture('eu_test_certificates/sk_8.txt');
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.tests.add(cert.tests.last.copyWith(typeOfTest: 'Fake'));
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(CertificateStatus.notValid));
@@ -318,7 +318,7 @@ void main() {
 
     test('Should not validate certificate with fake tests', () async {
       final base45 = fixture('eu_test_certificates/sm_1.txt');
-      final cert = await CertificateParser.getCertificateFromRawData(base45);
+      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.vaccinations
           .add(cert.vaccinations.last.copyWith(medicinalProduct: 'Fake'));
       final result = await validator.checkValidationRules(cert);

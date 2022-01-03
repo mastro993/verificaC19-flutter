@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:clock/clock.dart';
+import 'package:crypto/crypto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
@@ -180,9 +183,12 @@ class LocalRepositoryImpl implements LocalRepository {
   bool isUvciRevoked(
     String uvci,
   ) {
+    /// https://github.com/ministero-salute/it-dgc-documentation/blob/master/DRL.md#panoramica
     try {
       final Box<String> box = _hive.box(DbKeys.dbRevokeList);
-      return box.values.contains(uvci);
+      final Digest uvciDigets = sha256.convert(utf8.encode(uvci));
+      final String hashedUvci = base64Encode(uvciDigets.bytes);
+      return box.values.contains(hashedUvci);
     } catch (e) {
       throw CacheException('Unable to check uvci from cached revoke list');
     }
