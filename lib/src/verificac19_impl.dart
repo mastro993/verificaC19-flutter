@@ -9,7 +9,6 @@ import 'package:verificac19/src/data/updater_impl.dart';
 import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/logic/certificate_validator_impl.dart';
-import 'package:verificac19/src/model/validation_mode.dart';
 import 'package:verificac19/verificac19.dart';
 
 class VerificaC19Impl implements VerificaC19Interface {

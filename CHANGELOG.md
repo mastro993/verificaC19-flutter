@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Fix: added ValidationMode in exports
+
 ## 1.1.0
 
 - UVCI revoked list updates in chunks with version check

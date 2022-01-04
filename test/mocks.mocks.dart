@@ -330,10 +330,6 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  void clearRevokeList() =>
-      super.noSuchMethod(Invocation.method(#clearRevokeList, []),
-          returnValueForMissingStub: null);
-  @override
   List<_i11.ValidationRule> getRules() =>
       (super.noSuchMethod(Invocation.method(#getRules, []),
           returnValue: <_i11.ValidationRule>[]) as List<_i11.ValidationRule>);

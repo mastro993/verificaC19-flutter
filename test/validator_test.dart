@@ -7,7 +7,6 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/logic/certificate_validator_impl.dart';
-import 'package:verificac19/src/model/validation_mode.dart';
 import 'package:verificac19/verificac19.dart';
 
 import 'fixtures/fixture_reader.dart';
