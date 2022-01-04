@@ -48,7 +48,7 @@ void main() {
 
   Future<void> validateRules(
     String certFixture,
-    CertificateStatus expectedStatus, {
+    GreenCertificateStatus expectedStatus, {
     ValidationMode? mode,
     DateTime? withDate,
   }) async {
@@ -69,13 +69,13 @@ void main() {
   ) async {
     final base45 = fixture(certFixture);
     final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-    final sigOk = await validator.checkCertificateSignature(cert);
+    final verified = await validator.checkCertificateSignature(cert);
 
-    expect(sigOk, equals(expectedResult));
+    expect(verified, equals(expectedResult));
   }
 
   test('Should not validate revoked or blacklisted certificate', () async {
-    await validateRules('shit.txt', CertificateStatus.revoked);
+    await validateRules('shit.txt', GreenCertificateStatus.revoked);
   });
 
   test('Should not validate unsigned certificate', () async {
@@ -87,7 +87,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_1.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -96,7 +96,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_2.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -105,7 +105,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_3.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -114,7 +114,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_4.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -123,7 +123,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_5.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -132,7 +132,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_6.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -140,7 +140,7 @@ void main() {
     test('Should not validate certificate with expired test result', () async {
       await validateRules(
         'eu_test_certificates/sk_7.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -148,7 +148,7 @@ void main() {
     test('Should not validate certificate with expired test result', () async {
       await validateRules(
         'eu_test_certificates/sk_8.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -158,7 +158,7 @@ void main() {
     test('Should validate certificate with test result', () async {
       await validateRules(
         'eu_test_certificates/sk_7.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
       );
     });
@@ -166,7 +166,7 @@ void main() {
     test('Should validate certificate with test result', () async {
       await validateRules(
         'eu_test_certificates/sk_8.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
       );
     });
@@ -174,7 +174,7 @@ void main() {
     test('Should not validate certificate without Super DGP', () async {
       await validateRules(
         'eu_test_certificates/sk_8.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 5, 22),
         mode: ValidationMode.superDGP,
       );
@@ -185,7 +185,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_1.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 6, 24),
       );
     });
@@ -194,7 +194,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_7.txt',
-        CertificateStatus.notValidYet,
+        GreenCertificateStatus.notValidYet,
         withDate: DateTime(2021, 4, 22),
       );
     });
@@ -203,7 +203,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_1.txt',
-        CertificateStatus.notValidYet,
+        GreenCertificateStatus.notValidYet,
         withDate: DateTime(2021, 5, 24),
       );
     });
@@ -212,7 +212,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_3.txt',
-        CertificateStatus.notValidYet,
+        GreenCertificateStatus.notValidYet,
         withDate: DateTime(2021, 5, 18),
       );
     });
@@ -220,7 +220,7 @@ void main() {
     test('Should not validate certificate with vaccination expired', () async {
       await validateRules(
         'eu_test_certificates/sk_4.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2022, 6, 17),
       );
     });
@@ -228,7 +228,7 @@ void main() {
     test('Should validate certificate with valid recovery statement', () async {
       await validateRules(
         'eu_test_certificates/sk_6.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 10, 20),
       );
     });
@@ -238,7 +238,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_6.txt',
-        CertificateStatus.notValidYet,
+        GreenCertificateStatus.notValidYet,
         withDate: DateTime(2021, 4, 22),
       );
     });
@@ -247,7 +247,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sk_6.txt',
-        CertificateStatus.notValid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2022, 4, 22),
       );
     });
@@ -258,7 +258,7 @@ void main() {
       final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.recoveryStatements.clear();
       final result = await validator.checkValidationRules(cert);
-      expect(result, equals(CertificateStatus.notEuDCC));
+      expect(result, equals(GreenCertificateStatus.notEuDCC));
     });
 
     test('Should not validate certificate without tests', () async {
@@ -266,7 +266,7 @@ void main() {
       final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.tests.clear();
       final result = await validator.checkValidationRules(cert);
-      expect(result, equals(CertificateStatus.notEuDCC));
+      expect(result, equals(GreenCertificateStatus.notEuDCC));
     });
 
     test('Should not validate certificate without vaccinations', () async {
@@ -274,7 +274,7 @@ void main() {
       final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.vaccinations.clear();
       final result = await validator.checkValidationRules(cert);
-      expect(result, equals(CertificateStatus.notEuDCC));
+      expect(result, equals(GreenCertificateStatus.notEuDCC));
     });
 
     test('Should not validate certificate with negative vaccination', () async {
@@ -282,7 +282,7 @@ void main() {
       final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.vaccinations.add(cert.vaccinations.last.copyWith(doseNumber: -1));
       final result = await validator.checkValidationRules(cert);
-      expect(result, equals(CertificateStatus.notValid));
+      expect(result, equals(GreenCertificateStatus.notValid));
     });
 
     test(
@@ -290,7 +290,7 @@ void main() {
         () async {
       await validateRules(
         'eu_test_certificates/sm_1.txt',
-        CertificateStatus.valid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 12, 1),
       );
     });
@@ -303,7 +303,7 @@ void main() {
       cert.vaccinations
           .add(cert.vaccinations.last.copyWith(countryOfVaccination: 'IT'));
       final result = await validator.checkValidationRules(cert);
-      expect(result, equals(CertificateStatus.notValid));
+      expect(result, equals(GreenCertificateStatus.notValid));
     });
 
     test('Should not validate certificate with fake tests', () async {
@@ -311,7 +311,7 @@ void main() {
       final cert = await CertificateDecoder.getCertificateFromRawData(base45);
       cert.tests.add(cert.tests.last.copyWith(typeOfTest: 'Fake'));
       final result = await validator.checkValidationRules(cert);
-      expect(result, equals(CertificateStatus.notValid));
+      expect(result, equals(GreenCertificateStatus.notValid));
     });
 
     test('Should not validate certificate with fake tests', () async {
@@ -320,7 +320,7 @@ void main() {
       cert.vaccinations
           .add(cert.vaccinations.last.copyWith(medicinalProduct: 'Fake'));
       final result = await validator.checkValidationRules(cert);
-      expect(result, equals(CertificateStatus.notValid));
+      expect(result, equals(GreenCertificateStatus.notValid));
     });
   });
 }

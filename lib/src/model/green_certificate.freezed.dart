@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'certificate.dart';
+part of 'green_certificate.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,17 +14,17 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$CertificateTearOff {
-  const _$CertificateTearOff();
+class _$GreenCertificateTearOff {
+  const _$GreenCertificateTearOff();
 
-  _Certificate call(
+  _GreenCertificate call(
       {required Person person,
       required DateTime dateOfBirth,
       required List<Vaccination> vaccinations,
       required List<Test> tests,
       required List<RecoveryStatement> recoveryStatements,
       required DCC dcc}) {
-    return _Certificate(
+    return _GreenCertificate(
       person: person,
       dateOfBirth: dateOfBirth,
       vaccinations: vaccinations,
@@ -36,23 +36,23 @@ class _$CertificateTearOff {
 }
 
 /// @nodoc
-const $Certificate = _$CertificateTearOff();
+const $GreenCertificate = _$GreenCertificateTearOff();
 
 /// @nodoc
-mixin _$Certificate {
-  /// Personal information of the certificate subject
+mixin _$GreenCertificate {
+  /// Personal information of the Green Certificate subject
   Person get person => throw _privateConstructorUsedError;
 
   /// Date of birth of the person
   DateTime get dateOfBirth => throw _privateConstructorUsedError;
 
-  /// List of certificate Vaccinations
+  /// List of Certificate Vaccinations
   List<Vaccination> get vaccinations => throw _privateConstructorUsedError;
 
-  /// List of certificate Test results
+  /// List of Certificate Test results
   List<Test> get tests => throw _privateConstructorUsedError;
 
-  /// List of certificate Recovery statements
+  /// List of Certificate Recovery statements
   List<RecoveryStatement> get recoveryStatements =>
       throw _privateConstructorUsedError;
 
@@ -60,15 +60,15 @@ mixin _$Certificate {
   DCC get dcc => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CertificateCopyWith<Certificate> get copyWith =>
+  $GreenCertificateCopyWith<GreenCertificate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CertificateCopyWith<$Res> {
-  factory $CertificateCopyWith(
-          Certificate value, $Res Function(Certificate) then) =
-      _$CertificateCopyWithImpl<$Res>;
+abstract class $GreenCertificateCopyWith<$Res> {
+  factory $GreenCertificateCopyWith(
+          GreenCertificate value, $Res Function(GreenCertificate) then) =
+      _$GreenCertificateCopyWithImpl<$Res>;
   $Res call(
       {Person person,
       DateTime dateOfBirth,
@@ -82,12 +82,13 @@ abstract class $CertificateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CertificateCopyWithImpl<$Res> implements $CertificateCopyWith<$Res> {
-  _$CertificateCopyWithImpl(this._value, this._then);
+class _$GreenCertificateCopyWithImpl<$Res>
+    implements $GreenCertificateCopyWith<$Res> {
+  _$GreenCertificateCopyWithImpl(this._value, this._then);
 
-  final Certificate _value;
+  final GreenCertificate _value;
   // ignore: unused_field
-  final $Res Function(Certificate) _then;
+  final $Res Function(GreenCertificate) _then;
 
   @override
   $Res call({
@@ -142,11 +143,11 @@ class _$CertificateCopyWithImpl<$Res> implements $CertificateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CertificateCopyWith<$Res>
-    implements $CertificateCopyWith<$Res> {
-  factory _$CertificateCopyWith(
-          _Certificate value, $Res Function(_Certificate) then) =
-      __$CertificateCopyWithImpl<$Res>;
+abstract class _$GreenCertificateCopyWith<$Res>
+    implements $GreenCertificateCopyWith<$Res> {
+  factory _$GreenCertificateCopyWith(
+          _GreenCertificate value, $Res Function(_GreenCertificate) then) =
+      __$GreenCertificateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Person person,
@@ -163,14 +164,15 @@ abstract class _$CertificateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$CertificateCopyWithImpl<$Res> extends _$CertificateCopyWithImpl<$Res>
-    implements _$CertificateCopyWith<$Res> {
-  __$CertificateCopyWithImpl(
-      _Certificate _value, $Res Function(_Certificate) _then)
-      : super(_value, (v) => _then(v as _Certificate));
+class __$GreenCertificateCopyWithImpl<$Res>
+    extends _$GreenCertificateCopyWithImpl<$Res>
+    implements _$GreenCertificateCopyWith<$Res> {
+  __$GreenCertificateCopyWithImpl(
+      _GreenCertificate _value, $Res Function(_GreenCertificate) _then)
+      : super(_value, (v) => _then(v as _GreenCertificate));
 
   @override
-  _Certificate get _value => super._value as _Certificate;
+  _GreenCertificate get _value => super._value as _GreenCertificate;
 
   @override
   $Res call({
@@ -181,7 +183,7 @@ class __$CertificateCopyWithImpl<$Res> extends _$CertificateCopyWithImpl<$Res>
     Object? recoveryStatements = freezed,
     Object? dcc = freezed,
   }) {
-    return _then(_Certificate(
+    return _then(_GreenCertificate(
       person: person == freezed
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
@@ -212,8 +214,8 @@ class __$CertificateCopyWithImpl<$Res> extends _$CertificateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Certificate extends _Certificate {
-  const _$_Certificate(
+class _$_GreenCertificate extends _GreenCertificate {
+  const _$_GreenCertificate(
       {required this.person,
       required this.dateOfBirth,
       required this.vaccinations,
@@ -224,7 +226,7 @@ class _$_Certificate extends _Certificate {
 
   @override
 
-  /// Personal information of the certificate subject
+  /// Personal information of the Green Certificate subject
   final Person person;
   @override
 
@@ -232,15 +234,15 @@ class _$_Certificate extends _Certificate {
   final DateTime dateOfBirth;
   @override
 
-  /// List of certificate Vaccinations
+  /// List of Certificate Vaccinations
   final List<Vaccination> vaccinations;
   @override
 
-  /// List of certificate Test results
+  /// List of Certificate Test results
   final List<Test> tests;
   @override
 
-  /// List of certificate Recovery statements
+  /// List of Certificate Recovery statements
   final List<RecoveryStatement> recoveryStatements;
   @override
 
@@ -249,14 +251,14 @@ class _$_Certificate extends _Certificate {
 
   @override
   String toString() {
-    return 'Certificate(person: $person, dateOfBirth: $dateOfBirth, vaccinations: $vaccinations, tests: $tests, recoveryStatements: $recoveryStatements, dcc: $dcc)';
+    return 'GreenCertificate(person: $person, dateOfBirth: $dateOfBirth, vaccinations: $vaccinations, tests: $tests, recoveryStatements: $recoveryStatements, dcc: $dcc)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Certificate &&
+            other is _GreenCertificate &&
             const DeepCollectionEquality().equals(other.person, person) &&
             const DeepCollectionEquality()
                 .equals(other.dateOfBirth, dateOfBirth) &&
@@ -280,23 +282,23 @@ class _$_Certificate extends _Certificate {
 
   @JsonKey(ignore: true)
   @override
-  _$CertificateCopyWith<_Certificate> get copyWith =>
-      __$CertificateCopyWithImpl<_Certificate>(this, _$identity);
+  _$GreenCertificateCopyWith<_GreenCertificate> get copyWith =>
+      __$GreenCertificateCopyWithImpl<_GreenCertificate>(this, _$identity);
 }
 
-abstract class _Certificate extends Certificate {
-  const factory _Certificate(
+abstract class _GreenCertificate extends GreenCertificate {
+  const factory _GreenCertificate(
       {required Person person,
       required DateTime dateOfBirth,
       required List<Vaccination> vaccinations,
       required List<Test> tests,
       required List<RecoveryStatement> recoveryStatements,
-      required DCC dcc}) = _$_Certificate;
-  const _Certificate._() : super._();
+      required DCC dcc}) = _$_GreenCertificate;
+  const _GreenCertificate._() : super._();
 
   @override
 
-  /// Personal information of the certificate subject
+  /// Personal information of the Green Certificate subject
   Person get person;
   @override
 
@@ -304,15 +306,15 @@ abstract class _Certificate extends Certificate {
   DateTime get dateOfBirth;
   @override
 
-  /// List of certificate Vaccinations
+  /// List of Certificate Vaccinations
   List<Vaccination> get vaccinations;
   @override
 
-  /// List of certificate Test results
+  /// List of Certificate Test results
   List<Test> get tests;
   @override
 
-  /// List of certificate Recovery statements
+  /// List of Certificate Recovery statements
   List<RecoveryStatement> get recoveryStatements;
   @override
 
@@ -320,6 +322,6 @@ abstract class _Certificate extends Certificate {
   DCC get dcc;
   @override
   @JsonKey(ignore: true)
-  _$CertificateCopyWith<_Certificate> get copyWith =>
+  _$GreenCertificateCopyWith<_GreenCertificate> get copyWith =>
       throw _privateConstructorUsedError;
 }

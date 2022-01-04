@@ -8,6 +8,7 @@ import 'package:crypto/crypto.dart';
 import 'package:dart_base45/dart_base45.dart';
 import 'package:ninja/ninja.dart' as ninja;
 import 'package:ninja/padder/mgf/mgf.dart';
+import 'package:verificac19/src/model/certificate_info.dart';
 import 'package:verificac19/src/utils/certificate_utils.dart';
 import 'package:verificac19/src/utils/header_utils.dart';
 import 'package:verificac19/verificac19.dart';
@@ -92,10 +93,21 @@ class DccUtils {
       raw: rawData,
       coseRaw: coseRaw,
       payload: payloadData,
-      payloadBytes: Uint8List.view(payloadBytes.buffer, 0, payloadBytes.length),
-      protectedHeader:
-          Uint8List.view(protectedHeader.buffer, 0, protectedHeader.length),
-      signers: Uint8List.view(signers.buffer, 0, signers.length),
+      payloadBytes: Uint8List.view(
+        payloadBytes.buffer,
+        0,
+        payloadBytes.length,
+      ),
+      protectedHeader: Uint8List.view(
+        protectedHeader.buffer,
+        0,
+        protectedHeader.length,
+      ),
+      signers: Uint8List.view(
+        signers.buffer,
+        0,
+        signers.length,
+      ),
       unprotectedHeader: unprotectedHeader,
       kid: kid,
       algorithm: algo,
@@ -182,5 +194,32 @@ class DccUtils {
     }
 
     return verified;
+  }
+
+  static CertificateInfo getCertificateInfo(String certificate) {
+    String country = '';
+    bool extendedKeyUsage = false;
+
+    try {
+      final cert = CertificateUtils.getX509Certificate(certificate);
+      final TbsCertificate tbsCertificate = cert.tbsCertificate;
+      final Name issuer = tbsCertificate.issuer!;
+      final List<Extension> extensions = tbsCertificate.extensions!;
+
+      country = issuer.names
+          .firstWhere((name) => name.entries.first.key?.name == 'countryName')
+          .entries
+          .first
+          .value;
+
+      extendedKeyUsage = extensions.any((e) => e.extnId.name == 'extKeyUsage');
+    } catch (e) {
+      // Error during certificate parsing
+    }
+
+    return CertificateInfo(
+      country: country,
+      extendedKeyUsage: extendedKeyUsage,
+    );
   }
 }

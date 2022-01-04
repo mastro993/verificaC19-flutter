@@ -1,4 +1,4 @@
-enum CertificateStatus {
+enum GreenCertificateStatus {
   /// Certificate is not a valid EU DCC
   notEuDCC,
 

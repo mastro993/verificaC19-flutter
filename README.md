@@ -77,13 +77,14 @@ ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSM...')
 
 The result is a `ValidationResult` object containing the decoded `Certificate` object and its `CertificateStatus` which can have the following values:
 
-|     | Code        | Description                  |
-| --- | ----------- | ---------------------------- |
-| ✅  | valid       | Certificate is valid         |
-| ❌  | notValid    | Certificate is not valid     |
-| ❌  | notValidYet | Certificate is not valid yet |
-| ❌  | notEuDCC    | Certificate is not an EU DCC |
-| ❌  | revoke      | Certificate has been revoked |
+|     | Code        | Description                                    |
+| --- | ----------- | ---------------------------------------------- |
+| ✅  | valid       | Certificate is valid                           |
+| ❌  | notValid    | Certificate is not valid                       |
+| ❌  | notValidYet | Certificate is not valid yet                   |
+| ❌  | testNeeded  | Test needed if verification mode is boosterDGP |
+| ❌  | revoked     | Certificate has been revoked                   |
+| ❌  | notEuDCC    | Certificate is not an EU DCC                   |
 
 You can also provide a `ValidationMode` parameter.
 

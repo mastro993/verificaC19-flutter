@@ -18,7 +18,8 @@ class _$ValidationResultTearOff {
   const _$ValidationResultTearOff();
 
   _ValidationResult call(
-      {required Certificate certificate, required CertificateStatus status}) {
+      {required GreenCertificate certificate,
+      required GreenCertificateStatus status}) {
     return _ValidationResult(
       certificate: certificate,
       status: status,
@@ -32,10 +33,10 @@ const $ValidationResult = _$ValidationResultTearOff();
 /// @nodoc
 mixin _$ValidationResult {
   /// Validated certificate
-  Certificate get certificate => throw _privateConstructorUsedError;
+  GreenCertificate get certificate => throw _privateConstructorUsedError;
 
   /// Validation rules result
-  CertificateStatus get status => throw _privateConstructorUsedError;
+  GreenCertificateStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ValidationResultCopyWith<ValidationResult> get copyWith =>
@@ -47,9 +48,9 @@ abstract class $ValidationResultCopyWith<$Res> {
   factory $ValidationResultCopyWith(
           ValidationResult value, $Res Function(ValidationResult) then) =
       _$ValidationResultCopyWithImpl<$Res>;
-  $Res call({Certificate certificate, CertificateStatus status});
+  $Res call({GreenCertificate certificate, GreenCertificateStatus status});
 
-  $CertificateCopyWith<$Res> get certificate;
+  $GreenCertificateCopyWith<$Res> get certificate;
 }
 
 /// @nodoc
@@ -70,17 +71,17 @@ class _$ValidationResultCopyWithImpl<$Res>
       certificate: certificate == freezed
           ? _value.certificate
           : certificate // ignore: cast_nullable_to_non_nullable
-              as Certificate,
+              as GreenCertificate,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as CertificateStatus,
+              as GreenCertificateStatus,
     ));
   }
 
   @override
-  $CertificateCopyWith<$Res> get certificate {
-    return $CertificateCopyWith<$Res>(_value.certificate, (value) {
+  $GreenCertificateCopyWith<$Res> get certificate {
+    return $GreenCertificateCopyWith<$Res>(_value.certificate, (value) {
       return _then(_value.copyWith(certificate: value));
     });
   }
@@ -93,10 +94,10 @@ abstract class _$ValidationResultCopyWith<$Res>
           _ValidationResult value, $Res Function(_ValidationResult) then) =
       __$ValidationResultCopyWithImpl<$Res>;
   @override
-  $Res call({Certificate certificate, CertificateStatus status});
+  $Res call({GreenCertificate certificate, GreenCertificateStatus status});
 
   @override
-  $CertificateCopyWith<$Res> get certificate;
+  $GreenCertificateCopyWith<$Res> get certificate;
 }
 
 /// @nodoc
@@ -119,11 +120,11 @@ class __$ValidationResultCopyWithImpl<$Res>
       certificate: certificate == freezed
           ? _value.certificate
           : certificate // ignore: cast_nullable_to_non_nullable
-              as Certificate,
+              as GreenCertificate,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as CertificateStatus,
+              as GreenCertificateStatus,
     ));
   }
 }
@@ -137,11 +138,11 @@ class _$_ValidationResult extends _ValidationResult {
   @override
 
   /// Validated certificate
-  final Certificate certificate;
+  final GreenCertificate certificate;
   @override
 
   /// Validation rules result
-  final CertificateStatus status;
+  final GreenCertificateStatus status;
 
   @override
   String toString() {
@@ -172,18 +173,18 @@ class _$_ValidationResult extends _ValidationResult {
 
 abstract class _ValidationResult extends ValidationResult {
   factory _ValidationResult(
-      {required Certificate certificate,
-      required CertificateStatus status}) = _$_ValidationResult;
+      {required GreenCertificate certificate,
+      required GreenCertificateStatus status}) = _$_ValidationResult;
   _ValidationResult._() : super._();
 
   @override
 
   /// Validated certificate
-  Certificate get certificate;
+  GreenCertificate get certificate;
   @override
 
   /// Validation rules result
-  CertificateStatus get status;
+  GreenCertificateStatus get status;
   @override
   @JsonKey(ignore: true)
   _$ValidationResultCopyWith<_ValidationResult> get copyWith =>

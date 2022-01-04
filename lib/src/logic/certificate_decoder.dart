@@ -2,7 +2,8 @@ import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
 
 class CertificateDecoder {
-  static Future<Certificate> getCertificateFromRawData(String rawData) async {
+  static Future<GreenCertificate> getCertificateFromRawData(
+      String rawData) async {
     try {
       final DCC dcc = await DccUtils.getDCCFromRawData(rawData);
       final dateOfBirth = DateTime.parse(dcc.payload['dob']);
@@ -75,7 +76,7 @@ class CertificateDecoder {
         recoveryStatements.add(recoveryStatement);
       }
 
-      return Certificate(
+      return GreenCertificate(
         person: person,
         dateOfBirth: dateOfBirth,
         vaccinations: vaccinations,

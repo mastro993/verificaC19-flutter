@@ -9,9 +9,9 @@ class ValidationResult with _$ValidationResult {
 
   factory ValidationResult({
     /// Validated certificate
-    required Certificate certificate,
+    required GreenCertificate certificate,
 
     /// Validation rules result
-    required CertificateStatus status,
+    required GreenCertificateStatus status,
   }) = _ValidationResult;
 }
