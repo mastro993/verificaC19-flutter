@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:verificac19/src/model/certificate_info.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
 
@@ -31,19 +32,35 @@ void main() {
     DCC dcc = await DccUtils.getDCCFromRawData(fixture('signed_cert.txt'));
     String pem = fixture('signing_certificate.crt');
 
-    final result = await DccUtils.checkSignatureWithCertificate(pem, dcc);
+    final verified = await DccUtils.checkSignatureWithCertificate(pem, dcc);
 
     assert(dcc.kid == '2Rk3X8HntrI=');
-    assert(result == true);
+    assert(verified == true);
   });
 
   test('Should not verify signature', () async {
     DCC dcc = await DccUtils.getDCCFromRawData(fixture('signed_cert.txt'));
     String pem = fixture('wrong_signing_certificate.crt');
 
-    final result = await DccUtils.checkSignatureWithCertificate(pem, dcc);
+    final verified = await DccUtils.checkSignatureWithCertificate(pem, dcc);
 
     assert(dcc.kid == '2Rk3X8HntrI=');
-    assert(result == false);
+    assert(verified == false);
+  });
+
+  test('Should get certificate info (extKeyUsage', () async {
+    CertificateInfo info = DccUtils.getCertificateInfo(
+      fixture('signing_certificate.crt'),
+    );
+    assert(info.country == 'AT');
+    assert(info.extendedKeyUsage == false);
+  });
+
+  test('Should get certificate info (extKeyUsage)', () async {
+    CertificateInfo info = DccUtils.getCertificateInfo(
+      fixture('cert_info.crt'),
+    );
+    assert(info.country == 'NL');
+    assert(info.extendedKeyUsage == true);
   });
 }

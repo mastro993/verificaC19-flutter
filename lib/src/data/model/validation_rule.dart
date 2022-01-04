@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:verificac19/src/core/constants.dart';
 
 part 'validation_rule.g.dart';
 
@@ -27,7 +28,7 @@ class ValidationRule {
 
 extension RulesExtensions on List<ValidationRule> {
   ValidationRule? find(String name, [String? type]) {
-    type ??= 'GENERIC';
+    type ??= RuleType.generic;
     try {
       return firstWhere((r) => r.name == name && r.type == type);
     } catch (e) {

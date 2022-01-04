@@ -4,9 +4,9 @@ import 'package:verificac19/src/verificac19.dart';
 import 'package:verificac19/src/verificac19_impl.dart';
 
 export 'src/core/exception.dart';
-export 'src/model/certificate.dart';
-export 'src/model/certificate_status.dart';
 export 'src/model/dcc.dart';
+export 'src/model/green_certificate.dart';
+export 'src/model/green_certificate_status.dart';
 export 'src/model/person.dart';
 export 'src/model/recovery_statement.dart';
 export 'src/model/test.dart';

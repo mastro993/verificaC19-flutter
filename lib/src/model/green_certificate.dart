@@ -5,29 +5,29 @@ import 'package:verificac19/src/model/recovery_statement.dart';
 import 'package:verificac19/src/model/test.dart';
 import 'package:verificac19/src/model/vaccination.dart';
 
-part 'certificate.freezed.dart';
+part 'green_certificate.freezed.dart';
 
 @freezed
-class Certificate with _$Certificate {
-  const Certificate._();
+class GreenCertificate with _$GreenCertificate {
+  const GreenCertificate._();
 
-  const factory Certificate({
-    /// Personal information of the certificate subject
+  const factory GreenCertificate({
+    /// Personal information of the Green Certificate subject
     required Person person,
 
     /// Date of birth of the person
     required DateTime dateOfBirth,
 
-    /// List of certificate Vaccinations
+    /// List of Certificate Vaccinations
     required List<Vaccination> vaccinations,
 
-    /// List of certificate Test results
+    /// List of Certificate Test results
     required List<Test> tests,
 
-    /// List of certificate Recovery statements
+    /// List of Certificate Recovery statements
     required List<RecoveryStatement> recoveryStatements,
 
     /// Certificate DCC
     required DCC dcc,
-  }) = _Certificate;
+  }) = _GreenCertificate;
 }

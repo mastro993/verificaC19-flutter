@@ -1,3 +1,8 @@
+## 1.2.0
+
+- Added Booster validation mode for recovery statements and vaccinations
+- Renamed Certificate to GreenCertificate to better differentiate from Signgin Certificates
+
 ## 1.1.1
 
 - Fix: added ValidationMode in exports

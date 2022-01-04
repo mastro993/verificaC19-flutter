@@ -18,6 +18,27 @@ class DbKeys {
   static const String keyRevokeListVersion = 'revoke_list_version';
 }
 
+class RuleName {
+  static const String blackListUvci = 'black_list_uvci';
+  static const String vaccineStartDayNotComplete =
+      'vaccine_start_day_not_complete';
+  static const String vaccineEndDayNotComplete = 'vaccine_end_day_not_complete';
+  static const String vaccineStartDayComplete = 'vaccine_start_day_complete';
+  static const String vaccineEndDayComplete = 'vaccine_end_day_complete';
+  static const String molecularTestStartHours = 'molecular_test_start_hours';
+  static const String molecularTestEndHours = 'molecular_test_end_hours';
+  static const String rapidTestStartHours = 'rapid_test_start_hours';
+  static const String rapidTestEndHours = 'rapid_test_end_hours';
+  static const String recoveryCertStartDay = 'recovery_cert_start_day';
+  static const String recoveryCertEndDay = 'recovery_cert_end_day';
+  static const String recoveryCertPvStartDay = 'recovery_cert_pv_start_day';
+  static const String recoveryCertPvEndDay = 'recovery_cert_pv_end_day';
+}
+
+class RuleType {
+  static const String generic = "GENERIC";
+}
+
 class TestResult {
   static const String detected = "260373001";
 }
@@ -33,5 +54,11 @@ class VaccineType {
 }
 
 class Country {
+  static const String italy = 'IT';
   static const String sanMarino = 'SM';
+}
+
+class OID {
+  static const String recovery = '1.3.6.1.4.1.1847.2021.1.3';
+  static const String altRecovery = '1.3.6.1.4.1.0.1847.2021.1.3';
 }

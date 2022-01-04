@@ -5,7 +5,9 @@ import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/core/extensions.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
+import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
+import 'package:verificac19/src/model/certificate_info.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
 
@@ -18,8 +20,8 @@ class CertificateValidatorImpl implements CertificateValidator {
     final List<ValidationRule> rules = _cache.getRules();
 
     final ValidationRule? uvciRule = rules.find(
-      'black_list_uvci',
-      'black_list_uvci',
+      RuleName.blackListUvci,
+      RuleName.blackListUvci,
     );
     final List<String> blacklistedUvciList = uvciRule!.value
         .split(';')
@@ -40,19 +42,19 @@ class CertificateValidatorImpl implements CertificateValidator {
   }
 
   @override
-  Future<CertificateStatus> checkVaccinations(
+  Future<GreenCertificateStatus> checkVaccinations(
     List<Vaccination> vaccinations, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     try {
-      final Vaccination lastVaccination = vaccinations.last;
-      final String? type = lastVaccination.medicinalProduct;
+      final Vaccination last = vaccinations.last;
+      final String? type = last.medicinalProduct;
 
       // In Italy, Sputnik is accepted only for San Marino republic
       if (type == VaccineType.sputnik &&
-          lastVaccination.countryOfVaccination != Country.sanMarino) {
+          last.countryOfVaccination != Country.sanMarino) {
         log('Vaccine ${VaccineType.sputnik} is valid only in San Marino');
-        return CertificateStatus.notValid;
+        return GreenCertificateStatus.notValid;
       }
 
       final rules = _cache.getRules();
@@ -61,22 +63,21 @@ class CertificateValidatorImpl implements CertificateValidator {
       var vaccinationEndDays = 0;
 
       // Check for partial or complete vaccine
-      if (lastVaccination.doseNumber < lastVaccination.totalSeriesOfDoses) {
-        final startDays = rules.find('vaccine_start_day_not_complete', type);
-        final endDays = rules.find('vaccine_end_day_not_complete', type);
-        vaccinationStartDays = int.parse(startDays!.value);
-        vaccinationEndDays = int.parse(endDays!.value);
-
-        // Paertial vaccination is not valid if Booster validation mode
+      if (last.doseNumber < last.totalSeriesOfDoses) {
+        // Partial vaccination is not valid if Booster validation mode
         // Booster doses are only for complete vaccination
         if (mode == ValidationMode.boosterDGP) {
           log('Vaccine is not valid in Booster mode');
-          return CertificateStatus.notValid;
+          return GreenCertificateStatus.notValid;
         }
-      } else if (lastVaccination.doseNumber >=
-          lastVaccination.totalSeriesOfDoses) {
-        final startDays = rules.find('vaccine_start_day_complete', type);
-        final endDays = rules.find('vaccine_end_day_complete', type);
+
+        final startDays = rules.find(RuleName.vaccineStartDayNotComplete, type);
+        final endDays = rules.find(RuleName.vaccineEndDayNotComplete, type);
+        vaccinationStartDays = int.parse(startDays!.value);
+        vaccinationEndDays = int.parse(endDays!.value);
+      } else if (last.doseNumber >= last.totalSeriesOfDoses) {
+        final startDays = rules.find(RuleName.vaccineStartDayComplete, type);
+        final endDays = rules.find(RuleName.vaccineEndDayComplete, type);
         vaccinationStartDays = int.parse(startDays!.value);
         vaccinationEndDays = int.parse(endDays!.value);
 
@@ -88,10 +89,10 @@ class CertificateValidatorImpl implements CertificateValidator {
         }
       }
 
-      final vaccinationStart = lastVaccination.dateOfVaccination
+      final vaccinationStart = last.dateOfVaccination
           .withoutTime()
           .add(Duration(days: vaccinationStartDays));
-      final vaccinationEnd = lastVaccination.dateOfVaccination
+      final vaccinationEnd = last.dateOfVaccination
           .withoutTime()
           .add(Duration(days: vaccinationEndDays));
 
@@ -100,32 +101,48 @@ class CertificateValidatorImpl implements CertificateValidator {
           .add(const Duration(days: 1))
           .subtract(const Duration(milliseconds: 1));
 
+      final String doses = '${last.doseNumber}/${last.totalSeriesOfDoses}';
+
       if (vaccinationStart > todayEnd) {
-        log('Doses ${lastVaccination.doseNumber}/${lastVaccination.totalSeriesOfDoses} - Vaccination is not valid yet, starts at ${vaccinationStart.toIso8601String()}');
-        return CertificateStatus.notValidYet;
+        log('Doses $doses - Vaccination is not valid yet, starts at ${vaccinationStart.toIso8601String()}');
+        return GreenCertificateStatus.notValidYet;
       }
 
       if (vaccinationEnd < todayStart) {
-        log('Doses ${lastVaccination.doseNumber}/${lastVaccination.totalSeriesOfDoses} - Vaccination is expired at ${vaccinationEnd.toIso8601String()}');
-        return CertificateStatus.notValid;
+        log('Doses $doses - Vaccination is expired at ${vaccinationEnd.toIso8601String()}');
+        return GreenCertificateStatus.notValid;
       }
 
-      log('Doses ${lastVaccination.doseNumber}/${lastVaccination.totalSeriesOfDoses} - Vaccination is valid [${vaccinationStart.toIso8601String()} - ${vaccinationEnd.toIso8601String()}]');
-      return CertificateStatus.valid;
+      // Completed cycle without booster
+
+      if (mode == ValidationMode.boosterDGP) {
+        if (type == VaccineType.johnson) {
+          if (last.doseNumber == last.totalSeriesOfDoses &&
+              last.doseNumber < 2) {
+            return GreenCertificateStatus.testNeeded;
+          }
+        } else if (last.doseNumber == last.totalSeriesOfDoses &&
+            last.doseNumber < 3) {
+          return GreenCertificateStatus.testNeeded;
+        }
+      }
+
+      log('Doses $doses - Vaccination is valid [${vaccinationStart.toIso8601String()} - ${vaccinationEnd.toIso8601String()}]');
+      return GreenCertificateStatus.valid;
     } catch (e) {
       log('Vaccination is not present or is not a green pass: ${e.toString()}');
-      return CertificateStatus.notValid;
+      return GreenCertificateStatus.notValid;
     }
   }
 
   @override
-  Future<CertificateStatus> checkTests(
+  Future<GreenCertificateStatus> checkTests(
     List<Test> tests, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     if (mode != ValidationMode.normalDGP) {
       log('Not valid. Super DGP or Booster required.');
-      return CertificateStatus.notValid;
+      return GreenCertificateStatus.notValid;
     }
 
     try {
@@ -133,7 +150,7 @@ class CertificateValidatorImpl implements CertificateValidator {
 
       if (lastTest.testResult == TestResult.detected) {
         log('Test result is DETECTED');
-        return CertificateStatus.notValid;
+        return GreenCertificateStatus.notValid;
       }
 
       final rules = _cache.getRules();
@@ -142,18 +159,18 @@ class CertificateValidatorImpl implements CertificateValidator {
       int testEndHours;
 
       if (lastTest.typeOfTest == TestType.molecular) {
-        String startHours = rules.find('molecular_test_start_hours')!.value;
-        String endHours = rules.find('molecular_test_end_hours')!.value;
+        String startHours = rules.find(RuleName.molecularTestStartHours)!.value;
+        String endHours = rules.find(RuleName.molecularTestEndHours)!.value;
         testStartHours = int.parse(startHours);
         testEndHours = int.parse(endHours);
       } else if (lastTest.typeOfTest == TestType.rapid) {
-        String startHours = rules.find('rapid_test_start_hours')!.value;
-        String endHours = rules.find('rapid_test_end_hours')!.value;
+        String startHours = rules.find(RuleName.rapidTestStartHours)!.value;
+        String endHours = rules.find(RuleName.rapidTestEndHours)!.value;
         testStartHours = int.parse(startHours);
         testEndHours = int.parse(endHours);
       } else {
         log('Test type is not valid');
-        return CertificateStatus.notValid;
+        return GreenCertificateStatus.notValid;
       }
 
       final startDate = lastTest.dateTimeOfCollection.add(
@@ -165,73 +182,84 @@ class CertificateValidatorImpl implements CertificateValidator {
 
       if (clock.now() < startDate) {
         log('Test result is not valid yet, starts at: ${startDate.toIso8601String()}');
-        return CertificateStatus.notValidYet;
+        return GreenCertificateStatus.notValidYet;
       }
 
       if (clock.now() > endDate) {
         log('Test result is expired at: ${endDate.toIso8601String()}');
-        return CertificateStatus.notValid;
+        return GreenCertificateStatus.notValid;
       }
 
       log('Test result is valid [${startDate.toIso8601String()} - ${endDate.toIso8601String()}]');
-      return CertificateStatus.valid;
+      return GreenCertificateStatus.valid;
     } catch (e) {
       log('Test Result is not present or is not a green pass: ${e.toString()}');
-      return CertificateStatus.notValid;
+      return GreenCertificateStatus.notValid;
     }
   }
 
   @override
-  Future<CertificateStatus> checkRecoveryStatements(
+  Future<GreenCertificateStatus> checkRecoveryStatements(
     List<RecoveryStatement> recoveryStatements, {
     ValidationMode mode = ValidationMode.normalDGP,
+    bool isRecoveryBis = false,
   }) async {
     try {
+      if (mode == ValidationMode.boosterDGP) {
+        log('Test needed');
+        return GreenCertificateStatus.testNeeded;
+      }
+
       final rules = _cache.getRules();
-
-      final startDays = rules.find('recovery_cert_start_day')!.value;
-      final endDays = rules.find('recovery_cert_end_day')!.value;
-
       final RecoveryStatement lastRecovery = recoveryStatements.last;
+
+      ValidationRule? startDaysRule;
+      ValidationRule? endDaysRule;
+
+      if (isRecoveryBis) {
+        startDaysRule = rules.find(RuleName.recoveryCertPvStartDay);
+        endDaysRule = rules.find(RuleName.recoveryCertPvEndDay);
+      } else {
+        startDaysRule = rules.find(RuleName.recoveryCertStartDay);
+        endDaysRule = rules.find(RuleName.recoveryCertEndDay);
+      }
 
       final recoveryFromDay = lastRecovery.certificateValidFrom.withoutTime();
       final recoveryUntilDay = lastRecovery.certificateValidUntil.withoutTime();
 
+      final startDays = int.parse(startDaysRule!.value);
+      final endDays = int.parse(endDaysRule!.value);
+
       final startDateValidation = recoveryFromDay.add(
-        Duration(days: int.parse(startDays)),
+        Duration(days: startDays),
       );
       final endDateValidation = recoveryFromDay.add(
-        Duration(days: int.parse(endDays)),
+        Duration(days: endDays),
       );
 
       final today = clock.now().withoutTime();
 
       if (today < startDateValidation) {
         log('Recovery statement is not valid yet, starts at: ${startDateValidation.toIso8601String()}');
-        return CertificateStatus.notValidYet;
+        return GreenCertificateStatus.notValidYet;
       }
 
       if (today > recoveryUntilDay && today > endDateValidation) {
         log('Recovery statement is expired at: ${endDateValidation.toIso8601String()}');
-        return CertificateStatus.notValid;
-      }
-
-      if (mode == ValidationMode.boosterDGP) {
-        log('Test needed');
-        return CertificateStatus.testNeeded;
+        return GreenCertificateStatus.notValid;
       }
 
       log('Recovery statement is valid [${recoveryFromDay.toIso8601String()} - ${recoveryUntilDay.toIso8601String()}]');
-      return CertificateStatus.valid;
+      return GreenCertificateStatus.valid;
     } catch (e) {
       log('Recovery statement is not present or is not a green pass: ${e.toString()}');
-      return CertificateStatus.notValid;
+      return GreenCertificateStatus.notValid;
     }
   }
 
   @override
-  Future<CertificateStatus> checkValidationRules(
-    Certificate certificate, {
+  Future<GreenCertificateStatus> checkValidationRules(
+    GreenCertificate certificate, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     final List<dynamic> uvciList = [
@@ -243,45 +271,107 @@ class CertificateValidatorImpl implements CertificateValidator {
 
     if (isRevoked) {
       log('UVCI is in blacklist');
-      return CertificateStatus.revoked;
+      return GreenCertificateStatus.revoked;
     }
 
+    final signingCertificateInfo = await getCertificatesignatureInfo(
+      certificate,
+    );
+
     if (certificate.recoveryStatements.isNotEmpty) {
-      return checkRecoveryStatements(certificate.recoveryStatements);
+      final isRecoveryBis = signingCertificateInfo.country == Country.italy &&
+          signingCertificateInfo.extendedKeyUsage == true;
+
+      return checkRecoveryStatements(
+        certificate.recoveryStatements,
+        mode: mode,
+        isRecoveryBis: isRecoveryBis,
+      );
     }
 
     if (certificate.tests.isNotEmpty) {
       if (mode == ValidationMode.superDGP) {
         log('Not valid. Super DGP required');
-        return CertificateStatus.notValid;
+        return GreenCertificateStatus.notValid;
       }
-      return checkTests(certificate.tests);
+      return checkTests(
+        certificate.tests,
+        mode: mode,
+      );
     }
 
     if (certificate.vaccinations.isNotEmpty) {
-      return checkVaccinations(certificate.vaccinations, mode: mode);
+      return checkVaccinations(
+        certificate.vaccinations,
+        mode: mode,
+      );
     }
 
     log('No vaccination, test or recovery statement found in payload or UVCI is in blacklist');
-    return CertificateStatus.notEuDCC;
+    return GreenCertificateStatus.notEuDCC;
   }
 
-  @override
-  Future<bool> checkCertificateSignature(Certificate certificate) async {
+  Future<String?> getCertificateSignature(GreenCertificate certificate) async {
     final List<String> signaturesList = _cache.getSignaturesList();
     final Map<String, String> signatures = _cache.getSignatures();
 
     if (signaturesList.contains(certificate.dcc.kid)) {
-      try {
-        String signature = signatures[certificate.dcc.kid]!;
-        return DccUtils.checkSignatureWithCertificate(
-          signature,
-          certificate.dcc,
-        );
-      } catch (e) {
-        return false;
-      }
+      return signatures[certificate.dcc.kid];
     }
-    return false;
+  }
+
+  @override
+  Future<bool> checkCertificateSignature(GreenCertificate certificate) async {
+    try {
+      final String? signature = await getCertificateSignature(certificate);
+      return DccUtils.checkSignatureWithCertificate(
+        signature!,
+        certificate.dcc,
+      );
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<CertificateInfo> getCertificatesignatureInfo(
+    GreenCertificate certificate,
+  ) async {
+    try {
+      final String? signature = await getCertificateSignature(certificate);
+      return DccUtils.getCertificateInfo(signature!);
+    } catch (e) {
+      return CertificateInfo.empty();
+    }
+  }
+
+  @override
+  Future<ValidationResult> validateFromRaw(
+    String rawData, {
+    ValidationMode mode = ValidationMode.normalDGP,
+  }) async {
+    final certificate = await CertificateDecoder.getCertificateFromRawData(
+      rawData,
+    );
+
+    bool signatureIsOk = await checkCertificateSignature(certificate);
+
+    if (!signatureIsOk) {
+      log("Certificate has an invalid signature");
+
+      return ValidationResult(
+        certificate: certificate,
+        status: GreenCertificateStatus.notValid,
+      );
+    }
+
+    final GreenCertificateStatus rulesResult = await checkValidationRules(
+      certificate,
+      mode: mode,
+    );
+
+    return ValidationResult(
+      certificate: certificate,
+      status: rulesResult,
+    );
   }
 }
