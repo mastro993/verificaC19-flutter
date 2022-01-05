@@ -28,7 +28,7 @@ void main() {
     when(hive.box(DbKeys.dbRevokeList)).thenAnswer((_) => revokeListBox);
     when(hive.box(DbKeys.dbUpdates)).thenAnswer((_) => updatesBox);
 
-    cache = LocalRepositoryImpl(hive: hive);
+    cache = LocalRepositoryImpl(hive);
   });
 
   group('Rules', () {

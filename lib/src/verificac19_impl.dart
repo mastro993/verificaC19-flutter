@@ -1,45 +1,35 @@
+import 'package:injectable/injectable.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
-import 'package:verificac19/src/data/local/local_repository_impl.dart';
-import 'package:verificac19/src/data/remote/remote_repository.dart';
-import 'package:verificac19/src/data/remote/remote_repository_impl.dart';
 import 'package:verificac19/src/data/updater.dart';
-import 'package:verificac19/src/data/updater_impl.dart';
+import 'package:verificac19/src/di/injection.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
-import 'package:verificac19/src/logic/certificate_validator_impl.dart';
 import 'package:verificac19/verificac19.dart';
 
 class VerificaC19Impl implements VerificaC19Interface {
-  late RemoteRepository _service;
-  late LocalRepository _cache;
-  late CertificateValidator _validator;
-  late Updater _updater;
-
   @override
   Future<void> initialize() async {
-    _service = RemoteRepositoryImpl();
-    _cache = LocalRepositoryImpl();
-    _validator = CertificateValidatorImpl(_cache);
-    _updater = UpdaterImpl(_service, _cache);
-
-    await _cache.setup();
+    await configureInjection(Environment.prod);
   }
 
   @override
   bool needsUpdate() {
-    return _cache.needRulesUpdate() ||
-        _cache.needRevokeListUpdate() ||
-        _cache.needSignaturesListUpdate() ||
-        _cache.needSignaturesUpdate();
+    final LocalRepository cache = getIt<LocalRepository>();
+    return cache.needRulesUpdate() ||
+        cache.needRevokeListUpdate() ||
+        cache.needSignaturesListUpdate() ||
+        cache.needSignaturesUpdate();
   }
 
   @override
   Future<DateTime?> getLastUpdateTime() {
-    return _cache.getLastUpdateTime();
+    final LocalRepository cache = getIt<LocalRepository>();
+    return cache.getLastUpdateTime();
   }
 
   @override
   Future<void> update() async {
-    await _updater.updateAll();
+    final Updater updater = getIt<Updater>();
+    await updater.updateAll();
   }
 
   @override
@@ -52,6 +42,7 @@ class VerificaC19Impl implements VerificaC19Interface {
         'Expired validation rules. Please update the rules before validating a DGC',
       );
     }
-    return _validator.validateFromRaw(rawData, mode: mode);
+    final CertificateValidator validator = getIt<CertificateValidator>();
+    return validator.validateFromRaw(rawData, mode: mode);
   }
 }

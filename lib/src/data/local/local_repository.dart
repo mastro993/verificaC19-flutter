@@ -1,9 +1,6 @@
 import 'package:verificac19/src/data/model/validation_rule.dart';
 
 abstract class LocalRepository {
-  /// Initializes internal dependencies
-  Future<void> setup();
-
   /// Returns a [DateTime] with the date and time of the last completed update.
   /// Returns null if not date is available
   Future<DateTime?> getLastUpdateTime();

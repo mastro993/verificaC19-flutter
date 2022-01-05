@@ -278,10 +278,6 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
   }
 
   @override
-  _i6.Future<void> setup() => (super.noSuchMethod(Invocation.method(#setup, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
   _i6.Future<DateTime?> getLastUpdateTime() =>
       (super.noSuchMethod(Invocation.method(#getLastUpdateTime, []),
           returnValue: Future<DateTime?>.value()) as _i6.Future<DateTime?>);
