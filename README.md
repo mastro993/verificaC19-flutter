@@ -80,9 +80,9 @@ The result is a `ValidationResult` object containing the decoded `Certificate` o
 |     | Code        | Description                                    |
 | --- | ----------- | ---------------------------------------------- |
 | ✅  | valid       | Certificate is valid                           |
+| ⚠   | testNeeded  | Test needed if verification mode is boosterDGP |
 | ❌  | notValid    | Certificate is not valid                       |
 | ❌  | notValidYet | Certificate is not valid yet                   |
-| ❌  | testNeeded  | Test needed if verification mode is boosterDGP |
 | ❌  | revoked     | Certificate has been revoked                   |
 | ❌  | notEuDCC    | Certificate is not an EU DCC                   |
 
