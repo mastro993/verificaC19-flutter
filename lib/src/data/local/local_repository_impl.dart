@@ -16,18 +16,6 @@ class LocalRepositoryImpl implements LocalRepository {
 
   LocalRepositoryImpl(this._hive);
 
-  @factoryMethod
-  static Future<LocalRepository> create() async {
-    await Hive.initFlutter();
-    Hive.registerAdapter(ValidationRuleAdapter());
-
-    await Hive.openBox<dynamic>(DbKeys.dbData);
-    await Hive.openBox<String>(DbKeys.dbRevokeList);
-    await Hive.openBox<DateTime>(DbKeys.dbUpdates);
-
-    return LocalRepositoryImpl(Hive);
-  }
-
   @override
   Future<DateTime?> getLastUpdateTime() async {
     final Box<DateTime> box = _hive.box(DbKeys.dbUpdates);

@@ -15,9 +15,6 @@ class RemoteRepositoryImpl implements RemoteRepository {
 
   RemoteRepositoryImpl({Dio? dio}) : _client = ApiClient(dio ?? Dio());
 
-  @factoryMethod
-  static RemoteRepository create() => RemoteRepositoryImpl();
-
   @override
   Future<List<ValidationRule>> getValidationRules() async {
     try {
