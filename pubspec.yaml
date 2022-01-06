@@ -38,6 +38,6 @@ dev_dependencies:
   freezed: ^1.1.0
   hive_generator: ^1.1.1
   http_mock_adapter: ^0.3.2
-  injectable_generator: ^1.5.2
+  injectable_generator: ^1.4.0
   mockito: ^5.0.17
   retrofit_generator: ^3.0.1+1

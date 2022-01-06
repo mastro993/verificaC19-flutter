@@ -10,11 +10,24 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/verificac19.dart';
 
 @Environment(Environment.prod)
-@LazySingleton(as: LocalRepository)
+@preResolve
+@Singleton(as: LocalRepository)
 class LocalRepositoryImpl implements LocalRepository {
   final HiveInterface _hive;
 
-  LocalRepositoryImpl(this._hive);
+  LocalRepositoryImpl({HiveInterface? hive}) : _hive = hive ?? Hive;
+
+  @factoryMethod
+  static Future<LocalRepository> create() async {
+    await Hive.initFlutter();
+    Hive.registerAdapter(ValidationRuleAdapter());
+
+    await Hive.openBox<dynamic>(DbKeys.dbData);
+    await Hive.openBox<String>(DbKeys.dbRevokeList);
+    await Hive.openBox<DateTime>(DbKeys.dbUpdates);
+
+    return LocalRepositoryImpl();
+  }
 
   @override
   Future<DateTime?> getLastUpdateTime() async {

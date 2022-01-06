@@ -9,11 +9,16 @@ import 'package:verificac19/src/data/remote/remote_repository.dart';
 import 'package:verificac19/verificac19.dart';
 
 @Environment(Environment.prod)
-@LazySingleton(as: RemoteRepository)
+@Singleton(as: RemoteRepository)
 class RemoteRepositoryImpl implements RemoteRepository {
   final ApiClient _client;
 
   RemoteRepositoryImpl({Dio? dio}) : _client = ApiClient(dio ?? Dio());
+
+  @factoryMethod
+  static RemoteRepository create() {
+    return RemoteRepositoryImpl();
+  }
 
   @override
   Future<List<ValidationRule>> getValidationRules() async {
