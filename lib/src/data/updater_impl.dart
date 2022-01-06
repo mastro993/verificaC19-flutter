@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/crl.dart';
 import 'package:verificac19/src/data/model/crl_status.dart';
@@ -5,6 +6,8 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/data/remote/remote_repository.dart';
 import 'package:verificac19/src/data/updater.dart';
 
+@Environment(Environment.prod)
+@LazySingleton(as: Updater)
 class UpdaterImpl implements Updater {
   final LocalRepository _cache;
   final RemoteRepository _service;

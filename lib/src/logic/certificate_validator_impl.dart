@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:clock/clock.dart';
+import 'package:injectable/injectable.dart';
 import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/core/extensions.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
@@ -11,6 +12,8 @@ import 'package:verificac19/src/model/certificate_info.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
 
+@Environment(Environment.prod)
+@LazySingleton(as: CertificateValidator)
 class CertificateValidatorImpl implements CertificateValidator {
   final LocalRepository _cache;
 

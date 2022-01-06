@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:verificac19/src/data/model/crl.dart';
 import 'package:verificac19/src/data/model/crl_status.dart';
@@ -7,10 +8,17 @@ import 'package:verificac19/src/data/remote/api_client.dart';
 import 'package:verificac19/src/data/remote/remote_repository.dart';
 import 'package:verificac19/verificac19.dart';
 
+@Environment(Environment.prod)
+@Singleton(as: RemoteRepository)
 class RemoteRepositoryImpl implements RemoteRepository {
   final ApiClient _client;
 
   RemoteRepositoryImpl({Dio? dio}) : _client = ApiClient(dio ?? Dio());
+
+  @factoryMethod
+  static RemoteRepository create() {
+    return RemoteRepositoryImpl();
+  }
 
   @override
   Future<List<ValidationRule>> getValidationRules() async {

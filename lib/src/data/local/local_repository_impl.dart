@@ -3,24 +3,30 @@ import 'dart:convert';
 import 'package:clock/clock.dart';
 import 'package:crypto/crypto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:injectable/injectable.dart';
 import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/verificac19.dart';
 
+@Environment(Environment.prod)
+@preResolve
+@Singleton(as: LocalRepository)
 class LocalRepositoryImpl implements LocalRepository {
   final HiveInterface _hive;
 
   LocalRepositoryImpl({HiveInterface? hive}) : _hive = hive ?? Hive;
 
-  @override
-  Future<void> setup() async {
+  @factoryMethod
+  static Future<LocalRepository> create() async {
     await Hive.initFlutter();
     Hive.registerAdapter(ValidationRuleAdapter());
 
     await Hive.openBox<dynamic>(DbKeys.dbData);
     await Hive.openBox<String>(DbKeys.dbRevokeList);
     await Hive.openBox<DateTime>(DbKeys.dbUpdates);
+
+    return LocalRepositoryImpl();
   }
 
   @override
