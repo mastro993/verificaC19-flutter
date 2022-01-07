@@ -25,7 +25,7 @@ void main() {
     hive = MockHiveInterface();
 
     when(hive.box(DbKeys.dbData)).thenAnswer((_) => dataBox);
-    when(hive.box(DbKeys.dbRevokeList)).thenAnswer((_) => revokeListBox);
+    when(hive.box(DbKeys.dbCRL)).thenAnswer((_) => revokeListBox);
     when(hive.box(DbKeys.dbUpdates)).thenAnswer((_) => updatesBox);
 
     cache = LocalRepositoryImpl(hive: hive);
@@ -247,7 +247,7 @@ void main() {
       when(revokeListBox.addAll(any)).thenAnswer((_) async => []);
       when(revokeListBox.deleteAll(any)).thenAnswer((_) async => []);
       // act
-      await cache.storeRevokeList(insertions: [], deletions: []);
+      await cache.storeCRL(insertions: [], deletions: []);
       // assert
       verifyNever(revokeListBox.clear());
       verify(revokeListBox.addAll(any)).called(1);
@@ -260,7 +260,7 @@ void main() {
       final List<String> tRevokeList = [];
       when(revokeListBox.values).thenReturn(tRevokeList);
       // act
-      final result = cache.getRevokeList();
+      final result = cache.getCRL();
       // assert
       verify(revokeListBox.values).called(1);
       verifyNoMoreInteractions(revokeListBox);

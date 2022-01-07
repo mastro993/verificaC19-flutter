@@ -294,8 +294,8 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
       (super.noSuchMethod(Invocation.method(#needSignaturesListUpdate, []),
           returnValue: false) as bool);
   @override
-  bool needRevokeListUpdate() =>
-      (super.noSuchMethod(Invocation.method(#needRevokeListUpdate, []),
+  bool needCRLUpdate() =>
+      (super.noSuchMethod(Invocation.method(#needCRLUpdate, []),
           returnValue: false) as bool);
   @override
   _i6.Future<void> storeRules(List<_i11.ValidationRule>? rules) =>
@@ -313,16 +313,16 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<void> storeRevokeList(
+  _i6.Future<void> storeCRL(
           {List<String>? insertions, List<String>? deletions}) =>
       (super.noSuchMethod(
-          Invocation.method(#storeRevokeList, [],
-              {#insertions: insertions, #deletions: deletions}),
+          Invocation.method(
+              #storeCRL, [], {#insertions: insertions, #deletions: deletions}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<void> storeRevokeListVersion(int? version) =>
-      (super.noSuchMethod(Invocation.method(#storeRevokeListVersion, [version]),
+  _i6.Future<void> storeCRLVersion(int? version) =>
+      (super.noSuchMethod(Invocation.method(#storeCRLVersion, [version]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
@@ -338,13 +338,12 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
       (super.noSuchMethod(Invocation.method(#getSignaturesList, []),
           returnValue: <String>[]) as List<String>);
   @override
-  List<String> getRevokeList() =>
-      (super.noSuchMethod(Invocation.method(#getRevokeList, []),
-          returnValue: <String>[]) as List<String>);
+  List<String> getCRL() => (super.noSuchMethod(Invocation.method(#getCRL, []),
+      returnValue: <String>[]) as List<String>);
   @override
-  int getRevokeListVersion() =>
-      (super.noSuchMethod(Invocation.method(#getRevokeListVersion, []),
-          returnValue: 0) as int);
+  int getCRLVersion() =>
+      (super.noSuchMethod(Invocation.method(#getCRLVersion, []), returnValue: 0)
+          as int);
   @override
   bool isUvciRevoked(String? uvci) =>
       (super.noSuchMethod(Invocation.method(#isUvciRevoked, [uvci]),
@@ -376,16 +375,15 @@ class MockRemoteRepository extends _i1.Mock implements _i12.RemoteRepository {
               returnValue: Future<List<String>>.value(<String>[]))
           as _i6.Future<List<String>>);
   @override
-  _i6.Future<_i3.CRLStatus> getRevokeListStatus({int? version}) =>
-      (super.noSuchMethod(
-              Invocation.method(#getRevokeListStatus, [], {#version: version}),
-              returnValue: Future<_i3.CRLStatus>.value(_FakeCRLStatus_2()))
-          as _i6.Future<_i3.CRLStatus>);
+  _i6.Future<_i3.CRLStatus> getCRLStatus({int? version}) => (super.noSuchMethod(
+          Invocation.method(#getCRLStatus, [], {#version: version}),
+          returnValue: Future<_i3.CRLStatus>.value(_FakeCRLStatus_2()))
+      as _i6.Future<_i3.CRLStatus>);
   @override
-  _i6.Future<_i4.CRL> getRevokeListChunk({int? version, int? chunk}) =>
+  _i6.Future<_i4.CRL> getCRLChunk({int? version, int? chunk}) =>
       (super.noSuchMethod(
               Invocation.method(
-                  #getRevokeListChunk, [], {#version: version, #chunk: chunk}),
+                  #getCRLChunk, [], {#version: version, #chunk: chunk}),
               returnValue: Future<_i4.CRL>.value(_FakeCRL_3()))
           as _i6.Future<_i4.CRL>);
 }

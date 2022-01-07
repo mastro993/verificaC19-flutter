@@ -74,12 +74,12 @@ class RemoteRepositoryImpl implements RemoteRepository {
   }
 
   @override
-  Future<CRL> getRevokeListChunk({
+  Future<CRL> getCRLChunk({
     int? version,
     int? chunk,
   }) async {
     try {
-      final HttpResponse<CRL> response = await _client.getRevokeList(
+      final HttpResponse<CRL> response = await _client.getCRL(
         version: version,
         chunk: chunk,
       );
@@ -91,7 +91,7 @@ class RemoteRepositoryImpl implements RemoteRepository {
   }
 
   @override
-  Future<CRLStatus> getRevokeListStatus({
+  Future<CRLStatus> getCRLStatus({
     int? version,
   }) async {
     try {

@@ -5,7 +5,7 @@ class UpdateWindowHours {
 
 class DbKeys {
   static const String dbData = 'verificac19_data_box';
-  static const String dbRevokeList = 'verificac19_revoke_list_box';
+  static const String dbCRL = 'verificac19_crl_box';
   static const String dbUpdates = 'verificac19_updates_box';
 
   static const String keySignatures = 'signatures';
@@ -14,8 +14,8 @@ class DbKeys {
   static const String keyRulesUpdate = 'rules_update';
   static const String keySignaturesUpdate = 'signatures_update';
   static const String keySignaturesListUpdate = 'signatures_list_update';
-  static const String keyRevokeListUpdate = 'revoke_list_update';
-  static const String keyRevokeListVersion = 'revoke_list_version';
+  static const String keyCRLUpdate = 'crl_update';
+  static const String keyCRLVersion = 'crl_version';
 }
 
 class RuleName {

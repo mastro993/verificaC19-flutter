@@ -27,7 +27,7 @@ void main() {
       when(cache.needRulesUpdate()).thenReturn(false);
       when(cache.needSignaturesUpdate()).thenReturn(false);
       when(cache.needSignaturesListUpdate()).thenReturn(false);
-      when(cache.needRevokeListUpdate()).thenReturn(false);
+      when(cache.needCRLUpdate()).thenReturn(false);
 
       // act
       await updater.updateAll();
@@ -36,7 +36,7 @@ void main() {
       verify(cache.needRulesUpdate()).called(1);
       verify(cache.needSignaturesUpdate()).called(1);
       verify(cache.needSignaturesListUpdate()).called(1);
-      verify(cache.needRevokeListUpdate()).called(1);
+      verify(cache.needCRLUpdate()).called(1);
       verifyNoMoreInteractions(cache);
     });
 
@@ -45,7 +45,7 @@ void main() {
       when(cache.needRulesUpdate()).thenReturn(false);
       when(cache.needSignaturesUpdate()).thenReturn(false);
       when(cache.needSignaturesListUpdate()).thenReturn(false);
-      when(cache.needRevokeListUpdate()).thenReturn(false);
+      when(cache.needCRLUpdate()).thenReturn(false);
 
       // act
       await updater.updateAll();
@@ -54,7 +54,7 @@ void main() {
       verify(cache.needRulesUpdate()).called(1);
       verify(cache.needSignaturesUpdate()).called(1);
       verify(cache.needSignaturesListUpdate()).called(1);
-      verify(cache.needRevokeListUpdate()).called(1);
+      verify(cache.needCRLUpdate()).called(1);
       verifyNoMoreInteractions(cache);
     });
   });
@@ -158,11 +158,11 @@ void main() {
   group('revoke list', () {
     test('Should not update revoke list when not expired', () async {
       // arrange
-      when(cache.needRevokeListUpdate()).thenAnswer((_) => false);
+      when(cache.needCRLUpdate()).thenAnswer((_) => false);
       // act
-      await updater.updateRevokeList();
+      await updater.updateCRL();
       // assert
-      verify(cache.needRevokeListUpdate()).called(1);
+      verify(cache.needCRLUpdate()).called(1);
       verifyNoMoreInteractions(cache);
       verifyNoMoreInteractions(remote);
     });
@@ -170,18 +170,18 @@ void main() {
     test('Should not update revoke list if same version stored', () async {
       const tVersion = 10;
       // arrange
-      when(cache.needRevokeListUpdate()).thenAnswer((_) => true);
-      when(cache.getRevokeListVersion()).thenAnswer((_) => tVersion);
-      when(remote.getRevokeListStatus(
+      when(cache.needCRLUpdate()).thenAnswer((_) => true);
+      when(cache.getCRLVersion()).thenAnswer((_) => tVersion);
+      when(remote.getCRLStatus(
         version: tVersion,
       )).thenAnswer((_) async => CRLStatus(version: tVersion));
 
       // act
-      await updater.updateRevokeList();
+      await updater.updateCRL();
       // assert
-      verify(cache.needRevokeListUpdate()).called(1);
-      verify(cache.getRevokeListVersion()).called(1);
-      verify(remote.getRevokeListStatus(version: tVersion)).called(1);
+      verify(cache.needCRLUpdate()).called(1);
+      verify(cache.getCRLVersion()).called(1);
+      verify(remote.getCRLStatus(version: tVersion)).called(1);
       verifyNoMoreInteractions(cache);
       verifyNoMoreInteractions(remote);
     });
@@ -190,19 +190,18 @@ void main() {
       const tLocalVersion = 9;
       const tRemoteVersion = 10;
       // arrange
-      when(cache.needRevokeListUpdate()).thenAnswer((_) => true);
-      when(cache.getRevokeListVersion()).thenAnswer((_) => tLocalVersion);
-      when(cache.storeRevokeListVersion(tRemoteVersion))
-          .thenAnswer((_) async => Void);
-      when(cache.storeRevokeList(
+      when(cache.needCRLUpdate()).thenAnswer((_) => true);
+      when(cache.getCRLVersion()).thenAnswer((_) => tLocalVersion);
+      when(cache.storeCRLVersion(tRemoteVersion)).thenAnswer((_) async => Void);
+      when(cache.storeCRL(
         insertions: anyNamed('insertions'),
         deletions: anyNamed('deletions'),
       )).thenAnswer((_) async => Void);
 
-      when(remote.getRevokeListStatus(
+      when(remote.getCRLStatus(
         version: tLocalVersion,
       )).thenAnswer((_) async => CRLStatus(version: tRemoteVersion));
-      when(remote.getRevokeListChunk(
+      when(remote.getCRLChunk(
         version: tLocalVersion,
         chunk: anyNamed('chunk'),
       )).thenAnswer((_) async => CRL(
@@ -216,20 +215,20 @@ void main() {
           ));
 
       // act
-      await updater.updateRevokeList();
+      await updater.updateCRL();
       // assert
-      verify(cache.needRevokeListUpdate()).called(1);
-      verify(cache.getRevokeListVersion()).called(1);
-      verify(remote.getRevokeListStatus(version: tLocalVersion)).called(1);
-      verify(remote.getRevokeListChunk(
+      verify(cache.needCRLUpdate()).called(1);
+      verify(cache.getCRLVersion()).called(1);
+      verify(remote.getCRLStatus(version: tLocalVersion)).called(1);
+      verify(remote.getCRLChunk(
         version: tLocalVersion,
         chunk: anyNamed('chunk'),
       )).called(1);
-      verify(cache.storeRevokeList(
+      verify(cache.storeCRL(
         insertions: anyNamed('insertions'),
         deletions: anyNamed('deletions'),
       )).called(1);
-      verify(cache.storeRevokeListVersion(any)).called(1);
+      verify(cache.storeCRLVersion(any)).called(1);
       verifyNoMoreInteractions(cache);
       verifyNoMoreInteractions(remote);
     });

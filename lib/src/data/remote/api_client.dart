@@ -27,7 +27,7 @@ abstract class ApiClient {
   });
 
   @GET("/drl")
-  Future<HttpResponse<CRL>> getRevokeList({
+  Future<HttpResponse<CRL>> getCRL({
     @Query("version") int? version,
     @Query("chunk") int? chunk,
   });

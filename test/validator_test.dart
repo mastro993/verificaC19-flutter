@@ -37,7 +37,7 @@ void main() {
     final sigListRaw = jsonDecode(signaturesListFixture) as List<dynamic>;
     final signaturesList = sigListRaw.map((e) => e as String).toList();
 
-    when(cache.getRevokeList()).thenReturn(revokedList);
+    when(cache.getCRL()).thenReturn(revokedList);
     when(cache.getRules()).thenReturn(rules);
     when(cache.getSignatures()).thenReturn(signatures);
     when(cache.getSignaturesList()).thenReturn(signaturesList);

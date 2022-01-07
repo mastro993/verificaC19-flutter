@@ -2,68 +2,68 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 
 abstract class LocalRepository {
   /// Returns a [DateTime] with the date and time of the last completed update.
-  /// Returns null if not date is available
+  /// Returns null if no date is available
   Future<DateTime?> getLastUpdateTime();
 
-  /// Checks if rules  are expired
+  /// Checks if cached rules are expired
   bool needRulesUpdate();
 
-  /// Checks if signatures  are expired
+  /// Checks if cached signatures are expired
   bool needSignaturesUpdate();
 
-  /// Checks if signatures list is expired
+  /// Checks if cached signatures list is expired
   bool needSignaturesListUpdate();
 
-  /// Checks if revoke list is expired
-  bool needRevokeListUpdate();
+  /// Checks if cached certificate revocation list (CRL) is expired
+  bool needCRLUpdate();
 
-  /// Stores a [List] of [ValidationRule] locally
+  /// Stores a [List] of [ValidationRule] in the local cache
   Future<void> storeRules(
     List<ValidationRule> rules,
   );
 
-  /// Stores a [Map] of kid and signatures locally
+  /// Stores a [Map] of kid and signatures in the local cache
   Future<void> storeSignatures(
     Map<String, String> signatures,
   );
 
-  /// Stores a [List] of signatures locally
+  /// Stores a [List] of signatures in the local cache
   Future<void> storeSignaturesList(
     List<String> signaturesList,
   );
 
-  /// Stores the UVCIs contained in [insertions] and removed the ones in [deletions]
-  Future<void> storeRevokeList({
+  /// Stores the UVCIs contained in [insertions] and removes the ones in [deletions] from the cached CRL.
+  Future<void> storeCRL({
     List<String>? insertions,
     List<String>? deletions,
   });
 
-  /// Stores the [version] for the cached list of revoked UVCIs
-  Future<void> storeRevokeListVersion(
+  /// Stores the [version] for the cached certificate revocation list
+  Future<void> storeCRLVersion(
     int version,
   );
 
-  /// Gets the locally stored list of [ValidationRule].
+  /// Gets the cached list of [ValidationRule].
   /// Returns an empty list if no rules are yet been stored.
   List<ValidationRule> getRules();
 
-  /// Gets the locally stored map of kid and signatures.
+  /// Gets the cached map of kid and signatures.
   /// Returns an empty map if no rules are yet been stored.
   Map<String, String> getSignatures();
 
-  /// Gets the locally stored list of signatures.
+  /// Gets the cached list of signatures.
   /// Returns an empty list if no signatures are yet been stored.
   List<String> getSignaturesList();
 
-  /// Gets the locally stored list of revoked UVCIs.
+  /// Gets the cached certificate revocation list.
   /// Returns an empty list if no revoked UVCI are yet been stored.
-  List<String> getRevokeList();
+  List<String> getCRL();
 
-  /// Gets the version of the locally stored list of revoked UVCIs.
-  /// Returns 0 no revoked UVCI are yet been stored.
-  int getRevokeListVersion();
+  /// Gets the version of the cached certificate revocation list (CRL).
+  /// Returns 0 if no CRL was not yet been stored.
+  int getCRLVersion();
 
-  /// Returns true if the given [uvci] is present in the list of revoked UVCIs, false otherwise.
+  /// Returns true if the given [uvci] is present in the cached CRL, false otherwise.
   bool isUvciRevoked(
     String uvci,
   );

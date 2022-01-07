@@ -12,5 +12,5 @@ abstract class Updater {
   Future<void> updateSignatures();
 
   /// Updates the revoked UVCI list
-  Future<void> updateRevokeList();
+  Future<void> updateCRL();
 }

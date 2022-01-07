@@ -7,10 +7,10 @@ abstract class RemoteRepository {
   Future<Map<String, String>> getSignatures();
   Future<List<String>> getSignaturesList();
 
-  Future<CRLStatus> getRevokeListStatus({
+  Future<CRLStatus> getCRLStatus({
     int? version,
   });
-  Future<CRL> getRevokeListChunk({
+  Future<CRL> getCRLChunk({
     int? version,
     int? chunk,
   });

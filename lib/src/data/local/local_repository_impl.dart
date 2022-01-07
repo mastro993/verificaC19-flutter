@@ -23,7 +23,7 @@ class LocalRepositoryImpl implements LocalRepository {
     Hive.registerAdapter(ValidationRuleAdapter());
 
     await Hive.openBox<dynamic>(DbKeys.dbData);
-    await Hive.openBox<String>(DbKeys.dbRevokeList);
+    await Hive.openBox<String>(DbKeys.dbCRL);
     await Hive.openBox<DateTime>(DbKeys.dbUpdates);
 
     return LocalRepositoryImpl();
@@ -87,9 +87,9 @@ class LocalRepositoryImpl implements LocalRepository {
   }
 
   @override
-  List<String> getRevokeList() {
+  List<String> getCRL() {
     try {
-      final Box<String> box = _hive.box(DbKeys.dbRevokeList);
+      final Box<String> box = _hive.box(DbKeys.dbCRL);
       return box.values.toList();
     } catch (e) {
       throw CacheException('Unable to get revoke list from cache');
@@ -106,7 +106,7 @@ class LocalRepositoryImpl implements LocalRepository {
   bool needSignaturesUpdate() => _isExpired(DbKeys.keySignaturesUpdate);
 
   @override
-  bool needRevokeListUpdate() => _isExpired(DbKeys.keyRevokeListUpdate);
+  bool needCRLUpdate() => _isExpired(DbKeys.keyCRLUpdate);
 
   @override
   Future<void> storeRules(
@@ -151,12 +151,12 @@ class LocalRepositoryImpl implements LocalRepository {
   }
 
   @override
-  Future<void> storeRevokeList({
+  Future<void> storeCRL({
     List<String>? insertions,
     List<String>? deletions,
   }) async {
     try {
-      final Box<String> revokeListBox = _hive.box(DbKeys.dbRevokeList);
+      final Box<String> revokeListBox = _hive.box(DbKeys.dbCRL);
 
       if (insertions != null) {
         await revokeListBox.addAll(insertions);
@@ -176,7 +176,7 @@ class LocalRepositoryImpl implements LocalRepository {
   ) {
     /// https://github.com/ministero-salute/it-dgc-documentation/blob/master/DRL.md#panoramica
     try {
-      final Box<String> box = _hive.box(DbKeys.dbRevokeList);
+      final Box<String> box = _hive.box(DbKeys.dbCRL);
       final Digest uvciDigets = sha256.convert(utf8.encode(uvci));
       final String hashedUvci = base64Encode(uvciDigets.bytes);
       return box.values.contains(hashedUvci);
@@ -186,24 +186,24 @@ class LocalRepositoryImpl implements LocalRepository {
   }
 
   @override
-  int getRevokeListVersion() {
+  int getCRLVersion() {
     try {
       final Box box = _hive.box(DbKeys.dbData);
-      return box.get(DbKeys.keyRevokeListVersion, defaultValue: 0);
+      return box.get(DbKeys.keyCRLVersion, defaultValue: 0);
     } catch (e) {
       throw CacheException('Unable to get revoke list version from cache');
     }
   }
 
   @override
-  Future<void> storeRevokeListVersion(
+  Future<void> storeCRLVersion(
     int version,
   ) async {
     try {
       final Box box = _hive.box(DbKeys.dbData);
       final Box<DateTime> updatesBox = _hive.box(DbKeys.dbUpdates);
-      await box.put(DbKeys.keyRevokeListVersion, version);
-      await updatesBox.put(DbKeys.keyRevokeListUpdate, clock.now());
+      await box.put(DbKeys.keyCRLVersion, version);
+      await updatesBox.put(DbKeys.keyCRLUpdate, clock.now());
     } catch (e) {
       throw CacheException('Unable to store revoke list version to cache');
     }

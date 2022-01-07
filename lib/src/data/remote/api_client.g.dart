@@ -88,7 +88,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<HttpResponse<CRL>> getRevokeList({version, chunk}) async {
+  Future<HttpResponse<CRL>> getCRL({version, chunk}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'version': version,

@@ -19,7 +19,7 @@ class UpdaterImpl implements Updater {
     await updateRules();
     await updateSignatures();
     await updateSignaturesList();
-    await updateRevokeList();
+    await updateCRL();
   }
 
   @override
@@ -65,14 +65,14 @@ class UpdaterImpl implements Updater {
   }
 
   @override
-  Future<void> updateRevokeList() async {
+  Future<void> updateCRL() async {
     try {
-      if (!_cache.needRevokeListUpdate()) {
+      if (!_cache.needCRLUpdate()) {
         return;
       }
 
-      int currentVersion = _cache.getRevokeListVersion();
-      CRLStatus status = await _service.getRevokeListStatus(
+      int currentVersion = _cache.getCRLVersion();
+      CRLStatus status = await _service.getCRLStatus(
         version: currentVersion,
       );
 
@@ -84,18 +84,18 @@ class UpdaterImpl implements Updater {
       int currentChunk = 0;
 
       do {
-        crl = await _service.getRevokeListChunk(
+        crl = await _service.getCRLChunk(
           version: currentVersion,
           chunk: currentChunk + 1,
         );
 
         if (crl.delta != null) {
-          _cache.storeRevokeList(
+          _cache.storeCRL(
             insertions: crl.delta!.insertions,
             deletions: crl.delta!.deletions,
           );
         } else if (crl.revokedUcvi != null) {
-          _cache.storeRevokeList(
+          _cache.storeCRL(
             insertions: crl.revokedUcvi,
           );
         }
@@ -103,7 +103,7 @@ class UpdaterImpl implements Updater {
         currentChunk = crl.chunk!;
       } while (currentChunk != crl.lastChunk);
 
-      _cache.storeRevokeListVersion(status.version!);
+      _cache.storeCRLVersion(status.version!);
     } catch (e) {
       rethrow;
     }

@@ -15,7 +15,7 @@ class VerificaC19Impl implements VerificaC19Interface {
   bool needsUpdate() {
     final LocalRepository cache = getIt<LocalRepository>();
     return cache.needRulesUpdate() ||
-        cache.needRevokeListUpdate() ||
+        cache.needCRLUpdate() ||
         cache.needSignaturesListUpdate() ||
         cache.needSignaturesUpdate();
   }
@@ -39,7 +39,7 @@ class VerificaC19Impl implements VerificaC19Interface {
   }) {
     if (needsUpdate()) {
       throw ValidationException(
-        'Expired validation rules. Please update the rules before validating a DGC',
+        'Expired rules, DSCs and/or CRL. Please update before validating a DGC',
       );
     }
     final CertificateValidator validator = getIt<CertificateValidator>();
