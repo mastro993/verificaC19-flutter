@@ -1,3 +1,11 @@
+## 1.2.2
+
+- Bug fix
+
+## 1.2.1
+
+- Bug fix
+
 ## 1.2.0
 
 - Added Booster validation mode for recovery statements and vaccinations
