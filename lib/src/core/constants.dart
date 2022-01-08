@@ -31,8 +31,8 @@ class RuleName {
   static const String rapidTestEndHours = 'rapid_test_end_hours';
   static const String recoveryCertStartDay = 'recovery_cert_start_day';
   static const String recoveryCertEndDay = 'recovery_cert_end_day';
-  static const String recoveryCertPvStartDay = 'recovery_cert_pv_start_day';
-  static const String recoveryCertPvEndDay = 'recovery_cert_pv_end_day';
+  static const String recoveryCertPvStartDay = 'recovery_pv_cert_start_day';
+  static const String recoveryCertPvEndDay = 'recovery_pv_cert_end_day';
 }
 
 class RuleType {
