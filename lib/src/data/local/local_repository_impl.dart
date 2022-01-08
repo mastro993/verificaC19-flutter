@@ -60,7 +60,11 @@ class LocalRepositoryImpl implements LocalRepository {
   List<ValidationRule> getRules() {
     try {
       final Box box = _hive.box(DbKeys.dbData);
-      return box.get(DbKeys.keyRules, defaultValue: []);
+      final List<dynamic> data = box.get(
+        DbKeys.keyRules,
+        defaultValue: [],
+      );
+      return data.map((e) => e as ValidationRule).toList();
     } catch (e) {
       throw CacheException('Unable to get rules from cache');
     }
@@ -70,7 +74,11 @@ class LocalRepositoryImpl implements LocalRepository {
   List<String> getSignaturesList() {
     try {
       final Box box = _hive.box(DbKeys.dbData);
-      return box.get(DbKeys.keySignaturesList, defaultValue: []);
+      final List<dynamic> data = box.get(
+        DbKeys.keySignaturesList,
+        defaultValue: [],
+      );
+      return data.map((e) => e as String).toList();
     } catch (e) {
       throw CacheException('Unable to get signatures list from cache');
     }
@@ -80,7 +88,14 @@ class LocalRepositoryImpl implements LocalRepository {
   Map<String, String> getSignatures() {
     try {
       final Box box = _hive.box(DbKeys.dbData);
-      return box.get(DbKeys.keySignatures, defaultValue: {});
+      final Map<dynamic, dynamic> data = box.get(
+        DbKeys.keySignatures,
+        defaultValue: {},
+      );
+      return data.map(
+        (key, value) =>
+            MapEntry<String, String>(key as String, value as String),
+      );
     } catch (e) {
       throw CacheException('Unable to get signatures from cache');
     }
@@ -177,8 +192,8 @@ class LocalRepositoryImpl implements LocalRepository {
     /// https://github.com/ministero-salute/it-dgc-documentation/blob/master/DRL.md#panoramica
     try {
       final Box<String> box = _hive.box(DbKeys.dbCRL);
-      final Digest uvciDigets = sha256.convert(utf8.encode(uvci));
-      final String hashedUvci = base64Encode(uvciDigets.bytes);
+      final Digest uvciDigest = sha256.convert(utf8.encode(uvci));
+      final String hashedUvci = base64Encode(uvciDigest.bytes);
       return box.values.contains(hashedUvci);
     } catch (e) {
       throw CacheException('Unable to check uvci from cached revoke list');
