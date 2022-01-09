@@ -363,7 +363,9 @@ class CertificateValidatorImpl implements CertificateValidator {
 
       return ValidationResult(
         certificate: certificate,
-        status: GreenCertificateStatus.notValid,
+        certificateStatus: GreenCertificateStatus.notValid,
+        validationMode: mode,
+        validationDateTime: clock.now(),
       );
     }
 
@@ -374,7 +376,9 @@ class CertificateValidatorImpl implements CertificateValidator {
 
     return ValidationResult(
       certificate: certificate,
-      status: rulesResult,
+      certificateStatus: rulesResult,
+      validationMode: mode,
+      validationDateTime: clock.now(),
     );
   }
 }

@@ -12,6 +12,12 @@ class ValidationResult with _$ValidationResult {
     required GreenCertificate certificate,
 
     /// Validation rules result
-    required GreenCertificateStatus status,
+    required GreenCertificateStatus certificateStatus,
+
+    /// Validation mode used for the result
+    required ValidationMode validationMode,
+
+    /// Date and time of the validation
+    required DateTime validationDateTime,
   }) = _ValidationResult;
 }
