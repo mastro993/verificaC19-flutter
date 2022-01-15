@@ -40,7 +40,7 @@ flutter pub add verificac19
 
 ## Example app
 
-An example application is currently WIP.
+An example application can be seen [here](https://github.com/mastro993/greenguard-app).
 
 ## Usage
 
