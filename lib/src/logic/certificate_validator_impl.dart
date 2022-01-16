@@ -9,6 +9,7 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/model/certificate_info.dart';
+import 'package:verificac19/src/model/exemption.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
 
@@ -261,6 +262,36 @@ class CertificateValidatorImpl implements CertificateValidator {
   }
 
   @override
+  Future<GreenCertificateStatus> checkExemptions(
+    List<Exemption> exemptions, {
+    ValidationMode mode = ValidationMode.normalDGP,
+  }) async {
+    try {
+      final Exemption lastExemption = exemptions.last;
+
+      final exemptionFromDay = lastExemption.certificateValidFrom.withoutTime();
+      final exemptionUntilDay =
+          lastExemption.certificateValidUntil?.withoutTime();
+
+      if (exemptionFromDay > clock.now()) {
+        return GreenCertificateStatus.notValidYet;
+      }
+
+      if (exemptionUntilDay != null && exemptionUntilDay < clock.now()) {
+        return GreenCertificateStatus.notValid;
+      }
+
+      if (mode == ValidationMode.boosterDGP) {
+        return GreenCertificateStatus.testNeeded;
+      }
+
+      return GreenCertificateStatus.valid;
+    } catch (e) {
+      return GreenCertificateStatus.notEuDCC;
+    }
+  }
+
+  @override
   Future<GreenCertificateStatus> checkValidationRules(
     GreenCertificate certificate, {
     ValidationMode mode = ValidationMode.normalDGP,
@@ -280,6 +311,13 @@ class CertificateValidatorImpl implements CertificateValidator {
     final signingCertificateInfo = await getCertificatesignatureInfo(
       certificate,
     );
+
+    if (certificate.exemptions.isNotEmpty) {
+      return checkExemptions(
+        certificate.exemptions,
+        mode: mode,
+      );
+    }
 
     if (certificate.recoveryStatements.isNotEmpty) {
       final isRecoveryBis = signingCertificateInfo.country == Country.italy &&

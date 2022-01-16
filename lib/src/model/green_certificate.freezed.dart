@@ -23,6 +23,7 @@ class _$GreenCertificateTearOff {
       required List<Vaccination> vaccinations,
       required List<Test> tests,
       required List<RecoveryStatement> recoveryStatements,
+      required List<Exemption> exemptions,
       required DCC dcc}) {
     return _GreenCertificate(
       person: person,
@@ -30,6 +31,7 @@ class _$GreenCertificateTearOff {
       vaccinations: vaccinations,
       tests: tests,
       recoveryStatements: recoveryStatements,
+      exemptions: exemptions,
       dcc: dcc,
     );
   }
@@ -56,6 +58,9 @@ mixin _$GreenCertificate {
   List<RecoveryStatement> get recoveryStatements =>
       throw _privateConstructorUsedError;
 
+  /// List of Certificate Vaccine exemptions
+  List<Exemption> get exemptions => throw _privateConstructorUsedError;
+
   /// Certificate DCC
   DCC get dcc => throw _privateConstructorUsedError;
 
@@ -75,6 +80,7 @@ abstract class $GreenCertificateCopyWith<$Res> {
       List<Vaccination> vaccinations,
       List<Test> tests,
       List<RecoveryStatement> recoveryStatements,
+      List<Exemption> exemptions,
       DCC dcc});
 
   $PersonCopyWith<$Res> get person;
@@ -97,6 +103,7 @@ class _$GreenCertificateCopyWithImpl<$Res>
     Object? vaccinations = freezed,
     Object? tests = freezed,
     Object? recoveryStatements = freezed,
+    Object? exemptions = freezed,
     Object? dcc = freezed,
   }) {
     return _then(_value.copyWith(
@@ -120,6 +127,10 @@ class _$GreenCertificateCopyWithImpl<$Res>
           ? _value.recoveryStatements
           : recoveryStatements // ignore: cast_nullable_to_non_nullable
               as List<RecoveryStatement>,
+      exemptions: exemptions == freezed
+          ? _value.exemptions
+          : exemptions // ignore: cast_nullable_to_non_nullable
+              as List<Exemption>,
       dcc: dcc == freezed
           ? _value.dcc
           : dcc // ignore: cast_nullable_to_non_nullable
@@ -155,6 +166,7 @@ abstract class _$GreenCertificateCopyWith<$Res>
       List<Vaccination> vaccinations,
       List<Test> tests,
       List<RecoveryStatement> recoveryStatements,
+      List<Exemption> exemptions,
       DCC dcc});
 
   @override
@@ -181,6 +193,7 @@ class __$GreenCertificateCopyWithImpl<$Res>
     Object? vaccinations = freezed,
     Object? tests = freezed,
     Object? recoveryStatements = freezed,
+    Object? exemptions = freezed,
     Object? dcc = freezed,
   }) {
     return _then(_GreenCertificate(
@@ -204,6 +217,10 @@ class __$GreenCertificateCopyWithImpl<$Res>
           ? _value.recoveryStatements
           : recoveryStatements // ignore: cast_nullable_to_non_nullable
               as List<RecoveryStatement>,
+      exemptions: exemptions == freezed
+          ? _value.exemptions
+          : exemptions // ignore: cast_nullable_to_non_nullable
+              as List<Exemption>,
       dcc: dcc == freezed
           ? _value.dcc
           : dcc // ignore: cast_nullable_to_non_nullable
@@ -221,6 +238,7 @@ class _$_GreenCertificate extends _GreenCertificate {
       required this.vaccinations,
       required this.tests,
       required this.recoveryStatements,
+      required this.exemptions,
       required this.dcc})
       : super._();
 
@@ -246,12 +264,16 @@ class _$_GreenCertificate extends _GreenCertificate {
   final List<RecoveryStatement> recoveryStatements;
   @override
 
+  /// List of Certificate Vaccine exemptions
+  final List<Exemption> exemptions;
+  @override
+
   /// Certificate DCC
   final DCC dcc;
 
   @override
   String toString() {
-    return 'GreenCertificate(person: $person, dateOfBirth: $dateOfBirth, vaccinations: $vaccinations, tests: $tests, recoveryStatements: $recoveryStatements, dcc: $dcc)';
+    return 'GreenCertificate(person: $person, dateOfBirth: $dateOfBirth, vaccinations: $vaccinations, tests: $tests, recoveryStatements: $recoveryStatements, exemptions: $exemptions, dcc: $dcc)';
   }
 
   @override
@@ -267,6 +289,8 @@ class _$_GreenCertificate extends _GreenCertificate {
             const DeepCollectionEquality().equals(other.tests, tests) &&
             const DeepCollectionEquality()
                 .equals(other.recoveryStatements, recoveryStatements) &&
+            const DeepCollectionEquality()
+                .equals(other.exemptions, exemptions) &&
             const DeepCollectionEquality().equals(other.dcc, dcc));
   }
 
@@ -278,6 +302,7 @@ class _$_GreenCertificate extends _GreenCertificate {
       const DeepCollectionEquality().hash(vaccinations),
       const DeepCollectionEquality().hash(tests),
       const DeepCollectionEquality().hash(recoveryStatements),
+      const DeepCollectionEquality().hash(exemptions),
       const DeepCollectionEquality().hash(dcc));
 
   @JsonKey(ignore: true)
@@ -293,6 +318,7 @@ abstract class _GreenCertificate extends GreenCertificate {
       required List<Vaccination> vaccinations,
       required List<Test> tests,
       required List<RecoveryStatement> recoveryStatements,
+      required List<Exemption> exemptions,
       required DCC dcc}) = _$_GreenCertificate;
   const _GreenCertificate._() : super._();
 
@@ -316,6 +342,10 @@ abstract class _GreenCertificate extends GreenCertificate {
 
   /// List of Certificate Recovery statements
   List<RecoveryStatement> get recoveryStatements;
+  @override
+
+  /// List of Certificate Vaccine exemptions
+  List<Exemption> get exemptions;
   @override
 
   /// Certificate DCC

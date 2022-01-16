@@ -1,3 +1,4 @@
+import 'package:verificac19/src/model/exemption.dart';
 import 'package:verificac19/src/utils/dcc_utils.dart';
 import 'package:verificac19/verificac19.dart';
 
@@ -76,12 +77,28 @@ class CertificateDecoder {
         recoveryStatements.add(recoveryStatement);
       }
 
+      final List eList = dcc.payload['e'] ?? [];
+      final List<Exemption> exemptions = [];
+
+      for (final e in eList) {
+        final exemption = Exemption(
+          disease: e['tg'],
+          countryOfVaccination: e['co'],
+          certificateIssuer: e['is'],
+          certificateValidFrom: DateTime.parse(e['df']),
+          certificateValidUntil: DateTime.tryParse(e['du']),
+          certificateIdentifier: e['ci'],
+        );
+        exemptions.add(exemption);
+      }
+
       return GreenCertificate(
         person: person,
         dateOfBirth: dateOfBirth,
         vaccinations: vaccinations,
         tests: tests,
         recoveryStatements: recoveryStatements,
+        exemptions: exemptions,
         dcc: dcc,
       );
     } catch (e) {

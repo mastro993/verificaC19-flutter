@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:verificac19/src/model/dcc.dart';
+import 'package:verificac19/src/model/exemption.dart';
 import 'package:verificac19/src/model/person.dart';
 import 'package:verificac19/src/model/recovery_statement.dart';
 import 'package:verificac19/src/model/test.dart';
@@ -26,6 +27,9 @@ class GreenCertificate with _$GreenCertificate {
 
     /// List of Certificate Recovery statements
     required List<RecoveryStatement> recoveryStatements,
+
+    /// List of Certificate Vaccine exemptions
+    required List<Exemption> exemptions,
 
     /// Certificate DCC
     required DCC dcc,
