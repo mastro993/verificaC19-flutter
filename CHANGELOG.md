@@ -1,3 +1,7 @@
+## 1.2.3
+
+- Added vaccine exemptions support
+
 ## 1.2.2
 
 - Bug fix
