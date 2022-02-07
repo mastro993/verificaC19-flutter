@@ -46,17 +46,16 @@ class CertificateValidatorImpl implements CertificateValidator {
   }
 
   @override
-  Future<GreenCertificateStatus> checkVaccinations(
-    List<Vaccination> vaccinations, {
+  Future<GreenCertificateStatus> checkVaccination(
+    Vaccination vaccination, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     try {
-      final Vaccination last = vaccinations.last;
-      final String? type = last.medicinalProduct;
+      final String? type = vaccination.medicinalProduct;
 
       // In Italy, Sputnik is accepted only for San Marino republic
       if (type == VaccineType.sputnik &&
-          last.countryOfVaccination != Country.sanMarino) {
+          vaccination.countryOfVaccination != Country.sanMarino) {
         log('Vaccine ${VaccineType.sputnik} is valid only in San Marino');
         return GreenCertificateStatus.notValid;
       }
@@ -67,7 +66,7 @@ class CertificateValidatorImpl implements CertificateValidator {
       var vaccinationEndDays = 0;
 
       // Check for partial or complete vaccine
-      if (last.doseNumber < last.totalSeriesOfDoses) {
+      if (vaccination.doseNumber < vaccination.totalSeriesOfDoses) {
         // Partial vaccination is not valid if Booster or School validation mode
         // Booster doses are only for complete vaccination
         if (mode == ValidationMode.boosterDGP ||
@@ -81,7 +80,7 @@ class CertificateValidatorImpl implements CertificateValidator {
 
         vaccinationStartDays = int.parse(startDays!.value);
         vaccinationEndDays = int.parse(endDays!.value);
-      } else if (last.doseNumber >= last.totalSeriesOfDoses) {
+      } else if (vaccination.doseNumber >= vaccination.totalSeriesOfDoses) {
         final startDays = rules.find(RuleName.vaccineStartDayComplete, type);
         var endDays = rules.find(RuleName.vaccineEndDayComplete, type);
 
@@ -100,10 +99,10 @@ class CertificateValidatorImpl implements CertificateValidator {
         }
       }
 
-      final vaccinationStart = last.dateOfVaccination
+      final vaccinationStart = vaccination.dateOfVaccination
           .withoutTime()
           .add(Duration(days: vaccinationStartDays));
-      final vaccinationEnd = last.dateOfVaccination
+      final vaccinationEnd = vaccination.dateOfVaccination
           .withoutTime()
           .add(Duration(days: vaccinationEndDays));
 
@@ -112,7 +111,8 @@ class CertificateValidatorImpl implements CertificateValidator {
           .add(const Duration(days: 1))
           .subtract(const Duration(milliseconds: 1));
 
-      final String doses = '${last.doseNumber}/${last.totalSeriesOfDoses}';
+      final String doses =
+          '${vaccination.doseNumber}/${vaccination.totalSeriesOfDoses}';
 
       if (vaccinationStart > todayEnd) {
         log('Doses $doses - Vaccination is not valid yet, starts at ${vaccinationStart.toIso8601String()}');
@@ -128,12 +128,12 @@ class CertificateValidatorImpl implements CertificateValidator {
 
       if (mode == ValidationMode.boosterDGP) {
         if (type == VaccineType.johnson) {
-          if (last.doseNumber == last.totalSeriesOfDoses &&
-              last.doseNumber < 2) {
+          if (vaccination.doseNumber == vaccination.totalSeriesOfDoses &&
+              vaccination.doseNumber < 2) {
             return GreenCertificateStatus.testNeeded;
           }
-        } else if (last.doseNumber == last.totalSeriesOfDoses &&
-            last.doseNumber < 3) {
+        } else if (vaccination.doseNumber == vaccination.totalSeriesOfDoses &&
+            vaccination.doseNumber < 3) {
           return GreenCertificateStatus.testNeeded;
         }
       }
@@ -147,8 +147,8 @@ class CertificateValidatorImpl implements CertificateValidator {
   }
 
   @override
-  Future<GreenCertificateStatus> checkTests(
-    List<Test> tests, {
+  Future<GreenCertificateStatus> checkTest(
+    Test test, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     if (mode != ValidationMode.normalDGP) {
@@ -157,9 +157,7 @@ class CertificateValidatorImpl implements CertificateValidator {
     }
 
     try {
-      final lastTest = tests.last;
-
-      if (lastTest.testResult == TestResult.detected) {
+      if (test.testResult == TestResult.detected) {
         log('Test result is DETECTED');
         return GreenCertificateStatus.notValid;
       }
@@ -169,12 +167,12 @@ class CertificateValidatorImpl implements CertificateValidator {
       int testStartHours;
       int testEndHours;
 
-      if (lastTest.typeOfTest == TestType.molecular) {
+      if (test.typeOfTest == TestType.molecular) {
         String startHours = rules.find(RuleName.molecularTestStartHours)!.value;
         String endHours = rules.find(RuleName.molecularTestEndHours)!.value;
         testStartHours = int.parse(startHours);
         testEndHours = int.parse(endHours);
-      } else if (lastTest.typeOfTest == TestType.rapid) {
+      } else if (test.typeOfTest == TestType.rapid) {
         String startHours = rules.find(RuleName.rapidTestStartHours)!.value;
         String endHours = rules.find(RuleName.rapidTestEndHours)!.value;
         testStartHours = int.parse(startHours);
@@ -184,10 +182,10 @@ class CertificateValidatorImpl implements CertificateValidator {
         return GreenCertificateStatus.notValid;
       }
 
-      final startDate = lastTest.dateTimeOfCollection.add(
+      final startDate = test.dateTimeOfCollection.add(
         Duration(hours: testStartHours),
       );
-      final endDate = lastTest.dateTimeOfCollection.add(
+      final endDate = test.dateTimeOfCollection.add(
         Duration(hours: testEndHours),
       );
 
@@ -210,8 +208,8 @@ class CertificateValidatorImpl implements CertificateValidator {
   }
 
   @override
-  Future<GreenCertificateStatus> checkRecoveryStatements(
-    List<RecoveryStatement> recoveryStatements, {
+  Future<GreenCertificateStatus> checkRecoveryStatement(
+    RecoveryStatement recoveryStatement, {
     ValidationMode mode = ValidationMode.normalDGP,
     bool isRecoveryBis = false,
   }) async {
@@ -222,7 +220,6 @@ class CertificateValidatorImpl implements CertificateValidator {
       }
 
       final rules = _cache.getRules();
-      final RecoveryStatement lastRecovery = recoveryStatements.last;
 
       ValidationRule? startDaysRule;
       ValidationRule? endDaysRule;
@@ -238,8 +235,10 @@ class CertificateValidatorImpl implements CertificateValidator {
         endDaysRule = rules.find(RuleName.recoveryCertEndDay);
       }
 
-      final recoveryFromDay = lastRecovery.certificateValidFrom.withoutTime();
-      final recoveryUntilDay = lastRecovery.certificateValidUntil.withoutTime();
+      final recoveryFromDay =
+          recoveryStatement.certificateValidFrom.withoutTime();
+      final recoveryUntilDay =
+          recoveryStatement.certificateValidUntil.withoutTime();
 
       final startDays = int.parse(startDaysRule!.value);
       final endDays = int.parse(endDaysRule!.value);
@@ -272,16 +271,13 @@ class CertificateValidatorImpl implements CertificateValidator {
   }
 
   @override
-  Future<GreenCertificateStatus> checkExemptions(
-    List<Exemption> exemptions, {
+  Future<GreenCertificateStatus> checkExemption(
+    Exemption exemption, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     try {
-      final Exemption lastExemption = exemptions.last;
-
-      final exemptionFromDay = lastExemption.certificateValidFrom.withoutTime();
-      final exemptionUntilDay =
-          lastExemption.certificateValidUntil?.withoutTime();
+      final exemptionFromDay = exemption.certificateValidFrom.withoutTime();
+      final exemptionUntilDay = exemption.certificateValidUntil?.withoutTime();
 
       if (exemptionFromDay > clock.now()) {
         return GreenCertificateStatus.notValidYet;
@@ -323,8 +319,8 @@ class CertificateValidatorImpl implements CertificateValidator {
     );
 
     if (certificate.exemptions.isNotEmpty) {
-      return checkExemptions(
-        certificate.exemptions,
+      return checkExemption(
+        certificate.exemptions.last,
         mode: mode,
       );
     }
@@ -333,8 +329,8 @@ class CertificateValidatorImpl implements CertificateValidator {
       final isRecoveryBis = signingCertificateInfo.country == Country.italy &&
           signingCertificateInfo.extendedKeyUsage == true;
 
-      return checkRecoveryStatements(
-        certificate.recoveryStatements,
+      return checkRecoveryStatement(
+        certificate.recoveryStatements.last,
         mode: mode,
         isRecoveryBis: isRecoveryBis,
       );
@@ -347,15 +343,15 @@ class CertificateValidatorImpl implements CertificateValidator {
         log('Not valid. Super DGP required');
         return GreenCertificateStatus.notValid;
       }
-      return checkTests(
-        certificate.tests,
+      return checkTest(
+        certificate.tests.last,
         mode: mode,
       );
     }
 
     if (certificate.vaccinations.isNotEmpty) {
-      return checkVaccinations(
-        certificate.vaccinations,
+      return checkVaccination(
+        certificate.vaccinations.last,
         mode: mode,
       );
     }
