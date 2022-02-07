@@ -28,6 +28,7 @@ abstract class CertificateValidator {
   Future<GreenCertificateStatus> checkTest(
     Test test, {
     ValidationMode mode,
+    required DateTime dateOfBirth,
   });
 
   /// Cecks the validity of a [List] of [Vaccination] using cached validation rules

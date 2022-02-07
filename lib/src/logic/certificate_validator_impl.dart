@@ -147,21 +147,33 @@ class CertificateValidatorImpl implements CertificateValidator {
   }
 
   @override
-  Future<GreenCertificateStatus> checkTest(
-    Test test, {
-    ValidationMode mode = ValidationMode.normalDGP,
-  }) async {
+  Future<GreenCertificateStatus> checkTest(Test test,
+      {ValidationMode mode = ValidationMode.normalDGP,
+      required DateTime dateOfBirth}) async {
     if (mode != ValidationMode.normalDGP) {
       log('Not valid. Super DGP or Booster required.');
       return GreenCertificateStatus.notValid;
     }
 
-    try {
-      if (test.testResult == TestResult.detected) {
-        log('Test result is DETECTED');
+    if (mode == ValidationMode.workDGP) {
+      final limitDate = DateTime(
+        clock.now().year - RuleValue.vaccineMandatoryAge,
+        clock.now().month,
+        clock.now().day,
+      );
+
+      if (dateOfBirth < limitDate) {
+        log('Not valid. Age limit exceeded.');
         return GreenCertificateStatus.notValid;
       }
+    }
 
+    if (test.testResult == TestResult.detected) {
+      log('Test result is DETECTED');
+      return GreenCertificateStatus.notValid;
+    }
+
+    try {
       final rules = _cache.getRules();
 
       int testStartHours;
@@ -346,6 +358,7 @@ class CertificateValidatorImpl implements CertificateValidator {
       return checkTest(
         certificate.tests.last,
         mode: mode,
+        dateOfBirth: certificate.dateOfBirth,
       );
     }
 

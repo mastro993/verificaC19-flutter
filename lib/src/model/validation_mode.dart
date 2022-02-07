@@ -9,5 +9,8 @@ enum ValidationMode {
   boosterDGP,
 
   /// School mode
-  schoolDGP
+  schoolDGP,
+
+  /// Work mode
+  workDGP,
 }
