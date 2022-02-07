@@ -25,6 +25,7 @@ class RuleName {
   static const String vaccineEndDayNotComplete = 'vaccine_end_day_not_complete';
   static const String vaccineStartDayComplete = 'vaccine_start_day_complete';
   static const String vaccineEndDayComplete = 'vaccine_end_day_complete';
+  static const String vaccineEndDaySchool = 'vaccine_end_day_school';
   static const String molecularTestStartHours = 'molecular_test_start_hours';
   static const String molecularTestEndHours = 'molecular_test_end_hours';
   static const String rapidTestStartHours = 'rapid_test_start_hours';
@@ -33,6 +34,7 @@ class RuleName {
   static const String recoveryCertEndDay = 'recovery_cert_end_day';
   static const String recoveryCertPvStartDay = 'recovery_pv_cert_start_day';
   static const String recoveryCertPvEndDay = 'recovery_pv_cert_end_day';
+  static const String recoveryCertEndDaySchool = 'recovery_cert_end_day_school';
 }
 
 class RuleType {

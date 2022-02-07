@@ -68,20 +68,27 @@ class CertificateValidatorImpl implements CertificateValidator {
 
       // Check for partial or complete vaccine
       if (last.doseNumber < last.totalSeriesOfDoses) {
-        // Partial vaccination is not valid if Booster validation mode
+        // Partial vaccination is not valid if Booster or School validation mode
         // Booster doses are only for complete vaccination
-        if (mode == ValidationMode.boosterDGP) {
-          log('Vaccine is not valid in Booster mode');
+        if (mode == ValidationMode.boosterDGP ||
+            mode == ValidationMode.schoolDGP) {
+          log('Vaccine is not valid in Booster or School mode');
           return GreenCertificateStatus.notValid;
         }
 
         final startDays = rules.find(RuleName.vaccineStartDayNotComplete, type);
         final endDays = rules.find(RuleName.vaccineEndDayNotComplete, type);
+
         vaccinationStartDays = int.parse(startDays!.value);
         vaccinationEndDays = int.parse(endDays!.value);
       } else if (last.doseNumber >= last.totalSeriesOfDoses) {
         final startDays = rules.find(RuleName.vaccineStartDayComplete, type);
-        final endDays = rules.find(RuleName.vaccineEndDayComplete, type);
+        var endDays = rules.find(RuleName.vaccineEndDayComplete, type);
+
+        if (mode == ValidationMode.schoolDGP) {
+          endDays = rules.find(RuleName.vaccineEndDaySchool, type);
+        }
+
         vaccinationStartDays = int.parse(startDays!.value);
         vaccinationEndDays = int.parse(endDays!.value);
 
@@ -220,7 +227,10 @@ class CertificateValidatorImpl implements CertificateValidator {
       ValidationRule? startDaysRule;
       ValidationRule? endDaysRule;
 
-      if (isRecoveryBis) {
+      if (mode == ValidationMode.schoolDGP) {
+        startDaysRule = rules.find(RuleName.recoveryCertPvStartDay);
+        endDaysRule = rules.find(RuleName.recoveryCertEndDaySchool);
+      } else if (isRecoveryBis) {
         startDaysRule = rules.find(RuleName.recoveryCertPvStartDay);
         endDaysRule = rules.find(RuleName.recoveryCertPvEndDay);
       } else {
@@ -331,7 +341,9 @@ class CertificateValidatorImpl implements CertificateValidator {
     }
 
     if (certificate.tests.isNotEmpty) {
-      if (mode == ValidationMode.superDGP) {
+      if (mode == ValidationMode.superDGP ||
+          mode == ValidationMode.boosterDGP ||
+          mode == ValidationMode.schoolDGP) {
         log('Not valid. Super DGP required');
         return GreenCertificateStatus.notValid;
       }
