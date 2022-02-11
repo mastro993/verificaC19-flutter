@@ -9,12 +9,18 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../data/local/local_repository.dart' as _i3;
 import '../data/local/local_repository_impl.dart' as _i4;
-import '../data/remote/remote_repository.dart' as _i5;
-import '../data/remote/remote_repository_impl.dart' as _i6;
-import '../data/updater.dart' as _i7;
-import '../data/updater_impl.dart' as _i8;
-import '../logic/certificate_validator.dart' as _i9;
-import '../logic/certificate_validator_impl.dart' as _i10;
+import '../data/remote/remote_repository.dart' as _i7;
+import '../data/remote/remote_repository_impl.dart' as _i8;
+import '../data/updater.dart' as _i9;
+import '../data/updater_impl.dart' as _i10;
+import '../logic/certificate_validator.dart' as _i13;
+import '../logic/certificate_validator_impl.dart' as _i14;
+import '../logic/exemption_validator.dart' as _i16;
+import '../logic/recovery_statement_validator.dart' as _i5;
+import '../logic/recovery_statement_validator_impl.dart' as _i6;
+import '../logic/test_validator.dart' as _i15;
+import '../logic/vaccine_validator.dart' as _i11;
+import '../logic/vaccine_validator_impl.dart' as _i12;
 
 const String _prod = 'prod';
 // ignore_for_file: unnecessary_lambdas
@@ -27,14 +33,25 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i4.LocalRepositoryImpl.create(),
       registerFor: {_prod},
       preResolve: true);
-  gh.singleton<_i5.RemoteRepository>(_i6.RemoteRepositoryImpl.create(),
+  gh.lazySingleton<_i5.RecoveryStatementValidator>(
+      () => _i6.RecoveryStatementValidatorImpl(get<_i3.LocalRepository>()),
       registerFor: {_prod});
-  gh.lazySingleton<_i7.Updater>(
-      () => _i8.UpdaterImpl(
-          get<_i5.RemoteRepository>(), get<_i3.LocalRepository>()),
+  gh.singleton<_i7.RemoteRepository>(_i8.RemoteRepositoryImpl.create(),
       registerFor: {_prod});
-  gh.lazySingleton<_i9.CertificateValidator>(
-      () => _i10.CertificateValidatorImpl(get<_i3.LocalRepository>()),
+  gh.lazySingleton<_i9.Updater>(
+      () => _i10.UpdaterImpl(
+          get<_i7.RemoteRepository>(), get<_i3.LocalRepository>()),
+      registerFor: {_prod});
+  gh.lazySingleton<_i11.VaccineValidator>(
+      () => _i12.VaccineValidatorImpl(get<_i3.LocalRepository>()),
+      registerFor: {_prod});
+  gh.lazySingleton<_i13.CertificateValidator>(
+      () => _i14.CertificateValidatorImpl(
+          get<_i3.LocalRepository>(),
+          get<_i11.VaccineValidator>(),
+          get<_i5.RecoveryStatementValidator>(),
+          get<_i15.TestValidator>(),
+          get<_i16.ExemptionValidator>()),
       registerFor: {_prod});
   return get;
 }

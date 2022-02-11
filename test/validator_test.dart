@@ -7,6 +7,10 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/logic/certificate_validator_impl.dart';
+import 'package:verificac19/src/logic/exemption_validator_impl.dart';
+import 'package:verificac19/src/logic/recovery_statement_validator_impl.dart';
+import 'package:verificac19/src/logic/test_validator_impl.dart';
+import 'package:verificac19/src/logic/vaccine_validator_impl.dart';
 import 'package:verificac19/verificac19.dart';
 
 import 'fixtures/fixture_reader.dart';
@@ -14,11 +18,20 @@ import 'mocks.mocks.dart';
 
 void main() {
   late MockLocalRepository cache;
+  late VaccineValidatorImpl vaccineValidator;
+  late RecoveryStatementValidatorImpl recoveryStatementValidator;
+  late TestValidatorImpl testValidatorImpl;
+  late ExemptionValidatorImpl exemptionValidator;
   late CertificateValidator validator;
 
   setUp(() {
     cache = MockLocalRepository();
-    validator = CertificateValidatorImpl(cache);
+    vaccineValidator = VaccineValidatorImpl(cache);
+    recoveryStatementValidator = RecoveryStatementValidatorImpl(cache);
+    testValidatorImpl = TestValidatorImpl(cache);
+    exemptionValidator = ExemptionValidatorImpl();
+    validator = CertificateValidatorImpl(cache, vaccineValidator,
+        recoveryStatementValidator, testValidatorImpl, exemptionValidator);
 
     final revokedListFixture = fixture('../cache/revokedList.json');
     final rulesFixture = fixture('../cache/rules.json');
@@ -323,4 +336,6 @@ void main() {
       expect(result, equals(GreenCertificateStatus.notValid));
     });
   });
+
+  group('Rules verification with School scan mode', () {});
 }

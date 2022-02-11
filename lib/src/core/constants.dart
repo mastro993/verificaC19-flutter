@@ -62,6 +62,8 @@ class RuleValue {
   static const defaultDaysStartJJ = 15;
   static const defaultEndDaysIT = 180;
   static const defaultEndDaysNotIT = 270;
+  static const boosterMinimumDosesNumber = 3;
+  static const jjBoosterMinimumDosesNumber = 2;
 }
 
 class RuleType {
