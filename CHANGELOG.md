@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Added the ability to force update local data before its expiry (cached data)
+
 ## 1.3.0
 
 - Added support for new scan modes: School, Work
