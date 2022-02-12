@@ -25,10 +25,6 @@ class UpdaterImpl implements Updater {
   @override
   Future<void> updateRules() async {
     try {
-      if (!_cache.needRulesUpdate()) {
-        return;
-      }
-
       final List<ValidationRule> rules = await _service.getValidationRules();
       await _cache.storeRules(rules);
     } catch (e) {
@@ -39,10 +35,6 @@ class UpdaterImpl implements Updater {
   @override
   Future<void> updateSignaturesList() async {
     try {
-      if (!_cache.needSignaturesListUpdate()) {
-        return;
-      }
-
       final List<String> signaturesList = await _service.getSignaturesList();
       await _cache.storeSignaturesList(signaturesList);
     } catch (e) {
@@ -53,10 +45,6 @@ class UpdaterImpl implements Updater {
   @override
   Future<void> updateSignatures() async {
     try {
-      if (!_cache.needSignaturesUpdate()) {
-        return;
-      }
-
       final Map<String, String> signatures = await _service.getSignatures();
       await _cache.storeSignatures(signatures);
     } catch (e) {
@@ -67,10 +55,6 @@ class UpdaterImpl implements Updater {
   @override
   Future<void> updateCRL() async {
     try {
-      if (!_cache.needCRLUpdate()) {
-        return;
-      }
-
       int currentVersion = _cache.getCRLVersion();
       CRLStatus status = await _service.getCRLStatus(
         version: currentVersion,
