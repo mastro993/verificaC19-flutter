@@ -60,8 +60,6 @@ class TestValidatorImpl implements TestValidator {
   }) {
     final rules = _cache.getRules();
 
-    // https://github.com/ministero-salute/it-dgc-verificaC19-ios/blob/develop/DGCAVerifier/BusinessRules/Internal/TestValidityCheck.swift
-
     int? startHours = getStartHours(
       rules: rules,
       test: test,
@@ -119,7 +117,7 @@ class TestValidatorImpl implements TestValidator {
       return rules.find(RuleName.molecularTestEndHours)?.intValue;
     }
     if (test.isRapid) {
-      return rules.find(RuleName.molecularTestStartHours)?.intValue;
+      return rules.find(RuleName.rapidTestEndHours)?.intValue;
     }
     return null;
   }

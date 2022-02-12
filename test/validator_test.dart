@@ -119,7 +119,7 @@ void main() {
       await validateRules(
         'eu_test_certificates/sk_3.txt',
         GreenCertificateStatus.valid,
-        withDate: DateTime(2021, 12, 1),
+        withDate: DateTime(2021, 11, 1),
       );
     });
 
@@ -137,7 +137,7 @@ void main() {
       await validateRules(
         'eu_test_certificates/sk_5.txt',
         GreenCertificateStatus.valid,
-        withDate: DateTime(2021, 12, 1),
+        withDate: DateTime(2021, 11, 1),
       );
     });
 
@@ -173,6 +173,7 @@ void main() {
         'eu_test_certificates/sk_7.txt',
         GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
+        mode: ValidationMode.superDGP,
       );
     });
 
@@ -181,6 +182,7 @@ void main() {
         'eu_test_certificates/sk_8.txt',
         GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
+        mode: ValidationMode.superDGP,
       );
     });
 
@@ -189,7 +191,6 @@ void main() {
         'eu_test_certificates/sk_8.txt',
         GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 5, 22),
-        mode: ValidationMode.superDGP,
       );
     });
 
@@ -209,6 +210,7 @@ void main() {
         'eu_test_certificates/sk_7.txt',
         GreenCertificateStatus.notValidYet,
         withDate: DateTime(2021, 4, 22),
+        mode: ValidationMode.superDGP,
       );
     });
 
@@ -337,5 +339,31 @@ void main() {
     });
   });
 
-  group('Rules verification with School scan mode', () {});
+  group('Rules verification with Work scan mode', () {
+    test('Should not validate test result not over 50Y', () async {
+      withClock(Clock.fixed(DateTime(2021, 5, 22)), () async {
+        final base45 = fixture('eu_test_certificates/sk_8.txt');
+        var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+        cert = cert.copyWith(dateOfBirth: DateTime(2000));
+        final result = await validator.checkValidationRules(
+          cert,
+          mode: ValidationMode.workDGP,
+        );
+        expect(result, equals(GreenCertificateStatus.notValid));
+      });
+    });
+
+    test('Should validate test result over 50Y', () async {
+      withClock(Clock.fixed(DateTime(2021, 5, 22)), () async {
+        final base45 = fixture('eu_test_certificates/sk_8.txt');
+        var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+        cert = cert.copyWith(dateOfBirth: DateTime(1950));
+        final result = await validator.checkValidationRules(
+          cert,
+          mode: ValidationMode.workDGP,
+        );
+        expect(result, equals(GreenCertificateStatus.valid));
+      });
+    });
+  });
 }

@@ -193,12 +193,10 @@ class VaccineValidatorImpl implements VaccineValidator {
     switch (mode) {
       case ValidationMode.normalDGP:
         if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
+          return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
         }
         if (vaccination.isIncomplete) {
-          return rules
-              .find(RuleName.vaccineStartDayNotComplete, type)
-              ?.intValue;
+          return rules.find(RuleName.vaccineEndDayNotComplete, type)?.intValue;
         }
         return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
       case ValidationMode.superDGP:
