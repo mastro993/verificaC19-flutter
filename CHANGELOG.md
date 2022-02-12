@@ -1,3 +1,8 @@
+## 1.3.0
+
+- Added support for new scan modes: School, Work
+- Added support for new verification rules
+
 ## 1.2.3
 
 - Added vaccine exemptions support
