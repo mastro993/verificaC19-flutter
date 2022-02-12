@@ -92,7 +92,9 @@ You can also provide a `ValidationMode` parameter.
 | ---------- | ----------------------------------- |
 | normalDGP  | Normal verification (default value) |
 | superDGP   | Super Green Pass verification       |
-| boosterDGP | SBooster verification mode          |
+| boosterDGP | Booster verification mode           |
+| schoolDGP  | School verification mode            |
+| workDGP    | Over 50Y verification mode          |
 
 Example:
 
@@ -101,7 +103,3 @@ ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSM...',
 // or
 ValidationResult result = await VerificaC19.validateFromRaw('HC1:NCFOXN%TSM...', mode: ValidationMode.superDGP);
 ```
-
-## TODOs
-
-- [ ] Add the ability to retrieve/validate a Certificate from an image file
