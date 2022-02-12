@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:verificac19/src/core/constants.dart';
 
 part 'test.freezed.dart';
 
@@ -19,4 +20,7 @@ class Test with _$Test {
     required String certificateIssuer,
     required String certificateIdentifier,
   }) = _Test;
+
+  bool get isMolecular => typeOfTest == TestType.molecular;
+  bool get isRapid => typeOfTest == TestType.rapid;
 }

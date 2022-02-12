@@ -1,4 +1,3 @@
-import 'package:verificac19/src/model/exemption.dart';
 import 'package:verificac19/verificac19.dart';
 
 abstract class CertificateValidator {
@@ -12,35 +11,6 @@ abstract class CertificateValidator {
   /// A [mode] can be passed optionally. Default is [ValidationMode.normalDGP]
   Future<GreenCertificateStatus> checkValidationRules(
     GreenCertificate certificate, {
-    ValidationMode mode,
-  });
-
-  /// Checks the validity of a [List] of [RecoveryStatement] using cached validation rules
-  /// A [mode] can be passed optionally. Default is [ValidationMode.normalDGP]
-  Future<GreenCertificateStatus> checkRecoveryStatements(
-    List<RecoveryStatement> recoveryStatements, {
-    ValidationMode mode,
-    bool isRecoveryBis,
-  });
-
-  /// Cecks the validity of a [List] of [Test] using cached validation rules
-  /// A [mode] can be passed optionally. Default is [ValidationMode.normalDGP]
-  Future<GreenCertificateStatus> checkTests(
-    List<Test> tests, {
-    ValidationMode mode,
-  });
-
-  /// Cecks the validity of a [List] of [Vaccination] using cached validation rules
-  /// A [mode] can be passed optionally. Default is [ValidationMode.normalDGP]
-  Future<GreenCertificateStatus> checkVaccinations(
-    List<Vaccination> vaccinations, {
-    ValidationMode mode,
-  });
-
-  /// Cecks the validity of a [List] of [Exemption] using cached validation rules
-  /// A [mode] can be passed optionally. Default is [ValidationMode.normalDGP]
-  Future<GreenCertificateStatus> checkExemptions(
-    List<Exemption> exemptions, {
     ValidationMode mode,
   });
 

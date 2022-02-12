@@ -7,6 +7,10 @@ import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_decoder.dart';
 import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/logic/certificate_validator_impl.dart';
+import 'package:verificac19/src/logic/exemption_validator_impl.dart';
+import 'package:verificac19/src/logic/recovery_statement_validator_impl.dart';
+import 'package:verificac19/src/logic/test_validator_impl.dart';
+import 'package:verificac19/src/logic/vaccine_validator_impl.dart';
 import 'package:verificac19/verificac19.dart';
 
 import 'fixtures/fixture_reader.dart';
@@ -14,11 +18,20 @@ import 'mocks.mocks.dart';
 
 void main() {
   late MockLocalRepository cache;
+  late VaccineValidatorImpl vaccineValidator;
+  late RecoveryStatementValidatorImpl recoveryStatementValidator;
+  late TestValidatorImpl testValidatorImpl;
+  late ExemptionValidatorImpl exemptionValidator;
   late CertificateValidator validator;
 
   setUp(() {
     cache = MockLocalRepository();
-    validator = CertificateValidatorImpl(cache);
+    vaccineValidator = VaccineValidatorImpl(cache);
+    recoveryStatementValidator = RecoveryStatementValidatorImpl(cache);
+    testValidatorImpl = TestValidatorImpl(cache);
+    exemptionValidator = ExemptionValidatorImpl();
+    validator = CertificateValidatorImpl(cache, vaccineValidator,
+        recoveryStatementValidator, testValidatorImpl, exemptionValidator);
 
     final revokedListFixture = fixture('../cache/revokedList.json');
     final rulesFixture = fixture('../cache/rules.json');
@@ -106,7 +119,7 @@ void main() {
       await validateRules(
         'eu_test_certificates/sk_3.txt',
         GreenCertificateStatus.valid,
-        withDate: DateTime(2021, 12, 1),
+        withDate: DateTime(2021, 11, 1),
       );
     });
 
@@ -124,7 +137,7 @@ void main() {
       await validateRules(
         'eu_test_certificates/sk_5.txt',
         GreenCertificateStatus.valid,
-        withDate: DateTime(2021, 12, 1),
+        withDate: DateTime(2021, 11, 1),
       );
     });
 
@@ -160,6 +173,7 @@ void main() {
         'eu_test_certificates/sk_7.txt',
         GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
+        mode: ValidationMode.superDGP,
       );
     });
 
@@ -168,6 +182,7 @@ void main() {
         'eu_test_certificates/sk_8.txt',
         GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
+        mode: ValidationMode.superDGP,
       );
     });
 
@@ -176,7 +191,6 @@ void main() {
         'eu_test_certificates/sk_8.txt',
         GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 5, 22),
-        mode: ValidationMode.superDGP,
       );
     });
 
@@ -196,6 +210,7 @@ void main() {
         'eu_test_certificates/sk_7.txt',
         GreenCertificateStatus.notValidYet,
         withDate: DateTime(2021, 4, 22),
+        mode: ValidationMode.superDGP,
       );
     });
 
@@ -321,6 +336,34 @@ void main() {
           .add(cert.vaccinations.last.copyWith(medicinalProduct: 'Fake'));
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notValid));
+    });
+  });
+
+  group('Rules verification with Work scan mode', () {
+    test('Should not validate test result not over 50Y', () async {
+      withClock(Clock.fixed(DateTime(2021, 5, 22)), () async {
+        final base45 = fixture('eu_test_certificates/sk_8.txt');
+        var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+        cert = cert.copyWith(dateOfBirth: DateTime(2000));
+        final result = await validator.checkValidationRules(
+          cert,
+          mode: ValidationMode.workDGP,
+        );
+        expect(result, equals(GreenCertificateStatus.notValid));
+      });
+    });
+
+    test('Should validate test result over 50Y', () async {
+      withClock(Clock.fixed(DateTime(2021, 5, 22)), () async {
+        final base45 = fixture('eu_test_certificates/sk_8.txt');
+        var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+        cert = cert.copyWith(dateOfBirth: DateTime(1950));
+        final result = await validator.checkValidationRules(
+          cert,
+          mode: ValidationMode.workDGP,
+        );
+        expect(result, equals(GreenCertificateStatus.valid));
+      });
     });
   });
 }

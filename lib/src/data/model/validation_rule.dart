@@ -20,6 +20,8 @@ class ValidationRule {
     required this.value,
   });
 
+  int? get intValue => int.parse(value);
+
   factory ValidationRule.fromJson(Map<String, dynamic> json) =>
       _$ValidationRuleFromJson(json);
 
