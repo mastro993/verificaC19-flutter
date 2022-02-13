@@ -12,7 +12,7 @@ import 'package:verificac19/src/model/vaccination.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
 
 @Environment(Environment.prod)
-@LazySingleton(as: VaccineValidator)
+@Injectable(as: VaccineValidator)
 class VaccineValidatorImpl implements VaccineValidator {
   final LocalRepository _cache;
 

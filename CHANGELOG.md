@@ -1,3 +1,7 @@
+## 1.3.2
+
+- Hot-fix: added missing CertificateValidator dipendency
+
 ## 1.3.1
 
 - Added the ability to force update local data before its expiry (cached data)

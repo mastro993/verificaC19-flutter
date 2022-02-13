@@ -12,7 +12,7 @@ import 'package:verificac19/src/model/recovery_statement.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
 
 @Environment(Environment.prod)
-@LazySingleton(as: RecoveryStatementValidator)
+@Injectable(as: RecoveryStatementValidator)
 class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
   final LocalRepository _cache;
 

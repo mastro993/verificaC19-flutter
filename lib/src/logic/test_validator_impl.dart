@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:clock/clock.dart';
+import 'package:injectable/injectable.dart';
 import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/core/extensions.dart';
 import 'package:verificac19/src/data/local/local_repository.dart';
@@ -10,6 +11,8 @@ import 'package:verificac19/src/model/green_certificate_status.dart';
 import 'package:verificac19/src/model/test.dart';
 import 'package:verificac19/src/model/validation_mode.dart';
 
+@Environment(Environment.prod)
+@Injectable(as: TestValidator)
 class TestValidatorImpl implements TestValidator {
   final LocalRepository _cache;
 
