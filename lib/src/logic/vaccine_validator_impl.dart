@@ -25,8 +25,11 @@ class VaccineValidatorImpl implements VaccineValidator {
   }) async {
     try {
       // In Italy, Sputnik is accepted only for San Marino republic
-      if (vaccination.isSputnik && !vaccination.isSM) {
-        log('Vaccine ${VaccineType.sputnik} is valid only in San Marino');
+      final validForItaly =
+          vaccination.isEma || (vaccination.isSputnik && vaccination.isSM);
+
+      if (validForItaly) {
+        log('Vaccine ${vaccination.medicinalProduct} is not valid for Italy');
         return GreenCertificateStatus.notValid;
       }
 
@@ -120,6 +123,7 @@ class VaccineValidatorImpl implements VaccineValidator {
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
+      case ValidationMode.entryITDGP:
       case ValidationMode.normalDGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
@@ -191,6 +195,7 @@ class VaccineValidatorImpl implements VaccineValidator {
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
+      case ValidationMode.entryITDGP:
       case ValidationMode.normalDGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;

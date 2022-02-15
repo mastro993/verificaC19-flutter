@@ -120,6 +120,8 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
         return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
       case ValidationMode.workDGP:
         return null;
+      case ValidationMode.entryITDGP:
+        return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
     }
   }
 
@@ -148,6 +150,8 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
         return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
       case ValidationMode.workDGP:
         return null;
+      case ValidationMode.entryITDGP:
+        return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
     }
   }
 }
