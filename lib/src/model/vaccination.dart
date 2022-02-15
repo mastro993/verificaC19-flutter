@@ -34,4 +34,6 @@ class Vaccination with _$Vaccination {
       (doseNumber == totalSeriesOfDoses) && !isJJBooster && !isNotJJBooster;
   bool get isBooster =>
       (doseNumber > totalSeriesOfDoses) || (isJJBooster || isNotJJBooster);
+
+  bool get isEma => VaccineType.emaList.contains(medicinalProduct);
 }

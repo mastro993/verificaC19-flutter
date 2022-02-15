@@ -88,6 +88,15 @@ class VaccineType {
   static const String covishield = 'Covishield';
   static const String rCovi = 'R-COVI';
   static const String covid19Recombinant = 'Covid-19-recombinant';
+  static const List<String> emaList = [
+    johnson,
+    moderna,
+    pfizer,
+    astrazeneca,
+    covishield,
+    rCovi,
+    covid19Recombinant,
+  ];
 }
 
 class Country {
