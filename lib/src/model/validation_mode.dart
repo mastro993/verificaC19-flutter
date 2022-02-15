@@ -13,4 +13,7 @@ enum ValidationMode {
 
   /// Work mode
   workDGP,
+
+  /// Validation mode for Italy entry
+  entryITDGP,
 }
