@@ -82,6 +82,12 @@ class TestType {
 class VaccineType {
   static const String johnson = 'EU/1/20/1525';
   static const String sputnik = 'Sputnik-V';
+  static const String moderna = 'EU/1/20/1507';
+  static const String pfizer = 'EU/1/20/1528';
+  static const String astrazeneca = 'EU/1/21/1529';
+  static const String covishield = 'Covishield';
+  static const String rCovi = 'R-COVI';
+  static const String covid19Recombinant = 'Covid-19-recombinant';
 }
 
 class Country {
