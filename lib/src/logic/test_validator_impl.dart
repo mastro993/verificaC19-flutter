@@ -39,13 +39,13 @@ class TestValidatorImpl implements TestValidator {
 
       if (mode == ValidationMode.workDGP) {
         final limitDate = DateTime(
-          clock.now().year - RuleValue.vaccineMandatoryAge,
-          clock.now().month,
-          clock.now().day,
+          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
+          dateOfBirth.month,
+          dateOfBirth.day,
         );
 
-        if (dateOfBirth > limitDate) {
-          log('Not valid. Must be older than 50 years.');
+        if (clock.now() >= limitDate) {
+          log('Not valid. Must not be older than 50 years.');
           return GreenCertificateStatus.notValid;
         }
       }
