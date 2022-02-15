@@ -1,3 +1,8 @@
+## 1.3.3
+
+- Fix: test not valid for over 50Y (mandatory vaccine for over 50Y).
+- Fix: changed internal storage db names to (or at least to try to) prevent data corruption.
+
 ## 1.3.2
 
 - Hot-fix: added missing CertificateValidator dipendency
