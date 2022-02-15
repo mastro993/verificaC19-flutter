@@ -4,9 +4,9 @@ class UpdateWindowHours {
 }
 
 class DbKeys {
-  static const String dbData = 'verificac19_data_box';
-  static const String dbCRL = 'verificac19_crl_box';
-  static const String dbUpdates = 'verificac19_updates_box';
+  static const String dbData = 'verificac19databox';
+  static const String dbCRL = 'verificac19crlbox';
+  static const String dbUpdates = 'verificac19updatesbox';
 
   static const String keySignatures = 'signatures';
   static const String keyRules = 'rules';
