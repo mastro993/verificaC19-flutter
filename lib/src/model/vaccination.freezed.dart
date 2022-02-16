@@ -27,7 +27,8 @@ class _$VaccinationTearOff {
       required DateTime dateOfVaccination,
       required String countryOfVaccination,
       required String certificateIssuer,
-      required String certificateIdentifier}) {
+      required String certificateIdentifier,
+      required DateTime ownerBirthdate}) {
     return _Vaccination(
       disease: disease,
       vaccine: vaccine,
@@ -39,6 +40,7 @@ class _$VaccinationTearOff {
       countryOfVaccination: countryOfVaccination,
       certificateIssuer: certificateIssuer,
       certificateIdentifier: certificateIdentifier,
+      ownerBirthdate: ownerBirthdate,
     );
   }
 }
@@ -58,6 +60,7 @@ mixin _$Vaccination {
   String get countryOfVaccination => throw _privateConstructorUsedError;
   String get certificateIssuer => throw _privateConstructorUsedError;
   String get certificateIdentifier => throw _privateConstructorUsedError;
+  DateTime get ownerBirthdate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VaccinationCopyWith<Vaccination> get copyWith =>
@@ -79,7 +82,8 @@ abstract class $VaccinationCopyWith<$Res> {
       DateTime dateOfVaccination,
       String countryOfVaccination,
       String certificateIssuer,
-      String certificateIdentifier});
+      String certificateIdentifier,
+      DateTime ownerBirthdate});
 }
 
 /// @nodoc
@@ -102,6 +106,7 @@ class _$VaccinationCopyWithImpl<$Res> implements $VaccinationCopyWith<$Res> {
     Object? countryOfVaccination = freezed,
     Object? certificateIssuer = freezed,
     Object? certificateIdentifier = freezed,
+    Object? ownerBirthdate = freezed,
   }) {
     return _then(_value.copyWith(
       disease: disease == freezed
@@ -144,6 +149,10 @@ class _$VaccinationCopyWithImpl<$Res> implements $VaccinationCopyWith<$Res> {
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
+      ownerBirthdate: ownerBirthdate == freezed
+          ? _value.ownerBirthdate
+          : ownerBirthdate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -165,7 +174,8 @@ abstract class _$VaccinationCopyWith<$Res>
       DateTime dateOfVaccination,
       String countryOfVaccination,
       String certificateIssuer,
-      String certificateIdentifier});
+      String certificateIdentifier,
+      DateTime ownerBirthdate});
 }
 
 /// @nodoc
@@ -190,6 +200,7 @@ class __$VaccinationCopyWithImpl<$Res> extends _$VaccinationCopyWithImpl<$Res>
     Object? countryOfVaccination = freezed,
     Object? certificateIssuer = freezed,
     Object? certificateIdentifier = freezed,
+    Object? ownerBirthdate = freezed,
   }) {
     return _then(_Vaccination(
       disease: disease == freezed
@@ -232,6 +243,10 @@ class __$VaccinationCopyWithImpl<$Res> extends _$VaccinationCopyWithImpl<$Res>
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
+      ownerBirthdate: ownerBirthdate == freezed
+          ? _value.ownerBirthdate
+          : ownerBirthdate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -249,7 +264,8 @@ class _$_Vaccination extends _Vaccination {
       required this.dateOfVaccination,
       required this.countryOfVaccination,
       required this.certificateIssuer,
-      required this.certificateIdentifier})
+      required this.certificateIdentifier,
+      required this.ownerBirthdate})
       : super._();
 
   @override
@@ -272,10 +288,12 @@ class _$_Vaccination extends _Vaccination {
   final String certificateIssuer;
   @override
   final String certificateIdentifier;
+  @override
+  final DateTime ownerBirthdate;
 
   @override
   String toString() {
-    return 'Vaccination(disease: $disease, vaccine: $vaccine, medicinalProduct: $medicinalProduct, manufacturer: $manufacturer, doseNumber: $doseNumber, totalSeriesOfDoses: $totalSeriesOfDoses, dateOfVaccination: $dateOfVaccination, countryOfVaccination: $countryOfVaccination, certificateIssuer: $certificateIssuer, certificateIdentifier: $certificateIdentifier)';
+    return 'Vaccination(disease: $disease, vaccine: $vaccine, medicinalProduct: $medicinalProduct, manufacturer: $manufacturer, doseNumber: $doseNumber, totalSeriesOfDoses: $totalSeriesOfDoses, dateOfVaccination: $dateOfVaccination, countryOfVaccination: $countryOfVaccination, certificateIssuer: $certificateIssuer, certificateIdentifier: $certificateIdentifier, ownerBirthdate: $ownerBirthdate)';
   }
 
   @override
@@ -300,7 +318,9 @@ class _$_Vaccination extends _Vaccination {
             const DeepCollectionEquality()
                 .equals(other.certificateIssuer, certificateIssuer) &&
             const DeepCollectionEquality()
-                .equals(other.certificateIdentifier, certificateIdentifier));
+                .equals(other.certificateIdentifier, certificateIdentifier) &&
+            const DeepCollectionEquality()
+                .equals(other.ownerBirthdate, ownerBirthdate));
   }
 
   @override
@@ -315,7 +335,8 @@ class _$_Vaccination extends _Vaccination {
       const DeepCollectionEquality().hash(dateOfVaccination),
       const DeepCollectionEquality().hash(countryOfVaccination),
       const DeepCollectionEquality().hash(certificateIssuer),
-      const DeepCollectionEquality().hash(certificateIdentifier));
+      const DeepCollectionEquality().hash(certificateIdentifier),
+      const DeepCollectionEquality().hash(ownerBirthdate));
 
   @JsonKey(ignore: true)
   @override
@@ -334,7 +355,8 @@ abstract class _Vaccination extends Vaccination {
       required DateTime dateOfVaccination,
       required String countryOfVaccination,
       required String certificateIssuer,
-      required String certificateIdentifier}) = _$_Vaccination;
+      required String certificateIdentifier,
+      required DateTime ownerBirthdate}) = _$_Vaccination;
   const _Vaccination._() : super._();
 
   @override
@@ -357,6 +379,8 @@ abstract class _Vaccination extends Vaccination {
   String get certificateIssuer;
   @override
   String get certificateIdentifier;
+  @override
+  DateTime get ownerBirthdate;
   @override
   @JsonKey(ignore: true)
   _$VaccinationCopyWith<_Vaccination> get copyWith =>
