@@ -33,6 +33,7 @@ class CertificateDecoder {
           countryOfVaccination: v['co'],
           certificateIssuer: v['is'],
           certificateIdentifier: v['ci'],
+          ownerBirthdate: dateOfBirth,
         );
         vaccinations.add(vaccination);
       }
