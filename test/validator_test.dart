@@ -168,10 +168,10 @@ void main() {
   });
 
   group('Rules verification with special cases', () {
-    test('Should validate certificate with test result', () async {
+    test('Should not validate certificate with test result', () async {
       await validateRules(
         'eu_test_certificates/sk_7.txt',
-        GreenCertificateStatus.valid,
+        GreenCertificateStatus.notValid,
         withDate: DateTime(2021, 5, 22),
         mode: ValidationMode.superDGP,
       );
@@ -182,14 +182,14 @@ void main() {
         'eu_test_certificates/sk_8.txt',
         GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
-        mode: ValidationMode.superDGP,
+        mode: ValidationMode.normalDGP,
       );
     });
 
-    test('Should not validate certificate without Super DGP', () async {
+    test('Should validate certificate without Super DGP', () async {
       await validateRules(
         'eu_test_certificates/sk_8.txt',
-        GreenCertificateStatus.notValid,
+        GreenCertificateStatus.valid,
         withDate: DateTime(2021, 5, 22),
       );
     });
@@ -210,7 +210,7 @@ void main() {
         'eu_test_certificates/sk_7.txt',
         GreenCertificateStatus.notValidYet,
         withDate: DateTime(2021, 4, 22),
-        mode: ValidationMode.superDGP,
+        mode: ValidationMode.normalDGP,
       );
     });
 
