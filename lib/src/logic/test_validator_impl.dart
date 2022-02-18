@@ -25,10 +25,10 @@ class TestValidatorImpl implements TestValidator {
     required DateTime dateOfBirth,
   }) async {
     try {
-      if (mode == ValidationMode.normalDGP ||
+      if (mode == ValidationMode.superDGP ||
           mode == ValidationMode.boosterDGP ||
           mode == ValidationMode.schoolDGP) {
-        log('Not valid. Super DGP required');
+        log('Not valid. Super or Booster DGP required');
         return GreenCertificateStatus.notValid;
       }
 
