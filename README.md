@@ -93,7 +93,6 @@ You can also provide a `ValidationMode` parameter.
 | normalDGP  | Normal verification (default value) |
 | superDGP   | Super Green Pass verification       |
 | boosterDGP | Booster verification mode           |
-| schoolDGP  | School verification mode            |
 | workDGP    | Over 50Y verification mode          |
 
 Example:

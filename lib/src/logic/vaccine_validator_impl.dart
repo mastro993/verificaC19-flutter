@@ -56,13 +56,6 @@ class VaccineValidatorImpl implements VaccineValidator {
         return GreenCertificateStatus.notValid;
       }
 
-      if (mode == ValidationMode.schoolDGP) {
-        if (vaccination.isIncomplete) {
-          return GreenCertificateStatus.notValid;
-        }
-        return GreenCertificateStatus.valid;
-      }
-
       return result;
     } catch (e) {
       log('Vaccination is not present or is not a green pass: ${e.toString()}');
@@ -176,19 +169,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
         }
         return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
-      case ValidationMode.schoolDGP:
-        if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
-        }
-        if (vaccination.isIncomplete) {
-          return rules
-              .find(RuleName.vaccineStartDayNotComplete, type)
-              ?.intValue;
-        }
-        if (vaccination.isJJ) {
-          return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
-        }
-        return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
       case ValidationMode.entryITDGP:
         if (vaccination.isComplete) {
           return rules
@@ -247,14 +227,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineEndDayNotComplete, type)?.intValue;
         }
         return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
-      case ValidationMode.schoolDGP:
-        if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
-        }
-        if (vaccination.isIncomplete) {
-          return rules.find(RuleName.vaccineEndDayNotComplete, type)?.intValue;
-        }
-        return rules.find(RuleName.vaccineEndDaySchool)?.intValue;
       case ValidationMode.entryITDGP:
         if (vaccination.isComplete) {
           return rules
