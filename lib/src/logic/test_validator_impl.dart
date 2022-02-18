@@ -82,7 +82,7 @@ class TestValidatorImpl implements TestValidator {
 
     final validityStart =
         test.dateTimeOfCollection.add(Duration(hours: startHours));
-    final validityEnd = test.dateTimeOfCollection.add(Duration(days: endHours));
+    final validityEnd = test.dateTimeOfCollection.add(Duration(hours: endHours));
 
     if (validityStart > clock.now()) {
       log('Test result is not valid yet, starts at ${validityStart.toIso8601String()}');
