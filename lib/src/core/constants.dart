@@ -39,6 +39,8 @@ class RuleName {
       'vaccine_start_day_booster_NOT_IT';
   static const String vaccineEndDayBoosterNotIT =
       'vaccine_end_day_booster_NOT_IT';
+  static const String vaccineEndDayCompleteExtendedEMA =
+      'vaccine_end_day_complete_extended_EMA';
   static const String molecularTestStartHours = 'molecular_test_start_hours';
   static const String molecularTestEndHours = 'molecular_test_end_hours';
   static const String rapidTestStartHours = 'rapid_test_start_hours';
@@ -53,6 +55,7 @@ class RuleName {
   static const String recoveryCertStartDayNotIT =
       'recovery_cert_start_day_NOT_IT';
   static const String recoveryCertEndDayNotIT = 'recovery_cert_end_day_NOT_IT';
+  static const String emaVaccines = 'EMA_vaccines';
 }
 
 class RuleValue {
@@ -82,6 +85,21 @@ class TestType {
 class VaccineType {
   static const String johnson = 'EU/1/20/1525';
   static const String sputnik = 'Sputnik-V';
+  static const String moderna = 'EU/1/20/1507';
+  static const String pfizer = 'EU/1/20/1528';
+  static const String astrazeneca = 'EU/1/21/1529';
+  static const String covishield = 'Covishield';
+  static const String rCovi = 'R-COVI';
+  static const String covid19Recombinant = 'Covid-19-recombinant';
+  static const List<String> emaList = [
+    johnson,
+    moderna,
+    pfizer,
+    astrazeneca,
+    covishield,
+    rCovi,
+    covid19Recombinant,
+  ];
 }
 
 class Country {
