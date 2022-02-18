@@ -21,6 +21,10 @@ class ExemptionValidatorImpl implements ExemptionValidator {
       return GreenCertificateStatus.notValid;
     }
 
+    if (mode == ValidationMode.boosterDGP) {
+      return GreenCertificateStatus.testNeeded;
+    }
+
     try {
       final exemptionFromDay = exemption.certificateValidFrom.withoutTime();
       final exemptionUntilDay = exemption.certificateValidUntil?.withoutTime();
