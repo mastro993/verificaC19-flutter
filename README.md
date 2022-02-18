@@ -94,6 +94,7 @@ You can also provide a `ValidationMode` parameter.
 | superDGP   | Super Green Pass verification       |
 | boosterDGP | Booster verification mode           |
 | workDGP    | Over 50Y verification mode          |
+| entryITDGP | Italy travel validation mode        |
 
 Example:
 
