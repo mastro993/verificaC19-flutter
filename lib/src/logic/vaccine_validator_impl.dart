@@ -35,7 +35,7 @@ class VaccineValidatorImpl implements VaccineValidator {
       final validForItaly =
           vaccination.isEma || (vaccination.isSputnik && vaccination.isSM);
 
-      if (validForItaly) {
+      if (!validForItaly) {
         log('Vaccine ${vaccination.medicinalProduct} is not valid for Italy');
         return GreenCertificateStatus.notValid;
       }
