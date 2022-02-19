@@ -22,6 +22,7 @@ class VaccineValidatorImpl implements VaccineValidator {
   Future<GreenCertificateStatus> validate(
     Vaccination vaccination, {
     ValidationMode mode = ValidationMode.normalDGP,
+    required DateTime dateOfBirth,
   }) async {
     try {
       if (mode == ValidationMode.entryITDGP) {
@@ -40,7 +41,8 @@ class VaccineValidatorImpl implements VaccineValidator {
         return GreenCertificateStatus.notValid;
       }
 
-      final result = checkDate(vaccination: vaccination, mode: mode);
+      final result = checkDate(
+          vaccination: vaccination, mode: mode, dateOfBirth: dateOfBirth);
 
       if (result != GreenCertificateStatus.valid) {
         return result;
@@ -66,6 +68,7 @@ class VaccineValidatorImpl implements VaccineValidator {
   GreenCertificateStatus checkDate({
     required Vaccination vaccination,
     required ValidationMode mode,
+    required dateOfBirth,
   }) {
     final rules = _cache.getRules();
 
@@ -73,13 +76,14 @@ class VaccineValidatorImpl implements VaccineValidator {
       rules: rules,
       vaccination: vaccination,
       mode: mode,
+      dateOfBirth: dateOfBirth,
     );
 
     int? endDays = getEndDays(
-      rules: rules,
-      vaccination: vaccination,
-      mode: mode,
-    );
+        rules: rules,
+        vaccination: vaccination,
+        mode: mode,
+        dateOfBirth: dateOfBirth);
 
     if (startDays == null || endDays == null) {
       log('Unsupported vaccine type');
@@ -120,6 +124,7 @@ class VaccineValidatorImpl implements VaccineValidator {
     required List<ValidationRule> rules,
     required Vaccination vaccination,
     required ValidationMode mode,
+    required DateTime dateOfBirth,
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
@@ -185,7 +190,52 @@ class VaccineValidatorImpl implements VaccineValidator {
               .find(RuleName.vaccineStartDayNotComplete, type)
               ?.intValue;
         }
-        return null;
+        if (vaccination.isJJ) {
+          return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
+        }
+        return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
+      case ValidationMode.workDGP:
+        final limitDate = DateTime(
+          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
+          dateOfBirth.month,
+          dateOfBirth.day,
+        );
+        if (clock.now() >= limitDate) {
+          log("older than 50 years old. getStartDays ValidationMode.superDGP");
+          if (vaccination.isBooster) {
+            if (vaccination.isIT) {
+              return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
+            } else {
+              return rules.find(RuleName.vaccineStartDayBoosterNotIT)?.intValue;
+            }
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineStartDayNotComplete, type)
+                ?.intValue;
+          }
+          if (vaccination.isJJ) {
+            return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
+          }
+          if (vaccination.isIT) {
+            return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
+          }
+          return rules.find(RuleName.vaccineStartDayCompleteNotIT)?.intValue;
+        } else {
+          log("less than 50 years old. getStartDays ValidationMode.normalDGP");
+          if (vaccination.isBooster) {
+            return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineStartDayNotComplete, type)
+                ?.intValue;
+          }
+          if (vaccination.isJJ) {
+            return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
+          }
+          return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
+        }
     }
   }
 
@@ -193,6 +243,7 @@ class VaccineValidatorImpl implements VaccineValidator {
     required List<ValidationRule> rules,
     required Vaccination vaccination,
     required ValidationMode mode,
+    required DateTime dateOfBirth,
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
@@ -238,7 +289,41 @@ class VaccineValidatorImpl implements VaccineValidator {
         }
         return null;
       case ValidationMode.workDGP:
-        return null;
+        final limitDate = DateTime(
+          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
+          dateOfBirth.month,
+          dateOfBirth.day,
+        );
+        if (clock.now() >= limitDate) {
+          log("older than 50 years old. getEndDays ValidationMode.superDGP");
+          if (vaccination.isBooster) {
+            if (vaccination.isIT) {
+              return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
+            } else {
+              return rules.find(RuleName.vaccineEndDayBoosterNotIT)?.intValue;
+            }
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineEndDayNotComplete, type)
+                ?.intValue;
+          }
+          if (vaccination.isIT) {
+            return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
+          }
+          return rules.find(RuleName.vaccineEndDayCompleteNotIT)?.intValue;
+        } else {
+          log("less than 50 years old. getEndDays like ValidationMode.normalDGP");
+          if (vaccination.isBooster) {
+            return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineEndDayNotComplete, type)
+                ?.intValue;
+          }
+          return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
+        }
     }
   }
 }

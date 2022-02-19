@@ -108,6 +108,7 @@ class CertificateValidatorImpl implements CertificateValidator {
       return _vaccineValidator.validate(
         certificate.vaccinations.last,
         mode: mode,
+        dateOfBirth: certificate.dateOfBirth,
       );
     }
 
