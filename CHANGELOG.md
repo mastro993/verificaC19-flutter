@@ -1,3 +1,7 @@
+## 1.4.1
+
+- WorkDGP validation logic fixes
+
 ## 1.4.0
 
 - Removed School mode ([DECRETO-LEGGE 4 febbraio 2022, n. 5](https://www.gazzettaufficiale.it/eli/id/2022/02/04/22G00014/sg))
