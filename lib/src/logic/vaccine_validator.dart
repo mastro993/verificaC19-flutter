@@ -8,5 +8,6 @@ abstract class VaccineValidator {
   Future<GreenCertificateStatus> validate(
     Vaccination vaccination, {
     ValidationMode mode,
+    required DateTime dateOfBirth,
   });
 }
