@@ -22,7 +22,6 @@ class VaccineValidatorImpl implements VaccineValidator {
   Future<GreenCertificateStatus> validate(
     Vaccination vaccination, {
     ValidationMode mode = ValidationMode.normalDGP,
-    required DateTime dateOfBirth,
   }) async {
     try {
       if (mode == ValidationMode.entryITDGP) {
@@ -42,7 +41,7 @@ class VaccineValidatorImpl implements VaccineValidator {
       }
 
       final result = checkDate(
-          vaccination: vaccination, mode: mode, dateOfBirth: dateOfBirth);
+          vaccination: vaccination, mode: mode);
 
       if (result != GreenCertificateStatus.valid) {
         return result;
@@ -68,7 +67,6 @@ class VaccineValidatorImpl implements VaccineValidator {
   GreenCertificateStatus checkDate({
     required Vaccination vaccination,
     required ValidationMode mode,
-    required dateOfBirth,
   }) {
     final rules = _cache.getRules();
 
@@ -76,14 +74,13 @@ class VaccineValidatorImpl implements VaccineValidator {
       rules: rules,
       vaccination: vaccination,
       mode: mode,
-      dateOfBirth: dateOfBirth,
     );
 
     int? endDays = getEndDays(
         rules: rules,
         vaccination: vaccination,
         mode: mode,
-        dateOfBirth: dateOfBirth);
+      );
 
     if (startDays == null || endDays == null) {
       log('Unsupported vaccine type');
@@ -124,7 +121,6 @@ class VaccineValidatorImpl implements VaccineValidator {
     required List<ValidationRule> rules,
     required Vaccination vaccination,
     required ValidationMode mode,
-    required DateTime dateOfBirth,
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
@@ -185,12 +181,7 @@ class VaccineValidatorImpl implements VaccineValidator {
         }
         return null;
       case ValidationMode.workDGP:
-        final limitDate = DateTime(
-          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
-          dateOfBirth.month,
-          dateOfBirth.day,
-        );
-        if (clock.now() >= limitDate) {
+        if (vaccination.isOwnerOver50Y) {
           log("older than 50 years old. getStartDays ValidationMode.superDGP");
           if (vaccination.isBooster) {
             if (vaccination.isIT) {
@@ -233,7 +224,6 @@ class VaccineValidatorImpl implements VaccineValidator {
     required List<ValidationRule> rules,
     required Vaccination vaccination,
     required ValidationMode mode,
-    required DateTime dateOfBirth,
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
