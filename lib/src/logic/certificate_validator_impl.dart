@@ -93,6 +93,7 @@ class CertificateValidatorImpl implements CertificateValidator {
         certificate.recoveryStatements.last,
         mode: mode,
         isRecoveryBis: isRecoveryBis,
+        dateOfBirth: certificate.dateOfBirth,
       );
     }
 

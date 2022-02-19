@@ -9,5 +9,6 @@ abstract class RecoveryStatementValidator {
     RecoveryStatement statement, {
     ValidationMode mode,
     bool isRecoveryBis,
+    required DateTime dateOfBirth,
   });
 }
