@@ -6,6 +6,8 @@ part of 'api_client.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _ApiClient implements ApiClient {
   _ApiClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://get.dgc.gov.it/v1/dgc';
