@@ -46,8 +46,7 @@ class VaccineValidatorImpl implements VaccineValidator {
         return result;
       }
 
-      if (mode == ValidationMode.boosterDGP ||
-          mode == ValidationMode.visitorsRSADGP) {
+      if (mode == ValidationMode.visitorsRSADGP) {
         if (vaccination.isBooster) {
           return GreenCertificateStatus.valid;
         }
@@ -157,7 +156,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
         }
         return rules.find(RuleName.vaccineStartDayCompleteNotIT)?.intValue;
-      case ValidationMode.boosterDGP:
       case ValidationMode.visitorsRSADGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
@@ -251,7 +249,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
         }
         return rules.find(RuleName.vaccineEndDayCompleteNotIT)?.intValue;
-      case ValidationMode.boosterDGP:
       case ValidationMode.visitorsRSADGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;

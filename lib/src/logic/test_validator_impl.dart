@@ -26,7 +26,6 @@ class TestValidatorImpl implements TestValidator {
   }) async {
     try {
       if (mode == ValidationMode.superDGP ||
-          mode == ValidationMode.boosterDGP ||
           mode == ValidationMode.visitorsRSADGP) {
         log('Not valid. Super or Booster DGP required');
         return GreenCertificateStatus.notValid;

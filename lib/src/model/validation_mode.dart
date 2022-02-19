@@ -5,10 +5,7 @@ enum ValidationMode {
   /// Super DGP, valid from 6/12/21 to 15/01/22
   superDGP,
 
-  /// Certificate from booster dose
-  boosterDGP,
-
-  /// RSA Visitors
+  /// RSA Visitors (ex boosterDGP)
   visitorsRSADGP,
 
   /// Work mode
