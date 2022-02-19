@@ -279,12 +279,7 @@ class VaccineValidatorImpl implements VaccineValidator {
         }
         return null;
       case ValidationMode.workDGP:
-        final limitDate = DateTime(
-          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
-          dateOfBirth.month,
-          dateOfBirth.day,
-        );
-        if (clock.now() >= limitDate) {
+        if (vaccination.isOwnerOver50Y) {
           log("older than 50 years old. getEndDays ValidationMode.superDGP");
           if (vaccination.isBooster) {
             if (vaccination.isIT) {
