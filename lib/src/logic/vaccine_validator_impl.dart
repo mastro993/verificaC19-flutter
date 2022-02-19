@@ -185,16 +185,6 @@ class VaccineValidatorImpl implements VaccineValidator {
         }
         return null;
       case ValidationMode.workDGP:
-        if (vaccination.isIncomplete) {
-          return rules
-              .find(RuleName.vaccineStartDayNotComplete, type)
-              ?.intValue;
-        }
-        if (vaccination.isJJ) {
-          return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
-        }
-        return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
-      case ValidationMode.workDGP:
         final limitDate = DateTime(
           dateOfBirth.year + RuleValue.vaccineMandatoryAge,
           dateOfBirth.month,
