@@ -40,8 +40,7 @@ class VaccineValidatorImpl implements VaccineValidator {
         return GreenCertificateStatus.notValid;
       }
 
-      final result = checkDate(
-          vaccination: vaccination, mode: mode);
+      final result = checkDate(vaccination: vaccination, mode: mode);
 
       if (result != GreenCertificateStatus.valid) {
         return result;
@@ -77,10 +76,10 @@ class VaccineValidatorImpl implements VaccineValidator {
     );
 
     int? endDays = getEndDays(
-        rules: rules,
-        vaccination: vaccination,
-        mode: mode,
-      );
+      rules: rules,
+      vaccination: vaccination,
+      mode: mode,
+    );
 
     if (startDays == null || endDays == null) {
       log('Unsupported vaccine type');
