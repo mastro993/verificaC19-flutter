@@ -8,9 +8,9 @@ enum ValidationMode {
   /// Certificate from booster dose
   boosterDGP,
 
-  /// School mode
-  schoolDGP,
-
   /// Work mode
   workDGP,
+
+  /// Validation mode for Italy entry
+  entryITDGP,
 }

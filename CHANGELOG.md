@@ -1,3 +1,9 @@
+## 1.4.0
+
+- Removed School mode ([DECRETO-LEGGE 4 febbraio 2022, n. 5](https://www.gazzettaufficiale.it/eli/id/2022/02/04/22G00014/sg))
+- Added Italy travel validation mode
+- Validation logig bug fixes
+
 ## 1.3.3
 
 - Fix: test not valid for over 50Y (mandatory vaccine for over 50Y).

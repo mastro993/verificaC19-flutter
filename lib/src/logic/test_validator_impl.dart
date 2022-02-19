@@ -26,8 +26,7 @@ class TestValidatorImpl implements TestValidator {
   }) async {
     try {
       if (mode == ValidationMode.superDGP ||
-          mode == ValidationMode.boosterDGP ||
-          mode == ValidationMode.schoolDGP) {
+          mode == ValidationMode.boosterDGP) {
         log('Not valid. Super or Booster DGP required');
         return GreenCertificateStatus.notValid;
       }
@@ -82,7 +81,8 @@ class TestValidatorImpl implements TestValidator {
 
     final validityStart =
         test.dateTimeOfCollection.add(Duration(hours: startHours));
-    final validityEnd = test.dateTimeOfCollection.add(Duration(hours: endHours));
+    final validityEnd =
+        test.dateTimeOfCollection.add(Duration(hours: endHours));
 
     if (validityStart > clock.now()) {
       log('Test result is not valid yet, starts at ${validityStart.toIso8601String()}');

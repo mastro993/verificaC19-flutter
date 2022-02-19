@@ -52,8 +52,11 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
 
       final validityStart =
           statement.certificateValidFrom.add(Duration(days: startDays));
-      final validityEnd = getValidityEnd(
-          statement: statement, additionalDays: endDays, mode: mode);
+      final validityExtension =
+          statement.certificateValidFrom.add(Duration(days: endDays));
+      final validityEnd = statement.certificateValidUntil > validityExtension
+          ? statement.certificateValidUntil
+          : validityExtension;
 
       final today = clock.now().withoutTime();
 
@@ -72,26 +75,6 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
     } catch (e) {
       log('Recovery statement is not present or is not a green pass: ${e.toString()}');
       return GreenCertificateStatus.notValid;
-    }
-  }
-
-  DateTime getValidityEnd({
-    required RecoveryStatement statement,
-    required int additionalDays,
-    required ValidationMode mode,
-  }) {
-    if (mode == ValidationMode.schoolDGP) {
-      final validityExtension =
-          statement.dateOfFirstPositiveTest.add(Duration(days: additionalDays));
-      return statement.certificateValidUntil < validityExtension
-          ? statement.certificateValidUntil
-          : validityExtension;
-    } else {
-      final validityExtension =
-          statement.certificateValidFrom.add(Duration(days: additionalDays));
-      return statement.certificateValidUntil > validityExtension
-          ? statement.certificateValidUntil
-          : validityExtension;
     }
   }
 
@@ -116,10 +99,10 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
           return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
         }
         return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
-      case ValidationMode.schoolDGP:
-        return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
       case ValidationMode.workDGP:
         return null;
+      case ValidationMode.entryITDGP:
+        return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
     }
   }
 
@@ -144,10 +127,10 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
           return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
         }
         return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
-      case ValidationMode.schoolDGP:
-        return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
       case ValidationMode.workDGP:
         return null;
+      case ValidationMode.entryITDGP:
+        return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
     }
   }
 }
