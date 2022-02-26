@@ -21,6 +21,11 @@ class ExemptionValidatorImpl implements ExemptionValidator {
       return GreenCertificateStatus.notValid;
     }
 
+    if (mode == ValidationMode.boosterDGP ||
+        mode == ValidationMode.visitorsRSADGP) {
+      return GreenCertificateStatus.testNeeded;
+    }
+
     try {
       final exemptionFromDay = exemption.certificateValidFrom.withoutTime();
       final exemptionUntilDay = exemption.certificateValidUntil?.withoutTime();
@@ -33,7 +38,8 @@ class ExemptionValidatorImpl implements ExemptionValidator {
         return GreenCertificateStatus.notValid;
       }
 
-      if (mode == ValidationMode.boosterDGP) {
+      if (mode == ValidationMode.boosterDGP ||
+          mode == ValidationMode.visitorsRSADGP) {
         return GreenCertificateStatus.testNeeded;
       }
 

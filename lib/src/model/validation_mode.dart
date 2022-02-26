@@ -8,8 +8,8 @@ enum ValidationMode {
   /// Certificate from booster dose
   boosterDGP,
 
-  /// School mode
-  schoolDGP,
+  /// RSA Visitors
+  visitorsRSADGP,
 
   /// Work mode
   workDGP,

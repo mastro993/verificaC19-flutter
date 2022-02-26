@@ -23,9 +23,11 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
     RecoveryStatement statement, {
     ValidationMode mode = ValidationMode.normalDGP,
     bool isRecoveryBis = false,
+    required DateTime dateOfBirth,
   }) async {
     try {
-      if (mode == ValidationMode.boosterDGP) {
+      if (mode == ValidationMode.boosterDGP ||
+          mode == ValidationMode.visitorsRSADGP) {
         log('Test needed');
         return GreenCertificateStatus.testNeeded;
       }
@@ -33,16 +35,19 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
       final rules = _cache.getRules();
 
       int? startDays = getStartDays(
-          rules: rules,
-          statement: statement,
-          mode: mode,
-          isRecoveryBis: isRecoveryBis);
+        rules: rules,
+        statement: statement,
+        mode: mode,
+        isRecoveryBis: isRecoveryBis,
+        dateOfBirth: dateOfBirth,
+      );
 
       int? endDays = getEndDays(
         rules: rules,
         statement: statement,
         mode: mode,
         isRecoveryBis: isRecoveryBis,
+        dateOfBirth: dateOfBirth,
       );
 
       if (startDays == null || endDays == null) {
@@ -52,8 +57,11 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
 
       final validityStart =
           statement.certificateValidFrom.add(Duration(days: startDays));
-      final validityEnd = getValidityEnd(
-          statement: statement, additionalDays: endDays, mode: mode);
+      final validityExtension =
+          statement.certificateValidFrom.add(Duration(days: endDays));
+      final validityEnd = statement.certificateValidUntil > validityExtension
+          ? statement.certificateValidUntil
+          : validityExtension;
 
       final today = clock.now().withoutTime();
 
@@ -75,35 +83,17 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
     }
   }
 
-  DateTime getValidityEnd({
-    required RecoveryStatement statement,
-    required int additionalDays,
-    required ValidationMode mode,
-  }) {
-    if (mode == ValidationMode.schoolDGP) {
-      final validityExtension =
-          statement.dateOfFirstPositiveTest.add(Duration(days: additionalDays));
-      return statement.certificateValidUntil < validityExtension
-          ? statement.certificateValidUntil
-          : validityExtension;
-    } else {
-      final validityExtension =
-          statement.certificateValidFrom.add(Duration(days: additionalDays));
-      return statement.certificateValidUntil > validityExtension
-          ? statement.certificateValidUntil
-          : validityExtension;
-    }
-  }
-
   int? getStartDays({
     required List<ValidationRule> rules,
     required RecoveryStatement statement,
     required ValidationMode mode,
     required bool isRecoveryBis,
+    required DateTime dateOfBirth,
   }) {
     switch (mode) {
       case ValidationMode.normalDGP:
       case ValidationMode.boosterDGP:
+      case ValidationMode.visitorsRSADGP:
         if (isRecoveryBis) {
           return rules.find(RuleName.recoveryCertPvStartDay)?.intValue;
         }
@@ -116,10 +106,28 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
           return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
         }
         return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
-      case ValidationMode.schoolDGP:
-        return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
       case ValidationMode.workDGP:
-        return null;
+        final limitDate = DateTime(
+          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
+          dateOfBirth.month,
+          dateOfBirth.day,
+        );
+        if (clock.now() >= limitDate) {
+          log("older than 50 years old. getEndDays ValidationMode.superDGP");
+          if (isRecoveryBis) {
+            return rules.find(RuleName.recoveryCertPvStartDay)?.intValue;
+          }
+          if (statement.isIT) {
+            return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
+          }
+          return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
+        } else {
+          log("less than 50 years old. getEndDays ValidationMode.normalDGP");
+          if (isRecoveryBis) {
+            return rules.find(RuleName.recoveryCertPvStartDay)?.intValue;
+          }
+          return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
+        }
       case ValidationMode.entryITDGP:
         return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
     }
@@ -130,10 +138,12 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
     required RecoveryStatement statement,
     required ValidationMode mode,
     required bool isRecoveryBis,
+    required DateTime dateOfBirth,
   }) {
     switch (mode) {
       case ValidationMode.normalDGP:
       case ValidationMode.boosterDGP:
+      case ValidationMode.visitorsRSADGP:
         if (isRecoveryBis) {
           return rules.find(RuleName.recoveryCertPvEndDay)?.intValue;
         }
@@ -146,10 +156,28 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
           return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
         }
         return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
-      case ValidationMode.schoolDGP:
-        return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
       case ValidationMode.workDGP:
-        return null;
+        final limitDate = DateTime(
+          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
+          dateOfBirth.month,
+          dateOfBirth.day,
+        );
+        if (clock.now() >= limitDate) {
+          log("older than 50 years old. getEndDays ValidationMode.superDGP");
+          if (isRecoveryBis) {
+            return rules.find(RuleName.recoveryCertPvEndDay)?.intValue;
+          }
+          if (statement.isIT) {
+            return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
+          }
+          return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
+        } else {
+          log("less than 50 years old. getEndDays ValidationMode.normalDGP");
+          if (isRecoveryBis) {
+            return rules.find(RuleName.recoveryCertPvEndDay)?.intValue;
+          }
+          return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
+        }
       case ValidationMode.entryITDGP:
         return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
     }

@@ -24,11 +24,18 @@ class VaccineValidatorImpl implements VaccineValidator {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     try {
+      if (mode == ValidationMode.entryITDGP) {
+        if (vaccination.isIncomplete || !vaccination.isEma) {
+          log('Full vaccination (EMA approved) is required to enter in Italy');
+          return GreenCertificateStatus.notValid;
+        }
+      }
+
       // In Italy, Sputnik is accepted only for San Marino republic
       final validForItaly =
           vaccination.isEma || (vaccination.isSputnik && vaccination.isSM);
 
-      if (validForItaly) {
+      if (!validForItaly) {
         log('Vaccine ${vaccination.medicinalProduct} is not valid for Italy');
         return GreenCertificateStatus.notValid;
       }
@@ -39,7 +46,8 @@ class VaccineValidatorImpl implements VaccineValidator {
         return result;
       }
 
-      if (mode == ValidationMode.boosterDGP) {
+      if (mode == ValidationMode.boosterDGP ||
+          mode == ValidationMode.visitorsRSADGP) {
         if (vaccination.isBooster) {
           return GreenCertificateStatus.valid;
         }
@@ -47,13 +55,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return GreenCertificateStatus.testNeeded;
         }
         return GreenCertificateStatus.notValid;
-      }
-
-      if (mode == ValidationMode.schoolDGP) {
-        if (vaccination.isIncomplete) {
-          return GreenCertificateStatus.notValid;
-        }
-        return GreenCertificateStatus.valid;
       }
 
       return result;
@@ -123,7 +124,6 @@ class VaccineValidatorImpl implements VaccineValidator {
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
-      case ValidationMode.entryITDGP:
       case ValidationMode.normalDGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
@@ -158,6 +158,7 @@ class VaccineValidatorImpl implements VaccineValidator {
         }
         return rules.find(RuleName.vaccineStartDayCompleteNotIT)?.intValue;
       case ValidationMode.boosterDGP:
+      case ValidationMode.visitorsRSADGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
         }
@@ -170,21 +171,53 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
         }
         return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
-      case ValidationMode.schoolDGP:
-        if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
-        }
-        if (vaccination.isIncomplete) {
+      case ValidationMode.entryITDGP:
+        if (vaccination.isComplete) {
           return rules
-              .find(RuleName.vaccineStartDayNotComplete, type)
+              .find(RuleName.vaccineStartDayCompleteNotIT, type)
               ?.intValue;
         }
-        if (vaccination.isJJ) {
-          return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
+        if (vaccination.isBooster) {
+          return rules.find(RuleName.vaccineStartDayBoosterNotIT)?.intValue;
         }
-        return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
-      case ValidationMode.workDGP:
         return null;
+      case ValidationMode.workDGP:
+        if (vaccination.isOwnerOver50Y) {
+          log("older than 50 years old. getStartDays ValidationMode.superDGP");
+          if (vaccination.isBooster) {
+            if (vaccination.isIT) {
+              return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
+            } else {
+              return rules.find(RuleName.vaccineStartDayBoosterNotIT)?.intValue;
+            }
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineStartDayNotComplete, type)
+                ?.intValue;
+          }
+          if (vaccination.isJJ) {
+            return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
+          }
+          if (vaccination.isIT) {
+            return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
+          }
+          return rules.find(RuleName.vaccineStartDayCompleteNotIT)?.intValue;
+        } else {
+          log("less than 50 years old. getStartDays ValidationMode.normalDGP");
+          if (vaccination.isBooster) {
+            return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineStartDayNotComplete, type)
+                ?.intValue;
+          }
+          if (vaccination.isJJ) {
+            return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
+          }
+          return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
+        }
     }
   }
 
@@ -195,7 +228,6 @@ class VaccineValidatorImpl implements VaccineValidator {
   }) {
     final type = vaccination.medicinalProduct;
     switch (mode) {
-      case ValidationMode.entryITDGP:
       case ValidationMode.normalDGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
@@ -220,6 +252,7 @@ class VaccineValidatorImpl implements VaccineValidator {
         }
         return rules.find(RuleName.vaccineEndDayCompleteNotIT)?.intValue;
       case ValidationMode.boosterDGP:
+      case ValidationMode.visitorsRSADGP:
         if (vaccination.isBooster) {
           return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
         }
@@ -227,16 +260,47 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineEndDayNotComplete, type)?.intValue;
         }
         return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
-      case ValidationMode.schoolDGP:
+      case ValidationMode.entryITDGP:
+        if (vaccination.isComplete) {
+          return rules
+              .find(RuleName.vaccineEndDayCompleteNotIT, type)
+              ?.intValue;
+        }
         if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
+          return rules.find(RuleName.vaccineEndDayBoosterNotIT)?.intValue;
         }
-        if (vaccination.isIncomplete) {
-          return rules.find(RuleName.vaccineEndDayNotComplete, type)?.intValue;
-        }
-        return rules.find(RuleName.vaccineEndDaySchool)?.intValue;
-      case ValidationMode.workDGP:
         return null;
+      case ValidationMode.workDGP:
+        if (vaccination.isOwnerOver50Y) {
+          log("older than 50 years old. getEndDays ValidationMode.superDGP");
+          if (vaccination.isBooster) {
+            if (vaccination.isIT) {
+              return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
+            } else {
+              return rules.find(RuleName.vaccineEndDayBoosterNotIT)?.intValue;
+            }
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineEndDayNotComplete, type)
+                ?.intValue;
+          }
+          if (vaccination.isIT) {
+            return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
+          }
+          return rules.find(RuleName.vaccineEndDayCompleteNotIT)?.intValue;
+        } else {
+          log("less than 50 years old. getEndDays like ValidationMode.normalDGP");
+          if (vaccination.isBooster) {
+            return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
+          }
+          if (vaccination.isIncomplete) {
+            return rules
+                .find(RuleName.vaccineEndDayNotComplete, type)
+                ?.intValue;
+          }
+          return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
+        }
     }
   }
 }
