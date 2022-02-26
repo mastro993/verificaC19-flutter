@@ -21,7 +21,8 @@ class ExemptionValidatorImpl implements ExemptionValidator {
       return GreenCertificateStatus.notValid;
     }
 
-    if (mode == ValidationMode.boosterDGP) {
+    if (mode == ValidationMode.boosterDGP ||
+        mode == ValidationMode.visitorsRSADGP) {
       return GreenCertificateStatus.testNeeded;
     }
 
@@ -37,7 +38,8 @@ class ExemptionValidatorImpl implements ExemptionValidator {
         return GreenCertificateStatus.notValid;
       }
 
-      if (mode == ValidationMode.boosterDGP) {
+      if (mode == ValidationMode.boosterDGP ||
+          mode == ValidationMode.visitorsRSADGP) {
         return GreenCertificateStatus.testNeeded;
       }
 

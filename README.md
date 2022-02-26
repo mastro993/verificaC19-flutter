@@ -88,13 +88,14 @@ The result is a `ValidationResult` object containing the decoded `Certificate` o
 
 You can also provide a `ValidationMode` parameter.
 
-| Code       | Description                         |
-| ---------- | ----------------------------------- |
-| normalDGP  | Normal verification (default value) |
-| superDGP   | Super Green Pass verification       |
-| boosterDGP | Booster verification mode           |
-| workDGP    | Over 50Y verification mode          |
-| entryITDGP | Italy travel validation mode        |
+| Code           | Description                         |
+| -------------- | ----------------------------------- |
+| normalDGP      | Normal verification (default value) |
+| superDGP       | Super Green Pass verification       |
+| boosterDGP     | Booster verification mode           |
+| workDGP        | Over 50Y verification mode          |
+| entryITDGP     | Italy travel validation mode        |
+| visitorsRSADGP | RSA visitors validation mode        |
 
 Example:
 
