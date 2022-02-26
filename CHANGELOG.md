@@ -1,3 +1,7 @@
+## 1.4.2
+
+- RSA Visitors validation mode
+
 ## 1.4.1
 
 - WorkDGP validation logic fixes
