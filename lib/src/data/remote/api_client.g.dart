@@ -19,7 +19,10 @@ class _ApiClient implements ApiClient {
   Future<HttpResponse<String>> getCertUpdate(resumeToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'x-resume-token': resumeToken};
+    final _headers = <String, dynamic>{
+      r'User-Agent': 'verificac19-flutter/1.4.2',
+      r'x-resume-token': resumeToken
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<String>(
@@ -37,7 +40,10 @@ class _ApiClient implements ApiClient {
   Future<HttpResponse<List<String>>> getCertStatus() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'User-Agent': 'verificac19-flutter/1.4.2'
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<String>>>(
@@ -54,7 +60,10 @@ class _ApiClient implements ApiClient {
   Future<HttpResponse<List<ValidationRule>>> getValidationRules() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'User-Agent': 'verificac19-flutter/1.4.2'
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<ValidationRule>>>(
@@ -74,7 +83,10 @@ class _ApiClient implements ApiClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'version': version};
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'User-Agent': 'verificac19-flutter/1.4.2'
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<CRLStatus>>(
@@ -95,7 +107,10 @@ class _ApiClient implements ApiClient {
       r'chunk': chunk
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'User-Agent': 'verificac19-flutter/1.4.2'
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<CRL>>(

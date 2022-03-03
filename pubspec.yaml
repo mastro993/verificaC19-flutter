@@ -42,3 +42,7 @@ dev_dependencies:
   injectable_generator: ^1.5.2
   mockito: ^5.0.17
   retrofit_generator: ^3.0.1+1
+
+assets:
+  - assets/
+  - pubspec.yaml
