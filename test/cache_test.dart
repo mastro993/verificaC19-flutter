@@ -5,7 +5,6 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:verificac19/src/core/constants.dart';
-import 'package:verificac19/src/data/local/local_repository.dart';
 import 'package:verificac19/src/data/local/local_repository_impl.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 
@@ -16,7 +15,7 @@ void main() {
   late MockBox updatesBox;
   late MockBox<String> revokeListBox;
   late MockHiveInterface hive;
-  late LocalRepository cache;
+  late LocalRepositoryImpl cache;
 
   setUp(() {
     dataBox = MockBox();

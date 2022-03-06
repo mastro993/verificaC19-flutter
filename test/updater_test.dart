@@ -5,7 +5,6 @@ import 'package:mockito/mockito.dart';
 import 'package:verificac19/src/data/model/crl.dart';
 import 'package:verificac19/src/data/model/crl_delta.dart';
 import 'package:verificac19/src/data/model/crl_status.dart';
-import 'package:verificac19/src/data/updater.dart';
 import 'package:verificac19/src/data/updater_impl.dart';
 
 import './mocks.dart';
@@ -13,7 +12,7 @@ import './mocks.dart';
 void main() {
   late MockRemoteRepository remote;
   late MockLocalRepository cache;
-  late Updater updater;
+  late UpdaterImpl updater;
 
   setUp(() {
     remote = MockRemoteRepository();

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:verificac19/src/data/remote/remote_repository.dart';
 import 'package:verificac19/src/data/remote/remote_repository_impl.dart';
 
 import './fixtures/fixture_reader.dart';
@@ -11,7 +10,7 @@ import './fixtures/fixture_reader.dart';
 void main() {
   late Dio dio;
   late DioAdapter dioAdapter;
-  late RemoteRepository remote;
+  late RemoteRepositoryImpl remote;
 
   setUp(() {
     dio = Dio();

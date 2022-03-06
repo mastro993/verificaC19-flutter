@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 import 'package:verificac19/src/logic/certificate_decoder.dart';
-import 'package:verificac19/src/logic/certificate_validator.dart';
 import 'package:verificac19/src/logic/certificate_validator_impl.dart';
 import 'package:verificac19/src/logic/exemption_validator_impl.dart';
 import 'package:verificac19/src/logic/recovery_statement_validator_impl.dart';
@@ -22,7 +21,7 @@ void main() {
   late RecoveryStatementValidatorImpl recoveryStatementValidator;
   late TestValidatorImpl testValidatorImpl;
   late ExemptionValidatorImpl exemptionValidator;
-  late CertificateValidator validator;
+  late CertificateValidatorImpl validator;
 
   setUp(() {
     cache = MockLocalRepository();
