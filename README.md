@@ -10,9 +10,9 @@
 
 ## About
 
-This package allows to decode and validate any EU Digital Green Certificate in your Flutter application. It is based on the specications contained in the [official it-dgc-verificac19-sdk-android repository](https://github.com/ministero-salute/it-dgc-verificac19-sdk-android).
+This package allows to decode and validate any EU Digital Green Certificate in your Flutter application. It is based on the specifications contained in the [official it-dgc-verificac19-sdk-android repository](https://github.com/ministero-salute/it-dgc-verificac19-sdk-android).
 
-This library requires an internet connection to downlod and cache rules, CRL and DSCs at least once per day. Once updated the entire process of validation can be done completely offline and in real-time.
+This library requires an internet connection to download and cache rules, CRL and DSCs at least once per day. Once updated the entire process of validation can be done completely offline and in real-time.
 
 Starting from version 1.4.3, this package has been included in the [list of verified SDKs by Italian authorities (Ministero della salute)](https://github.com/ministero-salute/it-dgc-verificac19-sdk-onboarding).  
 
