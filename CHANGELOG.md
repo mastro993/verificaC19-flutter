@@ -1,3 +1,7 @@
+## 1.4.3
+
+- Added package name and version in requests headers
+
 ## 1.4.2
 
 - RSA Visitors validation mode
