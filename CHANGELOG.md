@@ -1,3 +1,8 @@
+## 1.4.4
+
+- Updated packages
+- Updated Cbor package (version 5.x)
+
 ## 1.4.3
 
 - Added package name and version in requests headers
