@@ -26,7 +26,6 @@ class DccUtils {
   static const _cborDataSignerIndex = 3;
 
   static Future<DCC> getDCCFromRawData(String rawData) async {
-    final Cbor cbor = Cbor();
     Uint8List base45Data;
 
     try {
@@ -36,78 +35,53 @@ class DccUtils {
     }
 
     final List<int> coseRaw = const ZLibDecoder().decodeBytes(base45Data);
+    final CborList? cborData = cborDecode(coseRaw) as CborList?;
 
-    cbor.decodeFromList(coseRaw);
-    final List? messageObject = cbor.getDecodedData();
-    cbor.clearDecodeStack();
-
-    if (messageObject == null || messageObject.isEmpty) {
+    if (cborData == null || cborData.isEmpty) {
       throw DecodeException('Cbor decoding error');
     }
 
-    final element = messageObject.first;
-
-    if (element is! List) {
-      throw DecodeException('Unsupported format');
-    }
-
-    List items = element;
-
     // check if it has exactly 4 items
-    if (items.length != _cborDataLength) {
+    if (cborData.length != _cborDataLength) {
       throw DecodeException('Invalid format');
     }
 
-    final protectedHeader = items[_cborDataProtectedHeaderIndex];
-    final unprotectedHeader = items[_cborDataUnprotectedHeaderIndex];
-    final payloadBytes = items[_cborDataPayloadBytesIndex];
-    final signers = items[_cborDataSignerIndex];
+    final protectedHeader =
+        cborData[_cborDataProtectedHeaderIndex] as CborBytes;
+    final unprotectedHeader =
+        cborData[_cborDataUnprotectedHeaderIndex] as CborMap;
+    final payloadBytes = cborData[_cborDataPayloadBytesIndex] as CborBytes;
+    final signers = cborData[_cborDataSignerIndex] as CborBytes;
 
-    cbor.decodeFromBuffer(protectedHeader);
-    var headerList = cbor.getDecodedData();
-    cbor.clearDecodeStack();
-
-    var header = <dynamic, dynamic>{};
-
-    if (headerList != null) {
-      if (headerList.isEmpty) {
-        throw DecodeException('Cbor decoding error');
-      }
-      header = headerList.first;
+    final header = cborDecode(protectedHeader.bytes) as CborMap?;
+    if (header == null || header.isEmpty) {
+      throw DecodeException('Cbor decoding error');
     }
 
-    final kid = HeaderUtils.parseKid(header, unprotectedHeader);
-    final algo = HeaderUtils.parseAlg(header, unprotectedHeader);
+    final kid = HeaderUtils.parseKid(
+      header.toObject() as Map<dynamic, dynamic>,
+      unprotectedHeader.toObject() as Map<dynamic, dynamic>,
+    );
+    final algo = HeaderUtils.parseAlg(
+      header.toObject() as Map<dynamic, dynamic>,
+      unprotectedHeader.toObject() as Map<dynamic, dynamic>,
+    );
 
-    cbor.decodeFromBuffer(payloadBytes);
-    var payload = cbor.getDecodedData();
-    cbor.clearDecodeStack();
+    var payload = cborDecode(payloadBytes.bytes) as CborMap?;
 
     if (payload == null || payload.isEmpty) {
       throw DecodeException('Cbor decoding error');
     }
 
-    var payloadData = payload.first[-260][1];
+    var payloadData = (payload.toObject() as Map<dynamic, dynamic>)[-260][1];
 
     return DCC(
       raw: rawData,
       coseRaw: coseRaw,
       payload: payloadData,
-      payloadBytes: Uint8List.view(
-        payloadBytes.buffer,
-        0,
-        payloadBytes.length,
-      ),
-      protectedHeader: Uint8List.view(
-        protectedHeader.buffer,
-        0,
-        protectedHeader.length,
-      ),
-      signers: Uint8List.view(
-        signers.buffer,
-        0,
-        signers.length,
-      ),
+      payloadBytes: Uint8List.fromList(payloadBytes.bytes),
+      protectedHeader: Uint8List.fromList(protectedHeader.bytes),
+      signers: Uint8List.fromList(signers.bytes),
       unprotectedHeader: unprotectedHeader,
       kid: kid,
       algorithm: algo,
@@ -136,18 +110,12 @@ class DccUtils {
       publicKey = publicKeyInfo.subjectPublicKey;
     }
 
-    final sigStructure = Cbor();
-    final sigStructureEncoder = sigStructure.encoder;
-
-    sigStructureEncoder.writeArray([
+    final sigStructureBytes = cborEncode(CborValue([
       'Signature1',
       dcc.protectedHeader,
       Uint8List(0),
       dcc.payloadBytes,
-    ]);
-
-    sigStructure.decodeFromInput();
-    final sigStructureBytes = sigStructure.output.getData();
+    ]));
 
     Verifier? verifier;
 
@@ -177,7 +145,7 @@ class DccUtils {
         verified = ninv.verify(
           npk,
           dcc.signers,
-          sigStructureBytes.buffer.asUint8List(),
+          sigStructureBytes,
         );
       } else {
         throw CertificateException("Unsupported algorithm");
@@ -188,7 +156,7 @@ class DccUtils {
 
     if (!verified && verifier != null) {
       verified = verifier.verify(
-        sigStructureBytes.buffer.asUint8List(),
+        Uint8List.fromList(sigStructureBytes),
         Signature(dcc.signers),
       );
     }

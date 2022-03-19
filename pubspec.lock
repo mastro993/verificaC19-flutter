@@ -112,7 +112,7 @@ packages:
       name: cbor
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.0"
+    version: "5.0.1"
   characters:
     dependency: transitive
     description:
@@ -291,6 +291,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  hex:
+    dependency: transitive
+    description:
+      name: hex
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   hive:
     dependency: "direct main"
     description:
@@ -333,6 +340,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  ieee754:
+    dependency: transitive
+    description:
+      name: ieee754
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   injectable:
     dependency: "direct main"
     description:

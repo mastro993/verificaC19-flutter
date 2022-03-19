@@ -11,7 +11,7 @@ environment:
 dependencies:
   archive: ^3.2.2
   asn1lib: ^1.1.0
-  cbor: ^4.1.0
+  cbor: ^5.0.1
   clock: ^1.1.0
   crypto: ^3.0.1
   crypto_keys: ^0.3.0
