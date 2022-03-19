@@ -41,7 +41,6 @@ class DccUtils {
       throw DecodeException('Cbor decoding error');
     }
 
-    // check if it has exactly 4 items
     if (cborData.length != _cborDataLength) {
       throw DecodeException('Invalid format');
     }
@@ -68,12 +67,15 @@ class DccUtils {
     );
 
     var payload = cborDecode(payloadBytes.bytes) as CborMap?;
-
     if (payload == null || payload.isEmpty) {
       throw DecodeException('Cbor decoding error');
     }
 
-    var payloadData = (payload.toObject() as Map<dynamic, dynamic>)[-260][1];
+    var payloadData = (payload.toObject() as Map<dynamic, dynamic>)[-260]?[1]
+        as Map<dynamic, dynamic>?;
+    if (payloadData == null || payloadData.isEmpty) {
+      throw DecodeException('Cbor decoding error');
+    }
 
     return DCC(
       raw: rawData,
