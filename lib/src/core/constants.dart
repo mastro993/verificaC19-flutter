@@ -3,21 +3,6 @@ class UpdateWindowHours {
   static const int min = 1;
 }
 
-class DbKeys {
-  static const String dbData = 'verificac19databox';
-  static const String dbCRL = 'verificac19crlbox';
-  static const String dbUpdates = 'verificac19updatesbox';
-
-  static const String keySignatures = 'signatures';
-  static const String keyRules = 'rules';
-  static const String keySignaturesList = 'signatures_list';
-  static const String keyRulesUpdate = 'rules_update';
-  static const String keySignaturesUpdate = 'signatures_update';
-  static const String keySignaturesListUpdate = 'signatures_list_update';
-  static const String keyCRLUpdate = 'crl_update';
-  static const String keyCRLVersion = 'crl_version';
-}
-
 class RuleName {
   static const String blackListUvci = 'black_list_uvci';
   static const String vaccineStartDayNotComplete =

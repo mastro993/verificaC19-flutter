@@ -1,6 +1,6 @@
 name: verificac19
 description: EU Digital Green Certificate validation SDK for Flutter apps
-version: 1.4.4
+version: 1.5.0-dev.1
 homepage: https://github.com/mastro993/verificac19-flutter
 documentation: https://github.com/mastro993/verificac19-flutter
 
@@ -21,14 +21,16 @@ dependencies:
     sdk: flutter
   freezed_annotation: ^1.1.0
   get_it: ^7.2.0
-  hive: ^2.0.6
-  hive_flutter: ^1.1.0
   injectable: ^1.5.3
+  isar: ^2.2.1
+  isar_flutter_libs: ^2.2.1
   json_annotation: ^4.4.0
   json_serializable: ^6.1.5
   mutex: ^3.0.0
   ninja: ^3.0.8
+  path_provider: ^2.0.9
   retrofit: ^3.0.1+1
+  shared_preferences: ^2.0.13
   x509b: ^0.2.5
 
 dev_dependencies:
@@ -37,8 +39,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^1.1.1
-  hive_generator: ^1.1.2
   http_mock_adapter: ^0.3.2
   injectable_generator: ^1.5.3
+  isar_generator: ^2.2.1
   mockito: ^5.1.0
   retrofit_generator: ^4.0.1

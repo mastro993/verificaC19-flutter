@@ -3,19 +3,17 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i6;
-import 'dart:typed_data' as _i9;
+import 'dart:typed_data' as _i10;
 
-import 'package:dio/src/adapter.dart' as _i5;
-import 'package:dio/src/options.dart' as _i13;
-import 'package:hive/hive.dart' as _i2;
-import 'package:hive/src/box/default_compaction_strategy.dart' as _i8;
-import 'package:hive/src/box/default_key_comparator.dart' as _i7;
+import 'package:dio/src/adapter.dart' as _i4;
+import 'package:dio/src/options.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:verificac19/src/data/local/local_repository.dart' as _i10;
-import 'package:verificac19/src/data/model/crl.dart' as _i4;
-import 'package:verificac19/src/data/model/crl_status.dart' as _i3;
-import 'package:verificac19/src/data/model/validation_rule.dart' as _i11;
-import 'package:verificac19/src/data/remote/remote_repository.dart' as _i12;
+import 'package:shared_preferences/shared_preferences.dart' as _i11;
+import 'package:verificac19/src/data/local/local_repository.dart' as _i5;
+import 'package:verificac19/src/data/model/crl.dart' as _i3;
+import 'package:verificac19/src/data/model/crl_status.dart' as _i2;
+import 'package:verificac19/src/data/model/validation_rule.dart' as _i7;
+import 'package:verificac19/src/data/remote/remote_repository.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,253 +25,16 @@ import 'package:verificac19/src/data/remote/remote_repository.dart' as _i12;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeBox_0<E> extends _i1.Fake implements _i2.Box<E> {}
+class _FakeCRLStatus_0 extends _i1.Fake implements _i2.CRLStatus {}
 
-class _FakeLazyBox_1<E> extends _i1.Fake implements _i2.LazyBox<E> {}
+class _FakeCRL_1 extends _i1.Fake implements _i3.CRL {}
 
-class _FakeCRLStatus_2 extends _i1.Fake implements _i3.CRLStatus {}
-
-class _FakeCRL_3 extends _i1.Fake implements _i4.CRL {}
-
-class _FakeResponseBody_4 extends _i1.Fake implements _i5.ResponseBody {}
-
-/// A class which mocks [HiveInterface].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
-  MockHiveInterface() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  void init(String? path) =>
-      super.noSuchMethod(Invocation.method(#init, [path]),
-          returnValueForMissingStub: null);
-  @override
-  _i6.Future<_i2.Box<E>> openBox<E>(String? name,
-          {_i2.HiveCipher? encryptionCipher,
-          _i2.KeyComparator? keyComparator = _i7.defaultKeyComparator,
-          _i2.CompactionStrategy? compactionStrategy =
-              _i8.defaultCompactionStrategy,
-          bool? crashRecovery = true,
-          String? path,
-          _i9.Uint8List? bytes,
-          List<int>? encryptionKey}) =>
-      (super.noSuchMethod(
-              Invocation.method(#openBox, [
-                name
-              ], {
-                #encryptionCipher: encryptionCipher,
-                #keyComparator: keyComparator,
-                #compactionStrategy: compactionStrategy,
-                #crashRecovery: crashRecovery,
-                #path: path,
-                #bytes: bytes,
-                #encryptionKey: encryptionKey
-              }),
-              returnValue: Future<_i2.Box<E>>.value(_FakeBox_0<E>()))
-          as _i6.Future<_i2.Box<E>>);
-  @override
-  _i6.Future<_i2.LazyBox<E>> openLazyBox<E>(String? name,
-          {_i2.HiveCipher? encryptionCipher,
-          _i2.KeyComparator? keyComparator = _i7.defaultKeyComparator,
-          _i2.CompactionStrategy? compactionStrategy =
-              _i8.defaultCompactionStrategy,
-          bool? crashRecovery = true,
-          String? path,
-          List<int>? encryptionKey}) =>
-      (super.noSuchMethod(
-              Invocation.method(#openLazyBox, [
-                name
-              ], {
-                #encryptionCipher: encryptionCipher,
-                #keyComparator: keyComparator,
-                #compactionStrategy: compactionStrategy,
-                #crashRecovery: crashRecovery,
-                #path: path,
-                #encryptionKey: encryptionKey
-              }),
-              returnValue: Future<_i2.LazyBox<E>>.value(_FakeLazyBox_1<E>()))
-          as _i6.Future<_i2.LazyBox<E>>);
-  @override
-  _i2.Box<E> box<E>(String? name) =>
-      (super.noSuchMethod(Invocation.method(#box, [name]),
-          returnValue: _FakeBox_0<E>()) as _i2.Box<E>);
-  @override
-  _i2.LazyBox<E> lazyBox<E>(String? name) =>
-      (super.noSuchMethod(Invocation.method(#lazyBox, [name]),
-          returnValue: _FakeLazyBox_1<E>()) as _i2.LazyBox<E>);
-  @override
-  bool isBoxOpen(String? name) =>
-      (super.noSuchMethod(Invocation.method(#isBoxOpen, [name]),
-          returnValue: false) as bool);
-  @override
-  _i6.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> deleteBoxFromDisk(String? name, {String? path}) =>
-      (super.noSuchMethod(
-          Invocation.method(#deleteBoxFromDisk, [name], {#path: path}),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> deleteFromDisk() =>
-      (super.noSuchMethod(Invocation.method(#deleteFromDisk, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  List<int> generateSecureKey() =>
-      (super.noSuchMethod(Invocation.method(#generateSecureKey, []),
-          returnValue: <int>[]) as List<int>);
-  @override
-  _i6.Future<bool> boxExists(String? name, {String? path}) =>
-      (super.noSuchMethod(Invocation.method(#boxExists, [name], {#path: path}),
-          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
-  @override
-  void registerAdapter<T>(_i2.TypeAdapter<T>? adapter,
-          {bool? internal = false, bool? override = false}) =>
-      super.noSuchMethod(
-          Invocation.method(#registerAdapter, [adapter],
-              {#internal: internal, #override: override}),
-          returnValueForMissingStub: null);
-  @override
-  bool isAdapterRegistered(int? typeId) =>
-      (super.noSuchMethod(Invocation.method(#isAdapterRegistered, [typeId]),
-          returnValue: false) as bool);
-  @override
-  void ignoreTypeId<T>(int? typeId) =>
-      super.noSuchMethod(Invocation.method(#ignoreTypeId, [typeId]),
-          returnValueForMissingStub: null);
-}
-
-/// A class which mocks [Box].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
-  MockBox() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  Iterable<E> get values =>
-      (super.noSuchMethod(Invocation.getter(#values), returnValue: <E>[])
-          as Iterable<E>);
-  @override
-  String get name =>
-      (super.noSuchMethod(Invocation.getter(#name), returnValue: '') as String);
-  @override
-  bool get isOpen =>
-      (super.noSuchMethod(Invocation.getter(#isOpen), returnValue: false)
-          as bool);
-  @override
-  bool get lazy =>
-      (super.noSuchMethod(Invocation.getter(#lazy), returnValue: false)
-          as bool);
-  @override
-  Iterable<dynamic> get keys =>
-      (super.noSuchMethod(Invocation.getter(#keys), returnValue: <dynamic>[])
-          as Iterable<dynamic>);
-  @override
-  int get length =>
-      (super.noSuchMethod(Invocation.getter(#length), returnValue: 0) as int);
-  @override
-  bool get isEmpty =>
-      (super.noSuchMethod(Invocation.getter(#isEmpty), returnValue: false)
-          as bool);
-  @override
-  bool get isNotEmpty =>
-      (super.noSuchMethod(Invocation.getter(#isNotEmpty), returnValue: false)
-          as bool);
-  @override
-  Iterable<E> valuesBetween({dynamic startKey, dynamic endKey}) =>
-      (super.noSuchMethod(
-          Invocation.method(
-              #valuesBetween, [], {#startKey: startKey, #endKey: endKey}),
-          returnValue: <E>[]) as Iterable<E>);
-  @override
-  E? getAt(int? index) =>
-      (super.noSuchMethod(Invocation.method(#getAt, [index])) as E?);
-  @override
-  Map<dynamic, E> toMap() => (super.noSuchMethod(Invocation.method(#toMap, []),
-      returnValue: <dynamic, E>{}) as Map<dynamic, E>);
-  @override
-  dynamic keyAt(int? index) =>
-      super.noSuchMethod(Invocation.method(#keyAt, [index]));
-  @override
-  _i6.Stream<_i2.BoxEvent> watch({dynamic key}) => (super.noSuchMethod(
-      Invocation.method(#watch, [], {#key: key}),
-      returnValue: Stream<_i2.BoxEvent>.empty()) as _i6.Stream<_i2.BoxEvent>);
-  @override
-  bool containsKey(dynamic key) =>
-      (super.noSuchMethod(Invocation.method(#containsKey, [key]),
-          returnValue: false) as bool);
-  @override
-  _i6.Future<void> put(dynamic key, E? value) =>
-      (super.noSuchMethod(Invocation.method(#put, [key, value]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> putAt(int? index, E? value) =>
-      (super.noSuchMethod(Invocation.method(#putAt, [index, value]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> putAll(Map<dynamic, E>? entries) =>
-      (super.noSuchMethod(Invocation.method(#putAll, [entries]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<int> add(E? value) =>
-      (super.noSuchMethod(Invocation.method(#add, [value]),
-          returnValue: Future<int>.value(0)) as _i6.Future<int>);
-  @override
-  _i6.Future<Iterable<int>> addAll(Iterable<E>? values) =>
-      (super.noSuchMethod(Invocation.method(#addAll, [values]),
-              returnValue: Future<Iterable<int>>.value(<int>[]))
-          as _i6.Future<Iterable<int>>);
-  @override
-  _i6.Future<void> delete(dynamic key) =>
-      (super.noSuchMethod(Invocation.method(#delete, [key]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> deleteAt(int? index) =>
-      (super.noSuchMethod(Invocation.method(#deleteAt, [index]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> deleteAll(Iterable<dynamic>? keys) =>
-      (super.noSuchMethod(Invocation.method(#deleteAll, [keys]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> compact() =>
-      (super.noSuchMethod(Invocation.method(#compact, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<int> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
-      returnValue: Future<int>.value(0)) as _i6.Future<int>);
-  @override
-  _i6.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> deleteFromDisk() =>
-      (super.noSuchMethod(Invocation.method(#deleteFromDisk, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<void> flush() => (super.noSuchMethod(Invocation.method(#flush, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-}
+class _FakeResponseBody_2 extends _i1.Fake implements _i4.ResponseBody {}
 
 /// A class which mocks [LocalRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
+class MockLocalRepository extends _i1.Mock implements _i5.LocalRepository {
   MockLocalRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -299,7 +60,7 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
       (super.noSuchMethod(Invocation.method(#needCRLUpdate, []),
           returnValue: false) as bool);
   @override
-  _i6.Future<void> storeRules(List<_i11.ValidationRule>? rules) =>
+  _i6.Future<void> storeRules(List<_i7.ValidationRule>? rules) =>
       (super.noSuchMethod(Invocation.method(#storeRules, [rules]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
@@ -327,9 +88,9 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  List<_i11.ValidationRule> getRules() =>
+  List<_i7.ValidationRule> getRules() =>
       (super.noSuchMethod(Invocation.method(#getRules, []),
-          returnValue: <_i11.ValidationRule>[]) as List<_i11.ValidationRule>);
+          returnValue: <_i7.ValidationRule>[]) as List<_i7.ValidationRule>);
   @override
   Map<String, String> getSignatures() =>
       (super.noSuchMethod(Invocation.method(#getSignatures, []),
@@ -354,17 +115,16 @@ class MockLocalRepository extends _i1.Mock implements _i10.LocalRepository {
 /// A class which mocks [RemoteRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoteRepository extends _i1.Mock implements _i12.RemoteRepository {
+class MockRemoteRepository extends _i1.Mock implements _i8.RemoteRepository {
   MockRemoteRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<List<_i11.ValidationRule>> getValidationRules() =>
+  _i6.Future<List<_i7.ValidationRule>> getValidationRules() =>
       (super.noSuchMethod(Invocation.method(#getValidationRules, []),
-              returnValue: Future<List<_i11.ValidationRule>>.value(
-                  <_i11.ValidationRule>[]))
-          as _i6.Future<List<_i11.ValidationRule>>);
+          returnValue: Future<List<_i7.ValidationRule>>.value(
+              <_i7.ValidationRule>[])) as _i6.Future<List<_i7.ValidationRule>>);
   @override
   _i6.Future<Map<String, String>> getSignatures() => (super.noSuchMethod(
           Invocation.method(#getSignatures, []),
@@ -376,39 +136,111 @@ class MockRemoteRepository extends _i1.Mock implements _i12.RemoteRepository {
               returnValue: Future<List<String>>.value(<String>[]))
           as _i6.Future<List<String>>);
   @override
-  _i6.Future<_i3.CRLStatus> getCRLStatus({int? version}) => (super.noSuchMethod(
+  _i6.Future<_i2.CRLStatus> getCRLStatus({int? version}) => (super.noSuchMethod(
           Invocation.method(#getCRLStatus, [], {#version: version}),
-          returnValue: Future<_i3.CRLStatus>.value(_FakeCRLStatus_2()))
-      as _i6.Future<_i3.CRLStatus>);
+          returnValue: Future<_i2.CRLStatus>.value(_FakeCRLStatus_0()))
+      as _i6.Future<_i2.CRLStatus>);
   @override
-  _i6.Future<_i4.CRL> getCRLChunk({int? version, int? chunk}) =>
+  _i6.Future<_i3.CRL> getCRLChunk({int? version, int? chunk}) =>
       (super.noSuchMethod(
               Invocation.method(
                   #getCRLChunk, [], {#version: version, #chunk: chunk}),
-              returnValue: Future<_i4.CRL>.value(_FakeCRL_3()))
-          as _i6.Future<_i4.CRL>);
+              returnValue: Future<_i3.CRL>.value(_FakeCRL_1()))
+          as _i6.Future<_i3.CRL>);
 }
 
 /// A class which mocks [HttpClientAdapter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClientAdapter extends _i1.Mock implements _i5.HttpClientAdapter {
+class MockHttpClientAdapter extends _i1.Mock implements _i4.HttpClientAdapter {
   MockHttpClientAdapter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i5.ResponseBody> fetch(
-          _i13.RequestOptions? options,
-          _i6.Stream<_i9.Uint8List>? requestStream,
+  _i6.Future<_i4.ResponseBody> fetch(
+          _i9.RequestOptions? options,
+          _i6.Stream<_i10.Uint8List>? requestStream,
           _i6.Future<dynamic>? cancelFuture) =>
       (super.noSuchMethod(
               Invocation.method(#fetch, [options, requestStream, cancelFuture]),
               returnValue:
-                  Future<_i5.ResponseBody>.value(_FakeResponseBody_4()))
-          as _i6.Future<_i5.ResponseBody>);
+                  Future<_i4.ResponseBody>.value(_FakeResponseBody_2()))
+          as _i6.Future<_i4.ResponseBody>);
   @override
   void close({bool? force = false}) =>
       super.noSuchMethod(Invocation.method(#close, [], {#force: force}),
           returnValueForMissingStub: null);
+}
+
+/// A class which mocks [SharedPreferences].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPreferences extends _i1.Mock implements _i11.SharedPreferences {
+  MockSharedPreferences() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  Set<String> getKeys() => (super.noSuchMethod(Invocation.method(#getKeys, []),
+      returnValue: <String>{}) as Set<String>);
+  @override
+  Object? get(String? key) =>
+      (super.noSuchMethod(Invocation.method(#get, [key])) as Object?);
+  @override
+  bool? getBool(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getBool, [key])) as bool?);
+  @override
+  int? getInt(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getInt, [key])) as int?);
+  @override
+  double? getDouble(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getDouble, [key])) as double?);
+  @override
+  String? getString(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getString, [key])) as String?);
+  @override
+  bool containsKey(String? key) =>
+      (super.noSuchMethod(Invocation.method(#containsKey, [key]),
+          returnValue: false) as bool);
+  @override
+  List<String>? getStringList(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getStringList, [key]))
+          as List<String>?);
+  @override
+  _i6.Future<bool> setBool(String? key, bool? value) =>
+      (super.noSuchMethod(Invocation.method(#setBool, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setInt(String? key, int? value) =>
+      (super.noSuchMethod(Invocation.method(#setInt, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setDouble(String? key, double? value) =>
+      (super.noSuchMethod(Invocation.method(#setDouble, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setString(String? key, String? value) =>
+      (super.noSuchMethod(Invocation.method(#setString, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setStringList(String? key, List<String>? value) =>
+      (super.noSuchMethod(Invocation.method(#setStringList, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> remove(String? key) =>
+      (super.noSuchMethod(Invocation.method(#remove, [key]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> commit() =>
+      (super.noSuchMethod(Invocation.method(#commit, []),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
+      returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> reload() =>
+      (super.noSuchMethod(Invocation.method(#reload, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }

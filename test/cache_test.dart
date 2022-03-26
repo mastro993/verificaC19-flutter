@@ -1,61 +1,63 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:clock/clock.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:isar/isar.dart';
+import 'package:path/path.dart' as path;
 import 'package:verificac19/src/core/constants.dart';
 import 'package:verificac19/src/data/local/local_repository_impl.dart';
+import 'package:verificac19/src/data/model/revoked_cert.dart';
 import 'package:verificac19/src/data/model/validation_rule.dart';
 
+import 'isar_utils.dart';
 import 'mocks.mocks.dart';
 
 void main() {
-  late MockBox dataBox;
-  late MockBox updatesBox;
-  late MockBox<String> revokeListBox;
-  late MockHiveInterface hive;
+  late MockSharedPreferences prefs;
+  late Isar isar;
   late LocalRepositoryImpl cache;
+  late Directory tempDir;
+  late Directory cacheDir;
 
-  setUp(() {
-    dataBox = MockBox();
-    updatesBox = MockBox<DateTime>();
-    revokeListBox = MockBox<String>();
-    hive = MockHiveInterface();
+  setUp(() async {
+    prefs = MockSharedPreferences();
 
-    when(hive.box(DbKeys.dbData)).thenAnswer((_) => dataBox);
-    when(hive.box(DbKeys.dbCRL)).thenAnswer((_) => revokeListBox);
-    when(hive.box(DbKeys.dbUpdates)).thenAnswer((_) => updatesBox);
+    isar = await openTempIsar(
+      schemas: [RevokedCertSchema],
+    );
 
-    cache = LocalRepositoryImpl(hive: hive);
+    tempDir = Directory(path.join(Directory.current.path, 'test', 'tmp'));
+    await tempDir.create();
+
+    cacheDir = Directory(path.join(Directory.current.path, 'test', 'cache'));
+
+    cache = LocalRepositoryImpl(tempDir.path, prefs, isar);
+  });
+
+  tearDown(() async {
+    await isar.close(deleteFromDisk: true);
+    await tempDir.delete(recursive: true);
   });
 
   group('Rules', () {
     test('Should store rules', () async {
-      // act
-      await cache.storeRules([]);
-      // assert
-      verify(dataBox.put(DbKeys.keyRules, any)).called(1);
-      verify(updatesBox.put(DbKeys.keyRulesUpdate, any)).called(1);
-      verifyNoMoreInteractions(dataBox);
-    });
-
-    test('Should get rules', () {
       // arrange
-      final List<ValidationRule> tResult = [];
-      when(dataBox.get(DbKeys.keyRules, defaultValue: [])).thenReturn(tResult);
+      final tRulesRaw =
+          await File(path.join(cacheDir.path, 'rules.json')).readAsString();
+      final tRulesJson = jsonDecode(tRulesRaw) as List<dynamic>;
+      final tRules = tRulesJson.map((e) => ValidationRule.fromJson(e)).toList();
       // act
-      final result = cache.getRules();
+      await cache.storeRules(tRules);
+      final rules = cache.getRules();
       // assert
-      verify(dataBox.get(DbKeys.keyRules, defaultValue: [])).called(1);
-      verifyNoMoreInteractions(dataBox);
-      expect(result, equals(tResult));
+      assert(rules.length == tRules.length);
     });
 
     test('Should return that rules must be updated if rules are not yet stored',
         () {
       // arrange
-      when(updatesBox.get(DbKeys.keyRulesUpdate)).thenReturn(null);
       // act
       final result = cache.needRulesUpdate();
       // assert
@@ -66,7 +68,6 @@ void main() {
         'Should return that rules must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keyRulesUpdate)).thenReturn(clock.now());
       // act
       await cache.storeRules([]);
       // assert
@@ -83,7 +84,6 @@ void main() {
 
     test('Should return that rules must be updated if are expired', () async {
       // arrange
-      when(updatesBox.get(DbKeys.keyRulesUpdate)).thenReturn(clock.now());
       // act
       // assert
       final now = clock.now();
@@ -100,31 +100,24 @@ void main() {
 
   group('Signatures', () {
     test('Should store signatures', () async {
-      // act
-      await cache.storeSignatures({});
-      // assert
-      verify(dataBox.put(DbKeys.keySignatures, any)).called(1);
-      verify(updatesBox.put(DbKeys.keySignaturesUpdate, any)).called(1);
-      verifyNoMoreInteractions(dataBox);
-    });
-
-    test('Should get signatures', () {
       // arrange
-      final Map<String, String> tResult = {};
-      when(dataBox.get(DbKeys.keySignatures, defaultValue: {}))
-          .thenReturn(tResult);
+      final tSignaturesRaw =
+          await File(path.join(cacheDir.path, 'signatures.json'))
+              .readAsString();
+      final tSignaturesJson =
+          jsonDecode(tSignaturesRaw) as Map<String, dynamic>;
+      final tSignatures =
+          tSignaturesJson.map((key, value) => MapEntry(key, value as String));
       // act
-      final result = cache.getSignatures();
+      await cache.storeSignatures(tSignatures);
+      final signatures = cache.getSignatures();
       // assert
-      verify(dataBox.get(DbKeys.keySignatures, defaultValue: {})).called(1);
-      verifyNoMoreInteractions(dataBox);
-      expect(result, equals(tResult));
+      assert(signatures.length == tSignatures.length);
     });
 
     test('Should return that rules must be updated if rules are not yet stored',
         () {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesUpdate)).thenReturn(null);
       // act
       final result = cache.needSignaturesUpdate();
       // assert
@@ -135,8 +128,8 @@ void main() {
         'Should return that signatures must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesUpdate)).thenReturn(clock.now());
       // act
+      await cache.storeSignatures({});
       // assert
       final now = clock.now();
       final testDate = now.add(const Duration(
@@ -152,7 +145,6 @@ void main() {
     test('Should return that signatures must be updated if are expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesUpdate)).thenReturn(clock.now());
       // act
       // assert
 
@@ -170,32 +162,22 @@ void main() {
 
   group('Signatures list', () {
     test('Should store signatures list', () async {
+      final tSignaturesRaw =
+          await File(path.join(cacheDir.path, 'signaturesList.json'))
+              .readAsString();
+      final tSignaturesJson = jsonDecode(tSignaturesRaw) as List<dynamic>;
+      final tSignatures = tSignaturesJson.map((e) => e as String).toList();
       // act
-      await cache.storeSignaturesList([]);
+      await cache.storeSignaturesList(tSignatures);
+      final signatures = cache.getSignaturesList();
       // assert
-      verify(dataBox.put(DbKeys.keySignaturesList, any)).called(1);
-      verify(updatesBox.put(DbKeys.keySignaturesListUpdate, any)).called(1);
-      verifyNoMoreInteractions(dataBox);
-    });
-
-    test('Should get signatures list', () {
-      // arrange
-      final List<String> tResult = [];
-      when(dataBox.get(DbKeys.keySignaturesList, defaultValue: []))
-          .thenReturn(tResult);
-      // act
-      final result = cache.getSignaturesList();
-      // assert
-      verify(dataBox.get(DbKeys.keySignaturesList, defaultValue: [])).called(1);
-      verifyNoMoreInteractions(dataBox);
-      expect(result, equals(tResult));
+      assert(signatures.length == tSignatures.length);
     });
 
     test(
         'Should return that signatures list must be updated if rules are not yet stored',
         () {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesListUpdate)).thenReturn(null);
       // act
       final result = cache.needSignaturesListUpdate();
       // assert
@@ -206,9 +188,8 @@ void main() {
         'Should return that signatures list must not be updated if rules are not yet expired',
         () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesListUpdate))
-          .thenReturn(clock.now());
       // act
+      await cache.storeSignaturesList([]);
       // assert
       final now = clock.now();
       final testDate = now.add(const Duration(
@@ -223,8 +204,6 @@ void main() {
 
     test('Should return that rules must be updated if are expired', () async {
       // arrange
-      when(updatesBox.get(DbKeys.keySignaturesListUpdate))
-          .thenReturn(clock.now());
       // act
       // assert
 
@@ -241,56 +220,41 @@ void main() {
   });
   group('Revoke list', () {
     test('Should store revoke list', () async {
-      // arrange
-      when(revokeListBox.clear()).thenAnswer((_) async => 0);
-      when(revokeListBox.addAll(any)).thenAnswer((_) async => []);
-      when(revokeListBox.deleteAll(any)).thenAnswer((_) async => []);
+      final tCrlRaw = await File(path.join(cacheDir.path, 'revokedList.json'))
+          .readAsString();
+      final tCrlJson = jsonDecode(tCrlRaw) as List<dynamic>;
+      final tCrl = tCrlJson.map((e) => e as String).toList();
       // act
-      await cache.storeCRL(insertions: [], deletions: []);
+      await cache.storeCRL(insertions: tCrl);
+      final crl = cache.getCRL();
       // assert
-      verifyNever(revokeListBox.clear());
-      verify(revokeListBox.addAll(any)).called(1);
-      verify(revokeListBox.deleteAll(any)).called(1);
-      verifyNoMoreInteractions(revokeListBox);
+      assert(crl.length == tCrl.length);
     });
 
-    test('Should get revoke list', () {
-      // arrange
-      final List<String> tRevokeList = [];
-      when(revokeListBox.values).thenReturn(tRevokeList);
-      // act
-      final result = cache.getCRL();
-      // assert
-      verify(revokeListBox.values).called(1);
-      verifyNoMoreInteractions(revokeListBox);
-      expect(result, equals(tRevokeList));
-    });
-
-    test('Should return that UVCI is revoked', () {
+    test('Should return that UVCI is revoked', () async {
       // arrange
       final List<String> tRevokeListRaw = ['A', 'B', 'C'];
       final List<String> tRevokeList = tRevokeListRaw
           .map((a) => base64Encode(sha256.convert(utf8.encode(a)).bytes))
           .toList();
-      when(revokeListBox.values).thenReturn(tRevokeList);
       // act
+      await cache.storeCRL(insertions: tRevokeList);
       final result = cache.isUvciRevoked('A');
       // assert
-      verify(revokeListBox.values).called(1);
-      verifyNoMoreInteractions(revokeListBox);
-      expect(result, equals(true));
+      assert(result);
     });
 
-    test('Should return that UVCI is not revoked', () {
+    test('Should return that UVCI is not revoked', () async {
       // arrange
-      final List<String> tRevokeList = ['A', 'B', 'C'];
-      when(revokeListBox.values).thenReturn(tRevokeList);
+      final List<String> tRevokeListRaw = ['A', 'B', 'C'];
+      final List<String> tRevokeList = tRevokeListRaw
+          .map((a) => base64Encode(sha256.convert(utf8.encode(a)).bytes))
+          .toList();
       // act
+      await cache.storeCRL(insertions: tRevokeList);
       final result = cache.isUvciRevoked('D');
       // assert
-      verify(revokeListBox.values).called(1);
-      verifyNoMoreInteractions(revokeListBox);
-      expect(result, equals(false));
+      assert(!result);
     });
   });
 }
