@@ -1,3 +1,17 @@
+## 1.5.0+1
+
+- Hot-fix
+
+## 1.5.0
+
+- Removed work validation mode ([DECRETO-LEGGE 24 marzo 2022, n. 24](https://www.gazzettaufficiale.it/eli/id/2022/03/24/22G00034/sg))
+- Improved local storage
+
+## 1.4.4
+
+- Updated packages
+- Updated Cbor package (version 5.x)
+
 ## 1.4.3
 
 - Added package name and version in requests headers

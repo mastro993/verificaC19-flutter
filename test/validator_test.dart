@@ -337,32 +337,4 @@ void main() {
       expect(result, equals(GreenCertificateStatus.notValid));
     });
   });
-
-  group('Rules verification with Work scan mode', () {
-    test('Should not validate test result over 50Y', () async {
-      withClock(Clock.fixed(DateTime(2021, 5, 22)), () async {
-        final base45 = fixture('eu_test_certificates/sk_8.txt');
-        var cert = await CertificateDecoder.getCertificateFromRawData(base45);
-        cert = cert.copyWith(dateOfBirth: DateTime(1950));
-        final result = await validator.checkValidationRules(
-          cert,
-          mode: ValidationMode.workDGP,
-        );
-        expect(result, equals(GreenCertificateStatus.notValid));
-      });
-    });
-
-    test('Should validate test result not over 50Y', () async {
-      withClock(Clock.fixed(DateTime(2021, 5, 22)), () async {
-        final base45 = fixture('eu_test_certificates/sk_8.txt');
-        var cert = await CertificateDecoder.getCertificateFromRawData(base45);
-        cert = cert.copyWith(dateOfBirth: DateTime(2000));
-        final result = await validator.checkValidationRules(
-          cert,
-          mode: ValidationMode.workDGP,
-        );
-        expect(result, equals(GreenCertificateStatus.valid));
-      });
-    });
-  });
 }

@@ -106,28 +106,6 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
           return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
         }
         return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
-      case ValidationMode.workDGP:
-        final limitDate = DateTime(
-          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
-          dateOfBirth.month,
-          dateOfBirth.day,
-        );
-        if (clock.now() >= limitDate) {
-          log("older than 50 years old. getEndDays ValidationMode.superDGP");
-          if (isRecoveryBis) {
-            return rules.find(RuleName.recoveryCertPvStartDay)?.intValue;
-          }
-          if (statement.isIT) {
-            return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
-          }
-          return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
-        } else {
-          log("less than 50 years old. getEndDays ValidationMode.normalDGP");
-          if (isRecoveryBis) {
-            return rules.find(RuleName.recoveryCertPvStartDay)?.intValue;
-          }
-          return rules.find(RuleName.recoveryCertStartDayIT)?.intValue;
-        }
       case ValidationMode.entryITDGP:
         return rules.find(RuleName.recoveryCertStartDayNotIT)?.intValue;
     }
@@ -156,28 +134,6 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
           return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
         }
         return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
-      case ValidationMode.workDGP:
-        final limitDate = DateTime(
-          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
-          dateOfBirth.month,
-          dateOfBirth.day,
-        );
-        if (clock.now() >= limitDate) {
-          log("older than 50 years old. getEndDays ValidationMode.superDGP");
-          if (isRecoveryBis) {
-            return rules.find(RuleName.recoveryCertPvEndDay)?.intValue;
-          }
-          if (statement.isIT) {
-            return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
-          }
-          return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
-        } else {
-          log("less than 50 years old. getEndDays ValidationMode.normalDGP");
-          if (isRecoveryBis) {
-            return rules.find(RuleName.recoveryCertPvEndDay)?.intValue;
-          }
-          return rules.find(RuleName.recoveryCertEndDayIT)?.intValue;
-        }
       case ValidationMode.entryITDGP:
         return rules.find(RuleName.recoveryCertEndDayNotIT)?.intValue;
     }
