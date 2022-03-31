@@ -37,19 +37,6 @@ class TestValidatorImpl implements TestValidator {
         return GreenCertificateStatus.notValid;
       }
 
-      if (mode == ValidationMode.workDGP) {
-        final limitDate = DateTime(
-          dateOfBirth.year + RuleValue.vaccineMandatoryAge,
-          dateOfBirth.month,
-          dateOfBirth.day,
-        );
-
-        if (clock.now() >= limitDate) {
-          log('Not valid. Must not be older than 50 years.');
-          return GreenCertificateStatus.notValid;
-        }
-      }
-
       return checkDate(test: test, mode: mode);
     } catch (e) {
       log('Test Result is not present or is not a green pass: ${e.toString()}');
