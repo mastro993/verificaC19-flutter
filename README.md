@@ -95,7 +95,6 @@ You can also provide a `ValidationMode` parameter.
 | normalDGP      | Normal verification (default value) |
 | superDGP       | Super Green Pass verification       |
 | boosterDGP     | Booster verification mode           |
-| workDGP        | Over 50Y verification mode          |
 | entryITDGP     | Italy travel validation mode        |
 | visitorsRSADGP | RSA visitors validation mode        |
 
