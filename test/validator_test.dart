@@ -300,7 +300,7 @@ void main() {
     });
 
     test(
-        'Should validate certificatw with Sputnik-V Vaccination from San Marino',
+        'Should validate certificate with Sputnik-V Vaccination from San Marino',
         () async {
       await validateRules(
         'eu_test_certificates/sm_1.txt',

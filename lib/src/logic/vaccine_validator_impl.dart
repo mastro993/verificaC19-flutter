@@ -189,6 +189,12 @@ class VaccineValidatorImpl implements VaccineValidator {
     required Vaccination vaccination,
     required ValidationMode mode,
   }) {
+    final offset = rules.find(RuleName.vaccineCompleteUnder18Offset)?.intValue;
+    final birthDate =
+        vaccination.ownerBirthdate.add(Duration(days: offset ?? 0));
+    final isUnderAge =
+        birthDate.addYears(RuleValue.vaccineUnderageAge) > clock.now();
+
     final type = vaccination.medicinalProduct;
     switch (mode) {
       case ValidationMode.normalDGP:
@@ -224,6 +230,11 @@ class VaccineValidatorImpl implements VaccineValidator {
         }
         return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
       case ValidationMode.entryITDGP:
+        if (vaccination.isComplete && isUnderAge) {
+          return rules
+              .find(RuleName.vaccineEndDayCompleteUnder18, type)
+              ?.intValue;
+        }
         if (vaccination.isComplete) {
           return rules
               .find(RuleName.vaccineEndDayCompleteNotIT, type)

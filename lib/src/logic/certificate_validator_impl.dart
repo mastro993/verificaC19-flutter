@@ -144,7 +144,10 @@ class CertificateValidatorImpl implements CertificateValidator {
   ) async {
     try {
       final String? signature = await getCertificateSignature(certificate);
-      return DccUtils.getCertificateInfo(signature!);
+      if (signature == null) {
+        return CertificateInfo.empty();
+      }
+      return DccUtils.getCertificateInfo(signature);
     } catch (e) {
       return CertificateInfo.empty();
     }
