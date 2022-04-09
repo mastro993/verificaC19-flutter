@@ -26,6 +26,10 @@ class RuleName {
       'vaccine_end_day_booster_NOT_IT';
   static const String vaccineEndDayCompleteExtendedEMA =
       'vaccine_end_day_complete_extended_EMA';
+  static const String vaccineEndDayCompleteUnder18 =
+      "vaccine_end_day_complete_under_18";
+  static const String vaccineCompleteUnder18Offset =
+      "vaccine_complete_under_18_offset";
   static const String molecularTestStartHours = 'molecular_test_start_hours';
   static const String molecularTestEndHours = 'molecular_test_end_hours';
   static const String rapidTestStartHours = 'rapid_test_start_hours';
@@ -44,7 +48,7 @@ class RuleName {
 }
 
 class RuleValue {
-  static const vaccineMandatoryAge = 50;
+  static const vaccineUnderageAge = 18;
   static const defaultDaysSchool = 120;
   static const defaultDaysStart = 0;
   static const defaultDaysStartJJ = 15;
