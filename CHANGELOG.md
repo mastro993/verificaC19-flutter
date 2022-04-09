@@ -1,3 +1,7 @@
+## 1.5.1
+
+- Added underage vaccine validation rule for IT entry mode
+
 ## 1.5.0+1
 
 - Hot-fix
