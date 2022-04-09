@@ -1,7 +1,5 @@
-import 'package:clock/clock.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:verificac19/src/core/constants.dart';
-import 'package:verificac19/src/core/extensions.dart';
 
 part 'vaccination.freezed.dart';
 
@@ -39,6 +37,4 @@ class Vaccination with _$Vaccination {
       (doseNumber > totalSeriesOfDoses) || (isJJBooster || isNotJJBooster);
 
   bool get isEma => VaccineType.emaList.contains(medicinalProduct);
-
-  bool get isOwnerOver50Y => ownerBirthdate <= clock.now().removeYears(50);
 }

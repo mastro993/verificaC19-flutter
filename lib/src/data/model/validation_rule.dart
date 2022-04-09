@@ -24,10 +24,9 @@ class ValidationRule {
 }
 
 extension RulesExtensions on List<ValidationRule> {
-  ValidationRule? find(String name, [String? type]) {
-    type ??= RuleType.generic;
+  ValidationRule? find(String name, [String? type = RuleType.generic]) {
     try {
-      return firstWhere((r) => r.name == name && r.type == type);
+      return firstWhere((r) => r.name == name && r.type == type, orElse: null);
     } catch (e) {
       return null;
     }
