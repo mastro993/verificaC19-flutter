@@ -12,28 +12,7 @@ part of 'validation_result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ValidationResultTearOff {
-  const _$ValidationResultTearOff();
-
-  _ValidationResult call(
-      {required GreenCertificate certificate,
-      required GreenCertificateStatus certificateStatus,
-      required ValidationMode validationMode,
-      required DateTime validationDateTime}) {
-    return _ValidationResult(
-      certificate: certificate,
-      certificateStatus: certificateStatus,
-      validationMode: validationMode,
-      validationDateTime: validationDateTime,
-    );
-  }
-}
-
-/// @nodoc
-const $ValidationResult = _$ValidationResultTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ValidationResult {
@@ -179,21 +158,20 @@ class _$_ValidationResult extends _ValidationResult {
       required this.validationDateTime})
       : super._();
 
-  @override
-
   /// Validated certificate
-  final GreenCertificate certificate;
   @override
+  final GreenCertificate certificate;
 
   /// Validation rules result
-  final GreenCertificateStatus certificateStatus;
   @override
+  final GreenCertificateStatus certificateStatus;
 
   /// Validation mode used for the result
-  final ValidationMode validationMode;
   @override
+  final ValidationMode validationMode;
 
   /// Date and time of the validation
+  @override
   final DateTime validationDateTime;
 
   @override
@@ -232,28 +210,29 @@ class _$_ValidationResult extends _ValidationResult {
 
 abstract class _ValidationResult extends ValidationResult {
   factory _ValidationResult(
-      {required GreenCertificate certificate,
-      required GreenCertificateStatus certificateStatus,
-      required ValidationMode validationMode,
-      required DateTime validationDateTime}) = _$_ValidationResult;
+      {required final GreenCertificate certificate,
+      required final GreenCertificateStatus certificateStatus,
+      required final ValidationMode validationMode,
+      required final DateTime validationDateTime}) = _$_ValidationResult;
   _ValidationResult._() : super._();
 
   @override
 
   /// Validated certificate
-  GreenCertificate get certificate;
+  GreenCertificate get certificate => throw _privateConstructorUsedError;
   @override
 
   /// Validation rules result
-  GreenCertificateStatus get certificateStatus;
+  GreenCertificateStatus get certificateStatus =>
+      throw _privateConstructorUsedError;
   @override
 
   /// Validation mode used for the result
-  ValidationMode get validationMode;
+  ValidationMode get validationMode => throw _privateConstructorUsedError;
   @override
 
   /// Date and time of the validation
-  DateTime get validationDateTime;
+  DateTime get validationDateTime => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ValidationResultCopyWith<_ValidationResult> get copyWith =>

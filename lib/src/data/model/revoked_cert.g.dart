@@ -6,150 +6,148 @@ part of 'revoked_cert.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
 
 extension GetRevokedCertCollection on Isar {
-  IsarCollection<RevokedCert> get revokedCerts {
-    return getCollection('RevokedCert');
-  }
+  IsarCollection<RevokedCert> get revokedCerts => getCollection();
 }
 
-final RevokedCertSchema = CollectionSchema(
+const RevokedCertSchema = CollectionSchema(
   name: 'RevokedCert',
   schema:
       '{"name":"RevokedCert","idName":"id","properties":[{"name":"cert","type":"String"}],"indexes":[{"name":"cert","unique":false,"properties":[{"name":"cert","type":"Hash","caseSensitive":true}]}],"links":[]}',
-  nativeAdapter: const _RevokedCertNativeAdapter(),
-  webAdapter: const _RevokedCertWebAdapter(),
   idName: 'id',
   propertyIds: {'cert': 0},
   listProperties: {},
   indexIds: {'cert': 0},
-  indexTypes: {
+  indexValueTypes: {
     'cert': [
-      NativeIndexType.stringHash,
+      IndexValueType.stringHash,
     ]
   },
   linkIds: {},
-  backlinkIds: {},
-  linkedCollections: [],
-  getId: (obj) {
-    if (obj.id == Isar.autoIncrement) {
-      return null;
-    } else {
-      return obj.id;
-    }
-  },
-  setId: (obj, id) => obj.id = id,
-  getLinks: (obj) => [],
-  version: 2,
+  backlinkLinkNames: {},
+  getId: _revokedCertGetId,
+  setId: _revokedCertSetId,
+  getLinks: _revokedCertGetLinks,
+  attachLinks: _revokedCertAttachLinks,
+  serializeNative: _revokedCertSerializeNative,
+  deserializeNative: _revokedCertDeserializeNative,
+  deserializePropNative: _revokedCertDeserializePropNative,
+  serializeWeb: _revokedCertSerializeWeb,
+  deserializeWeb: _revokedCertDeserializeWeb,
+  deserializePropWeb: _revokedCertDeserializePropWeb,
+  version: 3,
 );
 
-class _RevokedCertWebAdapter extends IsarWebTypeAdapter<RevokedCert> {
-  const _RevokedCertWebAdapter();
-
-  @override
-  Object serialize(IsarCollection<RevokedCert> collection, RevokedCert object) {
-    final jsObj = IsarNative.newJsObject();
-    IsarNative.jsObjectSet(jsObj, 'cert', object.cert);
-    IsarNative.jsObjectSet(jsObj, 'id', object.id);
-    return jsObj;
+int? _revokedCertGetId(RevokedCert object) {
+  if (object.id == Isar.autoIncrement) {
+    return null;
+  } else {
+    return object.id;
   }
-
-  @override
-  RevokedCert deserialize(
-      IsarCollection<RevokedCert> collection, dynamic jsObj) {
-    final object = RevokedCert();
-    object.cert = IsarNative.jsObjectGet(jsObj, 'cert') ?? '';
-    object.id = IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity;
-    return object;
-  }
-
-  @override
-  P deserializeProperty<P>(Object jsObj, String propertyName) {
-    switch (propertyName) {
-      case 'cert':
-        return (IsarNative.jsObjectGet(jsObj, 'cert') ?? '') as P;
-      case 'id':
-        return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
-            as P;
-      default:
-        throw 'Illegal propertyName';
-    }
-  }
-
-  @override
-  void attachLinks(Isar isar, int id, RevokedCert object) {}
 }
 
-class _RevokedCertNativeAdapter extends IsarNativeTypeAdapter<RevokedCert> {
-  const _RevokedCertNativeAdapter();
-
-  @override
-  void serialize(
-      IsarCollection<RevokedCert> collection,
-      IsarRawObject rawObj,
-      RevokedCert object,
-      int staticSize,
-      List<int> offsets,
-      AdapterAlloc alloc) {
-    var dynamicSize = 0;
-    final value0 = object.cert;
-    final _cert = IsarBinaryWriter.utf8Encoder.convert(value0);
-    dynamicSize += (_cert.length) as int;
-    final size = staticSize + dynamicSize;
-
-    rawObj.buffer = alloc(size);
-    rawObj.buffer_length = size;
-    final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
-    final writer = IsarBinaryWriter(buffer, staticSize);
-    writer.writeBytes(offsets[0], _cert);
-  }
-
-  @override
-  RevokedCert deserialize(IsarCollection<RevokedCert> collection, int id,
-      IsarBinaryReader reader, List<int> offsets) {
-    final object = RevokedCert();
-    object.cert = reader.readString(offsets[0]);
-    object.id = id;
-    return object;
-  }
-
-  @override
-  P deserializeProperty<P>(
-      int id, IsarBinaryReader reader, int propertyIndex, int offset) {
-    switch (propertyIndex) {
-      case -1:
-        return id as P;
-      case 0:
-        return (reader.readString(offset)) as P;
-      default:
-        throw 'Illegal propertyIndex';
-    }
-  }
-
-  @override
-  void attachLinks(Isar isar, int id, RevokedCert object) {}
+void _revokedCertSetId(RevokedCert object, int id) {
+  object.id = id;
 }
+
+List<IsarLinkBase> _revokedCertGetLinks(RevokedCert object) {
+  return [];
+}
+
+void _revokedCertSerializeNative(
+    IsarCollection<RevokedCert> collection,
+    IsarRawObject rawObj,
+    RevokedCert object,
+    int staticSize,
+    List<int> offsets,
+    AdapterAlloc alloc) {
+  var dynamicSize = 0;
+  final value0 = object.cert;
+  final _cert = IsarBinaryWriter.utf8Encoder.convert(value0);
+  dynamicSize += (_cert.length) as int;
+  final size = staticSize + dynamicSize;
+
+  rawObj.buffer = alloc(size);
+  rawObj.buffer_length = size;
+  final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
+  final writer = IsarBinaryWriter(buffer, staticSize);
+  writer.writeBytes(offsets[0], _cert);
+}
+
+RevokedCert _revokedCertDeserializeNative(
+    IsarCollection<RevokedCert> collection,
+    int id,
+    IsarBinaryReader reader,
+    List<int> offsets) {
+  final object = RevokedCert();
+  object.cert = reader.readString(offsets[0]);
+  object.id = id;
+  return object;
+}
+
+P _revokedCertDeserializePropNative<P>(
+    int id, IsarBinaryReader reader, int propertyIndex, int offset) {
+  switch (propertyIndex) {
+    case -1:
+      return id as P;
+    case 0:
+      return (reader.readString(offset)) as P;
+    default:
+      throw 'Illegal propertyIndex';
+  }
+}
+
+dynamic _revokedCertSerializeWeb(
+    IsarCollection<RevokedCert> collection, RevokedCert object) {
+  final jsObj = IsarNative.newJsObject();
+  IsarNative.jsObjectSet(jsObj, 'cert', object.cert);
+  IsarNative.jsObjectSet(jsObj, 'id', object.id);
+  return jsObj;
+}
+
+RevokedCert _revokedCertDeserializeWeb(
+    IsarCollection<RevokedCert> collection, dynamic jsObj) {
+  final object = RevokedCert();
+  object.cert = IsarNative.jsObjectGet(jsObj, 'cert') ?? '';
+  object.id = IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity;
+  return object;
+}
+
+P _revokedCertDeserializePropWeb<P>(Object jsObj, String propertyName) {
+  switch (propertyName) {
+    case 'cert':
+      return (IsarNative.jsObjectGet(jsObj, 'cert') ?? '') as P;
+    case 'id':
+      return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
+          as P;
+    default:
+      throw 'Illegal propertyName';
+  }
+}
+
+void _revokedCertAttachLinks(IsarCollection col, int id, RevokedCert object) {}
 
 extension RevokedCertQueryWhereSort
     on QueryBuilder<RevokedCert, RevokedCert, QWhere> {
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhere> anyId() {
-    return addWhereClauseInternal(const WhereClause(indexName: null));
+    return addWhereClauseInternal(const IdWhereClause.any());
   }
 
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhere> anyCert() {
-    return addWhereClauseInternal(const WhereClause(indexName: 'cert'));
+    return addWhereClauseInternal(
+        const IndexWhereClause.any(indexName: 'cert'));
   }
 }
 
 extension RevokedCertQueryWhere
     on QueryBuilder<RevokedCert, RevokedCert, QWhereClause> {
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> idEqualTo(int id) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      lower: [id],
+    return addWhereClauseInternal(IdWhereClause.between(
+      lower: id,
       includeLower: true,
-      upper: [id],
+      upper: id,
       includeUpper: true,
     ));
   }
@@ -157,48 +155,33 @@ extension RevokedCertQueryWhere
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> idNotEqualTo(
       int id) {
     if (whereSortInternal == Sort.asc) {
-      return addWhereClauseInternal(WhereClause(
-        indexName: null,
-        upper: [id],
-        includeUpper: false,
-      )).addWhereClauseInternal(WhereClause(
-        indexName: null,
-        lower: [id],
-        includeLower: false,
-      ));
+      return addWhereClauseInternal(
+        IdWhereClause.lessThan(upper: id, includeUpper: false),
+      ).addWhereClauseInternal(
+        IdWhereClause.greaterThan(lower: id, includeLower: false),
+      );
     } else {
-      return addWhereClauseInternal(WhereClause(
-        indexName: null,
-        lower: [id],
-        includeLower: false,
-      )).addWhereClauseInternal(WhereClause(
-        indexName: null,
-        upper: [id],
-        includeUpper: false,
-      ));
+      return addWhereClauseInternal(
+        IdWhereClause.greaterThan(lower: id, includeLower: false),
+      ).addWhereClauseInternal(
+        IdWhereClause.lessThan(upper: id, includeUpper: false),
+      );
     }
   }
 
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> idGreaterThan(
-    int id, {
-    bool include = false,
-  }) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      lower: [id],
-      includeLower: include,
-    ));
+      int id,
+      {bool include = false}) {
+    return addWhereClauseInternal(
+      IdWhereClause.greaterThan(lower: id, includeLower: include),
+    );
   }
 
-  QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> idLessThan(
-    int id, {
-    bool include = false,
-  }) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      upper: [id],
-      includeUpper: include,
-    ));
+  QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> idLessThan(int id,
+      {bool include = false}) {
+    return addWhereClauseInternal(
+      IdWhereClause.lessThan(upper: id, includeUpper: include),
+    );
   }
 
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> idBetween(
@@ -207,44 +190,40 @@ extension RevokedCertQueryWhere
     bool includeLower = true,
     bool includeUpper = true,
   }) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      lower: [lowerId],
+    return addWhereClauseInternal(IdWhereClause.between(
+      lower: lowerId,
       includeLower: includeLower,
-      upper: [upperId],
+      upper: upperId,
       includeUpper: includeUpper,
     ));
   }
 
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> certEqualTo(
       String cert) {
-    return addWhereClauseInternal(WhereClause(
+    return addWhereClauseInternal(IndexWhereClause.equalTo(
       indexName: 'cert',
-      lower: [cert],
-      includeLower: true,
-      upper: [cert],
-      includeUpper: true,
+      value: [cert],
     ));
   }
 
   QueryBuilder<RevokedCert, RevokedCert, QAfterWhereClause> certNotEqualTo(
       String cert) {
     if (whereSortInternal == Sort.asc) {
-      return addWhereClauseInternal(WhereClause(
+      return addWhereClauseInternal(IndexWhereClause.lessThan(
         indexName: 'cert',
         upper: [cert],
         includeUpper: false,
-      )).addWhereClauseInternal(WhereClause(
+      )).addWhereClauseInternal(IndexWhereClause.greaterThan(
         indexName: 'cert',
         lower: [cert],
         includeLower: false,
       ));
     } else {
-      return addWhereClauseInternal(WhereClause(
+      return addWhereClauseInternal(IndexWhereClause.greaterThan(
         indexName: 'cert',
         lower: [cert],
         includeLower: false,
-      )).addWhereClauseInternal(WhereClause(
+      )).addWhereClauseInternal(IndexWhereClause.lessThan(
         indexName: 'cert',
         upper: [cert],
         includeUpper: false,

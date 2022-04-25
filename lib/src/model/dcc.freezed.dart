@@ -12,38 +12,7 @@ part of 'dcc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$DCCTearOff {
-  const _$DCCTearOff();
-
-  _DCC call(
-      {required String raw,
-      required List<int> coseRaw,
-      required Uint8List protectedHeader,
-      required Map<dynamic, dynamic> unprotectedHeader,
-      required Map<dynamic, dynamic> payload,
-      required Uint8List payloadBytes,
-      required Uint8List signers,
-      required String kid,
-      required int algorithm}) {
-    return _DCC(
-      raw: raw,
-      coseRaw: coseRaw,
-      protectedHeader: protectedHeader,
-      unprotectedHeader: unprotectedHeader,
-      payload: payload,
-      payloadBytes: payloadBytes,
-      signers: signers,
-      kid: kid,
-      algorithm: algorithm,
-    );
-  }
-}
-
-/// @nodoc
-const $DCC = _$DCCTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$DCC {
@@ -240,51 +209,71 @@ class __$DCCCopyWithImpl<$Res> extends _$DCCCopyWithImpl<$Res>
 class _$_DCC extends _DCC {
   const _$_DCC(
       {required this.raw,
-      required this.coseRaw,
+      required final List<int> coseRaw,
       required this.protectedHeader,
-      required this.unprotectedHeader,
-      required this.payload,
+      required final Map<dynamic, dynamic> unprotectedHeader,
+      required final Map<dynamic, dynamic> payload,
       required this.payloadBytes,
       required this.signers,
       required this.kid,
       required this.algorithm})
-      : super._();
-
-  @override
+      : _coseRaw = coseRaw,
+        _unprotectedHeader = unprotectedHeader,
+        _payload = payload,
+        super._();
 
   /// Raw unprocessed data
-  final String raw;
   @override
+  final String raw;
 
   /// COSE data
-  final List<int> coseRaw;
+  final List<int> _coseRaw;
+
+  /// COSE data
   @override
+  List<int> get coseRaw {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_coseRaw);
+  }
 
   /// Protected header
-  final Uint8List protectedHeader;
   @override
+  final Uint8List protectedHeader;
 
   /// Unprotected header
-  final Map<dynamic, dynamic> unprotectedHeader;
+  final Map<dynamic, dynamic> _unprotectedHeader;
+
+  /// Unprotected header
   @override
+  Map<dynamic, dynamic> get unprotectedHeader {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_unprotectedHeader);
+  }
 
   /// Certificate data payload
-  final Map<dynamic, dynamic> payload;
+  final Map<dynamic, dynamic> _payload;
+
+  /// Certificate data payload
   @override
+  Map<dynamic, dynamic> get payload {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_payload);
+  }
 
   /// Encoded certificate data payload
-  final Uint8List payloadBytes;
   @override
+  final Uint8List payloadBytes;
 
   /// Certificate signers
-  final Uint8List signers;
   @override
+  final Uint8List signers;
 
   /// Certificate kid
-  final String kid;
   @override
+  final String kid;
 
   /// Certificate algorithm
+  @override
   final int algorithm;
 
   @override
@@ -332,53 +321,54 @@ class _$_DCC extends _DCC {
 
 abstract class _DCC extends DCC {
   const factory _DCC(
-      {required String raw,
-      required List<int> coseRaw,
-      required Uint8List protectedHeader,
-      required Map<dynamic, dynamic> unprotectedHeader,
-      required Map<dynamic, dynamic> payload,
-      required Uint8List payloadBytes,
-      required Uint8List signers,
-      required String kid,
-      required int algorithm}) = _$_DCC;
+      {required final String raw,
+      required final List<int> coseRaw,
+      required final Uint8List protectedHeader,
+      required final Map<dynamic, dynamic> unprotectedHeader,
+      required final Map<dynamic, dynamic> payload,
+      required final Uint8List payloadBytes,
+      required final Uint8List signers,
+      required final String kid,
+      required final int algorithm}) = _$_DCC;
   const _DCC._() : super._();
 
   @override
 
   /// Raw unprocessed data
-  String get raw;
+  String get raw => throw _privateConstructorUsedError;
   @override
 
   /// COSE data
-  List<int> get coseRaw;
+  List<int> get coseRaw => throw _privateConstructorUsedError;
   @override
 
   /// Protected header
-  Uint8List get protectedHeader;
+  Uint8List get protectedHeader => throw _privateConstructorUsedError;
   @override
 
   /// Unprotected header
-  Map<dynamic, dynamic> get unprotectedHeader;
+  Map<dynamic, dynamic> get unprotectedHeader =>
+      throw _privateConstructorUsedError;
   @override
 
   /// Certificate data payload
-  Map<dynamic, dynamic> get payload;
+  Map<dynamic, dynamic> get payload => throw _privateConstructorUsedError;
   @override
 
   /// Encoded certificate data payload
-  Uint8List get payloadBytes;
+  Uint8List get payloadBytes => throw _privateConstructorUsedError;
   @override
 
   /// Certificate signers
-  Uint8List get signers;
+  Uint8List get signers => throw _privateConstructorUsedError;
   @override
 
   /// Certificate kid
-  String get kid;
+  String get kid => throw _privateConstructorUsedError;
   @override
 
   /// Certificate algorithm
-  int get algorithm;
+  int get algorithm => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DCCCopyWith<_DCC> get copyWith => throw _privateConstructorUsedError;

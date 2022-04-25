@@ -12,23 +12,7 @@ part of 'certificate_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CertificateInfoTearOff {
-  const _$CertificateInfoTearOff();
-
-  _CertificateInfo call(
-      {required String country, required bool extendedKeyUsage}) {
-    return _CertificateInfo(
-      country: country,
-      extendedKeyUsage: extendedKeyUsage,
-    );
-  }
-}
-
-/// @nodoc
-const $CertificateInfo = _$CertificateInfoTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CertificateInfo {
@@ -155,14 +139,14 @@ class _$_CertificateInfo extends _CertificateInfo {
 
 abstract class _CertificateInfo extends CertificateInfo {
   const factory _CertificateInfo(
-      {required String country,
-      required bool extendedKeyUsage}) = _$_CertificateInfo;
+      {required final String country,
+      required final bool extendedKeyUsage}) = _$_CertificateInfo;
   const _CertificateInfo._() : super._();
 
   @override
-  String get country;
+  String get country => throw _privateConstructorUsedError;
   @override
-  bool get extendedKeyUsage;
+  bool get extendedKeyUsage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CertificateInfoCopyWith<_CertificateInfo> get copyWith =>

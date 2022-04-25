@@ -12,42 +12,7 @@ part of 'test.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$TestTearOff {
-  const _$TestTearOff();
-
-  _Test call(
-      {required String disease,
-      required String typeOfTest,
-      required String? testName,
-      required String? testNameAndManufacturer,
-      required DateTime dateTimeOfCollection,
-      required DateTime? dateTimeOfTestResult,
-      required String testResult,
-      required String testingCentre,
-      required String countryOfVaccination,
-      required String certificateIssuer,
-      required String certificateIdentifier}) {
-    return _Test(
-      disease: disease,
-      typeOfTest: typeOfTest,
-      testName: testName,
-      testNameAndManufacturer: testNameAndManufacturer,
-      dateTimeOfCollection: dateTimeOfCollection,
-      dateTimeOfTestResult: dateTimeOfTestResult,
-      testResult: testResult,
-      testingCentre: testingCentre,
-      countryOfVaccination: countryOfVaccination,
-      certificateIssuer: certificateIssuer,
-      certificateIdentifier: certificateIdentifier,
-    );
-  }
-}
-
-/// @nodoc
-const $Test = _$TestTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Test {
@@ -342,41 +307,41 @@ class _$_Test extends _Test {
 
 abstract class _Test extends Test {
   const factory _Test(
-      {required String disease,
-      required String typeOfTest,
-      required String? testName,
-      required String? testNameAndManufacturer,
-      required DateTime dateTimeOfCollection,
-      required DateTime? dateTimeOfTestResult,
-      required String testResult,
-      required String testingCentre,
-      required String countryOfVaccination,
-      required String certificateIssuer,
-      required String certificateIdentifier}) = _$_Test;
+      {required final String disease,
+      required final String typeOfTest,
+      required final String? testName,
+      required final String? testNameAndManufacturer,
+      required final DateTime dateTimeOfCollection,
+      required final DateTime? dateTimeOfTestResult,
+      required final String testResult,
+      required final String testingCentre,
+      required final String countryOfVaccination,
+      required final String certificateIssuer,
+      required final String certificateIdentifier}) = _$_Test;
   const _Test._() : super._();
 
   @override
-  String get disease;
+  String get disease => throw _privateConstructorUsedError;
   @override
-  String get typeOfTest;
+  String get typeOfTest => throw _privateConstructorUsedError;
   @override
-  String? get testName;
+  String? get testName => throw _privateConstructorUsedError;
   @override
-  String? get testNameAndManufacturer;
+  String? get testNameAndManufacturer => throw _privateConstructorUsedError;
   @override
-  DateTime get dateTimeOfCollection;
+  DateTime get dateTimeOfCollection => throw _privateConstructorUsedError;
   @override
-  DateTime? get dateTimeOfTestResult;
+  DateTime? get dateTimeOfTestResult => throw _privateConstructorUsedError;
   @override
-  String get testResult;
+  String get testResult => throw _privateConstructorUsedError;
   @override
-  String get testingCentre;
+  String get testingCentre => throw _privateConstructorUsedError;
   @override
-  String get countryOfVaccination;
+  String get countryOfVaccination => throw _privateConstructorUsedError;
   @override
-  String get certificateIssuer;
+  String get certificateIssuer => throw _privateConstructorUsedError;
   @override
-  String get certificateIdentifier;
+  String get certificateIdentifier => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TestCopyWith<_Test> get copyWith => throw _privateConstructorUsedError;

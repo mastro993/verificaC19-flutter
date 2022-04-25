@@ -12,34 +12,7 @@ part of 'green_certificate.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$GreenCertificateTearOff {
-  const _$GreenCertificateTearOff();
-
-  _GreenCertificate call(
-      {required Person person,
-      required DateTime dateOfBirth,
-      required List<Vaccination> vaccinations,
-      required List<Test> tests,
-      required List<RecoveryStatement> recoveryStatements,
-      required List<Exemption> exemptions,
-      required DCC dcc}) {
-    return _GreenCertificate(
-      person: person,
-      dateOfBirth: dateOfBirth,
-      vaccinations: vaccinations,
-      tests: tests,
-      recoveryStatements: recoveryStatements,
-      exemptions: exemptions,
-      dcc: dcc,
-    );
-  }
-}
-
-/// @nodoc
-const $GreenCertificate = _$GreenCertificateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$GreenCertificate {
@@ -236,40 +209,67 @@ class _$_GreenCertificate extends _GreenCertificate {
   const _$_GreenCertificate(
       {required this.person,
       required this.dateOfBirth,
-      required this.vaccinations,
-      required this.tests,
-      required this.recoveryStatements,
-      required this.exemptions,
+      required final List<Vaccination> vaccinations,
+      required final List<Test> tests,
+      required final List<RecoveryStatement> recoveryStatements,
+      required final List<Exemption> exemptions,
       required this.dcc})
-      : super._();
-
-  @override
+      : _vaccinations = vaccinations,
+        _tests = tests,
+        _recoveryStatements = recoveryStatements,
+        _exemptions = exemptions,
+        super._();
 
   /// Personal information of the Green Certificate subject
-  final Person person;
   @override
+  final Person person;
 
   /// Date of birth of the person
-  final DateTime dateOfBirth;
   @override
+  final DateTime dateOfBirth;
 
   /// List of Certificate Vaccinations
-  final List<Vaccination> vaccinations;
+  final List<Vaccination> _vaccinations;
+
+  /// List of Certificate Vaccinations
   @override
+  List<Vaccination> get vaccinations {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_vaccinations);
+  }
 
   /// List of Certificate Test results
-  final List<Test> tests;
+  final List<Test> _tests;
+
+  /// List of Certificate Test results
   @override
+  List<Test> get tests {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tests);
+  }
 
   /// List of Certificate Recovery statements
-  final List<RecoveryStatement> recoveryStatements;
+  final List<RecoveryStatement> _recoveryStatements;
+
+  /// List of Certificate Recovery statements
   @override
+  List<RecoveryStatement> get recoveryStatements {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_recoveryStatements);
+  }
 
   /// List of Certificate Vaccine exemptions
-  final List<Exemption> exemptions;
+  final List<Exemption> _exemptions;
+
+  /// List of Certificate Vaccine exemptions
   @override
+  List<Exemption> get exemptions {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_exemptions);
+  }
 
   /// Certificate DCC
+  @override
   final DCC dcc;
 
   @override
@@ -314,43 +314,44 @@ class _$_GreenCertificate extends _GreenCertificate {
 
 abstract class _GreenCertificate extends GreenCertificate {
   const factory _GreenCertificate(
-      {required Person person,
-      required DateTime dateOfBirth,
-      required List<Vaccination> vaccinations,
-      required List<Test> tests,
-      required List<RecoveryStatement> recoveryStatements,
-      required List<Exemption> exemptions,
-      required DCC dcc}) = _$_GreenCertificate;
+      {required final Person person,
+      required final DateTime dateOfBirth,
+      required final List<Vaccination> vaccinations,
+      required final List<Test> tests,
+      required final List<RecoveryStatement> recoveryStatements,
+      required final List<Exemption> exemptions,
+      required final DCC dcc}) = _$_GreenCertificate;
   const _GreenCertificate._() : super._();
 
   @override
 
   /// Personal information of the Green Certificate subject
-  Person get person;
+  Person get person => throw _privateConstructorUsedError;
   @override
 
   /// Date of birth of the person
-  DateTime get dateOfBirth;
+  DateTime get dateOfBirth => throw _privateConstructorUsedError;
   @override
 
   /// List of Certificate Vaccinations
-  List<Vaccination> get vaccinations;
+  List<Vaccination> get vaccinations => throw _privateConstructorUsedError;
   @override
 
   /// List of Certificate Test results
-  List<Test> get tests;
+  List<Test> get tests => throw _privateConstructorUsedError;
   @override
 
   /// List of Certificate Recovery statements
-  List<RecoveryStatement> get recoveryStatements;
+  List<RecoveryStatement> get recoveryStatements =>
+      throw _privateConstructorUsedError;
   @override
 
   /// List of Certificate Vaccine exemptions
-  List<Exemption> get exemptions;
+  List<Exemption> get exemptions => throw _privateConstructorUsedError;
   @override
 
   /// Certificate DCC
-  DCC get dcc;
+  DCC get dcc => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GreenCertificateCopyWith<_GreenCertificate> get copyWith =>

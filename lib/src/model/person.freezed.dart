@@ -12,28 +12,7 @@ part of 'person.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$PersonTearOff {
-  const _$PersonTearOff();
-
-  _Person call(
-      {required String standardisedFamilyName,
-      required String familyName,
-      required String standardisedGivenName,
-      required String givenName}) {
-    return _Person(
-      standardisedFamilyName: standardisedFamilyName,
-      familyName: familyName,
-      standardisedGivenName: standardisedGivenName,
-      givenName: givenName,
-    );
-  }
-}
-
-/// @nodoc
-const $Person = _$PersonTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Person {
@@ -159,21 +138,20 @@ class _$_Person extends _Person {
       required this.givenName})
       : super._();
 
-  @override
-
   /// Surname of the person with standard characters
-  final String standardisedFamilyName;
   @override
+  final String standardisedFamilyName;
 
   /// Surname of the person
-  final String familyName;
   @override
+  final String familyName;
 
   /// Name of the person with standard characters
-  final String standardisedGivenName;
   @override
+  final String standardisedGivenName;
 
   /// Name of the person
+  @override
   final String givenName;
 
   @override
@@ -211,28 +189,28 @@ class _$_Person extends _Person {
 
 abstract class _Person extends Person {
   const factory _Person(
-      {required String standardisedFamilyName,
-      required String familyName,
-      required String standardisedGivenName,
-      required String givenName}) = _$_Person;
+      {required final String standardisedFamilyName,
+      required final String familyName,
+      required final String standardisedGivenName,
+      required final String givenName}) = _$_Person;
   const _Person._() : super._();
 
   @override
 
   /// Surname of the person with standard characters
-  String get standardisedFamilyName;
+  String get standardisedFamilyName => throw _privateConstructorUsedError;
   @override
 
   /// Surname of the person
-  String get familyName;
+  String get familyName => throw _privateConstructorUsedError;
   @override
 
   /// Name of the person with standard characters
-  String get standardisedGivenName;
+  String get standardisedGivenName => throw _privateConstructorUsedError;
   @override
 
   /// Name of the person
-  String get givenName;
+  String get givenName => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PersonCopyWith<_Person> get copyWith => throw _privateConstructorUsedError;

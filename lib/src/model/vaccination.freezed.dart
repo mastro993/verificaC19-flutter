@@ -12,42 +12,7 @@ part of 'vaccination.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$VaccinationTearOff {
-  const _$VaccinationTearOff();
-
-  _Vaccination call(
-      {required String disease,
-      required String vaccine,
-      required String medicinalProduct,
-      required String manufacturer,
-      required int doseNumber,
-      required int totalSeriesOfDoses,
-      required DateTime dateOfVaccination,
-      required String countryOfVaccination,
-      required String certificateIssuer,
-      required String certificateIdentifier,
-      required DateTime ownerBirthdate}) {
-    return _Vaccination(
-      disease: disease,
-      vaccine: vaccine,
-      medicinalProduct: medicinalProduct,
-      manufacturer: manufacturer,
-      doseNumber: doseNumber,
-      totalSeriesOfDoses: totalSeriesOfDoses,
-      dateOfVaccination: dateOfVaccination,
-      countryOfVaccination: countryOfVaccination,
-      certificateIssuer: certificateIssuer,
-      certificateIdentifier: certificateIdentifier,
-      ownerBirthdate: ownerBirthdate,
-    );
-  }
-}
-
-/// @nodoc
-const $Vaccination = _$VaccinationTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Vaccination {
@@ -347,41 +312,41 @@ class _$_Vaccination extends _Vaccination {
 
 abstract class _Vaccination extends Vaccination {
   const factory _Vaccination(
-      {required String disease,
-      required String vaccine,
-      required String medicinalProduct,
-      required String manufacturer,
-      required int doseNumber,
-      required int totalSeriesOfDoses,
-      required DateTime dateOfVaccination,
-      required String countryOfVaccination,
-      required String certificateIssuer,
-      required String certificateIdentifier,
-      required DateTime ownerBirthdate}) = _$_Vaccination;
+      {required final String disease,
+      required final String vaccine,
+      required final String medicinalProduct,
+      required final String manufacturer,
+      required final int doseNumber,
+      required final int totalSeriesOfDoses,
+      required final DateTime dateOfVaccination,
+      required final String countryOfVaccination,
+      required final String certificateIssuer,
+      required final String certificateIdentifier,
+      required final DateTime ownerBirthdate}) = _$_Vaccination;
   const _Vaccination._() : super._();
 
   @override
-  String get disease;
+  String get disease => throw _privateConstructorUsedError;
   @override
-  String get vaccine;
+  String get vaccine => throw _privateConstructorUsedError;
   @override
-  String get medicinalProduct;
+  String get medicinalProduct => throw _privateConstructorUsedError;
   @override
-  String get manufacturer;
+  String get manufacturer => throw _privateConstructorUsedError;
   @override
-  int get doseNumber;
+  int get doseNumber => throw _privateConstructorUsedError;
   @override
-  int get totalSeriesOfDoses;
+  int get totalSeriesOfDoses => throw _privateConstructorUsedError;
   @override
-  DateTime get dateOfVaccination;
+  DateTime get dateOfVaccination => throw _privateConstructorUsedError;
   @override
-  String get countryOfVaccination;
+  String get countryOfVaccination => throw _privateConstructorUsedError;
   @override
-  String get certificateIssuer;
+  String get certificateIssuer => throw _privateConstructorUsedError;
   @override
-  String get certificateIdentifier;
+  String get certificateIdentifier => throw _privateConstructorUsedError;
   @override
-  DateTime get ownerBirthdate;
+  DateTime get ownerBirthdate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VaccinationCopyWith<_Vaccination> get copyWith =>

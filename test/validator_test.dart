@@ -269,32 +269,33 @@ void main() {
     test('Should not validate certificate without recovery statements',
         () async {
       final base45 = fixture('eu_test_certificates/sk_6.txt');
-      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-      cert.recoveryStatements.clear();
+      var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+      cert = cert.copyWith(recoveryStatements: []);
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notEuDCC));
     });
 
     test('Should not validate certificate without tests', () async {
       final base45 = fixture('eu_test_certificates/sk_7.txt');
-      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-      cert.tests.clear();
+      var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+      cert = cert.copyWith(tests: []);
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notEuDCC));
     });
 
     test('Should not validate certificate without vaccinations', () async {
       final base45 = fixture('eu_test_certificates/sk_3.txt');
-      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-      cert.vaccinations.clear();
+      var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+      cert = cert.copyWith(vaccinations: []);
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notEuDCC));
     });
 
     test('Should not validate certificate with negative vaccination', () async {
       final base45 = fixture('eu_test_certificates/sk_3.txt');
-      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-      cert.vaccinations.add(cert.vaccinations.last.copyWith(doseNumber: -1));
+      var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+      cert = cert.copyWith(
+          vaccinations: [cert.vaccinations.last.copyWith(doseNumber: -1)]);
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notValid));
     });
@@ -313,26 +314,29 @@ void main() {
         'Should not validate certificate with Sputnik-V Vaccination from other countries',
         () async {
       final base45 = fixture('eu_test_certificates/sm_1.txt');
-      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-      cert.vaccinations
-          .add(cert.vaccinations.last.copyWith(countryOfVaccination: 'IT'));
+      var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+      cert = cert.copyWith(vaccinations: [
+        cert.vaccinations.last.copyWith(countryOfVaccination: 'IT')
+      ]);
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notValid));
     });
 
     test('Should not validate certificate with fake tests', () async {
       final base45 = fixture('eu_test_certificates/sk_8.txt');
-      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-      cert.tests.add(cert.tests.last.copyWith(typeOfTest: 'Fake'));
+      var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+      cert =
+          cert.copyWith(tests: [cert.tests.last.copyWith(typeOfTest: 'Fake')]);
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notValid));
     });
 
     test('Should not validate certificate with fake tests', () async {
       final base45 = fixture('eu_test_certificates/sm_1.txt');
-      final cert = await CertificateDecoder.getCertificateFromRawData(base45);
-      cert.vaccinations
-          .add(cert.vaccinations.last.copyWith(medicinalProduct: 'Fake'));
+      var cert = await CertificateDecoder.getCertificateFromRawData(base45);
+      cert = cert.copyWith(vaccinations: [
+        cert.vaccinations.last.copyWith(medicinalProduct: 'Fake')
+      ]);
       final result = await validator.checkValidationRules(cert);
       expect(result, equals(GreenCertificateStatus.notValid));
     });

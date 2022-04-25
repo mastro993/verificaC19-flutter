@@ -12,34 +12,7 @@ part of 'recovery_statement.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$RecoveryStatementTearOff {
-  const _$RecoveryStatementTearOff();
-
-  _RecoveryStatement call(
-      {required String disease,
-      required DateTime dateOfFirstPositiveTest,
-      required DateTime certificateValidFrom,
-      required DateTime certificateValidUntil,
-      required String countryOfVaccination,
-      required String certificateIssuer,
-      required String certificateIdentifier}) {
-    return _RecoveryStatement(
-      disease: disease,
-      dateOfFirstPositiveTest: dateOfFirstPositiveTest,
-      certificateValidFrom: certificateValidFrom,
-      certificateValidUntil: certificateValidUntil,
-      countryOfVaccination: countryOfVaccination,
-      certificateIssuer: certificateIssuer,
-      certificateIdentifier: certificateIdentifier,
-    );
-  }
-}
-
-/// @nodoc
-const $RecoveryStatement = _$RecoveryStatementTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$RecoveryStatement {
@@ -266,29 +239,29 @@ class _$_RecoveryStatement extends _RecoveryStatement {
 
 abstract class _RecoveryStatement extends RecoveryStatement {
   const factory _RecoveryStatement(
-      {required String disease,
-      required DateTime dateOfFirstPositiveTest,
-      required DateTime certificateValidFrom,
-      required DateTime certificateValidUntil,
-      required String countryOfVaccination,
-      required String certificateIssuer,
-      required String certificateIdentifier}) = _$_RecoveryStatement;
+      {required final String disease,
+      required final DateTime dateOfFirstPositiveTest,
+      required final DateTime certificateValidFrom,
+      required final DateTime certificateValidUntil,
+      required final String countryOfVaccination,
+      required final String certificateIssuer,
+      required final String certificateIdentifier}) = _$_RecoveryStatement;
   const _RecoveryStatement._() : super._();
 
   @override
-  String get disease;
+  String get disease => throw _privateConstructorUsedError;
   @override
-  DateTime get dateOfFirstPositiveTest;
+  DateTime get dateOfFirstPositiveTest => throw _privateConstructorUsedError;
   @override
-  DateTime get certificateValidFrom;
+  DateTime get certificateValidFrom => throw _privateConstructorUsedError;
   @override
-  DateTime get certificateValidUntil;
+  DateTime get certificateValidUntil => throw _privateConstructorUsedError;
   @override
-  String get countryOfVaccination;
+  String get countryOfVaccination => throw _privateConstructorUsedError;
   @override
-  String get certificateIssuer;
+  String get certificateIssuer => throw _privateConstructorUsedError;
   @override
-  String get certificateIdentifier;
+  String get certificateIdentifier => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RecoveryStatementCopyWith<_RecoveryStatement> get copyWith =>
