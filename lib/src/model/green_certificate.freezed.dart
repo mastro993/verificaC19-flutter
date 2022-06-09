@@ -128,11 +128,11 @@ class _$GreenCertificateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$GreenCertificateCopyWith<$Res>
+abstract class _$$_GreenCertificateCopyWith<$Res>
     implements $GreenCertificateCopyWith<$Res> {
-  factory _$GreenCertificateCopyWith(
-          _GreenCertificate value, $Res Function(_GreenCertificate) then) =
-      __$GreenCertificateCopyWithImpl<$Res>;
+  factory _$$_GreenCertificateCopyWith(
+          _$_GreenCertificate value, $Res Function(_$_GreenCertificate) then) =
+      __$$_GreenCertificateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Person person,
@@ -150,15 +150,15 @@ abstract class _$GreenCertificateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$GreenCertificateCopyWithImpl<$Res>
+class __$$_GreenCertificateCopyWithImpl<$Res>
     extends _$GreenCertificateCopyWithImpl<$Res>
-    implements _$GreenCertificateCopyWith<$Res> {
-  __$GreenCertificateCopyWithImpl(
-      _GreenCertificate _value, $Res Function(_GreenCertificate) _then)
-      : super(_value, (v) => _then(v as _GreenCertificate));
+    implements _$$_GreenCertificateCopyWith<$Res> {
+  __$$_GreenCertificateCopyWithImpl(
+      _$_GreenCertificate _value, $Res Function(_$_GreenCertificate) _then)
+      : super(_value, (v) => _then(v as _$_GreenCertificate));
 
   @override
-  _GreenCertificate get _value => super._value as _GreenCertificate;
+  _$_GreenCertificate get _value => super._value as _$_GreenCertificate;
 
   @override
   $Res call({
@@ -170,7 +170,7 @@ class __$GreenCertificateCopyWithImpl<$Res>
     Object? exemptions = freezed,
     Object? dcc = freezed,
   }) {
-    return _then(_GreenCertificate(
+    return _then(_$_GreenCertificate(
       person: person == freezed
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
@@ -180,19 +180,19 @@ class __$GreenCertificateCopyWithImpl<$Res>
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
               as DateTime,
       vaccinations: vaccinations == freezed
-          ? _value.vaccinations
+          ? _value._vaccinations
           : vaccinations // ignore: cast_nullable_to_non_nullable
               as List<Vaccination>,
       tests: tests == freezed
-          ? _value.tests
+          ? _value._tests
           : tests // ignore: cast_nullable_to_non_nullable
               as List<Test>,
       recoveryStatements: recoveryStatements == freezed
-          ? _value.recoveryStatements
+          ? _value._recoveryStatements
           : recoveryStatements // ignore: cast_nullable_to_non_nullable
               as List<RecoveryStatement>,
       exemptions: exemptions == freezed
-          ? _value.exemptions
+          ? _value._exemptions
           : exemptions // ignore: cast_nullable_to_non_nullable
               as List<Exemption>,
       dcc: dcc == freezed
@@ -281,17 +281,17 @@ class _$_GreenCertificate extends _GreenCertificate {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GreenCertificate &&
+            other is _$_GreenCertificate &&
             const DeepCollectionEquality().equals(other.person, person) &&
             const DeepCollectionEquality()
                 .equals(other.dateOfBirth, dateOfBirth) &&
             const DeepCollectionEquality()
-                .equals(other.vaccinations, vaccinations) &&
-            const DeepCollectionEquality().equals(other.tests, tests) &&
+                .equals(other._vaccinations, _vaccinations) &&
+            const DeepCollectionEquality().equals(other._tests, _tests) &&
             const DeepCollectionEquality()
-                .equals(other.recoveryStatements, recoveryStatements) &&
+                .equals(other._recoveryStatements, _recoveryStatements) &&
             const DeepCollectionEquality()
-                .equals(other.exemptions, exemptions) &&
+                .equals(other._exemptions, _exemptions) &&
             const DeepCollectionEquality().equals(other.dcc, dcc));
   }
 
@@ -300,16 +300,16 @@ class _$_GreenCertificate extends _GreenCertificate {
       runtimeType,
       const DeepCollectionEquality().hash(person),
       const DeepCollectionEquality().hash(dateOfBirth),
-      const DeepCollectionEquality().hash(vaccinations),
-      const DeepCollectionEquality().hash(tests),
-      const DeepCollectionEquality().hash(recoveryStatements),
-      const DeepCollectionEquality().hash(exemptions),
+      const DeepCollectionEquality().hash(_vaccinations),
+      const DeepCollectionEquality().hash(_tests),
+      const DeepCollectionEquality().hash(_recoveryStatements),
+      const DeepCollectionEquality().hash(_exemptions),
       const DeepCollectionEquality().hash(dcc));
 
   @JsonKey(ignore: true)
   @override
-  _$GreenCertificateCopyWith<_GreenCertificate> get copyWith =>
-      __$GreenCertificateCopyWithImpl<_GreenCertificate>(this, _$identity);
+  _$$_GreenCertificateCopyWith<_$_GreenCertificate> get copyWith =>
+      __$$_GreenCertificateCopyWithImpl<_$_GreenCertificate>(this, _$identity);
 }
 
 abstract class _GreenCertificate extends GreenCertificate {
@@ -354,6 +354,6 @@ abstract class _GreenCertificate extends GreenCertificate {
   DCC get dcc => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$GreenCertificateCopyWith<_GreenCertificate> get copyWith =>
+  _$$_GreenCertificateCopyWith<_$_GreenCertificate> get copyWith =>
       throw _privateConstructorUsedError;
 }

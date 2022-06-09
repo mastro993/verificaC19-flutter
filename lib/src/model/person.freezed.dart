@@ -80,9 +80,9 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
-  factory _$PersonCopyWith(_Person value, $Res Function(_Person) then) =
-      __$PersonCopyWithImpl<$Res>;
+abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
+  factory _$$_PersonCopyWith(_$_Person value, $Res Function(_$_Person) then) =
+      __$$_PersonCopyWithImpl<$Res>;
   @override
   $Res call(
       {String standardisedFamilyName,
@@ -92,13 +92,13 @@ abstract class _$PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
-    implements _$PersonCopyWith<$Res> {
-  __$PersonCopyWithImpl(_Person _value, $Res Function(_Person) _then)
-      : super(_value, (v) => _then(v as _Person));
+class __$$_PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
+    implements _$$_PersonCopyWith<$Res> {
+  __$$_PersonCopyWithImpl(_$_Person _value, $Res Function(_$_Person) _then)
+      : super(_value, (v) => _then(v as _$_Person));
 
   @override
-  _Person get _value => super._value as _Person;
+  _$_Person get _value => super._value as _$_Person;
 
   @override
   $Res call({
@@ -107,7 +107,7 @@ class __$PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
     Object? standardisedGivenName = freezed,
     Object? givenName = freezed,
   }) {
-    return _then(_Person(
+    return _then(_$_Person(
       standardisedFamilyName: standardisedFamilyName == freezed
           ? _value.standardisedFamilyName
           : standardisedFamilyName // ignore: cast_nullable_to_non_nullable
@@ -163,7 +163,7 @@ class _$_Person extends _Person {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Person &&
+            other is _$_Person &&
             const DeepCollectionEquality()
                 .equals(other.standardisedFamilyName, standardisedFamilyName) &&
             const DeepCollectionEquality()
@@ -183,8 +183,8 @@ class _$_Person extends _Person {
 
   @JsonKey(ignore: true)
   @override
-  _$PersonCopyWith<_Person> get copyWith =>
-      __$PersonCopyWithImpl<_Person>(this, _$identity);
+  _$$_PersonCopyWith<_$_Person> get copyWith =>
+      __$$_PersonCopyWithImpl<_$_Person>(this, _$identity);
 }
 
 abstract class _Person extends Person {
@@ -213,5 +213,6 @@ abstract class _Person extends Person {
   String get givenName => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PersonCopyWith<_Person> get copyWith => throw _privateConstructorUsedError;
+  _$$_PersonCopyWith<_$_Person> get copyWith =>
+      throw _privateConstructorUsedError;
 }

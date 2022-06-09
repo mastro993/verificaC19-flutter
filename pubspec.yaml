@@ -41,7 +41,9 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.0.2
   http_mock_adapter: ^0.3.2
-  injectable_generator: ^1.5.3
+  injectable_generator:
+    path: .\injectable-generator
   isar_generator: 3.0.0-dev.0
   mockito: ^5.1.0
-  retrofit_generator: ^4.0.1
+  retrofit_generator:
+    path: .\retrofit-generator

@@ -6,7 +6,7 @@ part of 'revoked_cert.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable, no_leading_underscores_for_local_identifiers
 
 extension GetRevokedCertCollection on Isar {
   IsarCollection<RevokedCert> get revokedCerts => getCollection();
@@ -15,7 +15,7 @@ extension GetRevokedCertCollection on Isar {
 const RevokedCertSchema = CollectionSchema(
   name: 'RevokedCert',
   schema:
-      '{"name":"RevokedCert","idName":"id","properties":[{"name":"cert","type":"String"}],"indexes":[{"name":"cert","unique":false,"properties":[{"name":"cert","type":"Hash","caseSensitive":true}]}],"links":[]}',
+      '{"name":"RevokedCert","idName":"id","properties":[{"name":"cert","type":"String"}],"indexes":[{"name":"cert","unique":false,"replace":false,"properties":[{"name":"cert","type":"Hash","caseSensitive":true}]}],"links":[]}',
   idName: 'id',
   propertyIds: {'cert': 0},
   listProperties: {},
@@ -37,7 +37,7 @@ const RevokedCertSchema = CollectionSchema(
   serializeWeb: _revokedCertSerializeWeb,
   deserializeWeb: _revokedCertDeserializeWeb,
   deserializePropWeb: _revokedCertDeserializePropWeb,
-  version: 3,
+  version: 4,
 );
 
 int? _revokedCertGetId(RevokedCert object) {
@@ -58,7 +58,7 @@ List<IsarLinkBase> _revokedCertGetLinks(RevokedCert object) {
 
 void _revokedCertSerializeNative(
     IsarCollection<RevokedCert> collection,
-    IsarRawObject rawObj,
+    IsarCObject cObj,
     RevokedCert object,
     int staticSize,
     List<int> offsets,
@@ -69,9 +69,9 @@ void _revokedCertSerializeNative(
   dynamicSize += (_cert.length) as int;
   final size = staticSize + dynamicSize;
 
-  rawObj.buffer = alloc(size);
-  rawObj.buffer_length = size;
-  final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
+  cObj.buffer = alloc(size);
+  cObj.buffer_length = size;
+  final buffer = IsarNative.bufAsBytes(cObj.buffer, size);
   final writer = IsarBinaryWriter(buffer, staticSize);
   writer.writeBytes(offsets[0], _cert);
 }

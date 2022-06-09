@@ -126,9 +126,9 @@ class _$DCCCopyWithImpl<$Res> implements $DCCCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$DCCCopyWith<$Res> implements $DCCCopyWith<$Res> {
-  factory _$DCCCopyWith(_DCC value, $Res Function(_DCC) then) =
-      __$DCCCopyWithImpl<$Res>;
+abstract class _$$_DCCCopyWith<$Res> implements $DCCCopyWith<$Res> {
+  factory _$$_DCCCopyWith(_$_DCC value, $Res Function(_$_DCC) then) =
+      __$$_DCCCopyWithImpl<$Res>;
   @override
   $Res call(
       {String raw,
@@ -143,13 +143,13 @@ abstract class _$DCCCopyWith<$Res> implements $DCCCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$DCCCopyWithImpl<$Res> extends _$DCCCopyWithImpl<$Res>
-    implements _$DCCCopyWith<$Res> {
-  __$DCCCopyWithImpl(_DCC _value, $Res Function(_DCC) _then)
-      : super(_value, (v) => _then(v as _DCC));
+class __$$_DCCCopyWithImpl<$Res> extends _$DCCCopyWithImpl<$Res>
+    implements _$$_DCCCopyWith<$Res> {
+  __$$_DCCCopyWithImpl(_$_DCC _value, $Res Function(_$_DCC) _then)
+      : super(_value, (v) => _then(v as _$_DCC));
 
   @override
-  _DCC get _value => super._value as _DCC;
+  _$_DCC get _value => super._value as _$_DCC;
 
   @override
   $Res call({
@@ -163,13 +163,13 @@ class __$DCCCopyWithImpl<$Res> extends _$DCCCopyWithImpl<$Res>
     Object? kid = freezed,
     Object? algorithm = freezed,
   }) {
-    return _then(_DCC(
+    return _then(_$_DCC(
       raw: raw == freezed
           ? _value.raw
           : raw // ignore: cast_nullable_to_non_nullable
               as String,
       coseRaw: coseRaw == freezed
-          ? _value.coseRaw
+          ? _value._coseRaw
           : coseRaw // ignore: cast_nullable_to_non_nullable
               as List<int>,
       protectedHeader: protectedHeader == freezed
@@ -177,11 +177,11 @@ class __$DCCCopyWithImpl<$Res> extends _$DCCCopyWithImpl<$Res>
           : protectedHeader // ignore: cast_nullable_to_non_nullable
               as Uint8List,
       unprotectedHeader: unprotectedHeader == freezed
-          ? _value.unprotectedHeader
+          ? _value._unprotectedHeader
           : unprotectedHeader // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
       payload: payload == freezed
-          ? _value.payload
+          ? _value._payload
           : payload // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
       payloadBytes: payloadBytes == freezed
@@ -285,14 +285,14 @@ class _$_DCC extends _DCC {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DCC &&
+            other is _$_DCC &&
             const DeepCollectionEquality().equals(other.raw, raw) &&
-            const DeepCollectionEquality().equals(other.coseRaw, coseRaw) &&
+            const DeepCollectionEquality().equals(other._coseRaw, _coseRaw) &&
             const DeepCollectionEquality()
                 .equals(other.protectedHeader, protectedHeader) &&
             const DeepCollectionEquality()
-                .equals(other.unprotectedHeader, unprotectedHeader) &&
-            const DeepCollectionEquality().equals(other.payload, payload) &&
+                .equals(other._unprotectedHeader, _unprotectedHeader) &&
+            const DeepCollectionEquality().equals(other._payload, _payload) &&
             const DeepCollectionEquality()
                 .equals(other.payloadBytes, payloadBytes) &&
             const DeepCollectionEquality().equals(other.signers, signers) &&
@@ -304,10 +304,10 @@ class _$_DCC extends _DCC {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(raw),
-      const DeepCollectionEquality().hash(coseRaw),
+      const DeepCollectionEquality().hash(_coseRaw),
       const DeepCollectionEquality().hash(protectedHeader),
-      const DeepCollectionEquality().hash(unprotectedHeader),
-      const DeepCollectionEquality().hash(payload),
+      const DeepCollectionEquality().hash(_unprotectedHeader),
+      const DeepCollectionEquality().hash(_payload),
       const DeepCollectionEquality().hash(payloadBytes),
       const DeepCollectionEquality().hash(signers),
       const DeepCollectionEquality().hash(kid),
@@ -315,8 +315,8 @@ class _$_DCC extends _DCC {
 
   @JsonKey(ignore: true)
   @override
-  _$DCCCopyWith<_DCC> get copyWith =>
-      __$DCCCopyWithImpl<_DCC>(this, _$identity);
+  _$$_DCCCopyWith<_$_DCC> get copyWith =>
+      __$$_DCCCopyWithImpl<_$_DCC>(this, _$identity);
 }
 
 abstract class _DCC extends DCC {
@@ -371,5 +371,5 @@ abstract class _DCC extends DCC {
   int get algorithm => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$DCCCopyWith<_DCC> get copyWith => throw _privateConstructorUsedError;
+  _$$_DCCCopyWith<_$_DCC> get copyWith => throw _privateConstructorUsedError;
 }

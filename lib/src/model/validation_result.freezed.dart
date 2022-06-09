@@ -93,11 +93,11 @@ class _$ValidationResultCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ValidationResultCopyWith<$Res>
+abstract class _$$_ValidationResultCopyWith<$Res>
     implements $ValidationResultCopyWith<$Res> {
-  factory _$ValidationResultCopyWith(
-          _ValidationResult value, $Res Function(_ValidationResult) then) =
-      __$ValidationResultCopyWithImpl<$Res>;
+  factory _$$_ValidationResultCopyWith(
+          _$_ValidationResult value, $Res Function(_$_ValidationResult) then) =
+      __$$_ValidationResultCopyWithImpl<$Res>;
   @override
   $Res call(
       {GreenCertificate certificate,
@@ -110,15 +110,15 @@ abstract class _$ValidationResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ValidationResultCopyWithImpl<$Res>
+class __$$_ValidationResultCopyWithImpl<$Res>
     extends _$ValidationResultCopyWithImpl<$Res>
-    implements _$ValidationResultCopyWith<$Res> {
-  __$ValidationResultCopyWithImpl(
-      _ValidationResult _value, $Res Function(_ValidationResult) _then)
-      : super(_value, (v) => _then(v as _ValidationResult));
+    implements _$$_ValidationResultCopyWith<$Res> {
+  __$$_ValidationResultCopyWithImpl(
+      _$_ValidationResult _value, $Res Function(_$_ValidationResult) _then)
+      : super(_value, (v) => _then(v as _$_ValidationResult));
 
   @override
-  _ValidationResult get _value => super._value as _ValidationResult;
+  _$_ValidationResult get _value => super._value as _$_ValidationResult;
 
   @override
   $Res call({
@@ -127,7 +127,7 @@ class __$ValidationResultCopyWithImpl<$Res>
     Object? validationMode = freezed,
     Object? validationDateTime = freezed,
   }) {
-    return _then(_ValidationResult(
+    return _then(_$_ValidationResult(
       certificate: certificate == freezed
           ? _value.certificate
           : certificate // ignore: cast_nullable_to_non_nullable
@@ -183,7 +183,7 @@ class _$_ValidationResult extends _ValidationResult {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ValidationResult &&
+            other is _$_ValidationResult &&
             const DeepCollectionEquality()
                 .equals(other.certificate, certificate) &&
             const DeepCollectionEquality()
@@ -204,8 +204,8 @@ class _$_ValidationResult extends _ValidationResult {
 
   @JsonKey(ignore: true)
   @override
-  _$ValidationResultCopyWith<_ValidationResult> get copyWith =>
-      __$ValidationResultCopyWithImpl<_ValidationResult>(this, _$identity);
+  _$$_ValidationResultCopyWith<_$_ValidationResult> get copyWith =>
+      __$$_ValidationResultCopyWithImpl<_$_ValidationResult>(this, _$identity);
 }
 
 abstract class _ValidationResult extends ValidationResult {
@@ -235,6 +235,6 @@ abstract class _ValidationResult extends ValidationResult {
   DateTime get validationDateTime => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ValidationResultCopyWith<_ValidationResult> get copyWith =>
+  _$$_ValidationResultCopyWith<_$_ValidationResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
