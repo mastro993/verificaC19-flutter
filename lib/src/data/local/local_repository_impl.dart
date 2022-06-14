@@ -81,7 +81,7 @@ class LocalRepositoryImpl implements LocalRepository {
       if (!file.existsSync()) {
         return true;
       }
-      final DateTime? lastUpdate = file.lastModifiedSync();
+      final DateTime lastUpdate = file.lastModifiedSync();
       return _isExpired(lastUpdate);
     } catch (e) {
       throw CacheException('Unable to get ${file.path} from cache');

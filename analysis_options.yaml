@@ -3,3 +3,10 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     always_specify_types: false
+
+analyzer:
+  exclude:
+    - lib/**.g.dart
+    - lib/**.gr.dart
+    - lib/**.config.dart
+    - test/**
