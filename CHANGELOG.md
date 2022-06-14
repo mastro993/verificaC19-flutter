@@ -1,3 +1,7 @@
+## 1.5.3
+
+- Removed IT entry mode
+
 ## 1.5.2
 
 - Updated dependencies
