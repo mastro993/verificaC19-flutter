@@ -10,7 +10,4 @@ enum ValidationMode {
 
   /// RSA Visitors
   visitorsRSADGP,
-
-  /// Validation mode for Italy entry
-  entryITDGP,
 }

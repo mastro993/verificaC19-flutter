@@ -19,9 +19,9 @@ void registerBinaries() {
     try {
       Isar.initializeLibraries(
         libraries: {
-          'windows': path.join(binDir, 'libisar_windows_x64.dll'),
-          'macos': path.join(binDir, 'libisar_macos_x64.dylib'),
-          'linux': path.join(binDir, 'libisar_linux_x64.so'),
+          IsarAbi.windowsX64: path.join(binDir, 'libisar_windows_x64.dll'),
+          IsarAbi.macosX64: path.join(binDir, 'libisar_macos_x64.dylib'),
+          IsarAbi.linuxX64: path.join(binDir, 'libisar_linux_x64.so'),
         },
       );
     } catch (e) {
