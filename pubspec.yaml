@@ -13,35 +13,35 @@ dependencies:
   asn1lib: ^1.1.0
   cbor: ^5.0.1
   clock: ^1.1.0
-  crypto: ^3.0.1
+  crypto: ^3.0.2
   crypto_keys: ^0.3.0
   dart_base45: ^1.0.1
   dio: ^4.0.6
   flutter:
     sdk: flutter
-  freezed_annotation: ^2.0.1
+  freezed_annotation: ^2.0.3
   get_it: ^7.2.0
   injectable: ^1.5.3
-  isar: ^2.4.0
-  isar_flutter_libs: ^2.4.0
-  json_annotation: ^4.4.0
-  json_serializable: ^6.1.5
+  isar: ^2.5.0
+  isar_flutter_libs: ^2.5.0
+  json_annotation: ^4.5.0
+  json_serializable: ^6.2.0
   mutex: ^3.0.0
   ninja: ^3.0.8
-  path: ^1.8.0
-  path_provider: ^2.0.9
+  path: ^1.8.1
+  path_provider: ^2.0.11
   retrofit: ^3.0.1+1
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.15
   x509b: ^0.2.5
 
 dev_dependencies:
-  build_runner: ^2.1.8
-  flutter_lints: ^1.0.4
+  build_runner: ^2.1.11
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
-  freezed: ^2.0.2
-  http_mock_adapter: ^0.3.2
+  freezed: ^2.0.3+1
+  http_mock_adapter: ^0.3.3
   injectable_generator: ^1.5.3
-  isar_generator: ^2.2.1
-  mockito: ^5.1.0
+  isar_generator: ^2.5.0
+  mockito: ^5.2.0
   retrofit_generator: ^4.0.1
