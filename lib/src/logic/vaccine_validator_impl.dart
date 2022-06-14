@@ -24,13 +24,6 @@ class VaccineValidatorImpl implements VaccineValidator {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
     try {
-      if (mode == ValidationMode.entryITDGP) {
-        if (vaccination.isIncomplete || !vaccination.isEma) {
-          log('Full vaccination (EMA approved) is required to enter in Italy');
-          return GreenCertificateStatus.notValid;
-        }
-      }
-
       // In Italy, Sputnik is accepted only for San Marino republic
       final validForItaly =
           vaccination.isEma || (vaccination.isSputnik && vaccination.isSM);
@@ -171,16 +164,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
         }
         return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
-      case ValidationMode.entryITDGP:
-        if (vaccination.isComplete) {
-          return rules
-              .find(RuleName.vaccineStartDayCompleteNotIT, type)
-              ?.intValue;
-        }
-        if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineStartDayBoosterNotIT)?.intValue;
-        }
-        return null;
     }
   }
 
@@ -229,21 +212,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineEndDayNotComplete, type)?.intValue;
         }
         return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
-      case ValidationMode.entryITDGP:
-        if (vaccination.isComplete && isUnderAge) {
-          return rules
-              .find(RuleName.vaccineEndDayCompleteUnder18, type)
-              ?.intValue;
-        }
-        if (vaccination.isComplete) {
-          return rules
-              .find(RuleName.vaccineEndDayCompleteNotIT, type)
-              ?.intValue;
-        }
-        if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineEndDayBoosterNotIT)?.intValue;
-        }
-        return null;
     }
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:clock/clock.dart';
 import 'package:injectable/injectable.dart';
 import 'package:verificac19/src/core/extensions.dart';
@@ -16,11 +14,6 @@ class ExemptionValidatorImpl implements ExemptionValidator {
     Exemption exemption, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
-    if (mode == ValidationMode.entryITDGP) {
-      log('Exemption is not valid for Italy entry mode');
-      return GreenCertificateStatus.notValid;
-    }
-
     if (mode == ValidationMode.boosterDGP ||
         mode == ValidationMode.visitorsRSADGP) {
       return GreenCertificateStatus.testNeeded;
