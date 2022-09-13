@@ -2,9 +2,9 @@
 
 [![Flutter](https://github.com/mastro993/verificac19_flutter/actions/workflows/flutter-ci.yml/badge.svg?branch=master)](https://github.com/mastro993/verificac19_flutter/actions/workflows/flutter-ci.yml)
 [![pub package](https://img.shields.io/pub/v/verificac19.svg)](https://pub.dev/packages/verificac19)
-[![pub points](https://badges.bar/verificac19/pub%20points)](https://pub.dev/packages/verificac19/score)
-[![popularity](https://badges.bar/verificac19/popularity)](https://pub.dev/packages/verificac19/score)
-[![likes](https://badges.bar/verificac19/likes)](https://pub.dev/packages/verificac19/score)
+[![pub points](https://img.shields.io/pub/points/verificac19?logo=dart)](https://pub.dev/packages/verificac19/score)
+[![pub popularity](https://img.shields.io/pub/popularity/verificac19?logo=dart)](https://pub.dev/packages/verificac19/score)
+[![pub likes](https://img.shields.io/pub/likes/verificac19?logo=dart)](https://pub.dev/packages/verificac19/score)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4f13e7d9b798479aa8c41d32ed1f6b6d)](https://www.codacy.com/gh/mastro993/verificaC19-flutter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mastro993/verificaC19-flutter&amp;utm_campaign=Badge_Grade)
 
 
