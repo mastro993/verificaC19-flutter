@@ -1,3 +1,8 @@
+## 1.5.3+1
+
+- Dependencies update
+- Static analysis fix
+
 ## 1.5.3
 
 - Removed IT entry mode
