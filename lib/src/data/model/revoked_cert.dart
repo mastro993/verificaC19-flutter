@@ -4,7 +4,7 @@ part 'revoked_cert.g.dart';
 
 @Collection()
 class RevokedCert {
-  int id = Isar.autoIncrement;
+  Id id = Isar.autoIncrement;
   @Index()
   late String cert;
 }
