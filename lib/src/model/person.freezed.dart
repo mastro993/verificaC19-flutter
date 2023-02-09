@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'person.dart';
 
@@ -35,7 +35,8 @@ mixin _$Person {
 /// @nodoc
 abstract class $PersonCopyWith<$Res> {
   factory $PersonCopyWith(Person value, $Res Function(Person) then) =
-      _$PersonCopyWithImpl<$Res>;
+      _$PersonCopyWithImpl<$Res, Person>;
+  @useResult
   $Res call(
       {String standardisedFamilyName,
       String familyName,
@@ -44,46 +45,50 @@ abstract class $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
+class _$PersonCopyWithImpl<$Res, $Val extends Person>
+    implements $PersonCopyWith<$Res> {
   _$PersonCopyWithImpl(this._value, this._then);
 
-  final Person _value;
   // ignore: unused_field
-  final $Res Function(Person) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? standardisedFamilyName = freezed,
-    Object? familyName = freezed,
-    Object? standardisedGivenName = freezed,
-    Object? givenName = freezed,
+    Object? standardisedFamilyName = null,
+    Object? familyName = null,
+    Object? standardisedGivenName = null,
+    Object? givenName = null,
   }) {
     return _then(_value.copyWith(
-      standardisedFamilyName: standardisedFamilyName == freezed
+      standardisedFamilyName: null == standardisedFamilyName
           ? _value.standardisedFamilyName
           : standardisedFamilyName // ignore: cast_nullable_to_non_nullable
               as String,
-      familyName: familyName == freezed
+      familyName: null == familyName
           ? _value.familyName
           : familyName // ignore: cast_nullable_to_non_nullable
               as String,
-      standardisedGivenName: standardisedGivenName == freezed
+      standardisedGivenName: null == standardisedGivenName
           ? _value.standardisedGivenName
           : standardisedGivenName // ignore: cast_nullable_to_non_nullable
               as String,
-      givenName: givenName == freezed
+      givenName: null == givenName
           ? _value.givenName
           : givenName // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
-  factory _$PersonCopyWith(_Person value, $Res Function(_Person) then) =
-      __$PersonCopyWithImpl<$Res>;
+abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
+  factory _$$_PersonCopyWith(_$_Person value, $Res Function(_$_Person) then) =
+      __$$_PersonCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String standardisedFamilyName,
       String familyName,
@@ -92,35 +97,34 @@ abstract class _$PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
-    implements _$PersonCopyWith<$Res> {
-  __$PersonCopyWithImpl(_Person _value, $Res Function(_Person) _then)
-      : super(_value, (v) => _then(v as _Person));
+class __$$_PersonCopyWithImpl<$Res>
+    extends _$PersonCopyWithImpl<$Res, _$_Person>
+    implements _$$_PersonCopyWith<$Res> {
+  __$$_PersonCopyWithImpl(_$_Person _value, $Res Function(_$_Person) _then)
+      : super(_value, _then);
 
-  @override
-  _Person get _value => super._value as _Person;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? standardisedFamilyName = freezed,
-    Object? familyName = freezed,
-    Object? standardisedGivenName = freezed,
-    Object? givenName = freezed,
+    Object? standardisedFamilyName = null,
+    Object? familyName = null,
+    Object? standardisedGivenName = null,
+    Object? givenName = null,
   }) {
-    return _then(_Person(
-      standardisedFamilyName: standardisedFamilyName == freezed
+    return _then(_$_Person(
+      standardisedFamilyName: null == standardisedFamilyName
           ? _value.standardisedFamilyName
           : standardisedFamilyName // ignore: cast_nullable_to_non_nullable
               as String,
-      familyName: familyName == freezed
+      familyName: null == familyName
           ? _value.familyName
           : familyName // ignore: cast_nullable_to_non_nullable
               as String,
-      standardisedGivenName: standardisedGivenName == freezed
+      standardisedGivenName: null == standardisedGivenName
           ? _value.standardisedGivenName
           : standardisedGivenName // ignore: cast_nullable_to_non_nullable
               as String,
-      givenName: givenName == freezed
+      givenName: null == givenName
           ? _value.givenName
           : givenName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -163,28 +167,26 @@ class _$_Person extends _Person {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Person &&
-            const DeepCollectionEquality()
-                .equals(other.standardisedFamilyName, standardisedFamilyName) &&
-            const DeepCollectionEquality()
-                .equals(other.familyName, familyName) &&
-            const DeepCollectionEquality()
-                .equals(other.standardisedGivenName, standardisedGivenName) &&
-            const DeepCollectionEquality().equals(other.givenName, givenName));
+            other is _$_Person &&
+            (identical(other.standardisedFamilyName, standardisedFamilyName) ||
+                other.standardisedFamilyName == standardisedFamilyName) &&
+            (identical(other.familyName, familyName) ||
+                other.familyName == familyName) &&
+            (identical(other.standardisedGivenName, standardisedGivenName) ||
+                other.standardisedGivenName == standardisedGivenName) &&
+            (identical(other.givenName, givenName) ||
+                other.givenName == givenName));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(standardisedFamilyName),
-      const DeepCollectionEquality().hash(familyName),
-      const DeepCollectionEquality().hash(standardisedGivenName),
-      const DeepCollectionEquality().hash(givenName));
+  int get hashCode => Object.hash(runtimeType, standardisedFamilyName,
+      familyName, standardisedGivenName, givenName);
 
   @JsonKey(ignore: true)
   @override
-  _$PersonCopyWith<_Person> get copyWith =>
-      __$PersonCopyWithImpl<_Person>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_PersonCopyWith<_$_Person> get copyWith =>
+      __$$_PersonCopyWithImpl<_$_Person>(this, _$identity);
 }
 
 abstract class _Person extends Person {
@@ -198,20 +200,21 @@ abstract class _Person extends Person {
   @override
 
   /// Surname of the person with standard characters
-  String get standardisedFamilyName => throw _privateConstructorUsedError;
+  String get standardisedFamilyName;
   @override
 
   /// Surname of the person
-  String get familyName => throw _privateConstructorUsedError;
+  String get familyName;
   @override
 
   /// Name of the person with standard characters
-  String get standardisedGivenName => throw _privateConstructorUsedError;
+  String get standardisedGivenName;
   @override
 
   /// Name of the person
-  String get givenName => throw _privateConstructorUsedError;
+  String get givenName;
   @override
   @JsonKey(ignore: true)
-  _$PersonCopyWith<_Person> get copyWith => throw _privateConstructorUsedError;
+  _$$_PersonCopyWith<_$_Person> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'recovery_statement.dart';
 
@@ -33,7 +33,8 @@ mixin _$RecoveryStatement {
 abstract class $RecoveryStatementCopyWith<$Res> {
   factory $RecoveryStatementCopyWith(
           RecoveryStatement value, $Res Function(RecoveryStatement) then) =
-      _$RecoveryStatementCopyWithImpl<$Res>;
+      _$RecoveryStatementCopyWithImpl<$Res, RecoveryStatement>;
+  @useResult
   $Res call(
       {String disease,
       DateTime dateOfFirstPositiveTest,
@@ -45,64 +46,67 @@ abstract class $RecoveryStatementCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RecoveryStatementCopyWithImpl<$Res>
+class _$RecoveryStatementCopyWithImpl<$Res, $Val extends RecoveryStatement>
     implements $RecoveryStatementCopyWith<$Res> {
   _$RecoveryStatementCopyWithImpl(this._value, this._then);
 
-  final RecoveryStatement _value;
   // ignore: unused_field
-  final $Res Function(RecoveryStatement) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? dateOfFirstPositiveTest = freezed,
-    Object? certificateValidFrom = freezed,
-    Object? certificateValidUntil = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
+    Object? disease = null,
+    Object? dateOfFirstPositiveTest = null,
+    Object? certificateValidFrom = null,
+    Object? certificateValidUntil = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
   }) {
     return _then(_value.copyWith(
-      disease: disease == freezed
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      dateOfFirstPositiveTest: dateOfFirstPositiveTest == freezed
+      dateOfFirstPositiveTest: null == dateOfFirstPositiveTest
           ? _value.dateOfFirstPositiveTest
           : dateOfFirstPositiveTest // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      certificateValidFrom: certificateValidFrom == freezed
+      certificateValidFrom: null == certificateValidFrom
           ? _value.certificateValidFrom
           : certificateValidFrom // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      certificateValidUntil: certificateValidUntil == freezed
+      certificateValidUntil: null == certificateValidUntil
           ? _value.certificateValidUntil
           : certificateValidUntil // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$RecoveryStatementCopyWith<$Res>
+abstract class _$$_RecoveryStatementCopyWith<$Res>
     implements $RecoveryStatementCopyWith<$Res> {
-  factory _$RecoveryStatementCopyWith(
-          _RecoveryStatement value, $Res Function(_RecoveryStatement) then) =
-      __$RecoveryStatementCopyWithImpl<$Res>;
+  factory _$$_RecoveryStatementCopyWith(_$_RecoveryStatement value,
+          $Res Function(_$_RecoveryStatement) then) =
+      __$$_RecoveryStatementCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String disease,
       DateTime dateOfFirstPositiveTest,
@@ -114,52 +118,50 @@ abstract class _$RecoveryStatementCopyWith<$Res>
 }
 
 /// @nodoc
-class __$RecoveryStatementCopyWithImpl<$Res>
-    extends _$RecoveryStatementCopyWithImpl<$Res>
-    implements _$RecoveryStatementCopyWith<$Res> {
-  __$RecoveryStatementCopyWithImpl(
-      _RecoveryStatement _value, $Res Function(_RecoveryStatement) _then)
-      : super(_value, (v) => _then(v as _RecoveryStatement));
+class __$$_RecoveryStatementCopyWithImpl<$Res>
+    extends _$RecoveryStatementCopyWithImpl<$Res, _$_RecoveryStatement>
+    implements _$$_RecoveryStatementCopyWith<$Res> {
+  __$$_RecoveryStatementCopyWithImpl(
+      _$_RecoveryStatement _value, $Res Function(_$_RecoveryStatement) _then)
+      : super(_value, _then);
 
-  @override
-  _RecoveryStatement get _value => super._value as _RecoveryStatement;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? dateOfFirstPositiveTest = freezed,
-    Object? certificateValidFrom = freezed,
-    Object? certificateValidUntil = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
+    Object? disease = null,
+    Object? dateOfFirstPositiveTest = null,
+    Object? certificateValidFrom = null,
+    Object? certificateValidUntil = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
   }) {
-    return _then(_RecoveryStatement(
-      disease: disease == freezed
+    return _then(_$_RecoveryStatement(
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      dateOfFirstPositiveTest: dateOfFirstPositiveTest == freezed
+      dateOfFirstPositiveTest: null == dateOfFirstPositiveTest
           ? _value.dateOfFirstPositiveTest
           : dateOfFirstPositiveTest // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      certificateValidFrom: certificateValidFrom == freezed
+      certificateValidFrom: null == certificateValidFrom
           ? _value.certificateValidFrom
           : certificateValidFrom // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      certificateValidUntil: certificateValidUntil == freezed
+      certificateValidUntil: null == certificateValidUntil
           ? _value.certificateValidUntil
           : certificateValidUntil // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
@@ -204,37 +206,40 @@ class _$_RecoveryStatement extends _RecoveryStatement {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _RecoveryStatement &&
-            const DeepCollectionEquality().equals(other.disease, disease) &&
-            const DeepCollectionEquality().equals(
-                other.dateOfFirstPositiveTest, dateOfFirstPositiveTest) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateValidFrom, certificateValidFrom) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateValidUntil, certificateValidUntil) &&
-            const DeepCollectionEquality()
-                .equals(other.countryOfVaccination, countryOfVaccination) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIssuer, certificateIssuer) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIdentifier, certificateIdentifier));
+            other is _$_RecoveryStatement &&
+            (identical(other.disease, disease) || other.disease == disease) &&
+            (identical(
+                    other.dateOfFirstPositiveTest, dateOfFirstPositiveTest) ||
+                other.dateOfFirstPositiveTest == dateOfFirstPositiveTest) &&
+            (identical(other.certificateValidFrom, certificateValidFrom) ||
+                other.certificateValidFrom == certificateValidFrom) &&
+            (identical(other.certificateValidUntil, certificateValidUntil) ||
+                other.certificateValidUntil == certificateValidUntil) &&
+            (identical(other.countryOfVaccination, countryOfVaccination) ||
+                other.countryOfVaccination == countryOfVaccination) &&
+            (identical(other.certificateIssuer, certificateIssuer) ||
+                other.certificateIssuer == certificateIssuer) &&
+            (identical(other.certificateIdentifier, certificateIdentifier) ||
+                other.certificateIdentifier == certificateIdentifier));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(disease),
-      const DeepCollectionEquality().hash(dateOfFirstPositiveTest),
-      const DeepCollectionEquality().hash(certificateValidFrom),
-      const DeepCollectionEquality().hash(certificateValidUntil),
-      const DeepCollectionEquality().hash(countryOfVaccination),
-      const DeepCollectionEquality().hash(certificateIssuer),
-      const DeepCollectionEquality().hash(certificateIdentifier));
+      disease,
+      dateOfFirstPositiveTest,
+      certificateValidFrom,
+      certificateValidUntil,
+      countryOfVaccination,
+      certificateIssuer,
+      certificateIdentifier);
 
   @JsonKey(ignore: true)
   @override
-  _$RecoveryStatementCopyWith<_RecoveryStatement> get copyWith =>
-      __$RecoveryStatementCopyWithImpl<_RecoveryStatement>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_RecoveryStatementCopyWith<_$_RecoveryStatement> get copyWith =>
+      __$$_RecoveryStatementCopyWithImpl<_$_RecoveryStatement>(
+          this, _$identity);
 }
 
 abstract class _RecoveryStatement extends RecoveryStatement {
@@ -249,21 +254,21 @@ abstract class _RecoveryStatement extends RecoveryStatement {
   const _RecoveryStatement._() : super._();
 
   @override
-  String get disease => throw _privateConstructorUsedError;
+  String get disease;
   @override
-  DateTime get dateOfFirstPositiveTest => throw _privateConstructorUsedError;
+  DateTime get dateOfFirstPositiveTest;
   @override
-  DateTime get certificateValidFrom => throw _privateConstructorUsedError;
+  DateTime get certificateValidFrom;
   @override
-  DateTime get certificateValidUntil => throw _privateConstructorUsedError;
+  DateTime get certificateValidUntil;
   @override
-  String get countryOfVaccination => throw _privateConstructorUsedError;
+  String get countryOfVaccination;
   @override
-  String get certificateIssuer => throw _privateConstructorUsedError;
+  String get certificateIssuer;
   @override
-  String get certificateIdentifier => throw _privateConstructorUsedError;
+  String get certificateIdentifier;
   @override
   @JsonKey(ignore: true)
-  _$RecoveryStatementCopyWith<_RecoveryStatement> get copyWith =>
+  _$$_RecoveryStatementCopyWith<_$_RecoveryStatement> get copyWith =>
       throw _privateConstructorUsedError;
 }

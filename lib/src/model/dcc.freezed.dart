@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'dcc.dart';
 
@@ -51,7 +51,8 @@ mixin _$DCC {
 /// @nodoc
 abstract class $DCCCopyWith<$Res> {
   factory $DCCCopyWith(DCC value, $Res Function(DCC) then) =
-      _$DCCCopyWithImpl<$Res>;
+      _$DCCCopyWithImpl<$Res, DCC>;
+  @useResult
   $Res call(
       {String raw,
       List<int> coseRaw,
@@ -65,71 +66,74 @@ abstract class $DCCCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DCCCopyWithImpl<$Res> implements $DCCCopyWith<$Res> {
+class _$DCCCopyWithImpl<$Res, $Val extends DCC> implements $DCCCopyWith<$Res> {
   _$DCCCopyWithImpl(this._value, this._then);
 
-  final DCC _value;
   // ignore: unused_field
-  final $Res Function(DCC) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? raw = freezed,
-    Object? coseRaw = freezed,
-    Object? protectedHeader = freezed,
-    Object? unprotectedHeader = freezed,
-    Object? payload = freezed,
-    Object? payloadBytes = freezed,
-    Object? signers = freezed,
-    Object? kid = freezed,
-    Object? algorithm = freezed,
+    Object? raw = null,
+    Object? coseRaw = null,
+    Object? protectedHeader = null,
+    Object? unprotectedHeader = null,
+    Object? payload = null,
+    Object? payloadBytes = null,
+    Object? signers = null,
+    Object? kid = null,
+    Object? algorithm = null,
   }) {
     return _then(_value.copyWith(
-      raw: raw == freezed
+      raw: null == raw
           ? _value.raw
           : raw // ignore: cast_nullable_to_non_nullable
               as String,
-      coseRaw: coseRaw == freezed
+      coseRaw: null == coseRaw
           ? _value.coseRaw
           : coseRaw // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      protectedHeader: protectedHeader == freezed
+      protectedHeader: null == protectedHeader
           ? _value.protectedHeader
           : protectedHeader // ignore: cast_nullable_to_non_nullable
               as Uint8List,
-      unprotectedHeader: unprotectedHeader == freezed
+      unprotectedHeader: null == unprotectedHeader
           ? _value.unprotectedHeader
           : unprotectedHeader // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
-      payload: payload == freezed
+      payload: null == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
-      payloadBytes: payloadBytes == freezed
+      payloadBytes: null == payloadBytes
           ? _value.payloadBytes
           : payloadBytes // ignore: cast_nullable_to_non_nullable
               as Uint8List,
-      signers: signers == freezed
+      signers: null == signers
           ? _value.signers
           : signers // ignore: cast_nullable_to_non_nullable
               as Uint8List,
-      kid: kid == freezed
+      kid: null == kid
           ? _value.kid
           : kid // ignore: cast_nullable_to_non_nullable
               as String,
-      algorithm: algorithm == freezed
+      algorithm: null == algorithm
           ? _value.algorithm
           : algorithm // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$DCCCopyWith<$Res> implements $DCCCopyWith<$Res> {
-  factory _$DCCCopyWith(_DCC value, $Res Function(_DCC) then) =
-      __$DCCCopyWithImpl<$Res>;
+abstract class _$$_DCCCopyWith<$Res> implements $DCCCopyWith<$Res> {
+  factory _$$_DCCCopyWith(_$_DCC value, $Res Function(_$_DCC) then) =
+      __$$_DCCCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String raw,
       List<int> coseRaw,
@@ -143,60 +147,58 @@ abstract class _$DCCCopyWith<$Res> implements $DCCCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$DCCCopyWithImpl<$Res> extends _$DCCCopyWithImpl<$Res>
-    implements _$DCCCopyWith<$Res> {
-  __$DCCCopyWithImpl(_DCC _value, $Res Function(_DCC) _then)
-      : super(_value, (v) => _then(v as _DCC));
+class __$$_DCCCopyWithImpl<$Res> extends _$DCCCopyWithImpl<$Res, _$_DCC>
+    implements _$$_DCCCopyWith<$Res> {
+  __$$_DCCCopyWithImpl(_$_DCC _value, $Res Function(_$_DCC) _then)
+      : super(_value, _then);
 
-  @override
-  _DCC get _value => super._value as _DCC;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? raw = freezed,
-    Object? coseRaw = freezed,
-    Object? protectedHeader = freezed,
-    Object? unprotectedHeader = freezed,
-    Object? payload = freezed,
-    Object? payloadBytes = freezed,
-    Object? signers = freezed,
-    Object? kid = freezed,
-    Object? algorithm = freezed,
+    Object? raw = null,
+    Object? coseRaw = null,
+    Object? protectedHeader = null,
+    Object? unprotectedHeader = null,
+    Object? payload = null,
+    Object? payloadBytes = null,
+    Object? signers = null,
+    Object? kid = null,
+    Object? algorithm = null,
   }) {
-    return _then(_DCC(
-      raw: raw == freezed
+    return _then(_$_DCC(
+      raw: null == raw
           ? _value.raw
           : raw // ignore: cast_nullable_to_non_nullable
               as String,
-      coseRaw: coseRaw == freezed
-          ? _value.coseRaw
+      coseRaw: null == coseRaw
+          ? _value._coseRaw
           : coseRaw // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      protectedHeader: protectedHeader == freezed
+      protectedHeader: null == protectedHeader
           ? _value.protectedHeader
           : protectedHeader // ignore: cast_nullable_to_non_nullable
               as Uint8List,
-      unprotectedHeader: unprotectedHeader == freezed
-          ? _value.unprotectedHeader
+      unprotectedHeader: null == unprotectedHeader
+          ? _value._unprotectedHeader
           : unprotectedHeader // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
-      payload: payload == freezed
-          ? _value.payload
+      payload: null == payload
+          ? _value._payload
           : payload // ignore: cast_nullable_to_non_nullable
               as Map<dynamic, dynamic>,
-      payloadBytes: payloadBytes == freezed
+      payloadBytes: null == payloadBytes
           ? _value.payloadBytes
           : payloadBytes // ignore: cast_nullable_to_non_nullable
               as Uint8List,
-      signers: signers == freezed
+      signers: null == signers
           ? _value.signers
           : signers // ignore: cast_nullable_to_non_nullable
               as Uint8List,
-      kid: kid == freezed
+      kid: null == kid
           ? _value.kid
           : kid // ignore: cast_nullable_to_non_nullable
               as String,
-      algorithm: algorithm == freezed
+      algorithm: null == algorithm
           ? _value.algorithm
           : algorithm // ignore: cast_nullable_to_non_nullable
               as int,
@@ -232,6 +234,7 @@ class _$_DCC extends _DCC {
   /// COSE data
   @override
   List<int> get coseRaw {
+    if (_coseRaw is EqualUnmodifiableListView) return _coseRaw;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_coseRaw);
   }
@@ -246,6 +249,8 @@ class _$_DCC extends _DCC {
   /// Unprotected header
   @override
   Map<dynamic, dynamic> get unprotectedHeader {
+    if (_unprotectedHeader is EqualUnmodifiableMapView)
+      return _unprotectedHeader;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_unprotectedHeader);
   }
@@ -256,6 +261,7 @@ class _$_DCC extends _DCC {
   /// Certificate data payload
   @override
   Map<dynamic, dynamic> get payload {
+    if (_payload is EqualUnmodifiableMapView) return _payload;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_payload);
   }
@@ -285,38 +291,40 @@ class _$_DCC extends _DCC {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DCC &&
-            const DeepCollectionEquality().equals(other.raw, raw) &&
-            const DeepCollectionEquality().equals(other.coseRaw, coseRaw) &&
+            other is _$_DCC &&
+            (identical(other.raw, raw) || other.raw == raw) &&
+            const DeepCollectionEquality().equals(other._coseRaw, _coseRaw) &&
             const DeepCollectionEquality()
                 .equals(other.protectedHeader, protectedHeader) &&
             const DeepCollectionEquality()
-                .equals(other.unprotectedHeader, unprotectedHeader) &&
-            const DeepCollectionEquality().equals(other.payload, payload) &&
+                .equals(other._unprotectedHeader, _unprotectedHeader) &&
+            const DeepCollectionEquality().equals(other._payload, _payload) &&
             const DeepCollectionEquality()
                 .equals(other.payloadBytes, payloadBytes) &&
             const DeepCollectionEquality().equals(other.signers, signers) &&
-            const DeepCollectionEquality().equals(other.kid, kid) &&
-            const DeepCollectionEquality().equals(other.algorithm, algorithm));
+            (identical(other.kid, kid) || other.kid == kid) &&
+            (identical(other.algorithm, algorithm) ||
+                other.algorithm == algorithm));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(raw),
-      const DeepCollectionEquality().hash(coseRaw),
+      raw,
+      const DeepCollectionEquality().hash(_coseRaw),
       const DeepCollectionEquality().hash(protectedHeader),
-      const DeepCollectionEquality().hash(unprotectedHeader),
-      const DeepCollectionEquality().hash(payload),
+      const DeepCollectionEquality().hash(_unprotectedHeader),
+      const DeepCollectionEquality().hash(_payload),
       const DeepCollectionEquality().hash(payloadBytes),
       const DeepCollectionEquality().hash(signers),
-      const DeepCollectionEquality().hash(kid),
-      const DeepCollectionEquality().hash(algorithm));
+      kid,
+      algorithm);
 
   @JsonKey(ignore: true)
   @override
-  _$DCCCopyWith<_DCC> get copyWith =>
-      __$DCCCopyWithImpl<_DCC>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_DCCCopyWith<_$_DCC> get copyWith =>
+      __$$_DCCCopyWithImpl<_$_DCC>(this, _$identity);
 }
 
 abstract class _DCC extends DCC {
@@ -335,41 +343,40 @@ abstract class _DCC extends DCC {
   @override
 
   /// Raw unprocessed data
-  String get raw => throw _privateConstructorUsedError;
+  String get raw;
   @override
 
   /// COSE data
-  List<int> get coseRaw => throw _privateConstructorUsedError;
+  List<int> get coseRaw;
   @override
 
   /// Protected header
-  Uint8List get protectedHeader => throw _privateConstructorUsedError;
+  Uint8List get protectedHeader;
   @override
 
   /// Unprotected header
-  Map<dynamic, dynamic> get unprotectedHeader =>
-      throw _privateConstructorUsedError;
+  Map<dynamic, dynamic> get unprotectedHeader;
   @override
 
   /// Certificate data payload
-  Map<dynamic, dynamic> get payload => throw _privateConstructorUsedError;
+  Map<dynamic, dynamic> get payload;
   @override
 
   /// Encoded certificate data payload
-  Uint8List get payloadBytes => throw _privateConstructorUsedError;
+  Uint8List get payloadBytes;
   @override
 
   /// Certificate signers
-  Uint8List get signers => throw _privateConstructorUsedError;
+  Uint8List get signers;
   @override
 
   /// Certificate kid
-  String get kid => throw _privateConstructorUsedError;
+  String get kid;
   @override
 
   /// Certificate algorithm
-  int get algorithm => throw _privateConstructorUsedError;
+  int get algorithm;
   @override
   @JsonKey(ignore: true)
-  _$DCCCopyWith<_DCC> get copyWith => throw _privateConstructorUsedError;
+  _$$_DCCCopyWith<_$_DCC> get copyWith => throw _privateConstructorUsedError;
 }

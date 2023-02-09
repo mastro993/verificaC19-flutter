@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'validation_result.dart';
 
@@ -38,7 +38,8 @@ mixin _$ValidationResult {
 abstract class $ValidationResultCopyWith<$Res> {
   factory $ValidationResultCopyWith(
           ValidationResult value, $Res Function(ValidationResult) then) =
-      _$ValidationResultCopyWithImpl<$Res>;
+      _$ValidationResultCopyWithImpl<$Res, ValidationResult>;
+  @useResult
   $Res call(
       {GreenCertificate certificate,
       GreenCertificateStatus certificateStatus,
@@ -49,56 +50,60 @@ abstract class $ValidationResultCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ValidationResultCopyWithImpl<$Res>
+class _$ValidationResultCopyWithImpl<$Res, $Val extends ValidationResult>
     implements $ValidationResultCopyWith<$Res> {
   _$ValidationResultCopyWithImpl(this._value, this._then);
 
-  final ValidationResult _value;
   // ignore: unused_field
-  final $Res Function(ValidationResult) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? certificate = freezed,
-    Object? certificateStatus = freezed,
-    Object? validationMode = freezed,
-    Object? validationDateTime = freezed,
+    Object? certificate = null,
+    Object? certificateStatus = null,
+    Object? validationMode = null,
+    Object? validationDateTime = null,
   }) {
     return _then(_value.copyWith(
-      certificate: certificate == freezed
+      certificate: null == certificate
           ? _value.certificate
           : certificate // ignore: cast_nullable_to_non_nullable
               as GreenCertificate,
-      certificateStatus: certificateStatus == freezed
+      certificateStatus: null == certificateStatus
           ? _value.certificateStatus
           : certificateStatus // ignore: cast_nullable_to_non_nullable
               as GreenCertificateStatus,
-      validationMode: validationMode == freezed
+      validationMode: null == validationMode
           ? _value.validationMode
           : validationMode // ignore: cast_nullable_to_non_nullable
               as ValidationMode,
-      validationDateTime: validationDateTime == freezed
+      validationDateTime: null == validationDateTime
           ? _value.validationDateTime
           : validationDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $GreenCertificateCopyWith<$Res> get certificate {
     return $GreenCertificateCopyWith<$Res>(_value.certificate, (value) {
-      return _then(_value.copyWith(certificate: value));
+      return _then(_value.copyWith(certificate: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$ValidationResultCopyWith<$Res>
+abstract class _$$_ValidationResultCopyWith<$Res>
     implements $ValidationResultCopyWith<$Res> {
-  factory _$ValidationResultCopyWith(
-          _ValidationResult value, $Res Function(_ValidationResult) then) =
-      __$ValidationResultCopyWithImpl<$Res>;
+  factory _$$_ValidationResultCopyWith(
+          _$_ValidationResult value, $Res Function(_$_ValidationResult) then) =
+      __$$_ValidationResultCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {GreenCertificate certificate,
       GreenCertificateStatus certificateStatus,
@@ -110,37 +115,35 @@ abstract class _$ValidationResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ValidationResultCopyWithImpl<$Res>
-    extends _$ValidationResultCopyWithImpl<$Res>
-    implements _$ValidationResultCopyWith<$Res> {
-  __$ValidationResultCopyWithImpl(
-      _ValidationResult _value, $Res Function(_ValidationResult) _then)
-      : super(_value, (v) => _then(v as _ValidationResult));
+class __$$_ValidationResultCopyWithImpl<$Res>
+    extends _$ValidationResultCopyWithImpl<$Res, _$_ValidationResult>
+    implements _$$_ValidationResultCopyWith<$Res> {
+  __$$_ValidationResultCopyWithImpl(
+      _$_ValidationResult _value, $Res Function(_$_ValidationResult) _then)
+      : super(_value, _then);
 
-  @override
-  _ValidationResult get _value => super._value as _ValidationResult;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? certificate = freezed,
-    Object? certificateStatus = freezed,
-    Object? validationMode = freezed,
-    Object? validationDateTime = freezed,
+    Object? certificate = null,
+    Object? certificateStatus = null,
+    Object? validationMode = null,
+    Object? validationDateTime = null,
   }) {
-    return _then(_ValidationResult(
-      certificate: certificate == freezed
+    return _then(_$_ValidationResult(
+      certificate: null == certificate
           ? _value.certificate
           : certificate // ignore: cast_nullable_to_non_nullable
               as GreenCertificate,
-      certificateStatus: certificateStatus == freezed
+      certificateStatus: null == certificateStatus
           ? _value.certificateStatus
           : certificateStatus // ignore: cast_nullable_to_non_nullable
               as GreenCertificateStatus,
-      validationMode: validationMode == freezed
+      validationMode: null == validationMode
           ? _value.validationMode
           : validationMode // ignore: cast_nullable_to_non_nullable
               as ValidationMode,
-      validationDateTime: validationDateTime == freezed
+      validationDateTime: null == validationDateTime
           ? _value.validationDateTime
           : validationDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -183,29 +186,26 @@ class _$_ValidationResult extends _ValidationResult {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ValidationResult &&
-            const DeepCollectionEquality()
-                .equals(other.certificate, certificate) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateStatus, certificateStatus) &&
-            const DeepCollectionEquality()
-                .equals(other.validationMode, validationMode) &&
-            const DeepCollectionEquality()
-                .equals(other.validationDateTime, validationDateTime));
+            other is _$_ValidationResult &&
+            (identical(other.certificate, certificate) ||
+                other.certificate == certificate) &&
+            (identical(other.certificateStatus, certificateStatus) ||
+                other.certificateStatus == certificateStatus) &&
+            (identical(other.validationMode, validationMode) ||
+                other.validationMode == validationMode) &&
+            (identical(other.validationDateTime, validationDateTime) ||
+                other.validationDateTime == validationDateTime));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(certificate),
-      const DeepCollectionEquality().hash(certificateStatus),
-      const DeepCollectionEquality().hash(validationMode),
-      const DeepCollectionEquality().hash(validationDateTime));
+  int get hashCode => Object.hash(runtimeType, certificate, certificateStatus,
+      validationMode, validationDateTime);
 
   @JsonKey(ignore: true)
   @override
-  _$ValidationResultCopyWith<_ValidationResult> get copyWith =>
-      __$ValidationResultCopyWithImpl<_ValidationResult>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ValidationResultCopyWith<_$_ValidationResult> get copyWith =>
+      __$$_ValidationResultCopyWithImpl<_$_ValidationResult>(this, _$identity);
 }
 
 abstract class _ValidationResult extends ValidationResult {
@@ -219,22 +219,21 @@ abstract class _ValidationResult extends ValidationResult {
   @override
 
   /// Validated certificate
-  GreenCertificate get certificate => throw _privateConstructorUsedError;
+  GreenCertificate get certificate;
   @override
 
   /// Validation rules result
-  GreenCertificateStatus get certificateStatus =>
-      throw _privateConstructorUsedError;
+  GreenCertificateStatus get certificateStatus;
   @override
 
   /// Validation mode used for the result
-  ValidationMode get validationMode => throw _privateConstructorUsedError;
+  ValidationMode get validationMode;
   @override
 
   /// Date and time of the validation
-  DateTime get validationDateTime => throw _privateConstructorUsedError;
+  DateTime get validationDateTime;
   @override
   @JsonKey(ignore: true)
-  _$ValidationResultCopyWith<_ValidationResult> get copyWith =>
+  _$$_ValidationResultCopyWith<_$_ValidationResult> get copyWith =>
       throw _privateConstructorUsedError;
 }

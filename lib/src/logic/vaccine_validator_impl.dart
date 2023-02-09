@@ -39,17 +39,6 @@ class VaccineValidatorImpl implements VaccineValidator {
         return result;
       }
 
-      if (mode == ValidationMode.boosterDGP ||
-          mode == ValidationMode.visitorsRSADGP) {
-        if (vaccination.isBooster) {
-          return GreenCertificateStatus.valid;
-        }
-        if (vaccination.isComplete) {
-          return GreenCertificateStatus.testNeeded;
-        }
-        return GreenCertificateStatus.notValid;
-      }
-
       return result;
     } catch (e) {
       log('Vaccination is not present or is not a green pass: ${e.toString()}');
@@ -150,20 +139,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
         }
         return rules.find(RuleName.vaccineStartDayCompleteNotIT)?.intValue;
-      case ValidationMode.boosterDGP:
-      case ValidationMode.visitorsRSADGP:
-        if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineStartDayBoosterIT)?.intValue;
-        }
-        if (vaccination.isIncomplete) {
-          return rules
-              .find(RuleName.vaccineStartDayNotComplete, type)
-              ?.intValue;
-        }
-        if (vaccination.isJJ) {
-          return rules.find(RuleName.vaccineStartDayComplete, type)?.intValue;
-        }
-        return rules.find(RuleName.vaccineStartDayCompleteIT)?.intValue;
     }
   }
 
@@ -197,15 +172,6 @@ class VaccineValidatorImpl implements VaccineValidator {
           return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
         }
         return rules.find(RuleName.vaccineEndDayCompleteNotIT)?.intValue;
-      case ValidationMode.boosterDGP:
-      case ValidationMode.visitorsRSADGP:
-        if (vaccination.isBooster) {
-          return rules.find(RuleName.vaccineEndDayBoosterIT)?.intValue;
-        }
-        if (vaccination.isIncomplete) {
-          return rules.find(RuleName.vaccineEndDayNotComplete, type)?.intValue;
-        }
-        return rules.find(RuleName.vaccineEndDayCompleteIT)?.intValue;
     }
   }
 }

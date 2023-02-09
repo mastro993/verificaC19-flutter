@@ -26,12 +26,6 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
     required DateTime dateOfBirth,
   }) async {
     try {
-      if (mode == ValidationMode.boosterDGP ||
-          mode == ValidationMode.visitorsRSADGP) {
-        log('Test needed');
-        return GreenCertificateStatus.testNeeded;
-      }
-
       final rules = _cache.getRules();
 
       int? startDays = getStartDays(
@@ -92,8 +86,6 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
   }) {
     switch (mode) {
       case ValidationMode.normalDGP:
-      case ValidationMode.boosterDGP:
-      case ValidationMode.visitorsRSADGP:
         if (isRecoveryBis) {
           return rules.find(RuleName.recoveryCertPvStartDay)?.intValue;
         }
@@ -118,8 +110,6 @@ class RecoveryStatementValidatorImpl implements RecoveryStatementValidator {
   }) {
     switch (mode) {
       case ValidationMode.normalDGP:
-      case ValidationMode.boosterDGP:
-      case ValidationMode.visitorsRSADGP:
         if (isRecoveryBis) {
           return rules.find(RuleName.recoveryCertPvEndDay)?.intValue;
         }

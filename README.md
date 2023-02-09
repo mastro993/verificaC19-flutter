@@ -14,7 +14,7 @@ This package allows to decode and validate any EU Digital Green Certificate in y
 
 This library requires an internet connection to download and cache rules, CRL and DSCs at least once per day. Once updated the entire process of validation can be done completely offline and in real-time.
 
-Starting from version 1.4.3, this package has been included in the [list of verified SDKs by Italian authorities (Ministero della salute)](https://github.com/ministero-salute/it-dgc-verificac19-sdk-onboarding).  
+Starting from version 1.4.3, this package has been included in the [list of verified SDKs by Italian authorities (Ministero della salute)](https://github.com/ministero-salute/it-dgc-verificac19-sdk-onboarding).
 
 ## Development & testing
 
@@ -90,13 +90,10 @@ The result is a `ValidationResult` object containing the decoded `Certificate` o
 
 You can also provide a `ValidationMode` parameter.
 
-| Code           | Description                         |
-| -------------- | ----------------------------------- |
-| normalDGP      | Normal verification (default value) |
-| superDGP       | Super Green Pass verification       |
-| boosterDGP     | Booster verification mode           |
-| entryITDGP     | Italy travel validation mode        |
-| visitorsRSADGP | RSA visitors validation mode        |
+| Code      | Description                         |
+| --------- | ----------------------------------- |
+| normalDGP | Normal verification (default value) |
+| superDGP  | Super Green Pass verification       |
 
 Example:
 

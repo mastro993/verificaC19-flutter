@@ -31,7 +31,7 @@ class LocalRepositoryImpl implements LocalRepository {
     final preferences = await SharedPreferences.getInstance();
 
     final isar = await Isar.open(
-      schemas: [RevokedCertSchema],
+      [RevokedCertSchema],
       directory: basePath,
     );
 
@@ -210,16 +210,16 @@ class LocalRepositoryImpl implements LocalRepository {
     List<String>? deletions,
   }) async {
     try {
-      await _isar.writeTxn((isar) async {
+      await _isar.writeTxn(() async {
         if (insertions != null && insertions.isNotEmpty) {
-          await isar.revokedCerts.putAll(
+          await _isar.revokedCerts.putAll(
             insertions.map((c) => RevokedCert()..cert = c).toList(),
           );
         }
 
         if (deletions != null && deletions.isNotEmpty) {
           // ignore: invalid_use_of_protected_member
-          await isar.revokedCerts.deleteByIndex('cert', deletions);
+          await _isar.revokedCerts.deleteByIndex('cert', deletions);
         }
       });
     } catch (e) {
