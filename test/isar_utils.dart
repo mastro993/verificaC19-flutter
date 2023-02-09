@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
-import 'package:ffi/ffi.dart';
 
 String getRandomName() {
   var random = Random().nextInt(pow(2, 32) as int).toString();
