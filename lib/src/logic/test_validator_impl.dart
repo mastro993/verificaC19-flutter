@@ -25,9 +25,7 @@ class TestValidatorImpl implements TestValidator {
     required DateTime dateOfBirth,
   }) async {
     try {
-      if (mode == ValidationMode.superDGP ||
-          mode == ValidationMode.boosterDGP ||
-          mode == ValidationMode.visitorsRSADGP) {
+      if (mode == ValidationMode.superDGP) {
         log('Not valid. Super or Booster DGP required');
         return GreenCertificateStatus.notValid;
       }

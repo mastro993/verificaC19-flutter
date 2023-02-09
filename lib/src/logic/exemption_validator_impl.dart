@@ -14,11 +14,6 @@ class ExemptionValidatorImpl implements ExemptionValidator {
     Exemption exemption, {
     ValidationMode mode = ValidationMode.normalDGP,
   }) async {
-    if (mode == ValidationMode.boosterDGP ||
-        mode == ValidationMode.visitorsRSADGP) {
-      return GreenCertificateStatus.testNeeded;
-    }
-
     try {
       final exemptionFromDay = exemption.certificateValidFrom.withoutTime();
       final exemptionUntilDay = exemption.certificateValidUntil?.withoutTime();
@@ -29,11 +24,6 @@ class ExemptionValidatorImpl implements ExemptionValidator {
 
       if (exemptionUntilDay != null && exemptionUntilDay < clock.now()) {
         return GreenCertificateStatus.notValid;
-      }
-
-      if (mode == ValidationMode.boosterDGP ||
-          mode == ValidationMode.visitorsRSADGP) {
-        return GreenCertificateStatus.testNeeded;
       }
 
       return GreenCertificateStatus.valid;
