@@ -48,7 +48,7 @@ const RevokedCertSchema = CollectionSchema(
   getId: _revokedCertGetId,
   getLinks: _revokedCertGetLinks,
   attach: _revokedCertAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _revokedCertEstimateSize(

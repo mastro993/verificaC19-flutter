@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'exemption.dart';
 
@@ -31,7 +31,8 @@ mixin _$Exemption {
 /// @nodoc
 abstract class $ExemptionCopyWith<$Res> {
   factory $ExemptionCopyWith(Exemption value, $Res Function(Exemption) then) =
-      _$ExemptionCopyWithImpl<$Res>;
+      _$ExemptionCopyWithImpl<$Res, Exemption>;
+  @useResult
   $Res call(
       {String disease,
       String countryOfVaccination,
@@ -42,48 +43,51 @@ abstract class $ExemptionCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ExemptionCopyWithImpl<$Res> implements $ExemptionCopyWith<$Res> {
+class _$ExemptionCopyWithImpl<$Res, $Val extends Exemption>
+    implements $ExemptionCopyWith<$Res> {
   _$ExemptionCopyWithImpl(this._value, this._then);
 
-  final Exemption _value;
   // ignore: unused_field
-  final $Res Function(Exemption) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
-    Object? certificateValidFrom = freezed,
+    Object? disease = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
+    Object? certificateValidFrom = null,
     Object? certificateValidUntil = freezed,
   }) {
     return _then(_value.copyWith(
-      disease: disease == freezed
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateValidFrom: certificateValidFrom == freezed
+      certificateValidFrom: null == certificateValidFrom
           ? _value.certificateValidFrom
           : certificateValidFrom // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      certificateValidUntil: certificateValidUntil == freezed
+      certificateValidUntil: freezed == certificateValidUntil
           ? _value.certificateValidUntil
           : certificateValidUntil // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -93,6 +97,7 @@ abstract class _$$_ExemptionCopyWith<$Res> implements $ExemptionCopyWith<$Res> {
           _$_Exemption value, $Res Function(_$_Exemption) then) =
       __$$_ExemptionCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String disease,
       String countryOfVaccination,
@@ -103,46 +108,45 @@ abstract class _$$_ExemptionCopyWith<$Res> implements $ExemptionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ExemptionCopyWithImpl<$Res> extends _$ExemptionCopyWithImpl<$Res>
+class __$$_ExemptionCopyWithImpl<$Res>
+    extends _$ExemptionCopyWithImpl<$Res, _$_Exemption>
     implements _$$_ExemptionCopyWith<$Res> {
   __$$_ExemptionCopyWithImpl(
       _$_Exemption _value, $Res Function(_$_Exemption) _then)
-      : super(_value, (v) => _then(v as _$_Exemption));
+      : super(_value, _then);
 
-  @override
-  _$_Exemption get _value => super._value as _$_Exemption;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
-    Object? certificateValidFrom = freezed,
+    Object? disease = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
+    Object? certificateValidFrom = null,
     Object? certificateValidUntil = freezed,
   }) {
     return _then(_$_Exemption(
-      disease: disease == freezed
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateValidFrom: certificateValidFrom == freezed
+      certificateValidFrom: null == certificateValidFrom
           ? _value.certificateValidFrom
           : certificateValidFrom // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      certificateValidUntil: certificateValidUntil == freezed
+      certificateValidUntil: freezed == certificateValidUntil
           ? _value.certificateValidUntil
           : certificateValidUntil // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -185,31 +189,32 @@ class _$_Exemption extends _Exemption {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Exemption &&
-            const DeepCollectionEquality().equals(other.disease, disease) &&
-            const DeepCollectionEquality()
-                .equals(other.countryOfVaccination, countryOfVaccination) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIssuer, certificateIssuer) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIdentifier, certificateIdentifier) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateValidFrom, certificateValidFrom) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateValidUntil, certificateValidUntil));
+            (identical(other.disease, disease) || other.disease == disease) &&
+            (identical(other.countryOfVaccination, countryOfVaccination) ||
+                other.countryOfVaccination == countryOfVaccination) &&
+            (identical(other.certificateIssuer, certificateIssuer) ||
+                other.certificateIssuer == certificateIssuer) &&
+            (identical(other.certificateIdentifier, certificateIdentifier) ||
+                other.certificateIdentifier == certificateIdentifier) &&
+            (identical(other.certificateValidFrom, certificateValidFrom) ||
+                other.certificateValidFrom == certificateValidFrom) &&
+            (identical(other.certificateValidUntil, certificateValidUntil) ||
+                other.certificateValidUntil == certificateValidUntil));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(disease),
-      const DeepCollectionEquality().hash(countryOfVaccination),
-      const DeepCollectionEquality().hash(certificateIssuer),
-      const DeepCollectionEquality().hash(certificateIdentifier),
-      const DeepCollectionEquality().hash(certificateValidFrom),
-      const DeepCollectionEquality().hash(certificateValidUntil));
+      disease,
+      countryOfVaccination,
+      certificateIssuer,
+      certificateIdentifier,
+      certificateValidFrom,
+      certificateValidUntil);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ExemptionCopyWith<_$_Exemption> get copyWith =>
       __$$_ExemptionCopyWithImpl<_$_Exemption>(this, _$identity);
 }

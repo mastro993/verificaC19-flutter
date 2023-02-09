@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'green_certificate.dart';
 
@@ -47,7 +47,8 @@ mixin _$GreenCertificate {
 abstract class $GreenCertificateCopyWith<$Res> {
   factory $GreenCertificateCopyWith(
           GreenCertificate value, $Res Function(GreenCertificate) then) =
-      _$GreenCertificateCopyWithImpl<$Res>;
+      _$GreenCertificateCopyWithImpl<$Res, GreenCertificate>;
+  @useResult
   $Res call(
       {Person person,
       DateTime dateOfBirth,
@@ -62,67 +63,71 @@ abstract class $GreenCertificateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GreenCertificateCopyWithImpl<$Res>
+class _$GreenCertificateCopyWithImpl<$Res, $Val extends GreenCertificate>
     implements $GreenCertificateCopyWith<$Res> {
   _$GreenCertificateCopyWithImpl(this._value, this._then);
 
-  final GreenCertificate _value;
   // ignore: unused_field
-  final $Res Function(GreenCertificate) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? person = freezed,
-    Object? dateOfBirth = freezed,
-    Object? vaccinations = freezed,
-    Object? tests = freezed,
-    Object? recoveryStatements = freezed,
-    Object? exemptions = freezed,
-    Object? dcc = freezed,
+    Object? person = null,
+    Object? dateOfBirth = null,
+    Object? vaccinations = null,
+    Object? tests = null,
+    Object? recoveryStatements = null,
+    Object? exemptions = null,
+    Object? dcc = null,
   }) {
     return _then(_value.copyWith(
-      person: person == freezed
+      person: null == person
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
               as Person,
-      dateOfBirth: dateOfBirth == freezed
+      dateOfBirth: null == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      vaccinations: vaccinations == freezed
+      vaccinations: null == vaccinations
           ? _value.vaccinations
           : vaccinations // ignore: cast_nullable_to_non_nullable
               as List<Vaccination>,
-      tests: tests == freezed
+      tests: null == tests
           ? _value.tests
           : tests // ignore: cast_nullable_to_non_nullable
               as List<Test>,
-      recoveryStatements: recoveryStatements == freezed
+      recoveryStatements: null == recoveryStatements
           ? _value.recoveryStatements
           : recoveryStatements // ignore: cast_nullable_to_non_nullable
               as List<RecoveryStatement>,
-      exemptions: exemptions == freezed
+      exemptions: null == exemptions
           ? _value.exemptions
           : exemptions // ignore: cast_nullable_to_non_nullable
               as List<Exemption>,
-      dcc: dcc == freezed
+      dcc: null == dcc
           ? _value.dcc
           : dcc // ignore: cast_nullable_to_non_nullable
               as DCC,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PersonCopyWith<$Res> get person {
     return $PersonCopyWith<$Res>(_value.person, (value) {
-      return _then(_value.copyWith(person: value));
+      return _then(_value.copyWith(person: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $DCCCopyWith<$Res> get dcc {
     return $DCCCopyWith<$Res>(_value.dcc, (value) {
-      return _then(_value.copyWith(dcc: value));
+      return _then(_value.copyWith(dcc: value) as $Val);
     });
   }
 }
@@ -134,6 +139,7 @@ abstract class _$$_GreenCertificateCopyWith<$Res>
           _$_GreenCertificate value, $Res Function(_$_GreenCertificate) then) =
       __$$_GreenCertificateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Person person,
       DateTime dateOfBirth,
@@ -151,51 +157,49 @@ abstract class _$$_GreenCertificateCopyWith<$Res>
 
 /// @nodoc
 class __$$_GreenCertificateCopyWithImpl<$Res>
-    extends _$GreenCertificateCopyWithImpl<$Res>
+    extends _$GreenCertificateCopyWithImpl<$Res, _$_GreenCertificate>
     implements _$$_GreenCertificateCopyWith<$Res> {
   __$$_GreenCertificateCopyWithImpl(
       _$_GreenCertificate _value, $Res Function(_$_GreenCertificate) _then)
-      : super(_value, (v) => _then(v as _$_GreenCertificate));
+      : super(_value, _then);
 
-  @override
-  _$_GreenCertificate get _value => super._value as _$_GreenCertificate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? person = freezed,
-    Object? dateOfBirth = freezed,
-    Object? vaccinations = freezed,
-    Object? tests = freezed,
-    Object? recoveryStatements = freezed,
-    Object? exemptions = freezed,
-    Object? dcc = freezed,
+    Object? person = null,
+    Object? dateOfBirth = null,
+    Object? vaccinations = null,
+    Object? tests = null,
+    Object? recoveryStatements = null,
+    Object? exemptions = null,
+    Object? dcc = null,
   }) {
     return _then(_$_GreenCertificate(
-      person: person == freezed
+      person: null == person
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
               as Person,
-      dateOfBirth: dateOfBirth == freezed
+      dateOfBirth: null == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      vaccinations: vaccinations == freezed
+      vaccinations: null == vaccinations
           ? _value._vaccinations
           : vaccinations // ignore: cast_nullable_to_non_nullable
               as List<Vaccination>,
-      tests: tests == freezed
+      tests: null == tests
           ? _value._tests
           : tests // ignore: cast_nullable_to_non_nullable
               as List<Test>,
-      recoveryStatements: recoveryStatements == freezed
+      recoveryStatements: null == recoveryStatements
           ? _value._recoveryStatements
           : recoveryStatements // ignore: cast_nullable_to_non_nullable
               as List<RecoveryStatement>,
-      exemptions: exemptions == freezed
+      exemptions: null == exemptions
           ? _value._exemptions
           : exemptions // ignore: cast_nullable_to_non_nullable
               as List<Exemption>,
-      dcc: dcc == freezed
+      dcc: null == dcc
           ? _value.dcc
           : dcc // ignore: cast_nullable_to_non_nullable
               as DCC,
@@ -234,6 +238,7 @@ class _$_GreenCertificate extends _GreenCertificate {
   /// List of Certificate Vaccinations
   @override
   List<Vaccination> get vaccinations {
+    if (_vaccinations is EqualUnmodifiableListView) return _vaccinations;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_vaccinations);
   }
@@ -244,6 +249,7 @@ class _$_GreenCertificate extends _GreenCertificate {
   /// List of Certificate Test results
   @override
   List<Test> get tests {
+    if (_tests is EqualUnmodifiableListView) return _tests;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tests);
   }
@@ -254,6 +260,8 @@ class _$_GreenCertificate extends _GreenCertificate {
   /// List of Certificate Recovery statements
   @override
   List<RecoveryStatement> get recoveryStatements {
+    if (_recoveryStatements is EqualUnmodifiableListView)
+      return _recoveryStatements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_recoveryStatements);
   }
@@ -264,6 +272,7 @@ class _$_GreenCertificate extends _GreenCertificate {
   /// List of Certificate Vaccine exemptions
   @override
   List<Exemption> get exemptions {
+    if (_exemptions is EqualUnmodifiableListView) return _exemptions;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_exemptions);
   }
@@ -282,9 +291,9 @@ class _$_GreenCertificate extends _GreenCertificate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GreenCertificate &&
-            const DeepCollectionEquality().equals(other.person, person) &&
-            const DeepCollectionEquality()
-                .equals(other.dateOfBirth, dateOfBirth) &&
+            (identical(other.person, person) || other.person == person) &&
+            (identical(other.dateOfBirth, dateOfBirth) ||
+                other.dateOfBirth == dateOfBirth) &&
             const DeepCollectionEquality()
                 .equals(other._vaccinations, _vaccinations) &&
             const DeepCollectionEquality().equals(other._tests, _tests) &&
@@ -292,22 +301,23 @@ class _$_GreenCertificate extends _GreenCertificate {
                 .equals(other._recoveryStatements, _recoveryStatements) &&
             const DeepCollectionEquality()
                 .equals(other._exemptions, _exemptions) &&
-            const DeepCollectionEquality().equals(other.dcc, dcc));
+            (identical(other.dcc, dcc) || other.dcc == dcc));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(person),
-      const DeepCollectionEquality().hash(dateOfBirth),
+      person,
+      dateOfBirth,
       const DeepCollectionEquality().hash(_vaccinations),
       const DeepCollectionEquality().hash(_tests),
       const DeepCollectionEquality().hash(_recoveryStatements),
       const DeepCollectionEquality().hash(_exemptions),
-      const DeepCollectionEquality().hash(dcc));
+      dcc);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_GreenCertificateCopyWith<_$_GreenCertificate> get copyWith =>
       __$$_GreenCertificateCopyWithImpl<_$_GreenCertificate>(this, _$identity);
 }

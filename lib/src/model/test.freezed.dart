@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'test.dart';
 
@@ -35,7 +35,8 @@ mixin _$Test {
 /// @nodoc
 abstract class $TestCopyWith<$Res> {
   factory $TestCopyWith(Test value, $Res Function(Test) then) =
-      _$TestCopyWithImpl<$Res>;
+      _$TestCopyWithImpl<$Res, Test>;
+  @useResult
   $Res call(
       {String disease,
       String typeOfTest,
@@ -51,73 +52,76 @@ abstract class $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
+class _$TestCopyWithImpl<$Res, $Val extends Test>
+    implements $TestCopyWith<$Res> {
   _$TestCopyWithImpl(this._value, this._then);
 
-  final Test _value;
   // ignore: unused_field
-  final $Res Function(Test) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? typeOfTest = freezed,
+    Object? disease = null,
+    Object? typeOfTest = null,
     Object? testName = freezed,
     Object? testNameAndManufacturer = freezed,
-    Object? dateTimeOfCollection = freezed,
+    Object? dateTimeOfCollection = null,
     Object? dateTimeOfTestResult = freezed,
-    Object? testResult = freezed,
-    Object? testingCentre = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
+    Object? testResult = null,
+    Object? testingCentre = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
   }) {
     return _then(_value.copyWith(
-      disease: disease == freezed
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      typeOfTest: typeOfTest == freezed
+      typeOfTest: null == typeOfTest
           ? _value.typeOfTest
           : typeOfTest // ignore: cast_nullable_to_non_nullable
               as String,
-      testName: testName == freezed
+      testName: freezed == testName
           ? _value.testName
           : testName // ignore: cast_nullable_to_non_nullable
               as String?,
-      testNameAndManufacturer: testNameAndManufacturer == freezed
+      testNameAndManufacturer: freezed == testNameAndManufacturer
           ? _value.testNameAndManufacturer
           : testNameAndManufacturer // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateTimeOfCollection: dateTimeOfCollection == freezed
+      dateTimeOfCollection: null == dateTimeOfCollection
           ? _value.dateTimeOfCollection
           : dateTimeOfCollection // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dateTimeOfTestResult: dateTimeOfTestResult == freezed
+      dateTimeOfTestResult: freezed == dateTimeOfTestResult
           ? _value.dateTimeOfTestResult
           : dateTimeOfTestResult // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      testResult: testResult == freezed
+      testResult: null == testResult
           ? _value.testResult
           : testResult // ignore: cast_nullable_to_non_nullable
               as String,
-      testingCentre: testingCentre == freezed
+      testingCentre: null == testingCentre
           ? _value.testingCentre
           : testingCentre // ignore: cast_nullable_to_non_nullable
               as String,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -126,6 +130,7 @@ abstract class _$$_TestCopyWith<$Res> implements $TestCopyWith<$Res> {
   factory _$$_TestCopyWith(_$_Test value, $Res Function(_$_Test) then) =
       __$$_TestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String disease,
       String typeOfTest,
@@ -141,70 +146,68 @@ abstract class _$$_TestCopyWith<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
+class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res, _$_Test>
     implements _$$_TestCopyWith<$Res> {
   __$$_TestCopyWithImpl(_$_Test _value, $Res Function(_$_Test) _then)
-      : super(_value, (v) => _then(v as _$_Test));
+      : super(_value, _then);
 
-  @override
-  _$_Test get _value => super._value as _$_Test;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? typeOfTest = freezed,
+    Object? disease = null,
+    Object? typeOfTest = null,
     Object? testName = freezed,
     Object? testNameAndManufacturer = freezed,
-    Object? dateTimeOfCollection = freezed,
+    Object? dateTimeOfCollection = null,
     Object? dateTimeOfTestResult = freezed,
-    Object? testResult = freezed,
-    Object? testingCentre = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
+    Object? testResult = null,
+    Object? testingCentre = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
   }) {
     return _then(_$_Test(
-      disease: disease == freezed
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      typeOfTest: typeOfTest == freezed
+      typeOfTest: null == typeOfTest
           ? _value.typeOfTest
           : typeOfTest // ignore: cast_nullable_to_non_nullable
               as String,
-      testName: testName == freezed
+      testName: freezed == testName
           ? _value.testName
           : testName // ignore: cast_nullable_to_non_nullable
               as String?,
-      testNameAndManufacturer: testNameAndManufacturer == freezed
+      testNameAndManufacturer: freezed == testNameAndManufacturer
           ? _value.testNameAndManufacturer
           : testNameAndManufacturer // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateTimeOfCollection: dateTimeOfCollection == freezed
+      dateTimeOfCollection: null == dateTimeOfCollection
           ? _value.dateTimeOfCollection
           : dateTimeOfCollection // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dateTimeOfTestResult: dateTimeOfTestResult == freezed
+      dateTimeOfTestResult: freezed == dateTimeOfTestResult
           ? _value.dateTimeOfTestResult
           : dateTimeOfTestResult // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      testResult: testResult == freezed
+      testResult: null == testResult
           ? _value.testResult
           : testResult // ignore: cast_nullable_to_non_nullable
               as String,
-      testingCentre: testingCentre == freezed
+      testingCentre: null == testingCentre
           ? _value.testingCentre
           : testingCentre // ignore: cast_nullable_to_non_nullable
               as String,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
@@ -262,45 +265,48 @@ class _$_Test extends _Test {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Test &&
-            const DeepCollectionEquality().equals(other.disease, disease) &&
-            const DeepCollectionEquality()
-                .equals(other.typeOfTest, typeOfTest) &&
-            const DeepCollectionEquality().equals(other.testName, testName) &&
-            const DeepCollectionEquality().equals(
-                other.testNameAndManufacturer, testNameAndManufacturer) &&
-            const DeepCollectionEquality()
-                .equals(other.dateTimeOfCollection, dateTimeOfCollection) &&
-            const DeepCollectionEquality()
-                .equals(other.dateTimeOfTestResult, dateTimeOfTestResult) &&
-            const DeepCollectionEquality()
-                .equals(other.testResult, testResult) &&
-            const DeepCollectionEquality()
-                .equals(other.testingCentre, testingCentre) &&
-            const DeepCollectionEquality()
-                .equals(other.countryOfVaccination, countryOfVaccination) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIssuer, certificateIssuer) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIdentifier, certificateIdentifier));
+            (identical(other.disease, disease) || other.disease == disease) &&
+            (identical(other.typeOfTest, typeOfTest) ||
+                other.typeOfTest == typeOfTest) &&
+            (identical(other.testName, testName) ||
+                other.testName == testName) &&
+            (identical(
+                    other.testNameAndManufacturer, testNameAndManufacturer) ||
+                other.testNameAndManufacturer == testNameAndManufacturer) &&
+            (identical(other.dateTimeOfCollection, dateTimeOfCollection) ||
+                other.dateTimeOfCollection == dateTimeOfCollection) &&
+            (identical(other.dateTimeOfTestResult, dateTimeOfTestResult) ||
+                other.dateTimeOfTestResult == dateTimeOfTestResult) &&
+            (identical(other.testResult, testResult) ||
+                other.testResult == testResult) &&
+            (identical(other.testingCentre, testingCentre) ||
+                other.testingCentre == testingCentre) &&
+            (identical(other.countryOfVaccination, countryOfVaccination) ||
+                other.countryOfVaccination == countryOfVaccination) &&
+            (identical(other.certificateIssuer, certificateIssuer) ||
+                other.certificateIssuer == certificateIssuer) &&
+            (identical(other.certificateIdentifier, certificateIdentifier) ||
+                other.certificateIdentifier == certificateIdentifier));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(disease),
-      const DeepCollectionEquality().hash(typeOfTest),
-      const DeepCollectionEquality().hash(testName),
-      const DeepCollectionEquality().hash(testNameAndManufacturer),
-      const DeepCollectionEquality().hash(dateTimeOfCollection),
-      const DeepCollectionEquality().hash(dateTimeOfTestResult),
-      const DeepCollectionEquality().hash(testResult),
-      const DeepCollectionEquality().hash(testingCentre),
-      const DeepCollectionEquality().hash(countryOfVaccination),
-      const DeepCollectionEquality().hash(certificateIssuer),
-      const DeepCollectionEquality().hash(certificateIdentifier));
+      disease,
+      typeOfTest,
+      testName,
+      testNameAndManufacturer,
+      dateTimeOfCollection,
+      dateTimeOfTestResult,
+      testResult,
+      testingCentre,
+      countryOfVaccination,
+      certificateIssuer,
+      certificateIdentifier);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TestCopyWith<_$_Test> get copyWith =>
       __$$_TestCopyWithImpl<_$_Test>(this, _$identity);
 }

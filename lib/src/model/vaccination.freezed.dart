@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'vaccination.dart';
 
@@ -37,7 +37,8 @@ mixin _$Vaccination {
 abstract class $VaccinationCopyWith<$Res> {
   factory $VaccinationCopyWith(
           Vaccination value, $Res Function(Vaccination) then) =
-      _$VaccinationCopyWithImpl<$Res>;
+      _$VaccinationCopyWithImpl<$Res, Vaccination>;
+  @useResult
   $Res call(
       {String disease,
       String vaccine,
@@ -53,73 +54,76 @@ abstract class $VaccinationCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$VaccinationCopyWithImpl<$Res> implements $VaccinationCopyWith<$Res> {
+class _$VaccinationCopyWithImpl<$Res, $Val extends Vaccination>
+    implements $VaccinationCopyWith<$Res> {
   _$VaccinationCopyWithImpl(this._value, this._then);
 
-  final Vaccination _value;
   // ignore: unused_field
-  final $Res Function(Vaccination) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? vaccine = freezed,
-    Object? medicinalProduct = freezed,
-    Object? manufacturer = freezed,
-    Object? doseNumber = freezed,
-    Object? totalSeriesOfDoses = freezed,
-    Object? dateOfVaccination = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
-    Object? ownerBirthdate = freezed,
+    Object? disease = null,
+    Object? vaccine = null,
+    Object? medicinalProduct = null,
+    Object? manufacturer = null,
+    Object? doseNumber = null,
+    Object? totalSeriesOfDoses = null,
+    Object? dateOfVaccination = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
+    Object? ownerBirthdate = null,
   }) {
     return _then(_value.copyWith(
-      disease: disease == freezed
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      vaccine: vaccine == freezed
+      vaccine: null == vaccine
           ? _value.vaccine
           : vaccine // ignore: cast_nullable_to_non_nullable
               as String,
-      medicinalProduct: medicinalProduct == freezed
+      medicinalProduct: null == medicinalProduct
           ? _value.medicinalProduct
           : medicinalProduct // ignore: cast_nullable_to_non_nullable
               as String,
-      manufacturer: manufacturer == freezed
+      manufacturer: null == manufacturer
           ? _value.manufacturer
           : manufacturer // ignore: cast_nullable_to_non_nullable
               as String,
-      doseNumber: doseNumber == freezed
+      doseNumber: null == doseNumber
           ? _value.doseNumber
           : doseNumber // ignore: cast_nullable_to_non_nullable
               as int,
-      totalSeriesOfDoses: totalSeriesOfDoses == freezed
+      totalSeriesOfDoses: null == totalSeriesOfDoses
           ? _value.totalSeriesOfDoses
           : totalSeriesOfDoses // ignore: cast_nullable_to_non_nullable
               as int,
-      dateOfVaccination: dateOfVaccination == freezed
+      dateOfVaccination: null == dateOfVaccination
           ? _value.dateOfVaccination
           : dateOfVaccination // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
-      ownerBirthdate: ownerBirthdate == freezed
+      ownerBirthdate: null == ownerBirthdate
           ? _value.ownerBirthdate
           : ownerBirthdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 }
 
@@ -130,6 +134,7 @@ abstract class _$$_VaccinationCopyWith<$Res>
           _$_Vaccination value, $Res Function(_$_Vaccination) then) =
       __$$_VaccinationCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String disease,
       String vaccine,
@@ -145,71 +150,70 @@ abstract class _$$_VaccinationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VaccinationCopyWithImpl<$Res> extends _$VaccinationCopyWithImpl<$Res>
+class __$$_VaccinationCopyWithImpl<$Res>
+    extends _$VaccinationCopyWithImpl<$Res, _$_Vaccination>
     implements _$$_VaccinationCopyWith<$Res> {
   __$$_VaccinationCopyWithImpl(
       _$_Vaccination _value, $Res Function(_$_Vaccination) _then)
-      : super(_value, (v) => _then(v as _$_Vaccination));
+      : super(_value, _then);
 
-  @override
-  _$_Vaccination get _value => super._value as _$_Vaccination;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disease = freezed,
-    Object? vaccine = freezed,
-    Object? medicinalProduct = freezed,
-    Object? manufacturer = freezed,
-    Object? doseNumber = freezed,
-    Object? totalSeriesOfDoses = freezed,
-    Object? dateOfVaccination = freezed,
-    Object? countryOfVaccination = freezed,
-    Object? certificateIssuer = freezed,
-    Object? certificateIdentifier = freezed,
-    Object? ownerBirthdate = freezed,
+    Object? disease = null,
+    Object? vaccine = null,
+    Object? medicinalProduct = null,
+    Object? manufacturer = null,
+    Object? doseNumber = null,
+    Object? totalSeriesOfDoses = null,
+    Object? dateOfVaccination = null,
+    Object? countryOfVaccination = null,
+    Object? certificateIssuer = null,
+    Object? certificateIdentifier = null,
+    Object? ownerBirthdate = null,
   }) {
     return _then(_$_Vaccination(
-      disease: disease == freezed
+      disease: null == disease
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
               as String,
-      vaccine: vaccine == freezed
+      vaccine: null == vaccine
           ? _value.vaccine
           : vaccine // ignore: cast_nullable_to_non_nullable
               as String,
-      medicinalProduct: medicinalProduct == freezed
+      medicinalProduct: null == medicinalProduct
           ? _value.medicinalProduct
           : medicinalProduct // ignore: cast_nullable_to_non_nullable
               as String,
-      manufacturer: manufacturer == freezed
+      manufacturer: null == manufacturer
           ? _value.manufacturer
           : manufacturer // ignore: cast_nullable_to_non_nullable
               as String,
-      doseNumber: doseNumber == freezed
+      doseNumber: null == doseNumber
           ? _value.doseNumber
           : doseNumber // ignore: cast_nullable_to_non_nullable
               as int,
-      totalSeriesOfDoses: totalSeriesOfDoses == freezed
+      totalSeriesOfDoses: null == totalSeriesOfDoses
           ? _value.totalSeriesOfDoses
           : totalSeriesOfDoses // ignore: cast_nullable_to_non_nullable
               as int,
-      dateOfVaccination: dateOfVaccination == freezed
+      dateOfVaccination: null == dateOfVaccination
           ? _value.dateOfVaccination
           : dateOfVaccination // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      countryOfVaccination: countryOfVaccination == freezed
+      countryOfVaccination: null == countryOfVaccination
           ? _value.countryOfVaccination
           : countryOfVaccination // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIssuer: certificateIssuer == freezed
+      certificateIssuer: null == certificateIssuer
           ? _value.certificateIssuer
           : certificateIssuer // ignore: cast_nullable_to_non_nullable
               as String,
-      certificateIdentifier: certificateIdentifier == freezed
+      certificateIdentifier: null == certificateIdentifier
           ? _value.certificateIdentifier
           : certificateIdentifier // ignore: cast_nullable_to_non_nullable
               as String,
-      ownerBirthdate: ownerBirthdate == freezed
+      ownerBirthdate: null == ownerBirthdate
           ? _value.ownerBirthdate
           : ownerBirthdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -267,45 +271,46 @@ class _$_Vaccination extends _Vaccination {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Vaccination &&
-            const DeepCollectionEquality().equals(other.disease, disease) &&
-            const DeepCollectionEquality().equals(other.vaccine, vaccine) &&
-            const DeepCollectionEquality()
-                .equals(other.medicinalProduct, medicinalProduct) &&
-            const DeepCollectionEquality()
-                .equals(other.manufacturer, manufacturer) &&
-            const DeepCollectionEquality()
-                .equals(other.doseNumber, doseNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.totalSeriesOfDoses, totalSeriesOfDoses) &&
-            const DeepCollectionEquality()
-                .equals(other.dateOfVaccination, dateOfVaccination) &&
-            const DeepCollectionEquality()
-                .equals(other.countryOfVaccination, countryOfVaccination) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIssuer, certificateIssuer) &&
-            const DeepCollectionEquality()
-                .equals(other.certificateIdentifier, certificateIdentifier) &&
-            const DeepCollectionEquality()
-                .equals(other.ownerBirthdate, ownerBirthdate));
+            (identical(other.disease, disease) || other.disease == disease) &&
+            (identical(other.vaccine, vaccine) || other.vaccine == vaccine) &&
+            (identical(other.medicinalProduct, medicinalProduct) ||
+                other.medicinalProduct == medicinalProduct) &&
+            (identical(other.manufacturer, manufacturer) ||
+                other.manufacturer == manufacturer) &&
+            (identical(other.doseNumber, doseNumber) ||
+                other.doseNumber == doseNumber) &&
+            (identical(other.totalSeriesOfDoses, totalSeriesOfDoses) ||
+                other.totalSeriesOfDoses == totalSeriesOfDoses) &&
+            (identical(other.dateOfVaccination, dateOfVaccination) ||
+                other.dateOfVaccination == dateOfVaccination) &&
+            (identical(other.countryOfVaccination, countryOfVaccination) ||
+                other.countryOfVaccination == countryOfVaccination) &&
+            (identical(other.certificateIssuer, certificateIssuer) ||
+                other.certificateIssuer == certificateIssuer) &&
+            (identical(other.certificateIdentifier, certificateIdentifier) ||
+                other.certificateIdentifier == certificateIdentifier) &&
+            (identical(other.ownerBirthdate, ownerBirthdate) ||
+                other.ownerBirthdate == ownerBirthdate));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(disease),
-      const DeepCollectionEquality().hash(vaccine),
-      const DeepCollectionEquality().hash(medicinalProduct),
-      const DeepCollectionEquality().hash(manufacturer),
-      const DeepCollectionEquality().hash(doseNumber),
-      const DeepCollectionEquality().hash(totalSeriesOfDoses),
-      const DeepCollectionEquality().hash(dateOfVaccination),
-      const DeepCollectionEquality().hash(countryOfVaccination),
-      const DeepCollectionEquality().hash(certificateIssuer),
-      const DeepCollectionEquality().hash(certificateIdentifier),
-      const DeepCollectionEquality().hash(ownerBirthdate));
+      disease,
+      vaccine,
+      medicinalProduct,
+      manufacturer,
+      doseNumber,
+      totalSeriesOfDoses,
+      dateOfVaccination,
+      countryOfVaccination,
+      certificateIssuer,
+      certificateIdentifier,
+      ownerBirthdate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_VaccinationCopyWith<_$_Vaccination> get copyWith =>
       __$$_VaccinationCopyWithImpl<_$_Vaccination>(this, _$identity);
 }
