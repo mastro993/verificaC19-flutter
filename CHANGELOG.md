@@ -1,3 +1,8 @@
+## 1.6.0
+
+- Removed `Booster` and `RSA entry` validation modes
+- Updated dependencies
+
 ## 1.5.3+1
 
 - Dependencies update
