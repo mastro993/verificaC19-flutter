@@ -24,8 +24,8 @@ dependencies:
   injectable: ^2.1.0
   isar: ^3.0.5
   isar_flutter_libs: ^3.0.5
-  json_annotation: ^4.7.0
-  json_serializable: ^6.5.1
+  json_annotation: ^4.8.0
+  json_serializable: ^6.6.1
   mutex: ^3.0.0
   ninja: ^3.0.8
   path: ^1.8.2
