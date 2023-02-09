@@ -97,11 +97,11 @@ class _$RecoveryStatementCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$RecoveryStatementCopyWith<$Res>
+abstract class _$$_RecoveryStatementCopyWith<$Res>
     implements $RecoveryStatementCopyWith<$Res> {
-  factory _$RecoveryStatementCopyWith(
-          _RecoveryStatement value, $Res Function(_RecoveryStatement) then) =
-      __$RecoveryStatementCopyWithImpl<$Res>;
+  factory _$$_RecoveryStatementCopyWith(_$_RecoveryStatement value,
+          $Res Function(_$_RecoveryStatement) then) =
+      __$$_RecoveryStatementCopyWithImpl<$Res>;
   @override
   $Res call(
       {String disease,
@@ -114,15 +114,15 @@ abstract class _$RecoveryStatementCopyWith<$Res>
 }
 
 /// @nodoc
-class __$RecoveryStatementCopyWithImpl<$Res>
+class __$$_RecoveryStatementCopyWithImpl<$Res>
     extends _$RecoveryStatementCopyWithImpl<$Res>
-    implements _$RecoveryStatementCopyWith<$Res> {
-  __$RecoveryStatementCopyWithImpl(
-      _RecoveryStatement _value, $Res Function(_RecoveryStatement) _then)
-      : super(_value, (v) => _then(v as _RecoveryStatement));
+    implements _$$_RecoveryStatementCopyWith<$Res> {
+  __$$_RecoveryStatementCopyWithImpl(
+      _$_RecoveryStatement _value, $Res Function(_$_RecoveryStatement) _then)
+      : super(_value, (v) => _then(v as _$_RecoveryStatement));
 
   @override
-  _RecoveryStatement get _value => super._value as _RecoveryStatement;
+  _$_RecoveryStatement get _value => super._value as _$_RecoveryStatement;
 
   @override
   $Res call({
@@ -134,7 +134,7 @@ class __$RecoveryStatementCopyWithImpl<$Res>
     Object? certificateIssuer = freezed,
     Object? certificateIdentifier = freezed,
   }) {
-    return _then(_RecoveryStatement(
+    return _then(_$_RecoveryStatement(
       disease: disease == freezed
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
@@ -204,7 +204,7 @@ class _$_RecoveryStatement extends _RecoveryStatement {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _RecoveryStatement &&
+            other is _$_RecoveryStatement &&
             const DeepCollectionEquality().equals(other.disease, disease) &&
             const DeepCollectionEquality().equals(
                 other.dateOfFirstPositiveTest, dateOfFirstPositiveTest) &&
@@ -233,8 +233,9 @@ class _$_RecoveryStatement extends _RecoveryStatement {
 
   @JsonKey(ignore: true)
   @override
-  _$RecoveryStatementCopyWith<_RecoveryStatement> get copyWith =>
-      __$RecoveryStatementCopyWithImpl<_RecoveryStatement>(this, _$identity);
+  _$$_RecoveryStatementCopyWith<_$_RecoveryStatement> get copyWith =>
+      __$$_RecoveryStatementCopyWithImpl<_$_RecoveryStatement>(
+          this, _$identity);
 }
 
 abstract class _RecoveryStatement extends RecoveryStatement {
@@ -249,21 +250,21 @@ abstract class _RecoveryStatement extends RecoveryStatement {
   const _RecoveryStatement._() : super._();
 
   @override
-  String get disease => throw _privateConstructorUsedError;
+  String get disease;
   @override
-  DateTime get dateOfFirstPositiveTest => throw _privateConstructorUsedError;
+  DateTime get dateOfFirstPositiveTest;
   @override
-  DateTime get certificateValidFrom => throw _privateConstructorUsedError;
+  DateTime get certificateValidFrom;
   @override
-  DateTime get certificateValidUntil => throw _privateConstructorUsedError;
+  DateTime get certificateValidUntil;
   @override
-  String get countryOfVaccination => throw _privateConstructorUsedError;
+  String get countryOfVaccination;
   @override
-  String get certificateIssuer => throw _privateConstructorUsedError;
+  String get certificateIssuer;
   @override
-  String get certificateIdentifier => throw _privateConstructorUsedError;
+  String get certificateIdentifier;
   @override
   @JsonKey(ignore: true)
-  _$RecoveryStatementCopyWith<_RecoveryStatement> get copyWith =>
+  _$$_RecoveryStatementCopyWith<_$_RecoveryStatement> get copyWith =>
       throw _privateConstructorUsedError;
 }

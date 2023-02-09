@@ -60,32 +60,32 @@ class _$CertificateInfoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$CertificateInfoCopyWith<$Res>
+abstract class _$$_CertificateInfoCopyWith<$Res>
     implements $CertificateInfoCopyWith<$Res> {
-  factory _$CertificateInfoCopyWith(
-          _CertificateInfo value, $Res Function(_CertificateInfo) then) =
-      __$CertificateInfoCopyWithImpl<$Res>;
+  factory _$$_CertificateInfoCopyWith(
+          _$_CertificateInfo value, $Res Function(_$_CertificateInfo) then) =
+      __$$_CertificateInfoCopyWithImpl<$Res>;
   @override
   $Res call({String country, bool extendedKeyUsage});
 }
 
 /// @nodoc
-class __$CertificateInfoCopyWithImpl<$Res>
+class __$$_CertificateInfoCopyWithImpl<$Res>
     extends _$CertificateInfoCopyWithImpl<$Res>
-    implements _$CertificateInfoCopyWith<$Res> {
-  __$CertificateInfoCopyWithImpl(
-      _CertificateInfo _value, $Res Function(_CertificateInfo) _then)
-      : super(_value, (v) => _then(v as _CertificateInfo));
+    implements _$$_CertificateInfoCopyWith<$Res> {
+  __$$_CertificateInfoCopyWithImpl(
+      _$_CertificateInfo _value, $Res Function(_$_CertificateInfo) _then)
+      : super(_value, (v) => _then(v as _$_CertificateInfo));
 
   @override
-  _CertificateInfo get _value => super._value as _CertificateInfo;
+  _$_CertificateInfo get _value => super._value as _$_CertificateInfo;
 
   @override
   $Res call({
     Object? country = freezed,
     Object? extendedKeyUsage = freezed,
   }) {
-    return _then(_CertificateInfo(
+    return _then(_$_CertificateInfo(
       country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ class _$_CertificateInfo extends _CertificateInfo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CertificateInfo &&
+            other is _$_CertificateInfo &&
             const DeepCollectionEquality().equals(other.country, country) &&
             const DeepCollectionEquality()
                 .equals(other.extendedKeyUsage, extendedKeyUsage));
@@ -133,8 +133,8 @@ class _$_CertificateInfo extends _CertificateInfo {
 
   @JsonKey(ignore: true)
   @override
-  _$CertificateInfoCopyWith<_CertificateInfo> get copyWith =>
-      __$CertificateInfoCopyWithImpl<_CertificateInfo>(this, _$identity);
+  _$$_CertificateInfoCopyWith<_$_CertificateInfo> get copyWith =>
+      __$$_CertificateInfoCopyWithImpl<_$_CertificateInfo>(this, _$identity);
 }
 
 abstract class _CertificateInfo extends CertificateInfo {
@@ -144,11 +144,11 @@ abstract class _CertificateInfo extends CertificateInfo {
   const _CertificateInfo._() : super._();
 
   @override
-  String get country => throw _privateConstructorUsedError;
+  String get country;
   @override
-  bool get extendedKeyUsage => throw _privateConstructorUsedError;
+  bool get extendedKeyUsage;
   @override
   @JsonKey(ignore: true)
-  _$CertificateInfoCopyWith<_CertificateInfo> get copyWith =>
+  _$$_CertificateInfoCopyWith<_$_CertificateInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }

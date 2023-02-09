@@ -88,10 +88,10 @@ class _$ExemptionCopyWithImpl<$Res> implements $ExemptionCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ExemptionCopyWith<$Res> implements $ExemptionCopyWith<$Res> {
-  factory _$ExemptionCopyWith(
-          _Exemption value, $Res Function(_Exemption) then) =
-      __$ExemptionCopyWithImpl<$Res>;
+abstract class _$$_ExemptionCopyWith<$Res> implements $ExemptionCopyWith<$Res> {
+  factory _$$_ExemptionCopyWith(
+          _$_Exemption value, $Res Function(_$_Exemption) then) =
+      __$$_ExemptionCopyWithImpl<$Res>;
   @override
   $Res call(
       {String disease,
@@ -103,13 +103,14 @@ abstract class _$ExemptionCopyWith<$Res> implements $ExemptionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ExemptionCopyWithImpl<$Res> extends _$ExemptionCopyWithImpl<$Res>
-    implements _$ExemptionCopyWith<$Res> {
-  __$ExemptionCopyWithImpl(_Exemption _value, $Res Function(_Exemption) _then)
-      : super(_value, (v) => _then(v as _Exemption));
+class __$$_ExemptionCopyWithImpl<$Res> extends _$ExemptionCopyWithImpl<$Res>
+    implements _$$_ExemptionCopyWith<$Res> {
+  __$$_ExemptionCopyWithImpl(
+      _$_Exemption _value, $Res Function(_$_Exemption) _then)
+      : super(_value, (v) => _then(v as _$_Exemption));
 
   @override
-  _Exemption get _value => super._value as _Exemption;
+  _$_Exemption get _value => super._value as _$_Exemption;
 
   @override
   $Res call({
@@ -120,7 +121,7 @@ class __$ExemptionCopyWithImpl<$Res> extends _$ExemptionCopyWithImpl<$Res>
     Object? certificateValidFrom = freezed,
     Object? certificateValidUntil = freezed,
   }) {
-    return _then(_Exemption(
+    return _then(_$_Exemption(
       disease: disease == freezed
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
@@ -183,7 +184,7 @@ class _$_Exemption extends _Exemption {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Exemption &&
+            other is _$_Exemption &&
             const DeepCollectionEquality().equals(other.disease, disease) &&
             const DeepCollectionEquality()
                 .equals(other.countryOfVaccination, countryOfVaccination) &&
@@ -209,8 +210,8 @@ class _$_Exemption extends _Exemption {
 
   @JsonKey(ignore: true)
   @override
-  _$ExemptionCopyWith<_Exemption> get copyWith =>
-      __$ExemptionCopyWithImpl<_Exemption>(this, _$identity);
+  _$$_ExemptionCopyWith<_$_Exemption> get copyWith =>
+      __$$_ExemptionCopyWithImpl<_$_Exemption>(this, _$identity);
 }
 
 abstract class _Exemption extends Exemption {
@@ -224,19 +225,19 @@ abstract class _Exemption extends Exemption {
   const _Exemption._() : super._();
 
   @override
-  String get disease => throw _privateConstructorUsedError;
+  String get disease;
   @override
-  String get countryOfVaccination => throw _privateConstructorUsedError;
+  String get countryOfVaccination;
   @override
-  String get certificateIssuer => throw _privateConstructorUsedError;
+  String get certificateIssuer;
   @override
-  String get certificateIdentifier => throw _privateConstructorUsedError;
+  String get certificateIdentifier;
   @override
-  DateTime get certificateValidFrom => throw _privateConstructorUsedError;
+  DateTime get certificateValidFrom;
   @override
-  DateTime? get certificateValidUntil => throw _privateConstructorUsedError;
+  DateTime? get certificateValidUntil;
   @override
   @JsonKey(ignore: true)
-  _$ExemptionCopyWith<_Exemption> get copyWith =>
+  _$$_ExemptionCopyWith<_$_Exemption> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -122,9 +122,9 @@ class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TestCopyWith<$Res> implements $TestCopyWith<$Res> {
-  factory _$TestCopyWith(_Test value, $Res Function(_Test) then) =
-      __$TestCopyWithImpl<$Res>;
+abstract class _$$_TestCopyWith<$Res> implements $TestCopyWith<$Res> {
+  factory _$$_TestCopyWith(_$_Test value, $Res Function(_$_Test) then) =
+      __$$_TestCopyWithImpl<$Res>;
   @override
   $Res call(
       {String disease,
@@ -141,13 +141,13 @@ abstract class _$TestCopyWith<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
-    implements _$TestCopyWith<$Res> {
-  __$TestCopyWithImpl(_Test _value, $Res Function(_Test) _then)
-      : super(_value, (v) => _then(v as _Test));
+class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
+    implements _$$_TestCopyWith<$Res> {
+  __$$_TestCopyWithImpl(_$_Test _value, $Res Function(_$_Test) _then)
+      : super(_value, (v) => _then(v as _$_Test));
 
   @override
-  _Test get _value => super._value as _Test;
+  _$_Test get _value => super._value as _$_Test;
 
   @override
   $Res call({
@@ -163,7 +163,7 @@ class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
     Object? certificateIssuer = freezed,
     Object? certificateIdentifier = freezed,
   }) {
-    return _then(_Test(
+    return _then(_$_Test(
       disease: disease == freezed
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
@@ -261,7 +261,7 @@ class _$_Test extends _Test {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Test &&
+            other is _$_Test &&
             const DeepCollectionEquality().equals(other.disease, disease) &&
             const DeepCollectionEquality()
                 .equals(other.typeOfTest, typeOfTest) &&
@@ -301,8 +301,8 @@ class _$_Test extends _Test {
 
   @JsonKey(ignore: true)
   @override
-  _$TestCopyWith<_Test> get copyWith =>
-      __$TestCopyWithImpl<_Test>(this, _$identity);
+  _$$_TestCopyWith<_$_Test> get copyWith =>
+      __$$_TestCopyWithImpl<_$_Test>(this, _$identity);
 }
 
 abstract class _Test extends Test {
@@ -321,28 +321,28 @@ abstract class _Test extends Test {
   const _Test._() : super._();
 
   @override
-  String get disease => throw _privateConstructorUsedError;
+  String get disease;
   @override
-  String get typeOfTest => throw _privateConstructorUsedError;
+  String get typeOfTest;
   @override
-  String? get testName => throw _privateConstructorUsedError;
+  String? get testName;
   @override
-  String? get testNameAndManufacturer => throw _privateConstructorUsedError;
+  String? get testNameAndManufacturer;
   @override
-  DateTime get dateTimeOfCollection => throw _privateConstructorUsedError;
+  DateTime get dateTimeOfCollection;
   @override
-  DateTime? get dateTimeOfTestResult => throw _privateConstructorUsedError;
+  DateTime? get dateTimeOfTestResult;
   @override
-  String get testResult => throw _privateConstructorUsedError;
+  String get testResult;
   @override
-  String get testingCentre => throw _privateConstructorUsedError;
+  String get testingCentre;
   @override
-  String get countryOfVaccination => throw _privateConstructorUsedError;
+  String get countryOfVaccination;
   @override
-  String get certificateIssuer => throw _privateConstructorUsedError;
+  String get certificateIssuer;
   @override
-  String get certificateIdentifier => throw _privateConstructorUsedError;
+  String get certificateIdentifier;
   @override
   @JsonKey(ignore: true)
-  _$TestCopyWith<_Test> get copyWith => throw _privateConstructorUsedError;
+  _$$_TestCopyWith<_$_Test> get copyWith => throw _privateConstructorUsedError;
 }

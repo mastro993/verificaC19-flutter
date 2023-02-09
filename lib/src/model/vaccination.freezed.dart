@@ -124,11 +124,11 @@ class _$VaccinationCopyWithImpl<$Res> implements $VaccinationCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$VaccinationCopyWith<$Res>
+abstract class _$$_VaccinationCopyWith<$Res>
     implements $VaccinationCopyWith<$Res> {
-  factory _$VaccinationCopyWith(
-          _Vaccination value, $Res Function(_Vaccination) then) =
-      __$VaccinationCopyWithImpl<$Res>;
+  factory _$$_VaccinationCopyWith(
+          _$_Vaccination value, $Res Function(_$_Vaccination) then) =
+      __$$_VaccinationCopyWithImpl<$Res>;
   @override
   $Res call(
       {String disease,
@@ -145,14 +145,14 @@ abstract class _$VaccinationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$VaccinationCopyWithImpl<$Res> extends _$VaccinationCopyWithImpl<$Res>
-    implements _$VaccinationCopyWith<$Res> {
-  __$VaccinationCopyWithImpl(
-      _Vaccination _value, $Res Function(_Vaccination) _then)
-      : super(_value, (v) => _then(v as _Vaccination));
+class __$$_VaccinationCopyWithImpl<$Res> extends _$VaccinationCopyWithImpl<$Res>
+    implements _$$_VaccinationCopyWith<$Res> {
+  __$$_VaccinationCopyWithImpl(
+      _$_Vaccination _value, $Res Function(_$_Vaccination) _then)
+      : super(_value, (v) => _then(v as _$_Vaccination));
 
   @override
-  _Vaccination get _value => super._value as _Vaccination;
+  _$_Vaccination get _value => super._value as _$_Vaccination;
 
   @override
   $Res call({
@@ -168,7 +168,7 @@ class __$VaccinationCopyWithImpl<$Res> extends _$VaccinationCopyWithImpl<$Res>
     Object? certificateIdentifier = freezed,
     Object? ownerBirthdate = freezed,
   }) {
-    return _then(_Vaccination(
+    return _then(_$_Vaccination(
       disease: disease == freezed
           ? _value.disease
           : disease // ignore: cast_nullable_to_non_nullable
@@ -266,7 +266,7 @@ class _$_Vaccination extends _Vaccination {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Vaccination &&
+            other is _$_Vaccination &&
             const DeepCollectionEquality().equals(other.disease, disease) &&
             const DeepCollectionEquality().equals(other.vaccine, vaccine) &&
             const DeepCollectionEquality()
@@ -306,8 +306,8 @@ class _$_Vaccination extends _Vaccination {
 
   @JsonKey(ignore: true)
   @override
-  _$VaccinationCopyWith<_Vaccination> get copyWith =>
-      __$VaccinationCopyWithImpl<_Vaccination>(this, _$identity);
+  _$$_VaccinationCopyWith<_$_Vaccination> get copyWith =>
+      __$$_VaccinationCopyWithImpl<_$_Vaccination>(this, _$identity);
 }
 
 abstract class _Vaccination extends Vaccination {
@@ -326,29 +326,29 @@ abstract class _Vaccination extends Vaccination {
   const _Vaccination._() : super._();
 
   @override
-  String get disease => throw _privateConstructorUsedError;
+  String get disease;
   @override
-  String get vaccine => throw _privateConstructorUsedError;
+  String get vaccine;
   @override
-  String get medicinalProduct => throw _privateConstructorUsedError;
+  String get medicinalProduct;
   @override
-  String get manufacturer => throw _privateConstructorUsedError;
+  String get manufacturer;
   @override
-  int get doseNumber => throw _privateConstructorUsedError;
+  int get doseNumber;
   @override
-  int get totalSeriesOfDoses => throw _privateConstructorUsedError;
+  int get totalSeriesOfDoses;
   @override
-  DateTime get dateOfVaccination => throw _privateConstructorUsedError;
+  DateTime get dateOfVaccination;
   @override
-  String get countryOfVaccination => throw _privateConstructorUsedError;
+  String get countryOfVaccination;
   @override
-  String get certificateIssuer => throw _privateConstructorUsedError;
+  String get certificateIssuer;
   @override
-  String get certificateIdentifier => throw _privateConstructorUsedError;
+  String get certificateIdentifier;
   @override
-  DateTime get ownerBirthdate => throw _privateConstructorUsedError;
+  DateTime get ownerBirthdate;
   @override
   @JsonKey(ignore: true)
-  _$VaccinationCopyWith<_Vaccination> get copyWith =>
+  _$$_VaccinationCopyWith<_$_Vaccination> get copyWith =>
       throw _privateConstructorUsedError;
 }
